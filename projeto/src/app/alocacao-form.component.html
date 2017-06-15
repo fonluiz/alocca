@@ -1,0 +1,25 @@
+<div>
+    <h1>Alocações</h1>
+    <form>
+        <div><h3>Criar Alocação</h3></div>
+        <div class= "form-group">
+            
+            <input list="disciplinas" name="disciplina" placeholder="Disciplina">
+            <datalist id="disciplinas">
+                <option *ngFor = 'let disci of listaDisciplinas' value={{disci.nome}}>
+            </datalist>
+
+            <input list="professores1" name="docenteUm" placeholder="Docente 1">
+            <datalist id="professores1" >
+                <option *ngFor = 'let prof of listaProfessores' value={{prof.nome}}>
+            </datalist>
+            
+            <input list="professores2" name="docenteDois" placeholder="Docente 2">
+            <datalist id="professores2">
+                <option *ngFor = 'let prof of listaProfessores' value={{prof.nome}}>
+            </datalist>
+            <!--Definir função-->
+            <button (Click)= "alokaDisicplina()">Alocar</button>
+        </div>
+    </form>
+</div>

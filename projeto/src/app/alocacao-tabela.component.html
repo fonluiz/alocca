@@ -1,0 +1,29 @@
+<div>
+    <!--mudar esses 'br's. fazer com CSS-->
+    <br>
+    <br>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th>CA</th>
+            <th>Disciplina</th>
+            <th>Docente 1</th>
+            <th>Docente 2</th>
+            <th>Tipo</th>
+            <th>Créditos</th>
+            <th>Obs.</th>
+        </tr>
+        <tr *ngFor = 'let aloc of listaAlocacoes'>
+            <th>{{aloc.ca}}</th>
+            <th>{{aloc.disciplina}}</th>
+            <th>{{aloc.docenteUm}}</th>
+            <th>{{aloc.docenteDois}}</th>
+            <th>{{aloc.tipo}}</th>
+            <th>{{aloc.creditos}}</th>
+            <th>{{aloc.obs}}</th>
+            <!--Definir função-->
+            <th><button (Click)= "alokaDisicplina()">Excluir</button></th>
+        </tr>
+    </table>
+</div>
