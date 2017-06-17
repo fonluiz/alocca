@@ -11,74 +11,74 @@ export class AppComponent {
 
 
 @Component({
-  selector: 'alocacao-form',
-  templateUrl: `./alocacao-form.component.html`
+  selector: 'allocation-form',
+  templateUrl: `./allocation-form.component.html`
 })
-export class AppAlocacao{
+export class AppAllocationForm{
   //fazer mudanças quando integrar com o resto
-  listaProfessores: any[] = [{
-      "nome":"Eliane"
+  professorsList: any[] = [{
+      "name":"Eliane"
     },
     {
-      "nome":"Gustavo"
+      "name":"Gustavo"
     },
     {
-      "nome":"Joseana"
+      "name":"Joseana"
     },
     {
-      "nome":"Campelo"
+      "name":"Campelo"
     }];
   //fazer mudanças quando integrar com o resto
-  listaDisciplinas: any[] = [{
-      "nome":"Programação 1"
+  coursesList: any[] = [{
+      "name":"Programação 1"
     },
     {
-      "nome":"Introdução à Computação"
+      "name":"Introdução à Computação"
     },
     {
-      "nome":"Gerência da Informação"
+      "name":"Gerência da Informação"
     },
     {
-      "nome":"Laboratório de Engenharia de Software"
+      "name":"Laboratório de Engenharia de Software"
     }];
 
 }
 
 
 @Component({
-  selector: 'alocacao-tabela',
-  templateUrl: `./alocacao-tabela.component.html`
+  selector: 'allocation-table',
+  templateUrl: `./allocation-table.component.html`
 })
-export class AppAlocacaoTabela{
+export class AppAllocationTable{
   //fazer mudanças quando integrar com o resto
-  listaAlocacoes: any[] = [{
+  allocationsList: any[] = [{
     //mudar 'ca' para boolean
     "ca":"true",
-    "disciplina": "Gerência da Informação",
-    "docenteUm": "Campelo",
-    "docenteDois":"",
-    "tipo":"Obrigatória",
-    "creditos": 4,
+    "course": "Gerência da Informação",
+    "professorOne": "Campelo",
+    "profesorTwo":"",
+    "type":"Obrigatória",
+    "credits": 4,
     "obs": "muito boa"
     },
     {
     //mudar 'ca' para boolean
     "ca":"false",
-    "disciplina": "Introdução à Ciência da Computação",
-    "docenteUm": "Joseana",
-    "docenteDois":"",
-    "tipo":"Obrigatória",
-    "creditos": 4,
+    "course": "Introdução à Ciência da Computação",
+    "professorOne": "Joseana",
+    "professorTwo":"",
+    "type":"Obrigatória",
+    "credits": 4,
     "obs": "ótima"
     },
     {
     //mudar 'ca' para boolean
     "ca":"true",
-    "disciplina": "Laboratório de Engenharia de Software",
-    "docenteUm": "Gustavo",
-    "docenteDois":"???",
-    "tipo":"Obrigatória",
-    "creditos": 2,
+    "course": "Laboratório de Engenharia de Software",
+    "professorOne": "Gustavo",
+    "professorTwo":"??",
+    "type":"Obrigatória",
+    "credits": 2,
     "obs": "muito boa"
     }];
 }

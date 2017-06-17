@@ -1,5 +1,4 @@
 <div>
-    <!--mudar esses 'br's. fazer com CSS-->
     <br>
     <br>
     <br>
@@ -14,16 +13,16 @@
             <th>Créditos</th>
             <th>Obs.</th>
         </tr>
-        <tr *ngFor = 'let aloc of listaAlocacoes'>
+        <tr *ngFor = 'let aloc of allocationsList'>
             <th>{{aloc.ca}}</th>
-            <th>{{aloc.disciplina}}</th>
-            <th>{{aloc.docenteUm}}</th>
-            <th>{{aloc.docenteDois}}</th>
-            <th>{{aloc.tipo}}</th>
-            <th>{{aloc.creditos}}</th>
+            <th>{{aloc.course}}</th>
+            <th>{{aloc.professorOne}}</th>
+            <th>{{aloc.professorTwo}}</th>
+            <th>{{aloc.type}}</th>
+            <th>{{aloc.credits}}</th>
             <th>{{aloc.obs}}</th>
             <!--Definir função-->
-            <th><button (Click)= "alokaDisicplina()">Excluir</button></th>
+            <th><button (Click)= "removeAllocation()">Excluir</button></th>
         </tr>
     </table>
 </div>

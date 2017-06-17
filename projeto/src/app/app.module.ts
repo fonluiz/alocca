@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { AppAlocacao } from './app.component';
-import { AppAlocacaoTabela } from './app.component';
+import { AppAllocationForm, AppAllocationTable } from './app.component';
 
 @NgModule({
   imports: [BrowserModule,FormsModule,HttpModule],
-  declarations: [AppComponent, AppAlocacao, AppAlocacaoTabela],
+  declarations: [AppComponent, AppAllocationForm, AppAllocationTable],
   providers: [],
   bootstrap: [AppComponent]
 })
