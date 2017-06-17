@@ -12,7 +12,7 @@ export class AppComponent {
 
 @Component({
   selector: 'allocation-form',
-  templateUrl: `./allocation-form.component.html`
+  templateUrl: `./allocation/templates/allocation-form.component.html`
 })
 export class AppAllocationForm{
   //fazer mudanças quando integrar com o resto
@@ -47,7 +47,7 @@ export class AppAllocationForm{
 
 @Component({
   selector: 'allocation-table',
-  templateUrl: `./allocation-table.component.html`
+  templateUrl: `./allocation/templates/allocation-table.component.html`
 })
 export class AppAllocationTable{
   //fazer mudanças quando integrar com o resto
@@ -76,7 +76,7 @@ export class AppAllocationTable{
     "ca":"true",
     "course": "Laboratório de Engenharia de Software",
     "professorOne": "Gustavo",
-    "professorTwo":"??",
+    "professorTwo":"????",
     "type":"Obrigatória",
     "credits": 2,
     "obs": "muito boa"
