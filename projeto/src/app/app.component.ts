@@ -15,7 +15,7 @@ export class AppComponent {
   templateUrl: `./allocation/templates/allocation-form.component.html`
 })
 export class AppAllocationForm{
-  //fazer mudanças quando integrar com o resto
+  //make changes when integrating with other application parts
   professorsList: any[] = [{
       "name":"Eliane"
     },
@@ -28,7 +28,7 @@ export class AppAllocationForm{
     {
       "name":"Campelo"
     }];
-  //fazer mudanças quando integrar com o resto
+  //make changes when integrating with other application parts
   coursesList: any[] = [{
       "name":"Programação 1"
     },
@@ -50,9 +50,8 @@ export class AppAllocationForm{
   templateUrl: `./allocation/templates/allocation-table.component.html`
 })
 export class AppAllocationTable{
-  //fazer mudanças quando integrar com o resto
+  //make changes when integrating with other application parts
   allocationsList: any[] = [{
-    //mudar 'ca' para boolean
     "ca":"true",
     "course": "Gerência da Informação",
     "professorOne": "Campelo",
@@ -62,7 +61,6 @@ export class AppAllocationTable{
     "obs": "muito boa"
     },
     {
-    //mudar 'ca' para boolean
     "ca":"false",
     "course": "Introdução à Ciência da Computação",
     "professorOne": "Joseana",
@@ -72,7 +70,6 @@ export class AppAllocationTable{
     "obs": "ótima"
     },
     {
-    //mudar 'ca' para boolean
     "ca":"true",
     "course": "Laboratório de Engenharia de Software",
     "professorOne": "Gustavo",
