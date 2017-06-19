@@ -1,0 +1,28 @@
+<div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <table align="center">
+    <tr>
+      <th>CA</th>
+      <th>Disciplina</th>
+      <th>Docente 1</th>
+      <th>Docente 2</th>
+      <th>Tipo</th>
+      <th>Créditos</th>
+      <th>Obs.</th>
+    </tr>
+    <tr *ngFor = 'let aloc of allocationsList'>
+      <th>{{aloc.ca}}</th>
+      <th>{{aloc.course}}</th>
+      <th>{{aloc.professorOne}}</th>
+      <th>{{aloc.professorTwo}}</th>
+      <th>{{aloc.type}}</th>
+      <th>{{aloc.credits}}</th>
+      <th>{{aloc.obs}}</th>
+      <!--Define function-->
+      <th><button (Click)= "removeAllocation()">Excluir</button></th>
+    </tr>
+  </table>
+</div>
