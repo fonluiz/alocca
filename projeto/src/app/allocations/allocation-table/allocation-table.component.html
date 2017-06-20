@@ -21,8 +21,8 @@
       <th>{{aloc.type}}</th>
       <th>{{aloc.credits}}</th>
       <th>{{aloc.obs}}</th>
-      <!--Define function-->
-      <th><button (Click)= "removeAllocation()">Excluir</button></th>
+      <a class="btn btn-default" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a>
+      <a (click)="onDeleteAllocation(aloc.$key)" class="btn btn-danger" >Excluir</a>
     </tr>
   </table>
 </div>

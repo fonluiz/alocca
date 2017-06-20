@@ -6,7 +6,7 @@ import { EditAllocationComponent } from './allocations/edit-allocation/edit-allo
 
 const appRoutes: Routes = [
     {path: 'allocations', component: AddAllocationComponent},
-    {path: 'editAllocation', component: EditAllocationComponent}
+    {path: 'edit-allocation/:id', component: EditAllocationComponent}
 ];
 
 @NgModule({

@@ -20,4 +20,8 @@ export class AllocationTableComponent implements OnInit {
     });
   }
 
+  onDeleteAllocation(id){
+    this.FBservice.deleteAllocation(id);
+  }
+
 }

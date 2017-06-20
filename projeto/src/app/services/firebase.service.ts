@@ -8,6 +8,7 @@ export class FirebaseService {
   professorsNames: FirebaseListObservable<any[]>;
   coursesNames: FirebaseListObservable<any[]>;
   allocations: FirebaseListObservable<any[]>;
+  allocation: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.professorsNames = db.list('/professorsNames') as FirebaseListObservable<ProfessorsName[]>;
@@ -29,6 +30,19 @@ export class FirebaseService {
 
   addAllocation(allocation){
     return this.allocations.push(allocation);
+  }
+
+  getAllocationDetails(id){
+    this.allocation = this.db.object('/allocations/'+id) as FirebaseObjectObservable<Allocation>;
+    return this.allocation;
+  }
+
+  updateAllocation(id,allocation){
+    return this.allocations.update(id,allocation);
+  }
+
+  deleteAllocation(id){
+    return this.allocations.remove(id);
   }
 }
 
