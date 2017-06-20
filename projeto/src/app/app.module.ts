@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 ///extra modules
 import { AppRoutingModule } from './app-routing.module';
+import { FlashMessagesModule} from 'angular2-flash-messages';
+//firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -29,7 +31,8 @@ import { EditAllocationComponent } from './allocations/edit-allocation/edit-allo
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule],
+    AngularFireDatabaseModule,
+    FlashMessagesModule],
   declarations: [
     AppComponent,
     //extra declarations
