@@ -44,7 +44,7 @@ export class EditAllocationComponent implements OnInit {
   onUpdateAllocation(){
     let allocation: any;
     if(!(this.course)){
-      if(!(this.professorOne)){
+      if(!(this.professorOne) && !(this.professorTwo)){
         this.flashMessage.show('Escolha pelo menos uma disciplina e um(a) professor(a).', {cssClass: 'alert-danger', timeout: 7000});
       }else{
         this.flashMessage.show('Escolha uma disciplina.', {cssClass: 'alert-danger', timeout: 5000});
@@ -64,7 +64,8 @@ export class EditAllocationComponent implements OnInit {
     }else{
       allocation = {
       course: this.course,
-      professorOne: this.professorOne};
+      professorOne: this.professorOne,
+      professorTwo: ""};
       this.FBservice.updateAllocation(this.id,allocation);
 
       this.router.navigate(['allocations']);

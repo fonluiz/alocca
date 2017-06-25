@@ -14,12 +14,20 @@ import { FirebaseService } from './services/firebase.service';
 //components
 import { AppComponent } from './app.component';
 //our components
-///general components
+///navbar
 import { NavbarComponent } from './navbar/navbar.component';
 ///allocations
 import { AddAllocationComponent } from './allocations/add-allocation/add-allocation.component';
 import { AllocationTableComponent } from './allocations/allocation-table/allocation-table.component';
 import { EditAllocationComponent } from './allocations/edit-allocation/edit-allocation.component';
+///courses
+import { AddCourseComponent } from './courses/add-course/add-course.component';
+import { EditCourseComponent } from './courses/edit-course/edit-course.component';
+import { ViewCoursesComponent } from './courses/view-courses/view-courses.component';
+///professors
+import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
+import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
+import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 
 
 
@@ -39,7 +47,13 @@ import { EditAllocationComponent } from './allocations/edit-allocation/edit-allo
     NavbarComponent,
     AddAllocationComponent,
     AllocationTableComponent,
-    EditAllocationComponent],
+    EditAllocationComponent,
+    AddCourseComponent,
+    AddProfessorComponent,
+    EditProfessorComponent,
+    ViewProfessorsComponent,
+    EditCourseComponent,
+    ViewCoursesComponent],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })

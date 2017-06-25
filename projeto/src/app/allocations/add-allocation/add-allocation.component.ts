@@ -36,7 +36,9 @@ export class AddAllocationComponent implements OnInit {
 
   addNewAllocation(){
     let allocation: any;
-    if(!(this.course)){
+    if(this.professorOne && (this.professorOne==this.professorTwo)){
+      this.flashMessage.show('Escolha Docentes diferentes.', {cssClass: 'alert-danger', timeout: 7000});
+    }else if(!(this.course)){
       if(!(this.professorOne)){
         this.flashMessage.show('Escolha pelo menos uma disciplina e um(a) professor(a).', {cssClass: 'alert-danger', timeout: 7000});
       }else{
@@ -53,12 +55,19 @@ export class AddAllocationComponent implements OnInit {
       professorTwo: this.professorTwo};
       this.FBservice.addAllocation(allocation);
 
+      this.course = "";
+      this.professorOne = "";
+      this.professorTwo = "";
+
       this.router.navigate(['allocations']);
     }else{
       allocation = {
       course: this.course,
       professorOne: this.professorOne};
       this.FBservice.addAllocation(allocation);
+
+      this.course = "";
+      this.professorOne = "";
 
       this.router.navigate(['allocations']);
     }

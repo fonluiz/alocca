@@ -1,19 +1,33 @@
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            </button>
-          <a class="navbar-brand" href="#">Home</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a [routerLink]="['/allocations']">Alocações</a></li>
-            <li><a [routerLink]="['/editAllocation']">Testing</a></li>
-          </ul>
-        </div>
-    </div>
-</nav>
+<div class="mdl-layout__header-row">
+  <!-- Title -->
+  <span class="mdl-layout-title" [routerLink]="['/']">ALOCCA</span>
+  <!-- Navigation. We hide it in small screens. -->
+  <nav class="mdl-navigation mdl-layout--large-screen-only">
+    <!--Register button-->
+    <button id="demo-menu-lower-left-profs"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
+    Professores
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+      for="demo-menu-lower-left-profs">
+      <li class="mdl-menu__item" [routerLink]="['/add-professor']">Cadastrar</li>
+      <li class="mdl-menu__item" [routerLink]="['/view-professors']">Cadastrados</li>
+    </ul>
+    <button id="demo-menu-lower-left-courses"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 5px">
+    Disciplinas
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+      for="demo-menu-lower-left-courses">
+      <li class="mdl-menu__item" [routerLink]="['/add-course']">Cadastrar</li>
+      <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
+    </ul>
+    <button id="demo-menu-lower-left"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
+    Alocações
+    </button>
+
+
+
+  </nav>
+</div>
