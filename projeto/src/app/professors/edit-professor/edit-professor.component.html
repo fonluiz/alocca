@@ -1,3 +1,73 @@
-<p>
-  edit-professor works!
-</p>
+<div class="container-fluid col-md-offset-4">
+  <div class="col-md-6">
+    <h1 class="text-center">Editar Professor</h1>
+    <form (ngSubmit)="onEditProfessor()" #professorForm="ngForm">
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="text1" [(ngModel)]="nome" name="nome">
+        <label class="mdl-textfield__label" for="text1">Nome</label>
+      </div>
+
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="text2" [(ngModel)]="SIAP" name="SIAP">
+        <label class="mdl-textfield__label" for="text2">SIAP</label>
+      </div>
+      <!--Change to number type-->
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="text3" [(ngModel)]="max_creditos" name="max_creditos">
+        <label class="mdl-textfield__label" for="text3">Máximo de créditos</label>
+      </div>
+      <!--Change to number type-->
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="text4" [(ngModel)]="min_creditos" name="min_creditos">
+        <label class="mdl-textfield__label" for="text4">Mínimo de créditos</label>
+      </div>
+      <!--Change to number type-->
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="text5" [(ngModel)]="creditos_pos" name="creditos_pos">
+        <label class="mdl-textfield__label" for="text5">Créditos da pós-graduação</label>
+      </div>
+
+
+      <!-- time/day restrictions table
+      <div class="row text-center">
+        <div class="col-md-4">
+          <h3>Restrições</h3>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Restrição_Forte</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Restrição_Fraca</button>
+        </div>
+        <div class="col-md-12">
+          <table class="table table-bordered table-striped">
+            <caption>Horários</caption>
+            <thead>
+              <tr>
+                <th>Horários/Dia</th>
+                <th>Segunda</th>
+                <th>Terça</th>
+                <th>Quarta</th>
+                <th>Quinta</th>
+                <th>Sexta</th>
+                <th>Sábado</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let h of horarios">
+              <tr>{{h}}</tr>
+            <td>
+              <input type="checkbox" style="visibility: hidden;" />
+            </td>
+            <td *ngFor="let n of [2,3,4,5,6,7]">
+              <input type="checkbox" id="{{h}}{{n}}" />
+            </td>
+            </tbody>
+          </table>
+        </div>
+      </div> -->
+
+      <div class="row text-center">
+        <button type="button" class="btn btn-warning">Cancelar</button>
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <!--<button type="submit" class="btn btn-success" [disabled]="!professorForm.form.valid">Salvar</button>-->
+      </div>
+    </form>
+  </div>
+</div>
