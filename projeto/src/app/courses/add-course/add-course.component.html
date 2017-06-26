@@ -11,40 +11,63 @@
     <md-card-content class="new-course-card-content">
         <div class="course-card-row">
             <!-- Course name -->
-            <md-input-container class="course-name-input">
+            <md-input-container class="course-name-input" type="text">
                 <input mdInput placeholder="Nome">
             </md-input-container>
 
             <!-- Credits -->
             <md-input-container class="course-credits-input">
-                <input mdInput placeholder="Créditos">
+                <input mdInput placeholder="Créditos" type="number">
             </md-input-container>
         </div>
 
-        <div>
+        <div class="new-course-row">
             <!-- Type of course-->
-            <md-select class="course-type-input" placeholder="Tipo" [(ngModel)]="selectedValue" name="tipo">
+            <md-select class="course-type-input" placeholder="Tipo" [(ngModel)]="type" name="tipo">
                 <md-option *ngFor="let type of courseTypes" [value]="type">
                     {{ type }}
                 </md-option>
             </md-select>
 
-            <!--Recomended Semesters-->
-           <md-select class="course-semester-input" placeholder="Semestre Recomendado" [(ngModel)]="selectedValue">
-                <md-option *ngFor="let sem of semesters" [value]="sem">
-                    {{ sem }}
-                </md-option>
-            </md-select>
+            <span [ngSwitch]="type">
+                <span *ngSwitchCase="'Optativa'">
+                    <!--Recomended minimum Semester-->
+                    <md-select class="course-semester-input" placeholder="Semestre Mín. Recomendado" [(ngModel)]="selectedValue">
+                        <md-option *ngFor="let sem of semesters" [value]="sem">
+                            {{ sem }}
+                        </md-option>
+                    </md-select>
+                    
+                    <!--Recommended maximum Semester-->
+                    <md-select class="course-semester-input" style="margin-left: 30px;" placeholder="Semestre Máx. Recomendado">
+                        <md-option *ngFor="let sem of semesters" [value]="sem">
+                            {{ sem }}
+                        </md-option>
+                    </md-select>
+                </span>
+
+                <span *ngSwitchDefault>
+                    <!--Recommended semester for non-optional courses-->
+                     <md-select class="course-semester-input" placeholder="Semestre Recomendado" [(ngModel)]="selectedValue">
+                        <md-option *ngFor="let sem of semesters" [value]="sem">
+                            {{ sem }}
+                        </md-option>
+                    </md-select>
+                </span>
+            </span>
+       
         </div>
 
        <div class="course-card-row">
-           <md-select class="course-department-input" placeholder="Departamento Ofertante" [(ngModel)]="selectedDeptOrig">
+        <!--Offerer department-->           
+           <md-select class="course-department-input" placeholder="UA Ofertante" [(ngModel)]="selectedDeptOrig">
                 <md-option *ngFor="let dep of departments" [value]="dep">
                     {{ dep }}
                 </md-option>
            </md-select>
 
-            <md-select class="course-department-input" style="margin-left: 40%" placeholder="Departamento Solicitante" [(ngModel)]="selectedDeptDest" name="tipo">
+           <!--requerer department-->
+            <md-select class="course-department-input" style="margin-left: 30%; width:21%;" placeholder="UA Solicitante" [(ngModel)]="selectedDeptDest" name="tipo">
                     <md-option *ngFor="let dep of departments" [value]="dep">
                         {{ dep }}
                     </md-option>
