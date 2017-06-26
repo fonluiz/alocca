@@ -1,3 +1,55 @@
-<p>
-  add-course works!
-</p>
+<md-card class="new-course-card">
+    <!--Toolbar-->
+    <md-toolbar color="primary" class="new-course-card-toolbar">
+        Cadastrar Disciplina
+        <span class="spacer"></span>
+        <button md-button style="margin-right: 5px">Cancelar</button>
+        <button md-button>Salvar</button>
+    </md-toolbar>
+
+    <!--Form-->
+    <md-card-content class="new-course-card-content">
+        <div class="course-card-row">
+            <!-- Course name -->
+            <md-input-container class="course-name-input">
+                <input mdInput placeholder="Nome">
+            </md-input-container>
+
+            <!-- Credits -->
+            <md-input-container class="course-credits-input">
+                <input mdInput placeholder="Créditos">
+            </md-input-container>
+        </div>
+
+        <div>
+            <!-- Type of course-->
+            <md-select class="course-type-input" placeholder="Tipo" [(ngModel)]="selectedValue" name="tipo">
+                <md-option *ngFor="let type of courseTypes" [value]="type">
+                    {{ type }}
+                </md-option>
+            </md-select>
+
+            <!--Recomended Semesters-->
+           <md-select class="course-semester-input" placeholder="Semestre Recomendado" [(ngModel)]="selectedValue">
+                <md-option *ngFor="let sem of semesters" [value]="sem">
+                    {{ sem }}
+                </md-option>
+            </md-select>
+        </div>
+
+       <div class="course-card-row">
+           <md-select class="course-department-input" placeholder="Departamento Ofertante" [(ngModel)]="selectedDeptOrig">
+                <md-option *ngFor="let dep of departments" [value]="dep">
+                    {{ dep }}
+                </md-option>
+           </md-select>
+
+            <md-select class="course-department-input" style="margin-left: 40%" placeholder="Departamento Solicitante" [(ngModel)]="selectedDeptDest" name="tipo">
+                    <md-option *ngFor="let dep of departments" [value]="dep">
+                        {{ dep }}
+                    </md-option>
+           </md-select>
+       </div>
+    </md-card-content>
+
+</md-card>

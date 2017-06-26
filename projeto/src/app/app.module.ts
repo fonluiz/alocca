@@ -6,6 +6,11 @@ import { HttpModule } from '@angular/http';
 ///extra modules
 import { AppRoutingModule } from './app-routing.module';
 import { FlashMessagesModule} from 'angular2-flash-messages';
+import { CommonModule }  from '@angular/common';
+///angular material
+import { MaterialModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import 'hammerjs';
 //firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -36,11 +41,14 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
   imports: [
     BrowserModule,
     FormsModule,
+    CommonModule,
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    FlashMessagesModule],
+    FlashMessagesModule,
+    MaterialModule,
+    BrowserAnimationsModule],
   declarations: [
     AppComponent,
     //extra declarations
