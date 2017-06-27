@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { Professor } from '../professor.model';
+import { PROFESSORES } from '../professor.mock';
 
 @Component({
   selector: 'app-view-professors',
@@ -6,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-professors.component.css']
 })
 export class ViewProfessorsComponent implements OnInit {
+    professores: Professor[] = PROFESSORES;
 
   constructor() { }
 
