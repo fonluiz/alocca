@@ -64,8 +64,9 @@
       </div> -->
 
       <div class="row text-center">
-        <button type="button" class="btn btn-warning">Cancelar</button>
+        <button type="button" class="btn btn-warning" [routerLink]="['/view-professors']">Cancelar</button>
         <button type="submit" class="btn btn-success">Salvar</button>
+        <td><button class="mdl-button mdl-js-button mdl-button--accent" (click) = "onDeleteClick()">Deletar</button></td>
         <!--<button type="submit" class="btn btn-success" [disabled]="!professorForm.form.valid">Salvar</button>-->
       </div>
     </form>

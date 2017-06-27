@@ -77,7 +77,7 @@
     </form>
   </div>
 </div>
-
+ "button" (click) = "onAddNewProfessor()
 -->
 
 <md-card class="new-professor-card">
@@ -86,8 +86,8 @@
     <md-toolbar color="primary" class="new-professor-card-toolbar">
       Cadastrar Professor   
       <span class="spacer"></span>
-      <button md-button style="margin-right: 5px">Cancelar</button>
-      <button md-button [disabled]="!professorForm.form.valid">Salvar</button>
+      <button md-button style="margin-right: 5px" [routerLink]="['/']">Cancelar</button> 
+      <button md-button [disabled]="!professorForm.form.valid" >Salvar</button>
     </md-toolbar>
 
     <!--Form-->

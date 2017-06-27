@@ -31,9 +31,9 @@ export class EditProfessorComponent implements OnInit {
     this.FBservice.getProfessorDetails(this.id).subscribe(professor =>{
         this.nome = professor.nome;
         this.SIAP = professor.SIAP;
-        this.max_creditos = professor.max_creditos;
+        /*this.max_creditos = professor.max_creditos;
         this.min_creditos = professor.min_creditos;
-        this.creditos_pos = professor.creditos_pos;
+        this.creditos_pos = professor.creditos_pos;*/
         //this.restricoes_horarios = professor.restricoes_horarios;
 
     });
@@ -54,5 +54,9 @@ export class EditProfessorComponent implements OnInit {
     console.log(professor);
     this.router.navigate(['view-professors']);
 
+  }
+   onDeleteClick(){
+    this.FBservice.deleteProfessor(this.id);
+    this.router.navigate(['/view-professors']);
   }
 }

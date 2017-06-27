@@ -49,7 +49,7 @@ export class FirebaseService {
   addNewProfessor(professor){
     return this.professors.push(professor);
   }
-  getProfessors(){
+  getProfessors(){ 
     return this.professors;
   }
   getProfessorDetails( id){
@@ -58,6 +58,9 @@ export class FirebaseService {
   }
   updateProfessor(id, professor){
     return this.professors.update(id,professor);
+  }
+  deleteProfessor(id){
+    return this.professors.remove(id);
   }
 
 

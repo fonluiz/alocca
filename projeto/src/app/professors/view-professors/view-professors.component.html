@@ -15,11 +15,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of professores">
-          <td>{{p.nome}}</td>
-          <td>{{p.SIAP}}</td>
-          <td><button class="mdl-button mdl-js-button mdl-button--primary">Editar</button></td>
-          <td><button class="mdl-button mdl-js-button mdl-button--accent">Deletar</button></td>
+        <tr *ngFor="let professor of professors">
+          <td>{{professor.nome}}</td>
+          <td>{{professor.SIAP}}</td>
+          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
         </tr>
       </tbody>
     </table>
