@@ -1,3 +1,4 @@
+﻿<!--
 <div class="container-fluid col-md-offset-4">
   <div class="col-md-6">
     <h1 class="text-center">Cadastrar professor</h1>
@@ -12,23 +13,27 @@
         <input class="mdl-textfield__input" type="text" id="text2" [(ngModel)]="SIAP" name="SIAP">
         <label class="mdl-textfield__label" for="text2">SIAP</label>
       </div>
-      <!--Change to number type-->
+
+      
+        This part should be modularized to another class  
+      
+      <!--Change to number type
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text" id="text3" [(ngModel)]="max_creditos" name="max_creditos">
         <label class="mdl-textfield__label" for="text3">Máximo de créditos</label>
       </div>
-      <!--Change to number type-->
+      <!--Change to number type
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text" id="text4" [(ngModel)]="min_creditos" name="min_creditos">
         <label class="mdl-textfield__label" for="text4">Mínimo de créditos</label>
       </div>
-      <!--Change to number type-->
+      <!--Change to number type-
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <input class="mdl-textfield__input" type="text" id="text5" [(ngModel)]="creditos_pos" name="creditos_pos">
         <label class="mdl-textfield__label" for="text5">Créditos da pós-graduação</label>
       </div>
 
-      <!--time/day restrictions table-->
+      time/day restrictions table
       <div class="row text-center">
         <div class="col-md-4">
           <h3>Restrições</h3>
@@ -61,12 +66,43 @@
           </table>
         </div>
       </div>
+      
 
       <div class="row text-center">
         <button type="button" class="btn btn-warning">Cancelar</button>
         <button type="submit" class="btn btn-success">Salvar</button>
         <!--<button type="submit" class="btn btn-success" [disabled]="!professorForm.form.valid">Salvar</button>-->
+<!--
       </div>
     </form>
   </div>
 </div>
+
+-->
+
+<md-card class="new-professor-card">
+  <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">
+    <!--Toolbar-->
+    <md-toolbar color="primary" class="new-professor-card-toolbar">
+      Cadastrar Professor   
+      <span class="spacer"></span>
+      <button md-button style="margin-right: 5px">Cancelar</button>
+      <button md-button [disabled]="!professorForm.form.valid">Salvar</button>
+    </md-toolbar>
+
+    <!--Form-->
+    <md-card-content class="new-professor-card-content">
+      <div class="professor-card-row">
+        <!-- Professor name -->
+        <md-input-container class="professor-name-input" type="text">
+          <input mdInput placeholder="Nome" [(ngModel)]="nome" name="nome" required>
+        </md-input-container>
+
+        <!-- Professor's SIAP -->
+        <md-input-container class="professor-SIAP-input" type="text">
+          <input mdInput placeholder="SIAP" [(ngModel)]="SIAP" name="SIAP" required>
+        </md-input-container>
+      </div>
+    </md-card-content>
+  </form>
+</md-card>
