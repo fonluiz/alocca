@@ -2,29 +2,23 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import {Professor} from '../professors/professor.model';
+import {Course} from '../courses/course.model';
+import {Allocation} from '../allocations/allocation.model';
 
 @Injectable()
 export class FirebaseService {
   //"local"
-  professorsNames: FirebaseListObservable<any[]>;
-  coursesNames: FirebaseListObservable<any[]>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
   professor: FirebaseObjectObservable<any>;
+  courses: FirebaseListObservable<any[]>;
+  course: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.professorsNames = db.list('/professorsNames') as FirebaseListObservable<ProfessorsName[]>;
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    this.coursesNames = db.list('/coursesNames') as FirebaseListObservable<CoursesName[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
-  }
-
-  getProfessorsNames(){
-    return this.professorsNames;
-  }
-  getCoursesNames(){
-    return this.coursesNames;
+    this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
   }
 
 
@@ -55,7 +49,6 @@ export class FirebaseService {
   getProfessors(){ 
     return this.professors;
   }
-
   getProfessorDetails( id){
     this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
     return this.professor;
@@ -82,21 +75,20 @@ export class FirebaseService {
     return retorn;
   }
 
-}
-
-interface ProfessorsName{
-  $key?:string;
-  Nome?: string;
-}
-
-interface CoursesName{
-  $key?:string;
-  nome?: string;
-}
-
-interface Allocation{
-  $key?:string;
-  course?: string;
-  professorOne?: string;
-  professorTwo?: string;
+  addNewCourse(course){
+    return this.courses.push(course);
+  }
+  getCourses(){
+    return this.courses;
+  }
+  getCourseDetails( id){
+    this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
+    return this.course;
+  }
+  updateCourse(id, course){
+    return this.courses.update(id,course);
+  }
+  deleteCourse(id){
+    return this.courses.remove(id);
+  }
 }

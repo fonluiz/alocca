@@ -19,6 +19,7 @@
           <td>{{professor.nome}}</td>
           <td>{{professor.SIAP}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
+          <td><button (click)="onDeleteProfessor(professor.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
         </tr>
       </tbody>
     </table>

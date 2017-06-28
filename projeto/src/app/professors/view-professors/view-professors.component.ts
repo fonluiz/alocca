@@ -26,6 +26,11 @@ export class ViewProfessorsComponent implements OnInit {
       this.professors = professors;
     });
   }
+
+  onDeleteProfessor(id){
+    this.FBservice.deleteProfessor(id);
+    this.router.navigate(['/view-professors']);
+  }
   
 
 }
