@@ -48,10 +48,11 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
     AngularFireDatabaseModule,
     FlashMessagesModule,
     MaterialModule,
-    BrowserAnimationsModule],
+    BrowserAnimationsModule
+  ],
   declarations: [
     AppComponent,
-    //extra declarations
+    // extra declarations
     NavbarComponent,
     AddAllocationComponent,
     AllocationTableComponent,
@@ -61,7 +62,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
     EditProfessorComponent,
     ViewProfessorsComponent,
     EditCourseComponent,
-    ViewCoursesComponent],
+    ViewCoursesComponent
+    ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
