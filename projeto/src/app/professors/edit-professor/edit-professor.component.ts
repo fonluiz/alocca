@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Professor } from '../professor.model';
 import { HORARIOS } from '../professor.mock';
 import { FirebaseService } from '../../services/firebase.service';
@@ -31,11 +31,6 @@ export class EditProfessorComponent implements OnInit {
     this.FBservice.getProfessorDetails(this.id).subscribe(professor =>{
         this.nome = professor.nome;
         this.SIAP = professor.SIAP;
-        /*this.max_creditos = professor.max_creditos;
-        this.min_creditos = professor.min_creditos;
-        this.creditos_pos = professor.creditos_pos;*/
-        //this.restricoes_horarios = professor.restricoes_horarios;
-
     });
   }
 
@@ -46,7 +41,6 @@ export class EditProfessorComponent implements OnInit {
           max_creditos: this.max_creditos,
           min_creditos: this.min_creditos,
           creditos_pos: this.creditos_pos,
-          //restricoes_horarios: this.restricoes_horarios,
           id: this.id
     }
         
