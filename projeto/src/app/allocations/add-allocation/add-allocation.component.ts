@@ -26,10 +26,10 @@ export class AddAllocationComponent implements OnInit {
     ) {}
 
   ngOnInit() {
-    this.FBservice.getProfessorsNames().subscribe(professorsnames =>{
+    this.FBservice.getProfessors().subscribe(professorsnames =>{
       this.professorsList = professorsnames;
     });
-    this.FBservice.getCoursesNames().subscribe(coursesnames =>{
+    this.FBservice.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
     });
   }

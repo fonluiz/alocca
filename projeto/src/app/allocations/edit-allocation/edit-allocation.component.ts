@@ -28,10 +28,10 @@ export class EditAllocationComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
 
-    this.FBservice.getProfessorsNames().subscribe(professorsnames =>{
+    this.FBservice.getProfessors().subscribe(professorsnames =>{
       this.professorsList = professorsnames;
     });
-    this.FBservice.getCoursesNames().subscribe(coursesnames =>{
+    this.FBservice.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
     });
     this.FBservice.getAllocationDetails(this.id).subscribe(allocation =>{

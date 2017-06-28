@@ -1,3 +1,27 @@
-<p>
-  view-professors works! (Under Development. But edit-professors is ready)
-</p>
+﻿<md-card class="visualize-professor-card">
+  <!--Toolbar-->
+  <md-toolbar color="primary" class="new-professor-card-toolbar">
+    Visualizar Professores
+    <span class="spacer"></span>
+  </md-toolbar>
+
+  <md-card-content class="professor-card-content">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Matrícula SIAP</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let professor of professors">
+          <td>{{professor.nome}}</td>
+          <td>{{professor.SIAP}}</td>
+          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
+          <td><button (click)="onDeleteProfessor(professor.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>

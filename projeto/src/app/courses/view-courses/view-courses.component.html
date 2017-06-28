@@ -1,3 +1,35 @@
-<p>
-  view-courses works! (Under development. Also, edit-courses)
-</p>
+<md-card class="visualize-professor-card">
+  <!--Toolbar-->
+  <md-toolbar color="primary" class="new-professor-card-toolbar">
+    Disciplinas Cadastradas
+    <span class="spacer"></span>
+  </md-toolbar>
+
+  <md-card-content class="course-card-content">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Créditos</th>
+          <th>Semestre Recomendado</th>
+          <th>UA Ofertante </th>
+          <th>UA Solicitante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let course of courses">
+          <td>{{course.name}}</td>
+          <td>{{course.type}}</td>
+          <td>{{course.credits}}</td>
+          <td>{{course.recomendedSemester}}</td>
+          <td>{{course.offererDepartment}}</td>
+          <td>{{course.requesterDepartment}}</td>
+          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-course/' + course.$key]">Editar</button></td>
+          <td><button (click)="onDeleteCourse(course.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>

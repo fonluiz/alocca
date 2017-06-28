@@ -1,30 +1,24 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import {Professor} from '../professors/professor.model';
+import {Course} from '../courses/course.model';
+import {Allocation} from '../allocations/allocation.model';
 
 @Injectable()
 export class FirebaseService {
   //"local"
-  professorsNames: FirebaseListObservable<any[]>;
-  coursesNames: FirebaseListObservable<any[]>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
   professor: FirebaseObjectObservable<any>;
+  courses: FirebaseListObservable<any[]>;
+  course: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
-    this.professorsNames = db.list('/professorsNames') as FirebaseListObservable<ProfessorsName[]>;
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    this.coursesNames = db.list('/coursesNames') as FirebaseListObservable<CoursesName[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
-  }
-
-  getProfessorsNames(){
-    return this.professorsNames;
-  }
-  getCoursesNames(){
-    return this.coursesNames;
+    this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
   }
 
 
@@ -46,10 +40,15 @@ export class FirebaseService {
   }
 
 
-  addNewProfessor(professor){
-    return this.professors.push(professor);
+  addNewProfessor(newprofessor){
+    if(this.sameSIAPProfessor(newprofessor)){
+      return false;
+    } else {
+        this.professors.push(newprofessor);
+        return true;
+    }
   }
-  getProfessors(){
+  getProfessors(){ 
     return this.professors;
   }
   getProfessorDetails( id){
@@ -57,25 +56,41 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
+    if(!(this.sameSIAPProfessor(professor))){
+      return false;
+    }
     return this.professors.update(id,professor);
   }
+  deleteProfessor(id){
+    return this.professors.remove(id);
+  }
+  sameSIAPProfessor(newProfessor){
+    var retorn: Boolean = false;
+    this.getProfessors().subscribe(professors =>{
+      professors.forEach(element => {
+        if (element.SIAP == newProfessor.SIAP) {
+          retorn = true;
+        } else {
+         }
+      });
+    });
+    return retorn;
+  }
 
-
-}
-
-interface ProfessorsName{
-  $key?:string;
-  Nome?: string;
-}
-
-interface CoursesName{
-  $key?:string;
-  nome?: string;
-}
-
-interface Allocation{
-  $key?:string;
-  course?: string;
-  professorOne?: string;
-  professorTwo?: string;
+  addNewCourse(course){
+    return this.courses.push(course);
+  }
+  getCourses(){
+    return this.courses;
+  }
+  getCourseDetails( id){
+    this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
+    return this.course;
+  }
+  updateCourse(id, course){
+    return this.courses.update(id,course);
+  }
+  deleteCourse(id){
+    return this.courses.remove(id);
+  }
 }
