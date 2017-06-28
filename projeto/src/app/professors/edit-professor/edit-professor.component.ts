@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { Professor } from '../professor.model';
 import { HORARIOS } from '../professor.mock';
 import { FirebaseService } from '../../services/firebase.service';
@@ -19,11 +20,14 @@ export class EditProfessorComponent implements OnInit {
   restricoes_horarios;
   id;
   horarios: string[] = HORARIOS;
+  DELETED_MESSAGE: string = "Professor deletado com sucesso!";
+  TIMEOUT_DELETED_MESSAGE = 2500;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _flashMessagesService: FlashMessagesService
   ){    }
 
   ngOnInit(){
@@ -31,11 +35,6 @@ export class EditProfessorComponent implements OnInit {
     this.FBservice.getProfessorDetails(this.id).subscribe(professor =>{
         this.nome = professor.nome;
         this.SIAP = professor.SIAP;
-        /*this.max_creditos = professor.max_creditos;
-        this.min_creditos = professor.min_creditos;
-        this.creditos_pos = professor.creditos_pos;*/
-        //this.restricoes_horarios = professor.restricoes_horarios;
-
     });
   }
 
@@ -46,7 +45,6 @@ export class EditProfessorComponent implements OnInit {
           max_creditos: this.max_creditos,
           min_creditos: this.min_creditos,
           creditos_pos: this.creditos_pos,
-          //restricoes_horarios: this.restricoes_horarios,
           id: this.id
     }
         
@@ -56,7 +54,8 @@ export class EditProfessorComponent implements OnInit {
 
   }
    onDeleteClick(){
-    this.FBservice.deleteProfessor(this.id);
+       this.FBservice.deleteProfessor(this.id);
+       this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
     this.router.navigate(['/view-professors']);
   }
 }
