@@ -46,12 +46,16 @@ export class FirebaseService {
   }
 
 
-  addNewProfessor(professor){
-    return this.professors.push(professor);
+  addNewProfessor(newprofessor){
+    if(!(this.sameSIAPProfessor(newprofessor))){
+      return false;
+    }
+    return this.professors.push(newprofessor);
   }
   getProfessors(){ 
     return this.professors;
   }
+
   getProfessorDetails( id){
     this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
     return this.professor;
@@ -62,7 +66,16 @@ export class FirebaseService {
   deleteProfessor(id){
     return this.professors.remove(id);
   }
-
+  sameSIAPProfessor(newProfessor){
+    this.getProfessors().subscribe(professors=>{
+      if (professors.forEach(professor => {
+        if (professor.SIAP == newProfessor.SIAP){
+          return true;
+        }
+      }))
+      return false;
+    })
+  }
 
 }
 

@@ -24,7 +24,8 @@ export class AddProfessorComponent implements OnInit {
     let professor = {
     nome: this.nome,
     SIAP: this.SIAP
-    }
+  }
+    
     this.FBservice.addNewProfessor(professor);
     //para a area de cadastro oou para o view?
     this.router.navigate(['/add-professor']);
