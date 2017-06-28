@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+﻿import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
 import {Professor} from '../professors/professor.model';
@@ -49,8 +49,11 @@ export class FirebaseService {
   addNewProfessor(newprofessor){
     if(this.sameSIAPProfessor(newprofessor)){
       return false;
+    } else {
+        this.professors.push(newprofessor);
+        return true;
     }
-    return this.professors.push(newprofessor);
+    
   }
   getProfessors(){ 
     return this.professors;
