@@ -95,12 +95,13 @@
       <div class="professor-card-row">
         <!-- Professor name -->
         <md-input-container class="professor-name-input" type="text">
-          <input mdInput placeholder="Nome" [(ngModel)]="nome" name="nome" required>
+          <input mdInput placeholder="Nome" [(ngModel)]="nome" name="nome" pattern="[A-Za-zA-za-Z]" required>
         </md-input-container>
 
         <!-- Professor's SIAP -->
+
         <md-input-container class="professor-SIAP-input" type="text">
-          <input mdInput placeholder="SIAP" [(ngModel)]="SIAP" name="SIAP" required>
+          <input mdInput placeholder="SIAP" [(ngModel)]="SIAP" name="SIAP" size="7" maxlength="7" pattern="[0-9]{7}" required>
         </md-input-container>
       </div>
     </md-card-content>

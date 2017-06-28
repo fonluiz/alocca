@@ -2,7 +2,6 @@
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Professor } from '../professor.model';
-import { PROFESSORES } from '../professor.mock';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 

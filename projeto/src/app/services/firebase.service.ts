@@ -47,7 +47,6 @@ export class FirebaseService {
         this.professors.push(newprofessor);
         return true;
     }
-    
   }
   getProfessors(){ 
     return this.professors;
