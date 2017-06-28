@@ -47,7 +47,7 @@ export class FirebaseService {
 
 
   addNewProfessor(newprofessor){
-    if(!(this.sameSIAPProfessor(newprofessor))){
+    if(this.sameSIAPProfessor(newprofessor)){
       return false;
     }
     return this.professors.push(newprofessor);
@@ -61,20 +61,25 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
+    if(!(this.sameSIAPProfessor(professor))){
+      return false;
+    }
     return this.professors.update(id,professor);
   }
   deleteProfessor(id){
     return this.professors.remove(id);
   }
   sameSIAPProfessor(newProfessor){
-    this.getProfessors().subscribe(professors=>{
-      if (professors.forEach(professor => {
-        if (professor.SIAP == newProfessor.SIAP){
-          return true;
-        }
-      }))
-      return false;
-    })
+    var retorn: Boolean = false;
+    this.getProfessors().subscribe(professors =>{
+      professors.forEach(element => {
+        if (element.SIAP == newProfessor.SIAP) {
+          retorn = true;
+        } else {
+         }
+      });
+    });
+    return retorn;
   }
 
 }
