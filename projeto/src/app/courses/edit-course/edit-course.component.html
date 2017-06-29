@@ -33,14 +33,14 @@
             <span [ngSwitch]="type">
                 <span *ngSwitchCase="'Optativa'">
                     <!--Recomended minimum Semester-->
-                    <md-select class="course-semester-input" placeholder="Semestre Mín. Recomendado" [(ngModel)]="selectedValue">
+                    <md-select class="course-semester-input" placeholder="Semestre Mín. Recomendado" [(ngModel)]="minimumSemester" name="minimumSemester">
                         <md-option *ngFor="let sem of semesters" [value]="sem">
                             {{ sem }}
                         </md-option>
                     </md-select>
 
                     <!--Recommended maximum Semester-->
-                    <md-select class="course-semester-input" style="margin-left: 30px;" placeholder="Semestre Máx. Recomendado">
+                    <md-select class="course-semester-input" style="margin-left: 30px;" placeholder="Semestre Máx. Recomendado" [(ngModel)]="maximumSemester" name="maximumSemester">
                         <md-option *ngFor="let sem of semesters" [value]="sem">
                             {{ sem }}
                         </md-option>
