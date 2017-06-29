@@ -6,17 +6,17 @@
       <div class="container"><flash-messages></flash-messages></div>
       <input type="text" list="courses" [(ngModel)]="course" name="course" placeholder="Disciplina">
       <datalist id="courses">
-        <option *ngFor = 'let course of coursesList' value={{course.nome}}>
+        <option *ngFor = 'let course of coursesList' value={{course.name}}>
       </datalist>
 
       <input type="text" list="professors1" [(ngModel)]="professorOne" name="professorOne" placeholder="Docente 1">
       <datalist id="professors1">
-        <option *ngFor = 'let prof of professorsList' value={{prof.Nome}}>
+        <option *ngFor = 'let prof of professorsList' value={{prof.nome}}>
       </datalist>
             
       <input type="text" list="professors2" [(ngModel)]="professorTwo" name="professorTwo" placeholder="Docente 2">
       <datalist id="professors2" value="NA">
-        <option *ngFor = 'let prof of professorsList' value={{prof.Nome}}>
+        <option *ngFor = 'let prof of professorsList' value={{prof.nome}}>
       </datalist>
       <input type="submit" value="Alocar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
     </div>
