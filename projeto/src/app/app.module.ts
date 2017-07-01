@@ -16,9 +16,12 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from './services/firebase.service';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 //components
 import { AppComponent } from './app.component';
 //our components
+///home
+import { HomeComponent } from './home/home.component';
 ///navbar
 import { NavbarComponent } from './navbar/navbar.component';
 ///allocations
@@ -48,7 +51,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
     AngularFireDatabaseModule,
     FlashMessagesModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFireAuthModule
   ],
   declarations: [
     AppComponent,
@@ -62,7 +66,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
     EditProfessorComponent,
     ViewProfessorsComponent,
     EditCourseComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    HomeComponent
     ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

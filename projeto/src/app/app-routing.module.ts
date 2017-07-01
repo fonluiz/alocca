@@ -11,8 +11,12 @@ import { ViewCoursesComponent } from './courses/view-courses/view-courses.compon
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
+//home
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
+    {path: '', component: HomeComponent},
+
     {path: 'allocations', component: AddAllocationComponent},
     {path: 'edit-allocation/:id', component: EditAllocationComponent},
 

@@ -28,8 +28,19 @@
       class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
     Alocações
     </button>
-
-
-
   </nav>
+  
+    <div class="mdl-layout-spacer"></div>
+    <button *ngIf="!(dbAuth.authState | async)" id="demo-menu-lower-left"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="login()" style="margin-left: 5px">
+    <b>Entrar</b>
+    </button>
+    <button *ngIf="(dbAuth.authState | async)" id="demo-menu-lower-left"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
+    Período
+    </button>
+    <button *ngIf="(dbAuth.authState | async)" id="demo-menu-lower-left"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="logout()" style="margin-left: 5px" [routerLink]="['/']">
+    <b>Sair</b>
+    </button>
 </div>

@@ -1,10 +1,8 @@
-/*.fill-remaining-space {
+.fill-remaining-space {
    /*This fills the remaining space, by using flexbox.  
-  Every toolbar row uses a flexbox row layout. 
+  Every toolbar row uses a flexbox row layout.*/
   flex: 1 1 auto;
 }
-what's this^^^ for?
-*/
 
 
 /* Remove the blue outline from a selected option*/
