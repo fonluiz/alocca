@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import {Professor} from '../professors/professor.model';
 import {Course} from '../courses/course.model';
 import {Allocation} from '../allocations/allocation.model';
+import {User} from '../users/user.model';
 
 @Injectable()
 export class FirebaseService {
@@ -14,11 +15,13 @@ export class FirebaseService {
   professor: FirebaseObjectObservable<any>;
   courses: FirebaseListObservable<any[]>;
   course: FirebaseObjectObservable<any>;
+  users: FirebaseListObservable<any[]>;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
+    this.users = db.list('/users') as FirebaseListObservable<User[]>;
   }
 
 
@@ -92,5 +95,12 @@ export class FirebaseService {
   }
   deleteCourse(id){
     return this.courses.remove(id);
+  }
+
+  getUsers(){
+    return this.users;
+  }
+  deleteUser(id){
+    return this.users.remove(id);
   }
 }

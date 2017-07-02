@@ -1,0 +1,24 @@
+<md-card class="view-user-card">
+  <!--Toolbar-->
+  <md-toolbar color="primary" class="view-user-card-toolbar">
+    Usuários Cadastrados
+    <span class="spacer"></span>
+  </md-toolbar>
+
+  <md-card-content class="user-card-content">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Nome</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.nome}}</td>
+          <td><button (click)="onDeleteUser(user.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>

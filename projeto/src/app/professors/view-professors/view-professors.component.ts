@@ -12,7 +12,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 })
 export class ViewProfessorsComponent implements OnInit {
     //professores: Professor[] = PROFESSORES
-    professors: any
+    professors: any;
     id: any;
     DELETED_MESSAGE: string = "Professor deletado com sucesso!";
     TIMEOUT_DELETED_MESSAGE = 2500;

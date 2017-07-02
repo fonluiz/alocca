@@ -31,6 +31,16 @@
   </nav>
   
     <div class="mdl-layout-spacer"></div>
+    <button id="demo-menu-lower-left-users"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
+    Usuários
+    <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+      for="demo-menu-lower-left-users">
+      <!--<li class="mdl-menu__item" [routerLink]="['/add-user']">Cadastrar</li>-->
+      <li class="mdl-menu__item" [routerLink]="['/view-users']">Cadastrados</li>
+    </ul>
     <button *ngIf="!(dbAuth.authState | async)" id="demo-menu-lower-left"
       class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="login()" style="margin-left: 5px">
     <b>Entrar</b>

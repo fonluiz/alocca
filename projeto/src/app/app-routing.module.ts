@@ -13,6 +13,8 @@ import { EditProfessorComponent } from './professors/edit-professor/edit-profess
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 //home
 import { HomeComponent } from './home/home.component';
+//users
+import { ViewUsersComponent } from './users/view-users/view-users.component';
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -26,7 +28,9 @@ const appRoutes: Routes = [
     
     {path: 'add-professor', component: AddProfessorComponent},
     {path: 'edit-professor/:id', component: EditProfessorComponent},
-    {path: 'view-professors', component: ViewProfessorsComponent}
+    {path: 'view-professors', component: ViewProfessorsComponent},
+
+    {path: 'view-users', component: ViewUsersComponent}
 ];
 
 @NgModule({
