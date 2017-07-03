@@ -3,6 +3,12 @@
   display: inline-block;
 }
 
+.new-semester-selection {
+    display: inline;
+    align-content: center;
+    align-items: center;
+}
+
 
 /* Remove the blue outline from a selected option*/
 *:focus {
