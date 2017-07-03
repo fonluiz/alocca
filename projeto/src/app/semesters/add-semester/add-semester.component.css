@@ -1,0 +1,26 @@
+﻿.new-semester-card {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.new-semester-card-content {
+  text-align: left;
+  padding: 30px 30px 30px 30px;
+}
+
+.year-input {
+  width: 40%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.semester-period-input {
+  width: 10%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

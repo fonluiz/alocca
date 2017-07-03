@@ -1,3 +1,30 @@
-<p>
-  add-semester works!
-</p>
+﻿<md-card class="new-semester-card">
+  <form (ngSubmit)="onAddNewSemester()" #semesterForm="ngForm">
+    <!--Toolbar-->
+    <md-toolbar color="primary" class="new-semester-card-toolbar">
+      Adicionar novo semestre
+      <span class="spacer"></span>
+      <button md-button style="margin-right: 5px" [routerLink]="['/']">Cancelar</button>
+      <button md-button [disabled]="!semesterForm.form.valid">Salvar</button>
+    </md-toolbar>
+
+    <!--Form-->
+    <md-card-content class="new-semester-card-content">
+      <div class="semester-card-row">
+        <!-- Year -->
+        <md-select class="" placeholder="Ano" [(ngModel)]="year" name="year">
+          <md-option *ngFor="let year of years" [value]="year">
+            {{ year }}
+          </md-option>
+        </md-select>
+
+        <!-- Period -->
+        <md-select class="" placeholder="Período" [(ngModel)]="period" name="period">
+          <md-option *ngFor="let period of periods" [value]="period">
+            {{ period }}
+          </md-option>
+        </md-select>
+      </div>
+    </md-card-content>
+  </form>
+</md-card>
