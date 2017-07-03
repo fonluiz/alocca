@@ -4,13 +4,13 @@
 <!--Content-->
 <md-dialog-content>
    <div class="new-semester-card-content">
-        <md-select class="year-input" placeholder="Ano" [(ngModel)]="year" name="year">
+        <md-select class="year-input" placeholder="Ano" [(ngModel)]="year" name="year" floatPlaceholder="never">
           <md-option *ngFor="let year of years" [value]="year">
             {{ year }}
           </md-option>
         </md-select>
 
-        <md-select class="semester-input" placeholder="Semestre" [(ngModel)]="period" name="period">
+        <md-select class="semester-input" placeholder="Semestre" [(ngModel)]="period" name="period" floatPlaceholder="never">
           <md-option *ngFor="let period of periods" [value]="period">
             {{ period }}
           </md-option>
