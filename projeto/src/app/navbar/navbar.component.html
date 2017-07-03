@@ -31,8 +31,8 @@
   </nav>
 <div class="mdl-layout-spacer"></div>
   <md-select class="semester-select mdl-color-text--white">
-      <md-option>
-        <button md-button (click)="openDialog()">Open dialog</button>
+      <md-option (click)="openDialog()">
+         Novo Semestre
       </md-option>
       <md-option *ngFor="let sem of semesters" [value]="sem">
         {{ sem }}
