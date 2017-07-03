@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 
 import { MdDialog, MdDialogRef } from '@angular/material';
-import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component'
-import {AddCourseComponent} from '../courses/add-course/add-course.component'
+import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
+import { AddCourseComponent } from '../courses/add-course/add-course.component';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this.dialog.open(AddCourseComponent);
+      let dialogRef = this.dialog.open(AddSemesterComponent);
     dialogRef.afterClosed().subscribe(result => {
       // this.selectedOption = result;
     });

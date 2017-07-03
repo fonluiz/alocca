@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //components
 import { AddAllocationComponent } from './allocations/add-allocation/add-allocation.component';
@@ -11,6 +11,8 @@ import { ViewCoursesComponent } from './courses/view-courses/view-courses.compon
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
+//semesters
+import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
 
 const appRoutes: Routes = [
     {path: 'allocations', component: AddAllocationComponent},
@@ -22,7 +24,9 @@ const appRoutes: Routes = [
     
     {path: 'add-professor', component: AddProfessorComponent},
     {path: 'edit-professor/:id', component: EditProfessorComponent},
-    {path: 'view-professors', component: ViewProfessorsComponent}
+    {path: 'view-professors', component: ViewProfessorsComponent},
+    {path: 'add-semester', component: AddSemesterComponent }
+
 ];
 
 @NgModule({
