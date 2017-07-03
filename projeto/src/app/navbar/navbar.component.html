@@ -28,8 +28,14 @@
       class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
     Alocações
     </button>
-
-
-
   </nav>
+<div class="mdl-layout-spacer"></div>
+  <md-select class="semester-select mdl-color-text--white">
+      <md-option>
+        <button md-button (click)="openDialog()">Open dialog</button>
+      </md-option>
+      <md-option *ngFor="let sem of semesters" [value]="sem">
+        {{ sem }}
+      </md-option>
+    </md-select>
 </div>

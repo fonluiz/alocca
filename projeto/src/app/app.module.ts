@@ -33,9 +33,7 @@ import { ViewCoursesComponent } from './courses/view-courses/view-courses.compon
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
-
-
-
+import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
 
 @NgModule({
   imports: [
@@ -62,7 +60,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
     EditProfessorComponent,
     ViewProfessorsComponent,
     EditCourseComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    AddSemesterComponent
     ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

@@ -1,10 +1,7 @@
-/*.fill-remaining-space {
-   /*This fills the remaining space, by using flexbox.  
-  Every toolbar row uses a flexbox row layout. 
-  flex: 1 1 auto;
+.semester-select {
+  color: white;
+  display: inline-block;
 }
-what's this^^^ for?
-*/
 
 
 /* Remove the blue outline from a selected option*/
