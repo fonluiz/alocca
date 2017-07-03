@@ -32,7 +32,8 @@
 <div class="mdl-layout-spacer"></div>
   <md-select class="semester-select mdl-color-text--white">
       <md-option (click)="openDialog()">
-         Novo Semestre
+        <!--<md-icon>add_circle_outline</md-icon>-->
+        Novo Semestre
       </md-option>
       <md-option *ngFor="let sem of semesters" [value]="sem">
         {{ sem }}
