@@ -5,10 +5,11 @@ import { HttpModule } from '@angular/http';
 ///extra modules
 import { AppRoutingModule } from './app-routing.module';
 import { FlashMessagesModule} from 'angular2-flash-messages';
-///angular material
-import { MaterialModule } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import 'hammerjs';
+///our modules
+import {AllocationsModule} from './allocations/allocations.module';
+import {CoursesModule} from './courses/courses.module';
+import {ProfessorsModule} from './professors/professors.module';
+import { NavbarModule } from './navbar/navbar.module';
 //firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -17,9 +18,6 @@ import { FirebaseService } from './services/firebase.service';
 //components
 import { AppComponent } from './app.component';
 
-import { NavbarModule } from './navbar/navbar.module';
-import { CourseModule } from './courses/course.module'
-import { ProfessorModule } from './professors/professor.module'
 
 @NgModule({
   imports: [
@@ -29,15 +27,14 @@ import { ProfessorModule } from './professors/professor.module'
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     FlashMessagesModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    CourseModule, 
-    NavbarModule,
-    ProfessorModule
+    AllocationsModule,
+    CoursesModule,
+    ProfessorsModule,
+    NavbarModule
   ],
   declarations: [
-    AppComponent,
-    ],
+    AppComponent
+  ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
