@@ -9,9 +9,10 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {AddCourseComponent} from './add-course/add-course.component';
-import {EditCourseComponent} from './edit-course/edit-course.component';
-import {ViewCoursesComponent} from './view-courses/view-courses.component';
+import {AddProfessorComponent} from './add-professor/add-professor.component';
+import {EditProfessorComponent} from './edit-professor/edit-professor.component';
+import {ViewProfessorsComponent} from './view-professors/view-professors.component';
+import { AddRestrictionComponent } from './add-restriction/add-restriction.component';
 
 @NgModule({
     imports: [
@@ -19,12 +20,15 @@ import {ViewCoursesComponent} from './view-courses/view-courses.component';
         FormsModule,
         MaterialModule,
         BrowserAnimationsModule,
-        AppRoutingModule],
+        AppRoutingModule,
+        FlashMessagesModule],
     declarations: [
-        AddCourseComponent,
-        EditCourseComponent,
-        ViewCoursesComponent],
+        AddProfessorComponent,
+        EditProfessorComponent,
+        ViewProfessorsComponent,
+        AddRestrictionComponent
+        ],
     exports: []
 })
 
-export class CoursesModule {}
+export class ProfessorsModule {}
