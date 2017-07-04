@@ -8,6 +8,7 @@ import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { ViewCoursesComponent } from './courses/view-courses/view-courses.component';
 //professors
+import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component'
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
@@ -23,6 +24,7 @@ const appRoutes: Routes = [
     {path: 'view-courses', component: ViewCoursesComponent},
     
     {path: 'add-professor', component: AddProfessorComponent},
+    {path: 'add-restriction', component: AddRestrictionComponent},
     {path: 'edit-professor/:id', component: EditProfessorComponent},
     {path: 'view-professors', component: ViewProfessorsComponent},
     {path: 'add-semester', component: AddSemesterComponent }

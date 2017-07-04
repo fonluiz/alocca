@@ -1,0 +1,55 @@
+<md-card class="add-restriction-card">
+ <form>
+  <!--Toolbar-->
+    <md-toolbar color="primary" class="new-professor-card-toolbar">
+      Restrições  
+      <div class="mdl-layout-spacer"></div>
+      <button md-button style="margin-right: 5px">Cancelar</button> 
+      <button md-button>Salvar</button>
+    </md-toolbar>
+
+    <md-card-content class="add-restriction-card-content">
+      <md-input-container class="credits-input">
+        <input mdInput placeholder="Máximo de créditos" type="number">
+      </md-input-container>
+
+       <md-input-container class="credits-input">
+        <input mdInput placeholder="Mínimo de créditos" type="number">
+      </md-input-container>
+
+       <md-input-container class="credits-input">
+        <input mdInput placeholder="Créditos pós-graduação" type="number">
+      </md-input-container>
+
+      <hr>
+
+      <!--Schedules Table-->
+     <table class="mdl-data-table mdl-js-data-table">
+       <!--Header of the table-->
+      <thead>
+         <tr>
+          <th>Horário</th>
+          <th>Segunda</th>
+          <th>Terça</th>
+          <th>Quarta</th>
+          <th>Quinta</th>
+          <th>Sexta</th>
+        </tr>
+      </thead>
+
+      <!--Boby of the table-->
+      <tbody *ngFor="let hour of hours">
+          <tr>
+            <td>{{ hour }}</td>
+            <td><md-checkbox></md-checkbox></td>
+            <td><md-checkbox></md-checkbox></td>
+            <td><md-checkbox></md-checkbox></td>
+            <td><md-checkbox></md-checkbox></td>
+            <td><md-checkbox></md-checkbox></td>
+        </tr>
+      </tbody>
+    </table>
+
+    </md-card-content>
+ </form>
+</md-card>
