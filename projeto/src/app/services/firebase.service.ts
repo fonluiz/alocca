@@ -3,7 +3,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as firebase from 'firebase';
 import {Professor} from '../professors/professor.model';
 import {Course} from '../courses/course.model';
-import {Allocation} from '../allocations/allocation.model';
+import { Allocation } from '../allocations/allocation.model';
+import { Semester } from '../semesters/semester.model';
 
 @Injectable()
 export class FirebaseService {
@@ -14,11 +15,14 @@ export class FirebaseService {
   professor: FirebaseObjectObservable<any>;
   courses: FirebaseListObservable<any[]>;
   course: FirebaseObjectObservable<any>;
+  semesters: FirebaseListObservable<any[]>;
+  semester: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
+    this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
   }
 
 
@@ -77,6 +81,17 @@ export class FirebaseService {
     return retorn;
   }
 
+  semesterAlreadySaved(newSemester) {
+      this.getSemesters().subscribe(semesters => {
+          semesters.forEach(element => {
+              if (element.semester_id == newSemester.semester_id) {
+                  return true;
+              }
+          })
+      })
+      return false;
+  }
+
   addNewCourse(course){
     return this.courses.push(course);
   }
@@ -92,5 +107,18 @@ export class FirebaseService {
   }
   deleteCourse(id){
     return this.courses.remove(id);
+  }
+
+  addNewSemester(semester) {
+      if (this.semesterAlreadySaved(semester)) {
+          return false;
+      } else {
+          this.semesters.push(semester);
+          return true;
+      }
+  }
+
+  getSemesters() {
+      return this.semesters;
   }
 }
