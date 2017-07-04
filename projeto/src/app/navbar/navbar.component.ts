@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
-
+import { FirebaseService } from '../services/firebase.service';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { MdDialog, MdDialogRef } from '@angular/material';
 import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
@@ -10,11 +11,18 @@ import { AddCourseComponent } from '../courses/add-course/add-course.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  semesters = ["2015.2", "2016.1", "2016.2", "2017.1"];
+  //semesters = ["2015.2", "2016.1", "2016.2", "2017.1"];
+    semesters: string[];
 
-  constructor(public dialog: MdDialog) { }
+  constructor(
+      public dialog: MdDialog,
+      private FBservice: FirebaseService
+  ) { }
 
   ngOnInit() {
+      this.FBservice.getSemesters().subscribe(semesters => {
+          this.semesters = semesters;
+      });
   }
 
   openDialog() {
