@@ -1,4 +1,4 @@
-<div class="mdl-layout__header-row">
+﻿<div class="mdl-layout__header-row">
   <!-- Title -->
   <span class="mdl-layout-title" [routerLink]="['/']">ALOCCA</span>
   <!-- Navigation. We hide it in small screens. -->
@@ -36,7 +36,7 @@
         Novo Semestre
       </md-option>
       <md-option *ngFor="let sem of semesters" [value]="sem">
-        {{ sem }}
+        {{ sem.semester_id }}
       </md-option>
     </md-select>
 </div>
