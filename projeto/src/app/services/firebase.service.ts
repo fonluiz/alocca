@@ -45,7 +45,7 @@ export class FirebaseService {
 
 
   addNewProfessor(newprofessor){
-    if(this.sameSIAPProfessor(newprofessor)){
+    if(this.professorAlreadySaved(newprofessor)){
       return false;
     } else {
         this.professors.push(newprofessor);
@@ -60,7 +60,7 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
-    if(!(this.sameSIAPProfessor(professor))){
+    if(!(this.professorAlreadySaved(professor))){
       return false;
     }
     return this.professors.update(id,professor);
@@ -68,17 +68,17 @@ export class FirebaseService {
   deleteProfessor(id){
     return this.professors.remove(id);
   }
-  sameSIAPProfessor(newProfessor){
-    var retorn: Boolean = false;
+  professorAlreadySaved(newProfessor){
+    var isSiapSaved: Boolean = false;
     this.getProfessors().subscribe(professors =>{
       professors.forEach(element => {
         if (element.SIAP == newProfessor.SIAP) {
-          retorn = true;
+          isSiapSaved = true;
         } else {
          }
       });
     });
-    return retorn;
+    return isSiapSaved;
   }
 
   addNewCourse(course){
@@ -105,6 +105,29 @@ export class FirebaseService {
     return this.users.remove(id);
   }
   addNewUser(newUser){
-    return this.users.push(newUser);
+    var isEmailAlreadySaved: Boolean = this.emailAlreadySaved(newUser);
+    if (isEmailAlreadySaved===true){
+      return false;
+    }
+    else if(isEmailAlreadySaved===false){
+      this.users.push(newUser);
+      return true;
+    }
+    
   }
+  emailAlreadySaved(newUser){
+    var sameEmail: Boolean = false;
+    var executionOrder: Boolean = false;
+    this.getUsers().subscribe(users =>{
+      users.forEach(element => {
+        executionOrder = true;
+        if (element.email == newUser.email) {
+          sameEmail= true;
+        }
+      });
+    });
+    if(executionOrder){
+      return sameEmail;
+    }
+  } 
 }

@@ -13,7 +13,7 @@ export class AddUserComponent implements OnInit {
   email: string;
   nome: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário solicitado com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se as senhas coincidem.";
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o e-mail já não teve acesso solicitado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
   TIMEOUT_NOT_SAVED_MESSAGE = 5000;
 
@@ -33,9 +33,14 @@ export class AddUserComponent implements OnInit {
     this.email = null;
     this.nome = null;
 
-    this.FBservice.addNewUser(user);
-
-    this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+    let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
+    if(savedSuccessfully){
+        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+    }
+    else{
+        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        
+    }
     
     this.router.navigate(['/add-user']);
   }
