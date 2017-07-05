@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 export class AddUserComponent implements OnInit {
   email: string;
   nome: string;
-  SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário solicitado com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o e-mail já não teve acesso solicitado.";
+  SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
   TIMEOUT_NOT_SAVED_MESSAGE = 5000;
 
@@ -26,22 +26,22 @@ export class AddUserComponent implements OnInit {
 
   onAddNewUser(){
     let user = {
-    email: this.email,
-    nome: this.nome
-  }
+      email: this.email,
+      nome: this.nome
+    }
 
+    let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
+    console.log(this.email);
+    
     this.email = null;
     this.nome = null;
 
-    let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
     if(savedSuccessfully){
         this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
     }
     else{
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });
-        
-    }
-    
+        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });      
+    }    
     this.router.navigate(['/add-user']);
   }
 

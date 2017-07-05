@@ -11,11 +11,14 @@
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Email</th>
+          <th>  </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let user of users">
           <td>{{user.nome}}</td>
+          <td>{{user.email}}</td>
           <td><button (click)="onDeleteUser(user.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
         </tr>
       </tbody>

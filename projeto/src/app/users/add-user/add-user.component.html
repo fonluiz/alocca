@@ -1,14 +1,14 @@
 <md-card class="new-user-card">
   <form (ngSubmit)="onAddNewUser()" #userForm="ngForm">
-    <!--Toolbar-->
+     <!--Toolbar-->
     <md-toolbar color="primary" class="new-user-card-toolbar">
       Cadastrar Usuário   
       <span class="spacer"></span>
       <button md-button style="margin-right: 5px" [routerLink]="['/']">Cancelar</button> 
-      <button md-button [disabled]="!userForm.form.valid" >Cadastrar</button>
+      <button md-button type="submit" [disabled]="!userForm.form.valid" >Cadastrar</button>
     </md-toolbar>
-
-    <!--Form-->
+ 
+     <!--Form-->
     <md-card-content class="new-user-card-content">
       <div class="user-card-row">
         <!-- user's name -->
@@ -17,9 +17,9 @@
         </md-input-container>
         <!-- user's e-mail -->
         <md-input-container class="user-email-input">
-          <input mdInput type = "email"  pattern="[A-Za-z0-9._%+-]+@+[A-Za-z0-9._%+-]+.ufcg.edu.br" placeholder="E-mail" [(ngModel)]="email" name="email" required>
+          <input mdInput type = "email"  pattern="[A-Za-z0-9._%+-]+@[a-z]+.ufcg.edu.br" placeholder="E-mail" [(ngModel)]="email" name="email" required>
         </md-input-container>
-
+  
       </div>
     </md-card-content>
   </form>
