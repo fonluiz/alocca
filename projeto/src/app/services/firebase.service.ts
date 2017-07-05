@@ -16,6 +16,7 @@ export class FirebaseService {
   courses: FirebaseListObservable<any[]>;
   course: FirebaseObjectObservable<any>;
   users: FirebaseListObservable<any[]>;
+  user: FirebaseObjectObservable<any[]>;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -102,5 +103,8 @@ export class FirebaseService {
   }
   deleteUser(id){
     return this.users.remove(id);
+  }
+  addNewUser(newUser){
+    return this.users.push(newUser);
   }
 }

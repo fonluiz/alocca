@@ -1,0 +1,25 @@
+.new-user-card {
+  margin: 50px 250px 50px 250px;
+  padding: 0px 0px 0px 0px;
+}
+
+.new-user-card-content {
+  text-align: left;
+  padding: 30px 30px 30px 30px;
+}
+
+.user-name-input {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.user-email-input {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 10%
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

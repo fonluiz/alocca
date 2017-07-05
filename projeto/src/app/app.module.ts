@@ -38,6 +38,8 @@ import { EditProfessorComponent } from './professors/edit-professor/edit-profess
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 ///users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+
 
 
 
@@ -70,7 +72,8 @@ import { ViewUsersComponent } from './users/view-users/view-users.component';
     EditCourseComponent,
     ViewCoursesComponent,
     HomeComponent,
-    ViewUsersComponent
+    ViewUsersComponent,
+    AddUserComponent
     ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

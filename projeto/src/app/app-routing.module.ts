@@ -15,6 +15,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
 import { HomeComponent } from './home/home.component';
 //users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
+import { AddUserComponent } from './users/add-user/add-user.component';
+
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     {path: 'edit-professor/:id', component: EditProfessorComponent},
     {path: 'view-professors', component: ViewProfessorsComponent},
 
-    {path: 'view-users', component: ViewUsersComponent}
+    {path: 'view-users', component: ViewUsersComponent},
+    {path: 'add-user', component: AddUserComponent}
 ];
 
 @NgModule({

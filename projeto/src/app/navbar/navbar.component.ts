@@ -57,6 +57,8 @@ export class NavbarComponent implements OnInit {
 
   }
 
+
+
   logout(){
     this.dbAuth.auth.signOut();
   }
