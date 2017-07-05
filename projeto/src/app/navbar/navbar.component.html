@@ -38,8 +38,9 @@
     </button >
     <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
       for="demo-menu-lower-left-users">
-      <!--<li class="mdl-menu__item" [routerLink]="['/add-user']">Cadastrar</li>-->
+      <li class="mdl-menu__item" [routerLink]="['/add-user']">Cadastrar</li>
       <li class="mdl-menu__item" [routerLink]="['/view-users']">Cadastrados</li>
+      <li class="mdl-menu__item" [routerLink]="['/view-requests']">Requisições</li>
     </ul>
     
     <button *ngIf="!(dbAuth.authState | async)" id="demo-menu-lower-left"
@@ -47,7 +48,7 @@
     <b>Entrar</b>
     </button>
     <button *ngIf="!(dbAuth.authState | async)" id="demo-menu-lower-left"
-      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/add-user']" style="margin-left: 5px">
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/request-access']" style="margin-left: 5px">
     <b>Solicitar Acesso</b>
     </button>
 

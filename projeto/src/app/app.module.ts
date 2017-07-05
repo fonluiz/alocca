@@ -39,6 +39,8 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
 ///users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { ViewRequestsComponent } from './users/view-requests/view-requests.component';
+import { RequestAccessComponent } from './users/request-access/request-access.component';
 
 
 
@@ -73,7 +75,9 @@ import { AddUserComponent } from './users/add-user/add-user.component';
     ViewCoursesComponent,
     HomeComponent,
     ViewUsersComponent,
-    AddUserComponent
+    AddUserComponent,
+    ViewRequestsComponent,
+    RequestAccessComponent
     ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]

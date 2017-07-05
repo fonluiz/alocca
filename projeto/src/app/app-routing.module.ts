@@ -16,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 //users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+import { ViewRequestsComponent } from './users/view-requests/view-requests.component';
+import { RequestAccessComponent } from './users/request-access/request-access.component';
 
 
 const appRoutes: Routes = [
@@ -33,7 +35,9 @@ const appRoutes: Routes = [
     {path: 'view-professors', component: ViewProfessorsComponent},
 
     {path: 'view-users', component: ViewUsersComponent},
-    {path: 'add-user', component: AddUserComponent}
+    {path: 'add-user', component: AddUserComponent},
+    {path: 'request-access', component: RequestAccessComponent},
+    {path: 'view-requests', component: ViewRequestsComponent}
 ];
 
 @NgModule({

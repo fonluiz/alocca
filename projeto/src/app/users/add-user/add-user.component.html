@@ -5,7 +5,7 @@
       Cadastrar Usuário   
       <span class="spacer"></span>
       <button md-button style="margin-right: 5px" [routerLink]="['/']">Cancelar</button> 
-      <button md-button [disabled]="!userForm.form.valid" >Solicitar Acesso</button>
+      <button md-button [disabled]="!userForm.form.valid" >Cadastrar</button>
     </md-toolbar>
 
     <!--Form-->
@@ -17,7 +17,7 @@
         </md-input-container>
         <!-- user's e-mail -->
         <md-input-container class="user-email-input">
-          <input mdInput type = "email"  pattern="[A-Za-z0-9._%+-]+@computacao.ufcg.edu.br" placeholder="E-mail" [(ngModel)]="email" name="email" required>
+          <input mdInput type = "email"  pattern="[A-Za-z0-9._%+-]+@+[A-Za-z0-9._%+-]+.ufcg.edu.br" placeholder="E-mail" [(ngModel)]="email" name="email" required>
         </md-input-container>
 
       </div>
