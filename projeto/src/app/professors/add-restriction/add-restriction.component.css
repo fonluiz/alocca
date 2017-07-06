@@ -10,3 +10,19 @@
 .credits-input {
     margin-right: 5%;
 }
+
+.table-container {
+    display: inline-block;
+}
+
+.restrictions-slider {
+    display: block;
+}
+
+.sliders-container {
+    display: inline;
+}
+
+.schedules-container {
+    position: relative;
+}

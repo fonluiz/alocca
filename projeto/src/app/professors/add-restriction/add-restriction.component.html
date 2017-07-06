@@ -22,33 +22,53 @@
       </md-input-container>
 
       <hr>
+      <div class="schedules-container">
+        <div class="sliders-container">
 
-      <!--Schedules Table-->
-     <table class="mdl-data-table mdl-js-data-table">
-       <!--Header of the table-->
-      <thead>
-         <tr>
-          <th>Horário</th>
-          <th>Segunda</th>
-          <th>Terça</th>
-          <th>Quarta</th>
-          <th>Quinta</th>
-          <th>Sexta</th>
-        </tr>
-      </thead>
+            <md-slide-toggle
+                class="restrictions-slider"
+                [checked]="toughRestrictionSliderValue"
+                (change)="onToughRestrictionsSliderToggled($event)">
+              Horários impossíveis
+            </md-slide-toggle>
 
-      <!--Boby of the table-->
-      <tbody *ngFor="let hour of hours">
-          <tr>
-            <td>{{ hour }}</td>
-            <td><md-checkbox></md-checkbox></td>
-            <td><md-checkbox></md-checkbox></td>
-            <td><md-checkbox></md-checkbox></td>
-            <td><md-checkbox></md-checkbox></td>
-            <td><md-checkbox></md-checkbox></td>
-        </tr>
-      </tbody>
-    </table>
+            <md-slide-toggle
+                class="restrictions-slider"
+                [checked]="tractableRestrictionSliderValue"
+                (change)="onTractableRestrictionsSliderToggled($event)"
+                color="accent">
+              Horários indesejáveis
+            </md-slide-toggle>
+
+        </div>
+
+        <!--Schedules Table-->
+        <table class="mdl-data-table mdl-js-data-table table-container">
+          <!--Header of the table-->
+          <thead>
+            <tr>
+              <th>Horário</th>
+              <th>Segunda</th>
+              <th>Terça</th>
+              <th>Quarta</th>
+              <th>Quinta</th>
+              <th>Sexta</th>
+            </tr>
+          </thead>
+
+          <!--Boby of the table-->
+          <tbody *ngFor="let hour of hours">
+              <tr>
+                <td>{{ hour }}</td>
+                <td><md-checkbox></md-checkbox></td>
+                <td><md-checkbox></md-checkbox></td>
+                <td><md-checkbox></md-checkbox></td>
+                <td><md-checkbox></md-checkbox></td>
+                <td><md-checkbox></md-checkbox></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
     </md-card-content>
  </form>
