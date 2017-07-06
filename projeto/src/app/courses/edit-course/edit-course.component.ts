@@ -1,3 +1,9 @@
+﻿/**
+ * @api {component} projeto/src/app/courses/edit-course/edit-course.component.ts Edit Course Component
+ * @apiName Edit Course Component
+ * @apiGroup Course
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { FirebaseService } from '../../services/firebase.service';

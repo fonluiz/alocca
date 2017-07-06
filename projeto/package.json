@@ -50,5 +50,15 @@
     "ts-node": "3.1.0",
     "tslint": "^5.4.3",
     "typescript": "^2.3.4"
+  },
+  "apidoc": {
+    "name": "ALOCCA",
+    "version": "0.0.1",
+    "description": "Computer Science Allocation System - UFCG",
+    "template.forceLanguage": "en",
+    "apidoc": {
+      "title": "ALOCCA",
+      "url": ""
+    }
   }
 }

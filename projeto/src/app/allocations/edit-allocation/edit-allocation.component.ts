@@ -1,3 +1,9 @@
+﻿/**
+ * @api {component} projeto/src/app/allocations/edit-allocation/edit-allocation.component.ts Edit Allocation Component
+ * @apiName Edit Allocation Component
+ * @apiGroup Allocation
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
