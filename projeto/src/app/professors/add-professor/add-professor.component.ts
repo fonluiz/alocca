@@ -2,7 +2,6 @@
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { FirebaseService } from '../../services/firebase.service';
 import { Professor } from '../professor.model';
-import { HORARIOS } from '../professor.mock';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +12,6 @@ import { Router } from '@angular/router';
 export class AddProfessorComponent implements OnInit {
   nome: any;
   SIAP: any;
-  horarios: string[] = HORARIOS;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Professor salvo com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;

@@ -18,14 +18,14 @@
           <input mdInput type="text" list="professors1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" placeholder="SIAP do Docente 1" required>
         </md-input-container>
         <datalist id="professors1">
-          <option *ngFor = 'let prof of professorsList' data-value={{prof.nome}} value={{prof.SIAP}}></option>
+          <option *ngFor = 'let prof of professorsList' value={{prof.SIAP}}>{{prof.nome}}</option>
         </datalist>
 
         <md-input-container class="professor2-name-input">
           <input mdInput type="text" list="professors2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP" placeholder="SIAP do Docente 2">
         </md-input-container>
         <datalist id="professors2" value="NA">
-          <option *ngFor = 'let prof of professorsList' data-value={{prof.nome}} value={{prof.SIAP}}></option>
+          <option *ngFor = 'let prof of professorsList' value={{prof.SIAP}}>{{prof.nome}}</option>
         </datalist>
 
       </div>

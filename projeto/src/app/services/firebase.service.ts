@@ -88,6 +88,19 @@ export class FirebaseService {
     });
     return courseExists;
   }
+  getProfessorNameWithSIAP(professorSIAP) {
+    var professorName = "-";
+    this.getProfessors().subscribe(professors =>{
+      professors.forEach(element => {
+        if (element.SIAP === professorSIAP) {
+          console.log("HEEEEREEE",element);
+          professorName = element.nome;
+        }
+      });
+    });
+    console.log("HEEEEREEE",professorName);
+    return professorName;
+  }
 
   ///Professors
   addNewProfessor(newprofessor){

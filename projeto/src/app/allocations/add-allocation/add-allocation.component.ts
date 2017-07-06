@@ -70,13 +70,12 @@ export class AddAllocationComponent implements OnInit {
 
       this.addAlocationToFirebase(allocation);
 
-      this.course = "";
-      this.professorOneSIAP = "";
-      this.professorTwoSIAP = "";
-      this.professorOneName = "";
-      this.professorTwoName = "";
+      this.course = null;
+      this.professorOneSIAP = null;
+      this.professorTwoSIAP = null;
+      this.professorOneName = null;
+      this.professorTwoName = null;
 
-      this.router.navigate(['allocations']);
     }else{
       allocation = {
       course: this.course,
@@ -84,11 +83,10 @@ export class AddAllocationComponent implements OnInit {
       professorOneName: this.FBservice.getProfessorNameWithSIAP(this.professorOneSIAP)};
       this.addAlocationToFirebase(allocation);
 
-      this.course = "";
-      this.professorOneSIAP = "";
-      this.professorOneName = "";
-
-      this.router.navigate(['allocations']);
+      this.course = null;
+      this.professorOneSIAP = null;
+      this.professorOneName = null;
+      
     }
   }
 

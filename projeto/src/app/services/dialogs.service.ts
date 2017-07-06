@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { DialogComponent } from '../dialogs/dialogs.component';
+import { DialogsComponent } from '../dialogs/dialogs.component';
 import { MdDialogRef, MdDialog, MdDialogConfig } from '@angular/material';
 import { Injectable } from '@angular/core';
 
@@ -10,9 +10,9 @@ export class DialogsService {
 
     public confirm(title: string, message: string): Observable<boolean> {
 
-        let dialogRef: MdDialogRef<DialogComponent>;
+        let dialogRef: MdDialogRef<DialogsComponent>;
 
-        dialogRef = this.dialog.open(DialogComponent);
+        dialogRef = this.dialog.open(DialogsComponent);
         dialogRef.componentInstance.title = title;
         dialogRef.componentInstance.message = message;
 
