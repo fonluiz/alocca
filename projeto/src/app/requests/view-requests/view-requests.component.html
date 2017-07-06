@@ -1,3 +1,27 @@
-<p>
-  view-requests works!
-</p>
+<md-card class="view-request-card">
+  <!--Toolbar-->
+  <md-toolbar color="primary" class="view-request-card-toolbar">
+    Requisições de Acesso
+    <span class="spacer"></span>
+  </md-toolbar>
+
+  <md-card-content class="request-card-content">
+
+    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>  </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of requests">
+          <td>{{request.name}}</td>
+          <td>{{request.email}}</td>
+          <td><button (click)="onDeleteRequest(request.$key)" class="mdl-button mdl-js-button mdl-button--accent">Recusar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </md-card-content>
+</md-card>

@@ -172,4 +172,8 @@ export class FirebaseService {
   }
   */
 
+  deleteRequest(id){
+    this.requests.remove(id);
+  }
+
 }
