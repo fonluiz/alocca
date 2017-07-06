@@ -24,6 +24,7 @@ import { RequestAccessComponent } from './users/request-access/request-access.co
 
 
 const appRoutes: Routes = [
+    {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
     {path: 'home-body', component: HomeBodyComponent},
     {path: 'navbar', component: NavbarComponent},
