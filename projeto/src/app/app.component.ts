@@ -38,7 +38,7 @@ export class AppComponent {
       var usersList = this.db.list('/users') as FirebaseListObservable<User[]>;
       var isRegistered: Boolean = false;
       var executionOrder: Boolean = false;
-      usersList.subscribe(users =>{
+      return usersList.subscribe(users => {
         users.forEach(usr => {
           executionOrder = true;
           console.log(executionOrder+'execution');

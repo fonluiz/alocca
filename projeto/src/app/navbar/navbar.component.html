@@ -2,7 +2,7 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title" [routerLink]="['/']">ALOCCA</span>
+      <span class="mdl-layout-title" [routerLink]="['/home-body']">ALOCCA</span>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only" >
         <!--Register button-->
@@ -33,8 +33,19 @@
       </nav>
       
         <div class="mdl-layout-spacer"></div>
+
+        <md-select class="semester-select mdl-color-text--white" style="margin-right: 10px">
+          <md-option (click)="openDialog()">
+            <!--<md-icon>add_circle_outline</md-icon>-->
+            Novo Semestre
+          </md-option>
+          <md-option *ngFor="let sem of semesters" [value]="sem">
+            {{ sem.semester_id }}
+          </md-option>
+        </md-select>
+
         <button id="demo-menu-lower-left-users"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-right: 5px">
         Usuários
         <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
         </button >
@@ -46,11 +57,7 @@
         </ul>
 
         <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
-        Período
-        </button>
-        <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="logout()" style="margin-left: 5px" [routerLink]="['/home']">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="logout()" [routerLink]="['/home']">
         <b>Sair</b>
         </button>
     </div>
