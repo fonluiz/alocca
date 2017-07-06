@@ -22,26 +22,6 @@
       </md-input-container>
 
       <hr>
-      <div class="schedules-container">
-        <div class="sliders-container">
-
-            <md-slide-toggle
-                class="restrictions-slider"
-                [checked]="toughRestrictionSliderValue"
-                (change)="onToughRestrictionsSliderToggled($event)">
-              Horários impossíveis
-            </md-slide-toggle>
-
-            <md-slide-toggle
-                class="restrictions-slider"
-                [checked]="tractableRestrictionSliderValue"
-                (change)="onTractableRestrictionsSliderToggled($event)"
-                color="accent">
-              Horários indesejáveis
-            </md-slide-toggle>
-
-        </div>
-
         <!--Schedules Table-->
         <table class="mdl-data-table mdl-js-data-table table-container">
           <!--Header of the table-->
@@ -60,16 +40,13 @@
           <tbody *ngFor="let hour of hours">
               <tr>
                 <td>{{ hour }}</td>
-                <td><md-checkbox></md-checkbox></td>
-                <td><md-checkbox></md-checkbox></td>
-                <td><md-checkbox></md-checkbox></td>
-                <td><md-checkbox></md-checkbox></td>
-                <td><md-checkbox></md-checkbox></td>
+                <td *ngFor="let i of [1,2,3,4,5]">
+                  <md-checkbox>
+                  </md-checkbox>
+                  </td>
             </tr>
           </tbody>
         </table>
-      </div>
-
     </md-card-content>
  </form>
 </md-card>
