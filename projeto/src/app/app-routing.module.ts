@@ -21,6 +21,8 @@ import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { ViewRequestsComponent } from './requests/view-requests/view-requests.component';
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
+//semesters
+import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
 
 
 const appRoutes: Routes = [
@@ -44,7 +46,9 @@ const appRoutes: Routes = [
     {path: 'add-user', component: AddUserComponent},
     
     {path: 'request-access', component: RequestAccessComponent},
-    {path: 'view-requests', component: ViewRequestsComponent}
+    {path: 'view-requests', component: ViewRequestsComponent},
+
+    {path: 'add-semester', component: AddSemesterComponent }
 ];
 
 @NgModule({

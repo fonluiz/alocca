@@ -7,6 +7,9 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FlashMessagesModule} from 'angular2-flash-messages';
 import { CommonModule }  from '@angular/common';
+///our modules
+import { SemesterModule } from './semesters/semester.module';
+import { ProfessorsModule } from './professors/professors.module'
 ///angular material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -38,6 +41,8 @@ import { ViewCoursesComponent } from './courses/view-courses/view-courses.compon
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
+///restrictions
+import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
 ///users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
@@ -65,7 +70,9 @@ import { DialogsComponent } from './dialogs/dialogs.component';
     BrowserAnimationsModule,
     AngularFireAuthModule,
     MdDialogModule,
-    MdButtonModule
+    MdButtonModule,
+    SemesterModule,
+    ProfessorsModule
   ],
   declarations: [
     AppComponent,
@@ -75,9 +82,6 @@ import { DialogsComponent } from './dialogs/dialogs.component';
     AllocationTableComponent,
     EditAllocationComponent,
     AddCourseComponent,
-    AddProfessorComponent,
-    EditProfessorComponent,
-    ViewProfessorsComponent,
     EditCourseComponent,
     ViewCoursesComponent,
     HomeComponent,

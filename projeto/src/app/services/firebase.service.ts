@@ -6,6 +6,7 @@ import {Course} from '../courses/course.model';
 import {Allocation} from '../allocations/allocation.model';
 import {User} from '../users/user.model';
 import {Request} from '../requests/request.model';
+import { Semester } from '../semesters/semester.model';
 
 @Injectable()
 export class FirebaseService {
@@ -20,6 +21,8 @@ export class FirebaseService {
   user: FirebaseObjectObservable<any>;
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
+  semesters: FirebaseListObservable<any[]>;
+    semester: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -27,6 +30,7 @@ export class FirebaseService {
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
+    this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
   }
 
   ///Allocation
@@ -216,6 +220,7 @@ export class FirebaseService {
     }
     
   }
+  ///change to avoid duble values in the firebase system
   emailAlreadySaved(newUser){
     var sameEmail: Boolean = false;
     var executionOrder: Boolean = false;
@@ -237,6 +242,7 @@ export class FirebaseService {
     this.requests = this.db.list('/requests') as FirebaseListObservable<Request[]>;
     return this.requests;
   }
+  ///change to avoid duble values in the firebase system
   addNewRequest(request){
     this.requests.push(request);
     return true;
@@ -270,6 +276,32 @@ export class FirebaseService {
   */
   deleteRequest(id){
     this.requests.remove(id);
+  }
+
+  ///Semesters
+  addNewSemester(semester) {
+        var isAlreadySaved: Boolean = this.semesterAlreadySaved(semester);
+        if (!isAlreadySaved) {
+            this.semesters.push(semester);
+            return true;
+        } else {
+            return false;
+        }
+  }
+  getSemesters() {
+      return this.semesters;
+  }
+  ///change to avoid duble values in the firebase system
+  semesterAlreadySaved(semester) {
+        var isSaved: Boolean = false;
+        this.getSemesters().subscribe(semesters => {
+            semesters.forEach(element => {
+                if (element.semester_id === semester.semester_id) {
+                    isSaved = true;
+                }
+            });
+        });
+        return isSaved;
   }
 
 }
