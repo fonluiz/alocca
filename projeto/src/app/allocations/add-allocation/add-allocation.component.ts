@@ -13,17 +13,37 @@ import 'rxjs/add/operator/map';
   styleUrls: ['./add-allocation.component.css']
 })
 export class AddAllocationComponent implements OnInit {
+  // courseCtrl:FormControl;
+  // filteredCourses: any;
+
   professorsList: any[];
   coursesList: any[];
   course: any;
-  professorOne: any;
-  professorTwo: any;
+  professorOneName: any;
+  professorOneSIAP: any;
+  professorTwoName: any;
+  professorTwoSIAP: any;
+  SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a disciplina e/ou o(s) docente(s) já estão cadastrados.";
+  TIMEOUT_SAVED_MESSAGE = 2500;
+  TIMEOUT_NOT_SAVED_MESSAGE = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private flashMessage: FlashMessagesService
-    ) {}
+    ) {
+      // this.courseCtrl = new FormControl();
+      // this.filteredCourses = this.courseCtrl.valueChanges
+      //   .startWith(null)
+      //   .map(name => this.filterCourses(name));
+  }
+
+  // filterCourses(val: string) {
+  //   return val ? this.coursesList.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
+  //              : this.coursesList;
+  // }
+
 
   ngOnInit() {
     this.FBservice.getProfessors().subscribe(professorsnames =>{
@@ -31,48 +51,54 @@ export class AddAllocationComponent implements OnInit {
     });
     this.FBservice.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
+      console.log(this.coursesList);
     });
   }
 
   addNewAllocation(){
     let allocation: any;
-    if(this.professorOne && (this.professorOne==this.professorTwo)){
+
+    if(this.professorOneSIAP==this.professorTwoSIAP){
       this.flashMessage.show('Escolha Docentes diferentes.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(!(this.course)){
-      if(!(this.professorOne)){
-        this.flashMessage.show('Escolha pelo menos uma disciplina e um(a) professor(a).', {cssClass: 'alert-danger', timeout: 7000});
-      }else{
-        this.flashMessage.show('Escolha uma disciplina.', {cssClass: 'alert-danger', timeout: 5000});
-      }
-    }else if(!(this.professorOne) && !(this.professorTwo)){
-      this.flashMessage.show('Escolha pelo menos um Docente para a Disicplina.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(!(this.professorOne) && (this.professorTwo)){
-      this.flashMessage.show('Escolha o(a) professor(a) como o(a) primeiro(a) Docente.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(this.professorTwo){
+    }else if(this.professorTwoSIAP){
       allocation = {
       course: this.course,
-      professorOne: this.professorOne,
-      professorTwo: this.professorTwo};
-      this.FBservice.addAllocation(allocation);
+      professorOneSIAP: this.professorOneSIAP,
+      professorOneName: this.FBservice.getProfessorNameWithSIAP(this.professorOneSIAP),
+      professorTwoSIAP: this.professorTwoSIAP,
+      professorTwoName: this.FBservice.getProfessorNameWithSIAP(this.professorTwoSIAP),};
+
+      this.addAlocationToFirebase(allocation);
 
       this.course = "";
-      this.professorOne = "";
-      this.professorTwo = "";
+      this.professorOneSIAP = "";
+      this.professorTwoSIAP = "";
+      this.professorOneName = "";
+      this.professorTwoName = "";
 
       this.router.navigate(['allocations']);
     }else{
       allocation = {
       course: this.course,
-      professorOne: this.professorOne};
-      this.FBservice.addAllocation(allocation);
+      professorOneSIAP: this.professorOneSIAP,
+      professorOneName: this.FBservice.getProfessorNameWithSIAP(this.professorOneSIAP)};
+      this.addAlocationToFirebase(allocation);
 
       this.course = "";
-      this.professorOne = "";
+      this.professorOneSIAP = "";
+      this.professorOneName = "";
 
       this.router.navigate(['allocations']);
     }
-
-
   }
 
+  addAlocationToFirebase(allocation) {
+    let savedSuccessfully: boolean = this.FBservice.addAllocation(allocation);
+
+    if (savedSuccessfully) {
+        this.flashMessage.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+    } else {
+        this.flashMessage.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
+    }
+  }
 }

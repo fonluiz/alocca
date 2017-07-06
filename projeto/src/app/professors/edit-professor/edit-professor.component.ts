@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 //import { FlashMessagesService } from 'angular2-flash-messages';
 import { Professor } from '../professor.model';
-import { HORARIOS } from '../professor.mock';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -19,7 +18,6 @@ export class EditProfessorComponent implements OnInit {
   great;
   restricoes_horarios;
   id;
-  horarios: string[] = HORARIOS;
   //DELETED_MESSAGE: string = "Professor deletado com sucesso!";
   //TIMEOUT_DELETED_MESSAGE = 2500;
 

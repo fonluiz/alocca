@@ -2,8 +2,10 @@ export class Allocation {
     constructor(
         //???
         //caControl: boolean,
-        prfessorOne: string,
-        professorTwo: string,
+        professorOneName: string,
+        professorOneSIAP: string,
+        professorTwoName: string,
+        professorTwoSIAP: string,
         course: string,
         courseType: number,
         credits: string,

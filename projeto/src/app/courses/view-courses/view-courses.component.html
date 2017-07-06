@@ -13,7 +13,8 @@
           <th>Nome</th>
           <th>Tipo</th>
           <th>Créditos</th>
-          <th>Semestre Recomendado</th>
+          <th>Semestre Mínimo Recomendado</th>
+          <th>Semestre Máximo Recomendado</th>
           <th>UA Ofertante </th>
           <th>UA Solicitante</th>
         </tr>
@@ -23,11 +24,12 @@
           <td>{{course.name}}</td>
           <td>{{course.type}}</td>
           <td>{{course.credits}}</td>
-          <td>{{course.recomendedSemester}}</td>
+          <td>{{course.minimumSemester}}</td>
+          <td>{{course.maximumSemester}}</td>
           <td>{{course.offererDepartment}}</td>
           <td>{{course.requesterDepartment}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-course/' + course.$key]">Editar</button></td>
-          <td><button (click)="onDeleteCourse(course.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+          <td><button (click)="onDeleteCourse(course.$key, course.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
         </tr>
       </tbody>
     </table>

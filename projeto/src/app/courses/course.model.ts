@@ -3,7 +3,8 @@ export class Course {
         name: string,
         credits: string,
         type: string,
-        recomendedSemester: number,
+        minimumSemester: number,
+        maximumSemester: number,
         offererDepartment: string,
         requesterDepartment: String
     ) {}

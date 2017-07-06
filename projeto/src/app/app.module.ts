@@ -11,6 +11,8 @@ import { CommonModule }  from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import 'hammerjs';
+import { MdDialogModule, MdButtonModule  } from '@angular/material';
+import { DialogsService } from './services/dialogs.service';
 //firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
@@ -19,9 +21,9 @@ import { FirebaseService } from './services/firebase.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 //components
 import { AppComponent } from './app.component';
-//our components
 ///home
 import { HomeComponent } from './home/home.component';
+import { HomeBodyComponent } from './home-body/home-body.component';
 ///navbar
 import { NavbarComponent } from './navbar/navbar.component';
 ///allocations
@@ -39,9 +41,11 @@ import { ViewProfessorsComponent } from './professors/view-professors/view-profe
 ///users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+///requests
 import { ViewRequestsComponent } from './requests/view-requests/view-requests.component';
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
-import { HomeBodyComponent } from './home-body/home-body.component';
+///dialogs
+import { DialogsComponent } from './dialogs/dialogs.component';
 
 
 
@@ -59,7 +63,9 @@ import { HomeBodyComponent } from './home-body/home-body.component';
     FlashMessagesModule,
     MaterialModule,
     BrowserAnimationsModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MdDialogModule,
+    MdButtonModule
   ],
   declarations: [
     AppComponent,
@@ -79,9 +85,12 @@ import { HomeBodyComponent } from './home-body/home-body.component';
     AddUserComponent,
     ViewRequestsComponent,
     RequestAccessComponent,
-    HomeBodyComponent
+    HomeBodyComponent,
+    DialogsComponent
     ],
-  providers: [FirebaseService],
+  entryComponents:[DialogsComponent],
+  exports: [DialogsComponent],
+  providers: [FirebaseService,DialogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

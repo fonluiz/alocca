@@ -29,12 +29,27 @@ export class FirebaseService {
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
   }
 
-
+  ///Allocation
   getAllocations(){
     return this.allocations;
   }
   addAllocation(allocation){
-    return this.allocations.push(allocation);
+    if (allocation.professorTwoSIAP) {
+      if(this.professorExists(allocation.professorOneSIAP) &&
+          this.professorExists(allocation.professorTwoSIAP) &&
+            this.courseExists(allocation.course)){
+        this.allocations.push(allocation);
+        return true;
+      }
+    } else {
+      if(this.professorExists(allocation.professorOneSIAP) &&
+          this.courseExists(allocation.course)){
+        console.log("element.SIAP = professorSIAP");
+        this.allocations.push(allocation);
+        return true;
+      }
+    }
+    return false;
   }
   getAllocationDetails(id){
     this.allocation = this.db.object('/allocations/'+id) as FirebaseObjectObservable<Allocation>;
@@ -46,12 +61,35 @@ export class FirebaseService {
   deleteAllocation(id){
     return this.allocations.remove(id);
   }
+  professorExists(professorSIAP) {
+    var professorExists: Boolean = false;
+    this.getProfessors().subscribe(professors =>{
+      professors.forEach(element => {
+        console.log(element.SIAP, professorSIAP);
+        if (element.SIAP === professorSIAP) {
+          professorExists = true;
+        }
+      });
+    });
+    return professorExists;
+  }
+  courseExists(courseName) {
+    var courseExists: Boolean = false;
+    this.getCourses().subscribe(courses =>{
+      courses.forEach(element => {
+        if (element.name === courseName) {
+          courseExists = true;
+        }
+      });
+    });
+    return courseExists;
+  }
 
-
+  ///Professors
   addNewProfessor(newprofessor){
-    if(this.professorAlreadySaved(newprofessor)){
+    if(this.sameSIAPProfessor(newprofessor)===true){
       return false;
-    } else {
+    } else if(this.sameSIAPProfessor(newprofessor)===false){
         this.professors.push(newprofessor);
         return true;
     }
@@ -64,29 +102,59 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
-    if(!(this.professorAlreadySaved(professor))){
+    if(!(this.sameSIAPProfessor(professor))){
       return false;
     }
     return this.professors.update(id,professor);
   }
-  deleteProfessor(id){
-    return this.professors.remove(id);
-  }
-  professorAlreadySaved(newProfessor){
-    var isSiapSaved: Boolean = false;
-    this.getProfessors().subscribe(professors =>{
-      professors.forEach(element => {
-        if (element.SIAP == newProfessor.SIAP) {
-          isSiapSaved = true;
-        } else {
-         }
+  deleteProfessor(id, professorName){
+    this.getAllocations().subscribe(allocations => {
+      allocations.forEach(element => {
+        if (element.professorOne === professorName && !(element.professorTwo)) {
+          this.deleteAllocation(element.$key);
+        }else if(element.professorOne === professorName){
+          let allocation = {
+            course: element.course,
+            professorOne: element.professorTwo,
+            professorTwo: ""
+          }
+          this.updateAllocation(element.$key,allocation);
+        }else if(element.professorTwo === professorName){
+          let allocation = {
+            course: element.course,
+            professorOne: element.professorOne,
+            professorTwo: ""
+          }
+          this.updateAllocation(element.$key,allocation);
+        }
       });
     });
-    return isSiapSaved;
+    return this.professors.remove(id);
+  }
+  sameSIAPProfessor(newProfessor){
+    var sameSiap: Boolean = false;
+    var executionOrder: Boolean = false;
+    this.getProfessors().subscribe(professors =>{
+      professors.forEach(element => {
+        executionOrder = true;
+        if (element.SIAP == newProfessor.SIAP) {
+          sameSiap= true;
+        }
+      });
+    });
+    if(executionOrder){
+      return sameSiap;
+    }
   }
 
+  ///Courses
   addNewCourse(course){
-    return this.courses.push(course);
+    if(this.sameNameCourse(course)===true){
+      return false;
+    } else if (this.sameNameCourse(course)===false){
+      this.courses.push(course);
+      return true;
+    }
   }
   getCourses(){
     return this.courses;
@@ -96,12 +164,41 @@ export class FirebaseService {
     return this.course;
   }
   updateCourse(id, course){
-    return this.courses.update(id,course);
+    if(this.sameNameCourse(course)){
+      return false;
+    } else {
+        this.courses.update(id,course);
+        return true;
+    }
   }
-  deleteCourse(id){
+  deleteCourse(id, courseName){
+    this.getAllocations().subscribe(allocations => {
+      allocations.forEach(element => {
+        if (element.course === courseName) {
+          this.deleteAllocation(element.$key);
+        }
+      });
+    });
     return this.courses.remove(id);
   }
+  sameNameCourse(course){
+    var sameNameCourse: Boolean = false;
+    var executionOrder: Boolean = false;
+    this.getCourses().subscribe(courses => {
+      courses.forEach(element => {
+        executionOrder = true;
+        if (element.name === course.name) {
+          sameNameCourse = true;
+          return sameNameCourse;
+        }
+      });
+    });
+    if (executionOrder){
+      return sameNameCourse;
+    }
+  }
 
+  ///Users
   getUsers(){
     return this.users;
   }
@@ -135,6 +232,7 @@ export class FirebaseService {
     }
   } 
 
+  ///Requests
   getRequests(){
     this.requests = this.db.list('/requests') as FirebaseListObservable<Request[]>;
     return this.requests;
@@ -150,7 +248,6 @@ export class FirebaseService {
       return true;
     }
   }
-  
   RequestAlreadySent(request){
     var sameEmail: Boolean = false;
     var executionOrder: Boolean = false;
@@ -171,7 +268,6 @@ export class FirebaseService {
     }
   }
   */
-
   deleteRequest(id){
     this.requests.remove(id);
   }

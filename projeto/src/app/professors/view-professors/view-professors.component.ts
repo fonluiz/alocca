@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { DialogsService } from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-view-professors',
@@ -21,7 +22,8 @@ export class ViewProfessorsComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private _flashMessagesService: FlashMessagesService
+    private _flashMessagesService: FlashMessagesService,
+    private dialogsService: DialogsService
   ) {}
 
   ngOnInit() {
@@ -30,10 +32,19 @@ export class ViewProfessorsComponent implements OnInit {
     });
   }
 
-  onDeleteProfessor(id){
-    this.FBservice.deleteProfessor(id);
-    this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
-    this.router.navigate(['/view-professors']);
+
+  onDeleteProfessor(id, professorName){
+    var title = "Excluir Professor";
+    var message = "Deseja realmente excluir o professor "+professorName+" e suas alocações?";
+    this.dialogsService
+      .confirm(title, message)
+      .subscribe(res => {
+        if (res) {
+          this.FBservice.deleteProfessor(id, professorName);
+          this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
+          this.router.navigate(['/view-professors']);
+        }
+      });
   }
   
 

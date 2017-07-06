@@ -33,7 +33,6 @@ export class AddProfessorComponent implements OnInit {
   }
     
     let savedSuccessfully: boolean = this.FBservice.addNewProfessor(professor);
-    //para a area de cadastro oou para o view?
 
     this.nome = null;
     this.SIAP = null;
