@@ -1,3 +1,12 @@
+﻿/**
+ * @api {module} projeto/src/app/courses/courses.module.ts Courses Module
+ * @apiName Course Module
+ * @apiGroup Course
+ * @apiParam {component} AddCourseComponent
+ * @apiParam {component} EditCourseComponent
+ * @apiParam {component} ViewCoursesComponent
+ */
+
 import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';

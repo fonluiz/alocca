@@ -1,3 +1,12 @@
+﻿/**
+ * @api {module} projeto/src/app/allocations/allocations.module.ts Allocation Module
+ * @apiName Allocation Module
+ * @apiGroup Allocation
+ * @apiParam {component} AddAllocationComponent
+ * @apiParam {component} AllocationTableComponent
+ * @apiParam {component} EditAllocationComponent
+ */
+
 import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
