@@ -13,6 +13,9 @@ import { EditProfessorComponent } from './professors/edit-professor/edit-profess
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 //home
 import { HomeComponent } from './home/home.component';
+import { HomeBodyComponent } from './home-body/home-body.component';
+//navbar
+import { NavbarComponent } from './navbar/navbar.component';
 //users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
@@ -21,7 +24,9 @@ import { RequestAccessComponent } from './users/request-access/request-access.co
 
 
 const appRoutes: Routes = [
-    {path: '', component: HomeComponent},
+    {path: 'home', component: HomeComponent},
+    {path: 'home-body', component: HomeBodyComponent},
+    {path: 'navbar', component: NavbarComponent},
 
     {path: 'allocations', component: AddAllocationComponent},
     {path: 'edit-allocation/:id', component: EditAllocationComponent},

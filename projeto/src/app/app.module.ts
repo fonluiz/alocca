@@ -41,6 +41,7 @@ import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
 import { ViewRequestsComponent } from './users/view-requests/view-requests.component';
 import { RequestAccessComponent } from './users/request-access/request-access.component';
+import { HomeBodyComponent } from './home-body/home-body.component';
 
 
 
@@ -77,7 +78,8 @@ import { RequestAccessComponent } from './users/request-access/request-access.co
     ViewUsersComponent,
     AddUserComponent,
     ViewRequestsComponent,
-    RequestAccessComponent
+    RequestAccessComponent,
+    HomeBodyComponent
     ],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
