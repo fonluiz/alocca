@@ -19,8 +19,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 //users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
-import { ViewRequestsComponent } from './users/view-requests/view-requests.component';
-import { RequestAccessComponent } from './users/request-access/request-access.component';
+import { ViewRequestsComponent } from './requests/view-requests/view-requests.component';
+import { RequestAccessComponent } from './requests/request-access/request-access.component';
 
 
 const appRoutes: Routes = [

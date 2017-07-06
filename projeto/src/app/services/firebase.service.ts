@@ -5,6 +5,7 @@ import {Professor} from '../professors/professor.model';
 import {Course} from '../courses/course.model';
 import {Allocation} from '../allocations/allocation.model';
 import {User} from '../users/user.model';
+import {Request} from '../requests/request.model';
 
 @Injectable()
 export class FirebaseService {
@@ -16,13 +17,16 @@ export class FirebaseService {
   courses: FirebaseListObservable<any[]>;
   course: FirebaseObjectObservable<any>;
   users: FirebaseListObservable<any[]>;
-  user: FirebaseObjectObservable<any[]>;
+  user: FirebaseObjectObservable<any>;
+  requests: FirebaseListObservable<any[]>;
+  request: FirebaseObjectObservable<any>;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
+    this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
   }
 
 
@@ -130,4 +134,42 @@ export class FirebaseService {
       return sameEmail;
     }
   } 
+
+  getRequests(){
+    this.requests = this.db.list('/requests') as FirebaseListObservable<Request[]>;
+    return this.requests;
+  }
+  addNewRequest(request){
+    this.requests.push(request);
+    return true;
+  }
+    /*if(this.RequestAlreadySent(request)===true){
+      return false;
+    }else if(this.RequestAlreadySent(request)===false){
+      this.requests.push(request);
+      return true;
+    }
+  }
+  
+  RequestAlreadySent(request){
+    var sameEmail: Boolean = false;
+    var executionOrder: Boolean = false;
+    this.getRequests().subscribe(requests => {
+      console.log(executionOrder+"1");
+      requests.forEach(element => {
+        executionOrder = true;
+        if (element.email === request.email){
+          executionOrder = true;
+        }
+      });
+      console.log(executionOrder+"2");
+    });
+    console.log(executionOrder+"4");
+    if(executionOrder===true){
+      console.log(executionOrder+"5");
+      return sameEmail;
+    }
+  }
+  */
+
 }

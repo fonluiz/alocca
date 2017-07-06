@@ -1,0 +1,25 @@
+.new-request-card {
+  margin: 50px 250px 50px 250px;
+  padding: 0px 0px 0px 0px;
+}
+
+.new-request-card-content {
+  text-align: left;
+  padding: 30px 30px 30px 30px;
+}
+
+.request-name-input {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+.request-email-input {
+  width: 40%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 10%
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
