@@ -1,35 +1,33 @@
 <md-card class="new-allocation-card">
-  <form (submit)="addNewAllocation()" #courseForm="ngForm" align="center">
+  <form (ngSubmit)="onAddNewAllocation()" #allocationForm="ngForm" align="center">
     <md-toolbar color="primary" class="new-allocation-card-toolbar">
         Adicionar Alocação
+        <span class="spacer"></span>
+        <button md-button [disabled]="!allocationForm.form.valid" type="submit">Alocar</button>
     </md-toolbar>
 
     <md-card-content class="new-allocation-card-content">
       <div class="new-allocation-card-row">
 
-        <md-input-container class="course-name-input">
-          <input mdInput list="courses" placeholder="Disciplina" type="text" [(ngModel)]="course" name="course" required>
-        </md-input-container>
-        <datalist id="courses">
-          <option *ngFor = 'let course of coursesList' value={{course.name}}>
-        </datalist>
+        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+          <md-option *ngFor="let course of coursesList" [value]="course.$key">
+            {{ course.name }}
+          </md-option>
+        </md-select>
 
-        <md-input-container class="professor1-name-input">
-          <input mdInput type="text" list="professors1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" placeholder="SIAP do Docente 1" required>
-        </md-input-container>
-        <datalist id="professors1">
-          <option *ngFor = 'let prof of professorsList' value={{prof.SIAP}}>{{prof.nome}}</option>
-        </datalist>
+        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+            {{ prof.name }}
+          </md-option>
+        </md-select>
 
-        <md-input-container class="professor2-name-input">
-          <input mdInput type="text" list="professors2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP" placeholder="SIAP do Docente 2">
-        </md-input-container>
-        <datalist id="professors2" value="NA">
-          <option *ngFor = 'let prof of professorsList' value={{prof.SIAP}}>{{prof.nome}}</option>
-        </datalist>
-
+        <md-select class="professor2-name-input" placeholder="Docente 1" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+            {{ prof.name }}
+          </md-option>
+        </md-select>
       </div>
-      <input type="submit" [disabled]="!courseForm.form.valid" value="Alocar" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+      <button md-button [disabled]="!allocationForm.form.valid" type="submit">Alocar</button>
     </md-card-content>
   </form>
 </md-card>

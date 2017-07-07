@@ -1,0 +1,35 @@
+.new-allocation-card {
+  margin: 50px 50px 50px 50px;
+  padding: 0px 0px 0px 0px;
+}
+
+.new-allocation-card-toolbar {
+  
+}
+
+.new-allocation-card-content {
+    padding: 30px 30px 30px 30px;
+}
+
+
+.course-name-input {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor1-SIAP-input {
+    width: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor2-SIAP-input {
+    width: 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

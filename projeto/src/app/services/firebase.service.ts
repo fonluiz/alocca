@@ -41,21 +41,34 @@ export class FirebaseService {
   }
   addAllocation(allocation){
     if (allocation.professorTwoSIAP) {
-      if(this.professorExists(allocation.professorOneSIAP) &&
-          this.professorExists(allocation.professorTwoSIAP) &&
-            this.courseExists(allocation.course)){
-        this.allocations.push(allocation);
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP).set({
+          //change to get name(with key)
+          course: allocation.courseKey,
+          //add other fields: courseType, courseCredits and classNumber
+          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
+          professorOneSIAP: allocation.professorOneSIAP,
+          professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
+          professorTwoSIAP: allocation.professorTwoSIAP
+          //add note field
+        })){
         return true;
+      }else{
+        return false;
       }
     } else {
-      if(this.professorExists(allocation.professorOneSIAP) &&
-          this.courseExists(allocation.course)){
-        console.log("element.SIAP = professorSIAP");
-        this.allocations.push(allocation);
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP).set({
+        //change to get name(with key)
+          course: allocation.courseKey,
+          //add other fields: type, credits and classNumber
+          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
+          professorOneSIAP: allocation.professorOneSIAP
+          //add note field
+        })){
         return true;
+      }else{
+        return false;
       }
     }
-    return false;
   }
   getAllocationDetails(id){
     this.allocation = this.db.object('/allocations/'+id) as FirebaseObjectObservable<Allocation>;
@@ -67,46 +80,18 @@ export class FirebaseService {
   deleteAllocation(id){
     return this.allocations.remove(id);
   }
-  professorExists(professorSIAP) {
-    var professorExists: Boolean = false;
-    this.getProfessors().subscribe(professors =>{
-      professors.forEach(element => {
-        console.log(element.SIAP, professorSIAP);
-        if (element.SIAP === professorSIAP) {
-          professorExists = true;
-        }
-      });
-    });
-    return professorExists;
-  }
-  courseExists(courseName) {
-    var courseExists: Boolean = false;
-    this.getCourses().subscribe(courses =>{
-      courses.forEach(element => {
-        if (element.name === courseName) {
-          courseExists = true;
-        }
-      });
-    });
-    return courseExists;
-  }
   getProfessorNameWithSIAP(professorSIAP) {
-    var professorName = "-";
-    this.getProfessors().subscribe(professors =>{
-      professors.forEach(element => {
-        if (element.SIAP === professorSIAP) {
-          console.log("HEEEEREEE",element);
-          professorName = element.nome;
-        }
-      });
+    var professorName: String = "-";
+    this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){
+      professorName = snapshot.child('name').val();
     });
-    console.log("HEEEEREEE",professorName);
+    console.log(professorName);
     return professorName;
   }
 
   ///Professors
   addNewProfessor(newprofessor){
-    if(this.sameSIAPProfessor(newprofessor)){
+    if(this.professorExists(newprofessor.SIAP)){
         return false;
     }else{
       this.db.database.ref("professors/"+newprofessor.SIAP).set(newprofessor);
@@ -123,7 +108,7 @@ export class FirebaseService {
   //things to change in here!
   updateProfessor(id, professor){
     if (id!==professor.SIAP){
-      if(this.sameSIAPProfessor(professor)){
+      if(this.professorExists(professor.SIAP)){
         return false;
       }
         //change this after changing allocation
@@ -161,9 +146,9 @@ export class FirebaseService {
     return this.professors.remove(id);
     
   }
-  sameSIAPProfessor(newProfessor){
+  professorExists(newProfessorKey){
     var isSaved: boolean = false;
-    this.db.database.ref("professors/"+newProfessor.SIAP).once("value", function(snapshot) {
+    this.db.database.ref("professors/"+newProfessorKey).once("value", function(snapshot) {
       isSaved = snapshot.exists();
     });
     return isSaved;
@@ -171,7 +156,7 @@ export class FirebaseService {
 
   ///Courses
   addNewCourse(newCourse){
-    if(this.sameCourse(newCourse)){
+    if(this.courseExists(newCourse.name+newCourse.credits)){
       return false;
     }else{
       this.db.database.ref("courses/"+newCourse.name+newCourse.credits).set(newCourse);
@@ -188,7 +173,7 @@ export class FirebaseService {
   //things to change in here!!
   updateCourse(id, course){
     if(id!==(course.name+course.credits)){
-      if(this.sameCourse(course)){
+      if(this.courseExists(course.name+course.credits)){
         return false;
       }
       //change this after changing allocation
@@ -211,9 +196,9 @@ export class FirebaseService {
     });
     return this.courses.remove(id);
   }
-  sameCourse(newCourse){
+  courseExists(newCourseKey){
     var isSaved: boolean = false;
-    this.db.database.ref("courses/"+newCourse.name+newCourse.credits).once("value", function(snapshot) {
+    this.db.database.ref("courses/"+newCourseKey).once("value", function(snapshot) {
       isSaved = snapshot.exists();
     });
     return isSaved;

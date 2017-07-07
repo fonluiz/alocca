@@ -18,10 +18,8 @@ export class AddAllocationComponent implements OnInit {
 
   professorsList: any[];
   coursesList: any[];
-  course: any;
-  professorOneName: any;
+  courseKey: any;
   professorOneSIAP: any;
-  professorTwoName: any;
   professorTwoSIAP: any;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a disciplina e/ou o(s) docente(s) já estão cadastrados.";
@@ -51,41 +49,37 @@ export class AddAllocationComponent implements OnInit {
     });
     this.FBservice.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
-      console.log(this.coursesList);
     });
   }
 
-  addNewAllocation(){
+  onAddNewAllocation(){
     let allocation: any;
+    console.log(this.courseKey);
 
     if(this.professorOneSIAP==this.professorTwoSIAP){
       this.flashMessage.show('Escolha Docentes diferentes.', {cssClass: 'alert-danger', timeout: 7000});
     }else if(this.professorTwoSIAP){
       allocation = {
-      course: this.course,
+      courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
-      professorOneName: this.FBservice.getProfessorNameWithSIAP(this.professorOneSIAP),
       professorTwoSIAP: this.professorTwoSIAP,
-      professorTwoName: this.FBservice.getProfessorNameWithSIAP(this.professorTwoSIAP),};
+    };
 
       this.addAlocationToFirebase(allocation);
 
-      this.course = null;
+      this.courseKey = null;
       this.professorOneSIAP = null;
       this.professorTwoSIAP = null;
-      this.professorOneName = null;
-      this.professorTwoName = null;
 
     }else{
       allocation = {
-      course: this.course,
+      courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
-      professorOneName: this.FBservice.getProfessorNameWithSIAP(this.professorOneSIAP)};
+    };
       this.addAlocationToFirebase(allocation);
 
-      this.course = null;
+      this.courseKey = null;
       this.professorOneSIAP = null;
-      this.professorOneName = null;
       
     }
   }
@@ -98,5 +92,6 @@ export class AddAllocationComponent implements OnInit {
     } else {
         this.flashMessage.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
     }
+    this.router.navigate(['/allocations']);
   }
 }
