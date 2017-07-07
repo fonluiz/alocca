@@ -8,8 +8,11 @@
 
 export class ScheduleRestriction {
     constructor(
-        public tough: string[],
-        public tractable: string[]
+        public monday: number[],
+        public tuesday: number[],
+        public wednesday: number[],
+        public thursday: number[],
+        public friday: number[]
     ) { }
 
 }

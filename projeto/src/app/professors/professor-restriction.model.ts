@@ -5,7 +5,7 @@
  * @apiParam {string} SIAPSemester ID compound by professor SIAP's number and current semester
  * @apiParam {number} minCredits Minimum quantity of credits in a semester for a professor.
  * @apiParam {enum} maxCredits Maximum quantity of credits in a semester for a professor.
- * @apiParam {number} posGraduatedCredits Quantity of credits of a professor in a postgraduate teaching.
+ * @apiParam {number} graduatedCredits Quantity of credits of a professor in a graduate teaching.
  * @apiParam {string} scheduleRestrictions List of schedule restrictions associated to a professor.
  */
 
@@ -16,8 +16,18 @@ export class ProfessorRestriction {
         public SIAPSemester: string,
         public minCredits: number,
         public maxCredits: number,
-        public posGraduatedCredits: number,
-        public scheduleRestrictions: ScheduleRestriction[]
+        public graduateCredits: number,
+        public scheduleRestrictions: ScheduleRestriction
     ) { }
+
+    getFirebaseObject() {
+       var firebaseObject: any = {
+           'minCredits': this.minCredits,
+           'maxCredits': this.maxCredits,
+           'graduateCredits': this.graduateCredits,
+           'scheduleRestrictions': this.scheduleRestrictions
+       };
+       return <JSON>firebaseObject;
+    }
 
 }

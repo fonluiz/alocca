@@ -5,6 +5,7 @@ import {Professor} from '../professors/professor.model';
 import {Course} from '../courses/course.model';
 import { Allocation } from '../allocations/allocation.model';
 import { Semester } from '../semesters/semester.model';
+import { ProfessorRestriction } from '../professors/professor-restriction.model'
 
 @Injectable()
 export class FirebaseService {
@@ -17,14 +18,15 @@ export class FirebaseService {
     course: FirebaseObjectObservable<any>;
     semesters: FirebaseListObservable<any[]>;
     semester: FirebaseObjectObservable<any>;
+    professorRestrictions: FirebaseListObservable<any[]>;
 
     constructor(private db: AngularFireDatabase) {
         this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
         this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
         this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
         this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
+        this.professorRestrictions = db.list('/professorRestrictions') as FirebaseListObservable<ProfessorRestriction[]>;
     }
-
 
     getAllocations() {
         return this.allocations;
@@ -119,7 +121,16 @@ export class FirebaseService {
         }
     }
 
-  getSemesters() {
-      return this.semesters;
-  }
+    getSemesters() {
+        return this.semesters;
+    }
+
+    getProfessorRestrictions() {
+        return this.professorRestrictions;
+    }
+
+    saveProfessorRestriction(restriction: ProfessorRestriction) {        
+        this.db.database.ref('professorRestrictions/' + restriction.SIAPSemester)
+        .set(restriction.getFirebaseObject());
+    }
 }
