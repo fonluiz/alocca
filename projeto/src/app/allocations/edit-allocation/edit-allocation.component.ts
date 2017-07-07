@@ -11,6 +11,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class EditAllocationComponent implements OnInit {
   id;
   course;
+  courseKey;
   professorOneName;
   professorTwoName;
   professorOneSIAP;
@@ -49,7 +50,7 @@ export class EditAllocationComponent implements OnInit {
     let allocation: any;
     if(this.professorTwoName){
       allocation = {
-      course: this.course,
+      courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
       professorTwoSIAP: this.professorTwoSIAP
     };
@@ -58,7 +59,7 @@ export class EditAllocationComponent implements OnInit {
       this.router.navigate(['allocations']);
     }else{
       allocation = {
-      course: this.course,
+      courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP
     };
       this.FBservice.updateAllocation(this.id,allocation);

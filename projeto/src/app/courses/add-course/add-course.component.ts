@@ -17,6 +17,7 @@ export class AddCourseComponent implements OnInit {
   maximumSemester: number;
   offererDepartment: string;
   requesterDepartment: String;
+  classesNumber: number = 0;
   courseTypes = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
   semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   departments = ["UASC", "Outro"];
@@ -40,7 +41,7 @@ export class AddCourseComponent implements OnInit {
       maximumSemester: this.maximumSemester,
       offererDepartment: this.offererDepartment,
       requesterDepartment: this.requesterDepartment,
-      classesNumber: 0
+      classesNumber: this.classesNumber
     }
 
     let savedSuccessfully: boolean = this.FBservice.addNewCourse(course);
