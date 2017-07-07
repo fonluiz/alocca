@@ -22,7 +22,8 @@ export class FirebaseService {
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
   semesters: FirebaseListObservable<any[]>;
-    semester: FirebaseObjectObservable<any>;
+  semester: FirebaseObjectObservable<any>;
+  dbRef: any;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -31,6 +32,7 @@ export class FirebaseService {
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
     this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
+    this.dbRef = db.database.ref();
   }
 
   ///Allocation
@@ -104,12 +106,12 @@ export class FirebaseService {
 
   ///Professors
   addNewProfessor(newprofessor){
-    if(this.sameSIAPProfessor(newprofessor)===true){
-      return false;
-    } else if(this.sameSIAPProfessor(newprofessor)===false){
-        this.professors.push(newprofessor);
+    if (!this.sameSIAPProfessor(newprofessor)){
+      this.db.database.ref("professors/"+newprofessor.SIAP).set(newprofessor);
         return true;
-    }
+    }else{
+      return false;
+    }  
   }
   getProfessors(){ 
     return this.professors;
@@ -118,12 +120,20 @@ export class FirebaseService {
     this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
     return this.professor;
   }
+  //things to change in here!
   updateProfessor(id, professor){
-    if(!(this.sameSIAPProfessor(professor))){
+    if(this.sameSIAPProfessor(professor)){
       return false;
+    }else{
+      if (id!==professor.SIAP){
+        //change this after changing allocation
+        this.deleteProfessor(id,professor.name);
+      }
+      //using professor.SIAP because it is also the new object key
+      return this.professors.update(professor.SIAP,professor);
     }
-    return this.professors.update(id,professor);
   }
+  //change allocations first
   deleteProfessor(id, professorName){
     this.getAllocations().subscribe(allocations => {
       allocations.forEach(element => {
@@ -147,21 +157,14 @@ export class FirebaseService {
       });
     });
     return this.professors.remove(id);
+    
   }
   sameSIAPProfessor(newProfessor){
-    var sameSiap: Boolean = false;
-    var executionOrder: Boolean = false;
-    this.getProfessors().subscribe(professors =>{
-      professors.forEach(element => {
-        executionOrder = true;
-        if (element.SIAP == newProfessor.SIAP) {
-          sameSiap= true;
-        }
-      });
+    var isSaved: boolean = false;
+    this.db.database.ref("professors/"+newProfessor.SIAP).once("value", function(snapshot) {
+      isSaved = snapshot.exists();
     });
-    if(executionOrder){
-      return sameSiap;
-    }
+    return isSaved;
   }
 
   ///Courses
@@ -260,33 +263,6 @@ export class FirebaseService {
     this.requests.push(request);
     return true;
   }
-    /*if(this.RequestAlreadySent(request)===true){
-      return false;
-    }else if(this.RequestAlreadySent(request)===false){
-      this.requests.push(request);
-      return true;
-    }
-  }
-  RequestAlreadySent(request){
-    var sameEmail: Boolean = false;
-    var executionOrder: Boolean = false;
-    this.getRequests().subscribe(requests => {
-      console.log(executionOrder+"1");
-      requests.forEach(element => {
-        executionOrder = true;
-        if (element.email === request.email){
-          executionOrder = true;
-        }
-      });
-      console.log(executionOrder+"2");
-    });
-    console.log(executionOrder+"4");
-    if(executionOrder===true){
-      console.log(executionOrder+"5");
-      return sameEmail;
-    }
-  }
-  */
   deleteRequest(id){
     this.requests.remove(id);
   }

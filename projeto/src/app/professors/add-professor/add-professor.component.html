@@ -4,7 +4,7 @@
     <md-toolbar color="primary" class="new-professor-card-toolbar">
       Cadastrar Professor   
       <span class="spacer"></span>
-      <button md-button style="margin-right: 5px" [routerLink]="['/']">Cancelar</button> 
+      <button md-button style="margin-right: 5px" [routerLink]="['/home-body']">Cancelar</button> 
       <button md-button [disabled]="!professorForm.form.valid" >Salvar</button>
     </md-toolbar>
 
@@ -13,7 +13,7 @@
       <div class="professor-card-row">
         <!-- Professor name -->
         <md-input-container class="professor-name-input" type="text">
-          <input mdInput placeholder="Nome" [(ngModel)]="nome" name="nome" required>
+          <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>
         </md-input-container>
 
         <!-- Professor's SIAP -->

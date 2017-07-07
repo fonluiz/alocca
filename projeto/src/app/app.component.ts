@@ -34,6 +34,8 @@ export class AppComponent {
   login(){
     this.dbAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() =>{
       var userEmail: String = this.dbAuth.auth.currentUser.email;
+      //pegar UID do usuário
+      //console.log(this.dbAuth.auth.currentUser.uid);
       console.log(userEmail);
       var usersList = this.db.list('/users') as FirebaseListObservable<User[]>;
       var isRegistered: Boolean = false;

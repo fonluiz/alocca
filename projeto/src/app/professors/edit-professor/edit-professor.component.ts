@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./edit-professor.component.css']
 })
 export class EditProfessorComponent implements OnInit {
-  nome;
+  name;
   SIAP;
   max_creditos;
   min_creditos;
@@ -31,18 +31,18 @@ export class EditProfessorComponent implements OnInit {
   ngOnInit(){
     this.id = this.route.snapshot.params['id'],
     this.FBservice.getProfessorDetails(this.id).subscribe(professor =>{
-        this.nome = professor.nome;
+        this.name = professor.name;
         this.SIAP = professor.SIAP;
     });
   }
 
   onEditProfessor(){
     let professor = {
-          nome: this.nome,
+          name: this.name,
           SIAP: this.SIAP
     }
         
-    this.FBservice.updateProfessor(this.id, professor);
+    this.FBservice.updateProfessor(this.id,professor);
     console.log(professor);
     this.router.navigate(['view-professors']);
 

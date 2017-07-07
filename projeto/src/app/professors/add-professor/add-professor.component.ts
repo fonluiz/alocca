@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-professor.component.css']
 })
 export class AddProfessorComponent implements OnInit {
-  nome: any;
+  name: any;
   SIAP: any;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Professor salvo com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
@@ -26,13 +26,13 @@ export class AddProfessorComponent implements OnInit {
 
   onAddNewProfessor(){
     let professor = {
-    nome: this.nome,
+    name: this.name,
     SIAP: this.SIAP
   }
     
     let savedSuccessfully: boolean = this.FBservice.addNewProfessor(professor);
 
-    this.nome = null;
+    this.name = null;
     this.SIAP = null;
 
     // Queria colocar essa verificação em um método. Será que isso é possível?
@@ -41,8 +41,6 @@ export class AddProfessorComponent implements OnInit {
     } else {
         this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
     }
-    
-    this.router.navigate(['/add-professor']);
   }
 
   
