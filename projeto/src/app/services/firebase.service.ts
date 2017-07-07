@@ -82,18 +82,6 @@ export class FirebaseService {
         return retorn;
     }
 
-    semesterAlreadySaved(semester) {
-        var isSaved: Boolean = false;
-        this.getSemesters().subscribe(semesters => {
-            semesters.forEach(element => {
-                if (element.semester_id === semester.semester_id) {
-                    isSaved = true;
-                }
-            });
-        });
-        return isSaved;
-    }
-
     addNewCourse(course) {
         return this.courses.push(course);
     }
@@ -112,13 +100,12 @@ export class FirebaseService {
     }
 
     addNewSemester(semester) {
-        var isAlreadySaved: Boolean = this.semesterAlreadySaved(semester);
-        if (!isAlreadySaved) {
-            this.semesters.push(semester);
-            return true;
-        } else {
-            return false;
-        }
+        var semesterRef = this.db.database.ref('/semesters/' + semester.semester_id);
+        console.log(semesterRef);
+        semesterRef.set({
+            //TODO: This is unnecessary and will be deleted on next commit
+            semester_id: semester.semester_id.replace('_', '.')
+        });
     }
 
     getSemesters() {
