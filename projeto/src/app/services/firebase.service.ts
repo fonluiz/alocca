@@ -41,10 +41,11 @@ export class FirebaseService {
   }
   addAllocation(allocation){
     if (allocation.professorTwoSIAP) {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP).set({
-          //change to get name(with key)
-          course: allocation.courseKey,
-          //add other fields: courseType, courseCredits and classNumber
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
+          course: this.getCourseName(allocation.courseKey),
+          courseType: this.getCourseType(allocation.courseKey),
+          courseCredits: this.getCourseCredits(allocation.courseKey),
+          classNumber: this.getClassesNumber(allocation.courseKey),
           professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
           professorOneSIAP: allocation.professorOneSIAP,
           professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
@@ -56,10 +57,11 @@ export class FirebaseService {
         return false;
       }
     } else {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP).set({
-        //change to get name(with key)
-          course: allocation.courseKey,
-          //add other fields: type, credits and classNumber
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
+          course: this.getCourseName(allocation.courseKey),
+          courseType: this.getCourseType(allocation.courseKey),
+          courseCredits: this.getCourseCredits(allocation.courseKey),
+          classNumber: this.getClassesNumber(allocation.courseKey),
           professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
           professorOneSIAP: allocation.professorOneSIAP
           //add note field
@@ -75,10 +77,26 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    return this.allocations.update(id,allocation);
+    if (id!==(allocation.professorOneSIAP+allocation.courseKey)){
+      if(this.deleteAllocation(id,allocation.courseKey)){
+        if (this.addAllocation(allocation)){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }else{
+      return true;
+    }
   }
-  deleteAllocation(id){
-    return this.allocations.remove(id);
+  deleteAllocation(id,courseKey){
+    if(this.deleteClass(courseKey)){
+      return this.allocations.remove(id);
+    }else{
+      return false;
+    }
   }
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
@@ -87,6 +105,50 @@ export class FirebaseService {
     });
     console.log(professorName);
     return professorName;
+  }
+  getClassesNumber(courseKey){
+    var classesNumber: number = 0;
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      if (snapshot.exists()){
+        classesNumber = (snapshot.child('classesNumber').val()) + 1;
+      }
+    })
+    if(classesNumber>=1){
+      this.db.database.ref("courses/"+courseKey).update({
+        "classesNumber": classesNumber
+      });
+    }
+    return classesNumber;
+  }
+  getCourseName(courseKey){
+    var name: string = '';
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      name = snapshot.child('name').val();
+    })
+    return name;
+  }
+  getCourseType(courseKey){
+    var type: string = '';
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      type = snapshot.child('type').val();
+    })
+    return type;
+  }
+  getCourseCredits(courseKey){
+    var credits: string = '';
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      credits = snapshot.child('credits').val();
+    })
+    return credits;
+  }
+  deleteClass(courseKey){
+    var newClassesNumber: number = 0;
+    this.db.database.ref("courses"+courseKey).once("value",function(snapshot){
+      newClassesNumber = snapshot.child("classesNumber").val();
+    })
+    this.db.database.ref("courses/"+courseKey).update({
+        "classesNumber": (newClassesNumber-1)
+      });
   }
 
   ///Professors
@@ -113,8 +175,8 @@ export class FirebaseService {
       }
         //change this after changing allocation
       this.deleteProfessor(id,professor.name);
-    }
-    if(this.professors.update(professor.SIAP,professor)){
+      this.addNewProfessor(professor);
+    }else if(this.professors.update(id,professor)){
       return true;
     }else{
       return false;
@@ -125,7 +187,7 @@ export class FirebaseService {
     this.getAllocations().subscribe(allocations => {
       allocations.forEach(element => {
         if (element.professorOne === professorName && !(element.professorTwo)) {
-          this.deleteAllocation(element.$key);
+          //this.deleteAllocation(element.$key);
         }else if(element.professorOne === professorName){
           let allocation = {
             course: element.course,
@@ -190,7 +252,7 @@ export class FirebaseService {
     this.getAllocations().subscribe(allocations => {
       allocations.forEach(element => {
         if (element.course === courseName) {
-          this.deleteAllocation(element.$key);
+         // this.deleteAllocation(element.$key);
         }
       });
     });

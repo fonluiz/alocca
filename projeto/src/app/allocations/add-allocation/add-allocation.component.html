@@ -2,8 +2,6 @@
   <form (ngSubmit)="onAddNewAllocation()" #allocationForm="ngForm" align="center">
     <md-toolbar color="primary" class="new-allocation-card-toolbar">
         Adicionar Alocação
-        <span class="spacer"></span>
-        <button md-button [disabled]="!allocationForm.form.valid" type="submit">Alocar</button>
     </md-toolbar>
 
     <md-card-content class="new-allocation-card-content">
@@ -27,7 +25,7 @@
           </md-option>
         </md-select>
       </div>
-      <button md-button [disabled]="!allocationForm.form.valid" type="submit">Alocar</button>
+      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>
     </md-card-content>
   </form>
 </md-card>

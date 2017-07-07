@@ -5,10 +5,11 @@
   </md-toolbar>
 
   <md-card-content class="allocation-card-content">
-      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+      <table align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
             <th>CA</th>
+            <th>Turma</th>
             <th>Disciplina</th>
             <th>Docente 1</th>
             <th>Docente 2</th>
@@ -22,6 +23,7 @@
         <tbody>
           <tr *ngFor = 'let aloc of allocationsList'>
             <th>{{aloc.ca}}</th>
+            <th>{{aloc.classNumber}}</th>
             <th>{{aloc.course}}</th>
             <th>{{aloc.professorOneName}}</th>
             <th>{{aloc.professorTwoName}}</th>
@@ -29,7 +31,7 @@
             <th>{{aloc.courseCredits}}</th>
             <th>{{aloc.note}}</th>
             <th><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></th>
-            <th><a (click)="onDeleteAllocation(aloc.$key)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></th>
+            <th><a (click)="onDeleteAllocation(aloc.$key,aloc.course+aloc.courseCredits)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></th>
           </tr>
         </tbody>
       </table>

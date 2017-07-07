@@ -1,23 +1,38 @@
-<div>
-  <form (submit)="onUpdateAllocation()">
-    <div align="center"><h3>Editar Alocação</h3></div>
-    <div class= "form-group" align="center">
-      <div class="container"><flash-messages></flash-messages></div>
-      <input type="text" list="courses" [(ngModel)]="course" name="course" placeholder="Disciplina" required>
-      <datalist id="courses">
-        <option *ngFor = 'let course of coursesList' value={{course.nome}}>
-      </datalist>
+<md-card class="edit-allocation-card">
+  <form (submit)="onUpdateAllocation()" #allocationForm="ngForm" align="center">
+    <md-toolbar color="primary" class="edit-allocation-card-toolbar">
+        Editar Alocação
+        <span class="spacer"></span>
+        <button md-button style="margin-right: 5px" [routerLink]="['/allocations']">Cancelar</button>
+    </md-toolbar>
 
-      <input type="text" list="professors1" [(ngModel)]="professorOne" name="professorOne" placeholder="Docente 1" required>
-      <datalist id="professors1">
-        <option *ngFor = 'let prof of professorsList' value={{prof.Nome}}>
-      </datalist>
-            
-      <input type="text" list="professors2" [(ngModel)]="professorTwo" name="professorTwo" placeholder="Docente 2">
-      <datalist id="professors2" value="NA">
-        <option *ngFor = 'let prof of professorsList' value={{prof.Nome}}>
-      </datalist>
-      <input type="submit" value="Atualizar" class="btn btn-success">
-    </div>
+    <md-card-content class="edit-allocation-card-content">
+      <div class="edit-allocation-card-row">
+        <!--MAKE IT PRETTIER?? (and more intuitive)-->
+        <label style="color: gray" [ngModel]="course" name="course" class="course-name2-input">{{course}}</label>
+        <label style="color: gray" [ngModel]="professorOneName" name="professorOneName" class="professor1-name2-input">{{professorOneName}}</label>
+        <label style="color: gray" [ngModel]="professorTwoName" name="professorTwoName" class="professor2-name2-input">{{professorTwoName}}</label>
+      </div>
+      <div class="edit-allocation-card-row">
+        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+          <md-option *ngFor="let course of coursesList" [value]="course.$key">
+            {{ course.name }}
+          </md-option>
+        </md-select>
+
+        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+            {{ prof.name }}
+          </md-option>
+        </md-select>
+
+        <md-select class="professor2-name-input" placeholder="Docente 1" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+            {{ prof.name }}
+          </md-option>
+        </md-select>
+      </div>
+      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>
+    </md-card-content>
   </form>
-</div>
+</md-card>

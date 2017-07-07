@@ -1,0 +1,53 @@
+.edit-allocation-card {
+  margin: 50px 50px 50px 50px;
+  padding: 0px 0px 0px 0px;
+}
+
+.edit-allocation-card-toolbar {
+  
+}
+
+.edit-allocation-card-content {
+    padding: 30px 30px 30px 30px;
+}
+
+
+.course-name-input {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor1-name-input {
+    width: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor2-name-input {
+    width: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.course-name2-input {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor1-name2-input {
+    width: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.professor2-name2-input {
+    width: 15%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

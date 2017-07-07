@@ -11,8 +11,10 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class EditAllocationComponent implements OnInit {
   id;
   course;
-  professorOne;
-  professorTwo;
+  professorOneName;
+  professorTwoName;
+  professorOneSIAP;
+  professorTwoSIAP;
   professorsList: any[];
   coursesList: any[];
 
@@ -36,36 +38,29 @@ export class EditAllocationComponent implements OnInit {
     });
     this.FBservice.getAllocationDetails(this.id).subscribe(allocation =>{
       this.course = allocation.course;
-      this.professorOne = allocation.professorOne;
-      this.professorTwo = allocation.professorTwo;
+      this.professorOneName = allocation.professorOneName;
+      if(allocation.professorTwoName){
+        this.professorTwoName = allocation.professorTwoName;
+      }
     });
   }
 
   onUpdateAllocation(){
     let allocation: any;
-    if(!(this.course)){
-      if(!(this.professorOne) && !(this.professorTwo)){
-        this.flashMessage.show('Escolha pelo menos uma disciplina e um(a) professor(a).', {cssClass: 'alert-danger', timeout: 7000});
-      }else{
-        this.flashMessage.show('Escolha uma disciplina.', {cssClass: 'alert-danger', timeout: 5000});
-      }
-    }else if(!(this.professorOne) && !(this.professorTwo)){
-      this.flashMessage.show('Escolha pelo menos um Docente para a Disicplina.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(!(this.professorOne) && (this.professorTwo)){
-      this.flashMessage.show('Escolha o(a) professor(a) como o(a) primeiro(a) Docente.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(this.professorTwo){
+    if(this.professorTwoName){
       allocation = {
       course: this.course,
-      professorOne: this.professorOne,
-      professorTwo: this.professorTwo};
+      professorOneSIAP: this.professorOneSIAP,
+      professorTwoSIAP: this.professorTwoSIAP
+    };
       this.FBservice.updateAllocation(this.id,allocation);
 
       this.router.navigate(['allocations']);
     }else{
       allocation = {
       course: this.course,
-      professorOne: this.professorOne,
-      professorTwo: ""};
+      professorOneSIAP: this.professorOneSIAP
+    };
       this.FBservice.updateAllocation(this.id,allocation);
 
       this.router.navigate(['allocations']);
