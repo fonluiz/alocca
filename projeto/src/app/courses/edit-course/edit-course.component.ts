@@ -48,7 +48,6 @@ export class EditCourseComponent implements OnInit {
 
   onEditCourse(){
     let course = {
-          id: this.id,
           name: this.name,
           credits: this.credits,
           type: this.type,
@@ -59,9 +58,6 @@ export class EditCourseComponent implements OnInit {
     }
 
     let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course);
-
-    this.minimumSemester = null;
-    this.maximumSemester = null;
 
     if (savedSuccessfully) {
         this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });

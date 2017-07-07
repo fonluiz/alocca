@@ -1,33 +1,36 @@
-<md-card class="allocation-table-card">
+<md-card class="visualize-allocation-card">
+  <md-toolbar color="primary" class="view-allocation-card-toolbar">
+    Alocações Cadastradas
+  </md-toolbar>
+
   <md-card-content class="allocation-card-content">
-    <div>
-        <md-toolbar color="primary" class="new-allocation-card-toolbar">
-          Alocações Cadastradas
-        </md-toolbar>
       <table align="center" class="mdl-data-table mdl-js-data-table">
-        <tr>
-          <th>CA</th>
-          <th>Disciplina</th>
-          <th>Docente 1</th>
-          <th>Docente 2</th>
-          <th>Tipo</th>
-          <th>Créditos</th>
-          <th>Obs.</th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr *ngFor = 'let aloc of allocationsList'>
-          <th>{{aloc.ca}}</th>
-          <th>{{aloc.course}}</th>
-          <th>{{aloc.professorOne}}</th>
-          <th>{{aloc.professorTwo}}</th>
-          <th>{{aloc.type}}</th>
-          <th>{{aloc.credits}}</th>
-          <th>{{aloc.obs}}</th>
-          <th><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></th>
-          <th><a (click)="onDeleteAllocation(aloc.$key)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></th>
-        </tr>
+        <thead>
+          <tr>
+            <th>CA</th>
+            <th>Disciplina</th>
+            <th>Docente 1</th>
+            <th>Docente 2</th>
+            <th>Tipo</th>
+            <th>Créditos</th>
+            <th>Obs.</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = 'let aloc of allocationsList'>
+            <th>{{aloc.ca}}</th>
+            <th>{{aloc.course}}</th>
+            <th>{{aloc.professorOne}}</th>
+            <th>{{aloc.professorTwo}}</th>
+            <th>{{aloc.type}}</th>
+            <th>{{aloc.credits}}</th>
+            <th>{{aloc.obs}}</th>
+            <th><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></th>
+            <th><a (click)="onDeleteAllocation(aloc.$key)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></th>
+          </tr>
+        </tbody>
       </table>
-    </div>
   </md-card-content>
 </md-card>

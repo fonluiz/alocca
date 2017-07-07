@@ -106,11 +106,11 @@ export class FirebaseService {
 
   ///Professors
   addNewProfessor(newprofessor){
-    if (!this.sameSIAPProfessor(newprofessor)){
-      this.db.database.ref("professors/"+newprofessor.SIAP).set(newprofessor);
-        return true;
+    if(this.sameSIAPProfessor(newprofessor)){
+        return false;
     }else{
-      return false;
+      this.db.database.ref("professors/"+newprofessor.SIAP).set(newprofessor);
+      return true;
     }  
   }
   getProfessors(){ 
@@ -129,8 +129,11 @@ export class FirebaseService {
         //change this after changing allocation
         this.deleteProfessor(id,professor.name);
       }
-      //using professor.SIAP because it is also the new object key
-      return this.professors.update(professor.SIAP,professor);
+      if(this.professors.update(professor.SIAP,professor)){
+        return true;
+      }else{
+        return false;
+      }
     }
   }
   //change allocations first
@@ -168,11 +171,11 @@ export class FirebaseService {
   }
 
   ///Courses
-  addNewCourse(course){
-    if(this.sameNameCourse(course)===true){
+  addNewCourse(newCourse){
+    if(this.sameCourse(newCourse)){
       return false;
-    } else if (this.sameNameCourse(course)===false){
-      this.courses.push(course);
+    }else{
+      this.db.database.ref("courses/"+newCourse.name+newCourse.credits).set(newCourse);
       return true;
     }
   }
@@ -183,14 +186,23 @@ export class FirebaseService {
     this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
     return this.course;
   }
+  //things to change in here!!
   updateCourse(id, course){
-    if(this.sameNameCourse(course)){
+    if(this.sameCourse(course)){
       return false;
     } else {
-        this.courses.update(id,course);
+      if(id!==(course.name+course.credits)){
+        //change this after changing allocation
+        this.deleteCourse(id,course.name);
+      }
+      if(this.courses.update((course.name+course.credits),course)){
         return true;
+      }else{
+        return false;
+      }
     }
   }
+  //change allocation first
   deleteCourse(id, courseName){
     this.getAllocations().subscribe(allocations => {
       allocations.forEach(element => {
@@ -201,21 +213,12 @@ export class FirebaseService {
     });
     return this.courses.remove(id);
   }
-  sameNameCourse(course){
-    var sameNameCourse: Boolean = false;
-    var executionOrder: Boolean = false;
-    this.getCourses().subscribe(courses => {
-      courses.forEach(element => {
-        executionOrder = true;
-        if (element.name === course.name) {
-          sameNameCourse = true;
-          return sameNameCourse;
-        }
-      });
+  sameCourse(newCourse){
+    var isSaved: boolean = false;
+    this.db.database.ref("courses/"+newCourse.name+newCourse.credits).once("value", function(snapshot) {
+      isSaved = snapshot.exists();
     });
-    if (executionOrder){
-      return sameNameCourse;
-    }
+    return isSaved;
   }
 
   ///Users
