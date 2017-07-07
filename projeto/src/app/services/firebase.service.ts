@@ -92,8 +92,13 @@ export class FirebaseService {
     }
   }
   deleteAllocation(id,courseKey){
+    console.log(courseKey);
+    //change (or not) after checking with client
     if(this.deleteClass(courseKey)){
-      return this.allocations.remove(id);
+      console.log(courseKey);
+      if (this.allocations.remove(id)){
+        return true;
+      }
     }else{
       return false;
     }
@@ -107,18 +112,17 @@ export class FirebaseService {
     return professorName;
   }
   getClassesNumber(courseKey){
-    var classesNumber: number = 0;
+    var actualClassesNumber: number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
       if (snapshot.exists()){
-        classesNumber = (snapshot.child('classesNumber').val()) + 1;
+        actualClassesNumber = snapshot.child('classesNumber').val() + 1;
       }
-    })
-    if(classesNumber>=1){
-      this.db.database.ref("courses/"+courseKey).update({
-        "classesNumber": classesNumber
-      });
+    });
+    if (this.db.database.ref("courses/"+courseKey).update({
+        "classesNumber": actualClassesNumber
+    })){
+      return actualClassesNumber;
     }
-    return classesNumber;
   }
   getCourseName(courseKey){
     var name: string = '';
@@ -142,13 +146,13 @@ export class FirebaseService {
     return credits;
   }
   deleteClass(courseKey){
-    var newClassesNumber: number = 0;
-    this.db.database.ref("courses"+courseKey).once("value",function(snapshot){
-      newClassesNumber = snapshot.child("classesNumber").val();
+    var newClassesNumber:number;
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      newClassesNumber = (snapshot.child('classesNumber').val())-1;
     })
-    this.db.database.ref("courses/"+courseKey).update({
-        "classesNumber": (newClassesNumber-1)
-      });
+    return this.db.database.ref("courses/"+courseKey).update({
+        "classesNumber": newClassesNumber
+    });
   }
 
   ///Professors

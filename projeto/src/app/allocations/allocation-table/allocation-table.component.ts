@@ -20,8 +20,8 @@ export class AllocationTableComponent implements OnInit {
     });
   }
 
-  onDeleteAllocation(id,courseKey){
-    this.FBservice.deleteAllocation(id,courseKey);
+  onDeleteAllocation(id,course,credits){
+    this.FBservice.deleteAllocation(id,course+credits);
   }
 
 }

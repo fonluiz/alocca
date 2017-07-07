@@ -6,7 +6,8 @@ export class Course {
         minimumSemester: number,
         maximumSemester: number,
         offererDepartment: string,
-        requesterDepartment: String
+        requesterDepartment: String,
+        classesNumber: number
     ) {}
 
 }
