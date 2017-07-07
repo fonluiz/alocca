@@ -122,18 +122,17 @@ export class FirebaseService {
   }
   //things to change in here!
   updateProfessor(id, professor){
-    if(this.sameSIAPProfessor(professor)){
-      return false;
-    }else{
-      if (id!==professor.SIAP){
-        //change this after changing allocation
-        this.deleteProfessor(id,professor.name);
-      }
-      if(this.professors.update(professor.SIAP,professor)){
-        return true;
-      }else{
+    if (id!==professor.SIAP){
+      if(this.sameSIAPProfessor(professor)){
         return false;
       }
+        //change this after changing allocation
+      this.deleteProfessor(id,professor.name);
+    }
+    if(this.professors.update(professor.SIAP,professor)){
+      return true;
+    }else{
+      return false;
     }
   }
   //change allocations first
@@ -188,18 +187,17 @@ export class FirebaseService {
   }
   //things to change in here!!
   updateCourse(id, course){
-    if(this.sameCourse(course)){
-      return false;
-    } else {
-      if(id!==(course.name+course.credits)){
-        //change this after changing allocation
-        this.deleteCourse(id,course.name);
-      }
-      if(this.courses.update((course.name+course.credits),course)){
-        return true;
-      }else{
+    if(id!==(course.name+course.credits)){
+      if(this.sameCourse(course)){
         return false;
       }
+      //change this after changing allocation
+      this.deleteCourse(id,course.name);
+    }
+    if(this.courses.update((course.name+course.credits),course)){
+      return true;
+    }else{
+      return false;
     }
   }
   //change allocation first
