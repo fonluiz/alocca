@@ -42,7 +42,7 @@ export class AddSemesterComponent implements OnInit {
 
   onAddNewSemester() {
 
-      let semester_id_str = this.year + "." + this.semester
+      let semester_id_str = this.year + "_" + this.semester
 
       let semester = {
           semester_id: semester_id_str
