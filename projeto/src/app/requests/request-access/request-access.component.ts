@@ -41,9 +41,9 @@ export class RequestAccessComponent implements OnInit {
     }
     else{
       console.log(savedSuccessfully);
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });      
+        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        
     }  
-    this.router.navigate(['/home']);  
   }
 
   ngOnInit() {

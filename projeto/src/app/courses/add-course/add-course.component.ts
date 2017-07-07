@@ -57,7 +57,6 @@ export class AddCourseComponent implements OnInit {
     } else {
         this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
     }
-
     this.router.navigate(['/view-courses']);
   }
 

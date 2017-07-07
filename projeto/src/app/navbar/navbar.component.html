@@ -62,11 +62,10 @@
         </button>
     </div>
   </header>
-  
+  <flash-messages></flash-messages>
   <main class="mdl-layout__content">
       <div class="page-content">
          <router-outlet *ngIf="dbAuth.authState | async"></router-outlet>
       </div>
   </main>
-  <flash-messages></flash-messages>
 </div>

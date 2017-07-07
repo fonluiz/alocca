@@ -4,7 +4,7 @@
     <md-toolbar color="primary" class="new-request-card-toolbar">
       Solicitação
       <span class="spacer"></span>
-      <button md-button style="margin-right: 5px" [routerLink]="['/home']">Cancelar</button> 
+      <button md-button style="margin-right: 5px" [routerLink]="['/home']">Voltar</button> 
       <button md-button type="submit" [disabled]="!userForm.form.valid" >Cadastrar</button>
     </md-toolbar>
  
@@ -24,3 +24,5 @@
     </md-card-content>
   </form>
 </md-card>
+
+<flash-messages></flash-messages>
