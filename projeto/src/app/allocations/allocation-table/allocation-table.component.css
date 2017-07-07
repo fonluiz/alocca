@@ -1,0 +1,12 @@
+.visualize-allocation-card {
+  margin: 50px 50px 50px 50px;
+  padding: 0px 0px 0px 0px;
+}
+
+.allocation-card-content {
+  text-align: center;
+  padding: 30px 30px 30px 30px;
+}
+.spacer {
+  flex: 1 1 auto;
+}
