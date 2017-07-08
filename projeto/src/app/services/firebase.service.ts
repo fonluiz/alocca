@@ -90,14 +90,22 @@ export class FirebaseService {
   }
   deleteAllocation(id,courseKey){
     //change (or not) after checking with client
-    if(this.deleteClass(courseKey)){
+    if(courseKey){
+      if(this.deleteClass(courseKey)){
+        if (this.allocations.remove(id)){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }else{
       if (this.allocations.remove(id)){
         return true;
       }else{
         return false;
       }
-    }else{
-      return false;
     }
   }
   getProfessorNameWithSIAP(professorSIAP) {
@@ -110,10 +118,9 @@ export class FirebaseService {
   getClassesNumber(courseKey){
     var actualClassesNumber: number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-      if (snapshot.exists()){
         actualClassesNumber = snapshot.child('classesNumber').val() + 1;
-      }
     });
+    console.log(actualClassesNumber);
     if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": actualClassesNumber
     })){
@@ -144,11 +151,16 @@ export class FirebaseService {
   deleteClass(courseKey){
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-      newClassesNumber = (snapshot.child('classesNumber').val())-1;
+      console.log(snapshot.child('classesNumber').val());
+      newClassesNumber = snapshot.child('classesNumber').val() - 1;
     })
-    return this.db.database.ref("courses/"+courseKey).update({
+    console.log(newClassesNumber);
+    if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": newClassesNumber
-    });
+    }))
+    {
+      return true;
+    }
   }
 
   ///Professors
@@ -228,27 +240,26 @@ export class FirebaseService {
     this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
     return this.course;
   }
-  //things to change in here!!
   updateCourse(id, course){
     if(id!==(course.name+course.credits)){
       if(this.courseExists(course.name+course.credits)){
         return false;
       }
-      //change this after changing allocation
-      this.deleteCourse(id,course.name);
-    }
-    if(this.courses.update((course.name+course.credits),course)){
+      this.deleteCourse(id);
+      this.addNewCourse(course);
+    }else if(this.courses.update(id,course)){
       return true;
     }else{
       return false;
     }
   }
-  //change allocation first
-  deleteCourse(id, courseName){
-    this.getAllocations().subscribe(allocations => {
-      allocations.forEach(element => {
-        if (element.course === courseName) {
-         // this.deleteAllocation(element.$key);
+
+  deleteCourse(id){
+    var thisObject = this;
+    this.db.database.ref("allocations/").once("value").then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val() === id) {
+          thisObject.deleteAllocation(childSnapshot.key,null);
         }
       });
     });

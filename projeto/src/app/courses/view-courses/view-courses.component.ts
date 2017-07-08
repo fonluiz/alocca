@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Course } from '../course.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
+import { FlashMessagesService } from 'angular2-flash-messages';
 import { DialogsService } from '../../services/dialogs.service';
 
 @Component({
@@ -14,11 +15,14 @@ export class ViewCoursesComponent implements OnInit {
   courses: any
   id: any;
   public result: any;
+  DELETED_MESSAGE: string = "Disicplina deletada com sucesso!";
+  TIMEOUT_DELETED_MESSAGE = 2500;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
+    private _flashMessagesService: FlashMessagesService,
     private dialogsService: DialogsService
   ) { }
 
@@ -35,14 +39,10 @@ export class ViewCoursesComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          this.FBservice.deleteCourse(id, courseName)
+          this.FBservice.deleteCourse(id);
+          this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
+          this.router.navigate(['/view-courses']);
         }
       });
-  }
-
-  public openDialog() {
-    this.dialogsService
-      .confirm('Confirm Dialog', 'Are you sure you want to do this?')
-      .subscribe(res => this.result = res);
   }
 }

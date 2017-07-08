@@ -35,7 +35,7 @@ export class ViewProfessorsComponent implements OnInit {
 
   onDeleteProfessor(id, professorName){
     var title = "Excluir Professor";
-    var message = "Deseja realmente excluir o professor "+professorName+" e suas alocações?";
+    var message = "Deseja realmente excluir o(a) professor(a) "+professorName+" e atualizar a tabela de alocações?";
     this.dialogsService
       .confirm(title, message)
       .subscribe(res => {
