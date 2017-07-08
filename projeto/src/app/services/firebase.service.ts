@@ -77,8 +77,8 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    if (id!==(allocation.professorOneSIAP+allocation.courseKey)){
       if(this.deleteAllocation(id,allocation.courseKey)){
+      //is it more efficient like this? or setting all the date before?
         if (this.addAllocation(allocation)){
           return true;
         }else{
@@ -87,17 +87,14 @@ export class FirebaseService {
       }else{
         return false;
       }
-    }else{
-      return true;
-    }
   }
   deleteAllocation(id,courseKey){
-    console.log(courseKey);
     //change (or not) after checking with client
     if(this.deleteClass(courseKey)){
-      console.log(courseKey);
       if (this.allocations.remove(id)){
         return true;
+      }else{
+        return false;
       }
     }else{
       return false;
@@ -108,7 +105,6 @@ export class FirebaseService {
     this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){
       professorName = snapshot.child('name').val();
     });
-    console.log(professorName);
     return professorName;
   }
   getClassesNumber(courseKey){
@@ -171,13 +167,11 @@ export class FirebaseService {
     this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
     return this.professor;
   }
-  //things to change in here!
   updateProfessor(id, professor){
     if (id!==professor.SIAP){
       if(this.professorExists(professor.SIAP)){
         return false;
       }
-        //change this after changing allocation
       this.deleteProfessor(id,professor.name);
       this.addNewProfessor(professor);
     }else if(this.professors.update(id,professor)){
@@ -186,26 +180,24 @@ export class FirebaseService {
       return false;
     }
   }
-  //change allocations first
   deleteProfessor(id, professorName){
-    this.getAllocations().subscribe(allocations => {
-      allocations.forEach(element => {
-        if (element.professorOne === professorName && !(element.professorTwo)) {
-          //this.deleteAllocation(element.$key);
-        }else if(element.professorOne === professorName){
+    var thisObject = this;
+    this.db.database.ref("allocations/").once("value").then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if (childSnapshot.child('professorOneSIAP').val() === id && !childSnapshot.child('professorTwoSIAP').val()){
+            thisObject.deleteAllocation(childSnapshot.key,(childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val()));
+        }else if(childSnapshot.child('professorOneSIAP').val() === id){
           let allocation = {
-            course: element.course,
-            professorOne: element.professorTwo,
-            professorTwo: ""
-          }
-          this.updateAllocation(element.$key,allocation);
-        }else if(element.professorTwo === professorName){
+            courseKey: childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val(),
+            professorOneSIAP: childSnapshot.child('professorTwoSIAP').val()
+          };
+          thisObject.updateAllocation(childSnapshot.key,allocation);
+        }else if(childSnapshot.child('professorTwoSIAP').val() === id){
           let allocation = {
-            course: element.course,
-            professorOne: element.professorOne,
-            professorTwo: ""
-          }
-          this.updateAllocation(element.$key,allocation);
+            courseKey: childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val(),
+            professorOneSIAP: childSnapshot.child('professorOneSIAP').val()
+          };
+          thisObject.updateAllocation(childSnapshot.key,allocation);
         }
       });
     });

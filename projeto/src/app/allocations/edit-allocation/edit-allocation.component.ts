@@ -48,7 +48,7 @@ export class EditAllocationComponent implements OnInit {
 
   onUpdateAllocation(){
     let allocation: any;
-    if(this.professorTwoName){
+    if(this.professorTwoSIAP){
       allocation = {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
