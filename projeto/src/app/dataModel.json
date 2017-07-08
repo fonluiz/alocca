@@ -1,0 +1,83 @@
+{
+    "root":{
+        "professors":{
+            //the key would be: '9837248'
+            "SIAP":{
+                "SIAP": "9837248",
+                "name": "Joseana"
+            }
+        },
+        "courses":{
+            //the key would be: 'Introdução à Computação4'
+            "courseName+CourseCredits":{
+                "name": "Introdução à Computação",
+                "credits": "4",
+                "type": "Obrigatória",
+                "minimumSemester": "1",
+                "maximumSemester": "1",
+                "offererDepartment": "UASC",
+                "requesterDepartment": "UASC",
+                "classesNumber": 0 //0 at first, then it changes according to classes being allocated
+            }
+        },
+        "allocations":{
+            //the key would be: '9837248Introdução à Computação4'
+            "professorOneSIAP+courseKey":{
+                "caControl": "false",//checker, false at first
+                "classNumber": 2,//current classesNumber of the allocated course
+                "professorOneName": "Joseana",
+                "professorOneSIAP": "9837248",
+                "professorTwoName": "",
+                "professorTwoSIAP": "",
+                "course": "Introdução à Computação",
+                "courseType": "Obrigatória",
+                "courseCredits": "4",
+                "note": "", //nothing at first
+                "alerts": []//to change after creating the alerts entity
+            }
+        },
+        "professorRestrictions":{
+            //the key would be: '98372482017_1'
+            "professorSIAP+semesterKey":{
+                //"professorName": "", I think it could be useful
+                "minCredits": 4,
+                "maxCredits": 8,
+                "posGraduatedCredits": 3,
+                "scheduleRestrictions": [
+                    [14,16],//monday
+                    [14],//tuesday
+                    [8],//wednesday
+                    [],//thursday
+                    [8,10]//friday
+                ]
+            }
+        },
+        "semesters":{
+            //the key would be: '2017_1'
+            "semesterKey":{
+                "semester_id": "2017.1",
+                "allocations": ["9837248Introdução à Computação4"]
+            }
+        },
+        "requests":{
+            //the key would be: 'fulano'
+            "requesterName":{
+                "name": "fulano",
+                "email": "fulano.carvalho@ccc.ufcg.edu.br"
+            }
+        },
+        "users":{
+            //the key would be: 'sicrano'
+            "userName":{
+                "name": "sicrano",
+                "email": "sicrano.silva@computacao.ufcg.edu.br"
+            }
+        },
+        "schedules":{
+            //DEFINE LATER
+        },
+        "alserts":{
+            //DEFINE LATER
+        }
+    }
+}

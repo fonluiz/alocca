@@ -11,6 +11,7 @@ export class Allocation {
         courseType: string,
         courseCredits: string,
         note: String
+        //alerts: Alerts[]
     ) {}
 
 }

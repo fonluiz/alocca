@@ -3,9 +3,4 @@ export class User {
         public name: string,
         public email: string
     ) {}
-
-    getEmail(){
-        return this.email;
-    }
-
 } 
