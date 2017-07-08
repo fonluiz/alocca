@@ -1,7 +1,11 @@
 export class User {
     constructor(
-        public nome: string,
+        public name: string,
         public email: string
     ) {}
+
+    getEmail(){
+        return this.email;
+    }
 
 } 

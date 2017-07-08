@@ -43,13 +43,16 @@ export class AddSemesterComponent implements OnInit {
   onAddNewSemester() {
 
       let semester_id_str = this.year + "." + this.semester
+      let semester_key_str = this.year +"_"+ this.semester
 
-      let semester = {
-          semester_id: semester_id_str
+      let newSemester = {
+          semester_id: semester_id_str,
+          semesterKey: semester_key_str
       }
 
-      this.FBservice.addNewSemester(semester);
+      this.FBservice.addNewSemester(newSemester);
       console.log(semester_id_str)
+      console.log(semester_key_str)
   }
 
   ngOnInit() {

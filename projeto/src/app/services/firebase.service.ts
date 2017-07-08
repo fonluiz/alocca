@@ -24,8 +24,9 @@ export class FirebaseService {
   semesters: FirebaseListObservable<any[]>;
   semester: FirebaseObjectObservable<any>;
 
-  constructor(private db: AngularFireDatabase) {
+  constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
+    console.log(this.allocations);
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -38,7 +39,7 @@ export class FirebaseService {
     return this.allocations;
   }
   addAllocation(allocation){
-    if(this.allocationExists){
+    if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
       return false;
     }
     if (allocation.professorTwoSIAP) {
@@ -164,8 +165,13 @@ export class FirebaseService {
     }
   }
   //CHECK WITH CLIENT
+  //TO CHANGE (not working on start of the page)
   allocationExists(newAllocationKey){
-    return this.db.object('/allocations/'+newAllocationKey) as FirebaseObjectObservable<Professor>;
+    var isSaved: boolean;
+    this.db.database.ref("alllocations/"+newAllocationKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
+    });
+    return isSaved;
   }
 
   ///Professors
@@ -221,8 +227,13 @@ export class FirebaseService {
     return this.professors.remove(id);
     
   }
+  //TO CHANGE (not working on start of the page)
   professorExists(newProfessorKey){
-    return this.db.object('/professors/'+newProfessorKey) as FirebaseObjectObservable<Professor>;
+    var isSaved:boolean;
+    this.db.database.ref("professors/"+newProfessorKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
+    });
+    return isSaved;
   }
 
   ///Courses
@@ -266,8 +277,13 @@ export class FirebaseService {
     });
     return this.courses.remove(id);
   }
+  //TO CHANGE (not working on start of the page)
   courseExists(newCourseKey){
-    return this.db.object('/courses/'+newCourseKey) as FirebaseObjectObservable<Professor>;
+    var isSaved: boolean;
+    this.db.database.ref("courses/"+newCourseKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
+    });
+    return isSaved;
   }
 
   ///Users
@@ -278,71 +294,71 @@ export class FirebaseService {
     return this.users.remove(id);
   }
   addNewUser(newUser){
-    var isEmailAlreadySaved: Boolean = this.emailAlreadySaved(newUser);
-    if (isEmailAlreadySaved===true){
-      return false;
-    }
-    else if(isEmailAlreadySaved===false){
-      this.users.push(newUser);
-      return true;
-    }
-    
+      if (this.emailAlreadySaved(newUser.name)){
+        return false;
+      }else{
+        this.db.database.ref("users/"+newUser.name).set(newUser);
+        return true;
+      }
+
   }
-  ///change to avoid duble values in the firebase system
-  emailAlreadySaved(newUser){
-    var sameEmail: Boolean = false;
-    var executionOrder: Boolean = false;
-    this.getUsers().subscribe(users =>{
-      users.forEach(element => {
-        executionOrder = true;
-        if (element.email == newUser.email) {
-          sameEmail= true;
-        }
-      });
+  
+  //TO CHANGE (not working on start of the page)
+  emailAlreadySaved(newUserKey){
+    var isSaved: boolean;
+    this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
     });
-    if(executionOrder){
-      return sameEmail;
-    }
+    return isSaved;
   } 
 
   ///Requests
   getRequests(){
-    this.requests = this.db.list('/requests') as FirebaseListObservable<Request[]>;
     return this.requests;
   }
-  ///change to avoid duble values in the firebase system
-  addNewRequest(request){
-    this.requests.push(request);
-    return true;
+  addNewRequest(newRequest){
+    if(this.requestExists(newRequest.name)){
+      return false;
+    }else{
+      this.db.database.ref("requests/"+newRequest.name).set(newRequest);
+      return true;
+    }
   }
   deleteRequest(id){
     this.requests.remove(id);
   }
+  //TO CHANGE (not working on start of the page)
+  requestExists(newRequestKey){
+    var isSaved: boolean;
+    this.db.database.ref("requests/"+newRequestKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
+    });
+    return isSaved;
+  }
 
   ///Semesters
-  addNewSemester(semester) {
-        var isAlreadySaved: Boolean = this.semesterAlreadySaved(semester);
-        if (!isAlreadySaved) {
-            this.semesters.push(semester);
-            return true;
-        } else {
-            return false;
-        }
+  addNewSemester(newSemester) {
+    var isSaved: Boolean = this.semesterExists(newSemester.semesterKey)
+    if(this.semesterExists(newSemester.name)){
+      return false
+    }else{
+      this.db.database.ref("semesters/"+(newSemester.semesterKey)).set({
+        semester_id: newSemester.semester_id
+        //add allocations?
+      })
+      return true
+    }
   }
   getSemesters() {
       return this.semesters;
   }
-  ///change to avoid duble values in the firebase system
-  semesterAlreadySaved(semester) {
-        var isSaved: Boolean = false;
-        this.getSemesters().subscribe(semesters => {
-            semesters.forEach(element => {
-                if (element.semester_id === semester.semester_id) {
-                    isSaved = true;
-                }
-            });
-        });
-        return isSaved;
+  //TO CHANGE (never working)
+  semesterExists(newSemesterKey) {
+    var isSaved: boolean;
+    this.db.database.ref("semesters/"+newSemesterKey).once("value",function(snapshot){
+      isSaved = snapshot.exists();
+    });
+    return isSaved;
   }
 
 }
