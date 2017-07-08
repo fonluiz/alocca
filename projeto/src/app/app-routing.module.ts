@@ -23,6 +23,8 @@ import { ViewRequestsComponent } from './requests/view-requests/view-requests.co
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
 //semesters
 import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
+//restrictions
+import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
 
 
 const appRoutes: Routes = [
@@ -48,7 +50,9 @@ const appRoutes: Routes = [
     {path: 'request-access', component: RequestAccessComponent},
     {path: 'view-requests', component: ViewRequestsComponent},
 
-    {path: 'add-semester', component: AddSemesterComponent }
+    {path: 'add-semester', component: AddSemesterComponent },
+
+    {path: 'add-restriction', component: AddRestrictionComponent}
 ];
 
 @NgModule({
