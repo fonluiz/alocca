@@ -22,7 +22,7 @@ export class AddAllocationComponent implements OnInit {
   professorOneSIAP: any;
   professorTwoSIAP: any;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a disciplina e/ou o(s) docente(s) já estão cadastrados.";
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a turma já foi alocada.";
   TIMEOUT_SAVED_MESSAGE = 2500;
   TIMEOUT_NOT_SAVED_MESSAGE = 5000;
 

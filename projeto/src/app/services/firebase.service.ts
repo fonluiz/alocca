@@ -23,7 +23,6 @@ export class FirebaseService {
   request: FirebaseObjectObservable<any>;
   semesters: FirebaseListObservable<any[]>;
   semester: FirebaseObjectObservable<any>;
-  dbRef: any;
 
   constructor(private db: AngularFireDatabase) {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -32,7 +31,6 @@ export class FirebaseService {
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
     this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
-    this.dbRef = db.database.ref();
   }
 
   ///Allocation
@@ -40,6 +38,9 @@ export class FirebaseService {
     return this.allocations;
   }
   addAllocation(allocation){
+    if(this.allocationExists){
+      return false;
+    }
     if (allocation.professorTwoSIAP) {
       if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
           course: this.getCourseName(allocation.courseKey),
@@ -162,6 +163,10 @@ export class FirebaseService {
       return true;
     }
   }
+  //CHECK WITH CLIENT
+  allocationExists(newAllocationKey){
+    return this.db.object('/allocations/'+newAllocationKey) as FirebaseObjectObservable<Professor>;
+  }
 
   ///Professors
   addNewProfessor(newprofessor){
@@ -217,11 +222,7 @@ export class FirebaseService {
     
   }
   professorExists(newProfessorKey){
-    var isSaved: boolean = false;
-    this.db.database.ref("professors/"+newProfessorKey).once("value", function(snapshot) {
-      isSaved = snapshot.exists();
-    });
-    return isSaved;
+    return this.db.object('/professors/'+newProfessorKey) as FirebaseObjectObservable<Professor>;
   }
 
   ///Courses
@@ -266,11 +267,7 @@ export class FirebaseService {
     return this.courses.remove(id);
   }
   courseExists(newCourseKey){
-    var isSaved: boolean = false;
-    this.db.database.ref("courses/"+newCourseKey).once("value", function(snapshot) {
-      isSaved = snapshot.exists();
-    });
-    return isSaved;
+    return this.db.object('/courses/'+newCourseKey) as FirebaseObjectObservable<Professor>;
   }
 
   ///Users
