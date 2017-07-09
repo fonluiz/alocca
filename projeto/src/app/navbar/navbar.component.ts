@@ -35,6 +35,9 @@ export class NavbarComponent implements OnInit {
     this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
     });
+    if (this.dbAuth.authState && this.router.url==='/home-body'){
+      this.router.navigate(['home-body']);
+    }
   }
 
   openDialog() {

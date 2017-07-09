@@ -44,6 +44,10 @@ export class EditCourseComponent implements OnInit {
         this.offererDepartment = course.offererDepartment;
         this.requesterDepartment = course.requesterDepartment;
     });
+    let initiateCourses: any[];
+    this.FBservice.getCourses().subscribe(courses =>{
+      initiateCourses = courses;
+    });
   }
 
   onEditCourse(){

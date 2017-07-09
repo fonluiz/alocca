@@ -16,6 +16,7 @@ export class AddProfessorComponent implements OnInit {
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
   TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  
 
   constructor(
     private FBservice: FirebaseService,
@@ -45,5 +46,9 @@ export class AddProfessorComponent implements OnInit {
 
   
   ngOnInit() {
+    let initiateProfessors: any[];
+    this.FBservice.getProfessors().subscribe(professors =>{
+      initiateProfessors = professors;
+    });
   }
 }

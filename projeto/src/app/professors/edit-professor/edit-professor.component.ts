@@ -34,6 +34,10 @@ export class EditProfessorComponent implements OnInit {
         this.name = professor.name;
         this.SIAP = professor.SIAP;
     });
+    let initiateProfessors: any[];
+    this.FBservice.getProfessors().subscribe(professors =>{
+      initiateProfessors = professors;
+    });
   }
 
   onEditProfessor(){

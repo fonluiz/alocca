@@ -26,7 +26,6 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    console.log(this.allocations);
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -183,7 +182,7 @@ export class FirebaseService {
       return true;
     }  
   }
-  getProfessors(){ 
+  getProfessors(){
     return this.professors;
   }
   getProfessorDetails( id){
@@ -265,7 +264,6 @@ export class FirebaseService {
       return false;
     }
   }
-
   deleteCourse(id){
     var thisObject = this;
     this.db.database.ref("allocations/").once("value").then(function(snapshot) {
@@ -302,7 +300,6 @@ export class FirebaseService {
       }
 
   }
-  
   //TO CHANGE (not working on start of the page)
   emailAlreadySaved(newUserKey){
     var isSaved: boolean;
@@ -310,7 +307,7 @@ export class FirebaseService {
       isSaved = snapshot.exists();
     });
     return isSaved;
-  } 
+  }
 
   ///Requests
   getRequests(){

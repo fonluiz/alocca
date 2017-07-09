@@ -62,6 +62,10 @@ export class AddCourseComponent implements OnInit {
   }
 
   ngOnInit() {
+    let initiateCourses: any[];
+    this.FBservice.getCourses().subscribe(courses =>{
+      initiateCourses = courses;
+    });
   }
 
 }

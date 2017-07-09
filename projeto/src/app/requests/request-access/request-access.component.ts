@@ -47,6 +47,10 @@ export class RequestAccessComponent implements OnInit {
   }
 
   ngOnInit() {
+    let initiateRequests: any[];
+    this.FBservice.getRequests().subscribe(requests =>{
+      initiateRequests = requests;
+    });
   }
 
 }

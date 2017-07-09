@@ -50,6 +50,10 @@ export class AddSemesterComponent implements OnInit {
   }
 
   ngOnInit() {
+    let initiateSemesters: any[];
+    this.FBservice.getSemesters().subscribe(semesters =>{
+      initiateSemesters = semesters;
+    });
   }
 
 }
