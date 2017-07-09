@@ -130,6 +130,10 @@ export class FirebaseService {
         return this.semesters;
     }
 
+    getSemestersIds() {
+        return this.allSemesters;
+    }
+
     getProfessorRestrictions() {
         return this.professorRestrictions;
     }

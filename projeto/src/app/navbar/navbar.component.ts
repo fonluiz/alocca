@@ -11,8 +11,8 @@ import { AddCourseComponent } from '../courses/add-course/add-course.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  //semesters = ["2015.2", "2016.1", "2016.2", "2017.1"];
-    semesters: string[];
+
+  semesters: string[];
 
   constructor(
       public dialog: MdDialog,
@@ -20,7 +20,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.FBservice.getSemesters().subscribe(semesters => {
+      this.FBservice.getSemestersIds().subscribe(semesters => {
           this.semesters = semesters;
       });
   }
