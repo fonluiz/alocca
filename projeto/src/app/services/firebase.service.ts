@@ -41,7 +41,7 @@ export class FirebaseService {
     if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
       return false;
     }
-    if (allocation.professorTwoSIAP) {
+    else if (allocation.professorTwoSIAP) {
       if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
           course: this.getCourseName(allocation.courseKey),
           courseType: this.getCourseType(allocation.courseKey),
@@ -78,19 +78,18 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-      if(this.deleteAllocation(id,allocation.courseKey)){
-      //is it more efficient like this? or setting all the date before?
-        if (this.addAllocation(allocation)){
-          return true;
-        }else{
-          return false;
-        }
+    if(this.addAllocation(allocation)){
+      if(this.deleteAllocation(id,allocation.oldCourseKey)){
+        return true;
       }else{
         return false;
       }
+    }else{
+      return false;
+    }
   }
   deleteAllocation(id,courseKey){
-    //change (or not) after checking with client
+    //to update
     if(courseKey){
       if(this.deleteClass(courseKey)){
         if (this.allocations.remove(id)){
@@ -121,7 +120,6 @@ export class FirebaseService {
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
         actualClassesNumber = snapshot.child('classesNumber').val() + 1;
     });
-    console.log(actualClassesNumber);
     if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": actualClassesNumber
     })){
@@ -152,10 +150,8 @@ export class FirebaseService {
   deleteClass(courseKey){
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-      console.log(snapshot.child('classesNumber').val());
       newClassesNumber = snapshot.child('classesNumber').val() - 1;
     })
-    console.log(newClassesNumber);
     if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": newClassesNumber
     }))
@@ -164,10 +160,9 @@ export class FirebaseService {
     }
   }
   //CHECK WITH CLIENT
-  //TO CHANGE (not working on start of the page)
   allocationExists(newAllocationKey){
     var isSaved: boolean;
-    this.db.database.ref("alllocations/"+newAllocationKey).once("value",function(snapshot){
+    this.db.database.ref("allocations/"+newAllocationKey).once("value",function(snapshot){
       isSaved = snapshot.exists();
     });
     return isSaved;
@@ -226,7 +221,6 @@ export class FirebaseService {
     return this.professors.remove(id);
     
   }
-  //TO CHANGE (not working on start of the page)
   professorExists(newProfessorKey){
     var isSaved:boolean;
     this.db.database.ref("professors/"+newProfessorKey).once("value",function(snapshot){
@@ -275,7 +269,6 @@ export class FirebaseService {
     });
     return this.courses.remove(id);
   }
-  //TO CHANGE (not working on start of the page)
   courseExists(newCourseKey){
     var isSaved: boolean;
     this.db.database.ref("courses/"+newCourseKey).once("value",function(snapshot){
@@ -300,7 +293,6 @@ export class FirebaseService {
       }
 
   }
-  //TO CHANGE (not working on start of the page)
   emailAlreadySaved(newUserKey){
     var isSaved: boolean;
     this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
@@ -324,7 +316,6 @@ export class FirebaseService {
   deleteRequest(id){
     this.requests.remove(id);
   }
-  //TO CHANGE (not working on start of the page)
   requestExists(newRequestKey){
     var isSaved: boolean;
     this.db.database.ref("requests/"+newRequestKey).once("value",function(snapshot){
@@ -349,7 +340,6 @@ export class FirebaseService {
   getSemesters() {
       return this.semesters;
   }
-  //TO CHANGE (never working)
   semesterExists(newSemesterKey) {
     var isSaved: boolean;
     this.db.database.ref("semesters/"+newSemesterKey).once("value",function(snapshot){

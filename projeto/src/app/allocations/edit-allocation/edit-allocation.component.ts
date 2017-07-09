@@ -12,6 +12,7 @@ export class EditAllocationComponent implements OnInit {
   id;
   course;
   courseKey;
+  oldCourseKey;
   professorOneName;
   professorTwoName;
   professorOneSIAP;
@@ -43,6 +44,7 @@ export class EditAllocationComponent implements OnInit {
       if(allocation.professorTwoName){
         this.professorTwoName = allocation.professorTwoName;
       }
+      this.oldCourseKey = allocation.course+allocation.courseCredits;
     });
   }
 
@@ -52,17 +54,31 @@ export class EditAllocationComponent implements OnInit {
       allocation = {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
-      professorTwoSIAP: this.professorTwoSIAP
+      professorTwoSIAP: this.professorTwoSIAP,
+      oldCourseKey: this.oldCourseKey
     };
-      this.FBservice.updateAllocation(this.id,allocation);
+      if(this.FBservice.updateAllocation(this.id,allocation)){
+        //change to flash_message
+        console.log('foi');
+      }else{
+        //change to flash_message
+        console.log('não foi YAY');
+      }
 
       this.router.navigate(['allocations']);
     }else{
       allocation = {
       courseKey: this.courseKey,
-      professorOneSIAP: this.professorOneSIAP
+      professorOneSIAP: this.professorOneSIAP,
+      oldCourseKey: this.oldCourseKey
     };
-      this.FBservice.updateAllocation(this.id,allocation);
+      if(this.FBservice.updateAllocation(this.id,allocation)){
+        //change to flash_message
+        console.log('foi');
+      }else{
+        //change to flash_message
+        console.log('não foi YAY');
+      }
 
       this.router.navigate(['allocations']);
     }

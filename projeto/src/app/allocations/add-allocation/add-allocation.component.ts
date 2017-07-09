@@ -54,7 +54,7 @@ export class AddAllocationComponent implements OnInit {
 
   onAddNewAllocation(){
     let allocation: any;
-    console.log(this.courseKey);
+    console.log(this.professorOneSIAP+this.courseKey);
 
     if(this.professorOneSIAP==this.professorTwoSIAP){
       this.flashMessage.show('Escolha Docentes diferentes.', {cssClass: 'alert-danger', timeout: 7000});
