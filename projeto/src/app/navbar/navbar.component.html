@@ -31,7 +31,7 @@
     </button>
   </nav>
 <div class="mdl-layout-spacer"></div>
-  <md-select class="semester-select mdl-color-text--white">
+  <md-select class="semester-select mdl-color-text--white" [(ngModel)]="selectedSemesterID" name="selectedSemesterID">
       <md-option (click)="openDialog()">
         <!--<md-icon>add_circle_outline</md-icon>-->
         Novo Semestre

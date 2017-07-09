@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule } from '@angular/forms';
 import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
@@ -13,7 +14,8 @@ import {NavbarComponent} from './navbar.component';
         MaterialModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        CommonModule
+        CommonModule,
+        FormsModule
     ],
     declarations: [NavbarComponent],
     exports: [NavbarComponent]

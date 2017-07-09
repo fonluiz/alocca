@@ -13,6 +13,7 @@ import { AddCourseComponent } from '../courses/add-course/add-course.component';
 export class NavbarComponent implements OnInit {
 
   semesters: string[];
+  selectedSemesterID: String;
 
   constructor(
       public dialog: MdDialog,
