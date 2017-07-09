@@ -7,6 +7,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { Semester } from '../semester.model';
 
 @Component({
   selector: 'app-add-semester',
@@ -42,14 +43,11 @@ export class AddSemesterComponent implements OnInit {
 
   onAddNewSemester() {
 
-      let semester_id_str = this.year + "." + this.semester
+      let semesterId = this.year + "-" + this.semester
 
-      let semester = {
-          semester_id: semester_id_str
-      }
+      let semester = new Semester(semesterId, []);
 
-      this.FBservice.addNewSemester(semester);
-      console.log(semester_id_str)
+      this.FBservice.addSemester(semesterId);
   }
 
   ngOnInit() {

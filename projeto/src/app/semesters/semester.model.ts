@@ -6,12 +6,32 @@
  * @apiParam {Allocation[]} allocations List of allocations for that semester.
  */
 
-import { Allocation } from '../allocations/allocation.model'
-
 export class Semester {
     constructor(
-        public semester_id: string,
-        public allocations: Allocation[]
+        private id: String,
+        private allocations: String[]
     ) { }
 
+    getId() {
+        return this.id;
+    }
+
+    getAllocations() {
+        return this.allocations;
+    }
+
+    setId(newId: String) {
+        this.id = newId;
+    }
+
+    setAllocations(newAllocations: String[]) {
+        this.allocations = newAllocations;
+    }
+
+    toFirebaseObject() {
+        var firebaseObject: any = {
+            'allocations': this.allocations
+        };
+        return <JSON>firebaseObject;
+    }
 }

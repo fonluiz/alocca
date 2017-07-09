@@ -8,11 +8,10 @@
 
 export class ScheduleRestriction {
     constructor(
-        public monday: number[],
-        public tuesday: number[],
-        public wednesday: number[],
-        public thursday: number[],
-        public friday: number[]
+        private monday: number[],
+        private tuesday: number[],
+        private wednesday: number[],
+        private thursday: number[],
+        private friday: number[]
     ) { }
-
 }

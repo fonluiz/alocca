@@ -9,6 +9,10 @@ import { ProfessorRestriction } from '../professors/professor-restriction.model'
 
 @Injectable()
 export class FirebaseService {
+
+    ALL_SEMESTERS_PATH = '/allSemesters/ids';
+    PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions';
+
     //"local"
     allocations: FirebaseListObservable<any[]>;
     allocation: FirebaseObjectObservable<any>;
@@ -17,15 +21,16 @@ export class FirebaseService {
     courses: FirebaseListObservable<any[]>;
     course: FirebaseObjectObservable<any>;
     semesters: FirebaseListObservable<any[]>;
-    semester: FirebaseObjectObservable<any>;
     professorRestrictions: FirebaseListObservable<any[]>;
+    allSemesters: FirebaseObjectObservable<string[]>;
 
     constructor(private db: AngularFireDatabase) {
         this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
         this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
         this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
         this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
-        this.professorRestrictions = db.list('/professorRestrictions') as FirebaseListObservable<ProfessorRestriction[]>;
+        this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
+        this.allSemesters = db.object(this.ALL_SEMESTERS_PATH) as FirebaseObjectObservable<string[]>;
     }
 
     getAllocations() {
@@ -69,6 +74,7 @@ export class FirebaseService {
     deleteProfessor(id) {
         return this.professors.remove(id);
     }
+
     sameSIAPProfessor(newProfessor) {
         var retorn: Boolean = false;
         this.getProfessors().subscribe(professors => {
@@ -80,18 +86,6 @@ export class FirebaseService {
             });
         });
         return retorn;
-    }
-
-    semesterAlreadySaved(semester) {
-        var isSaved: Boolean = false;
-        this.getSemesters().subscribe(semesters => {
-            semesters.forEach(element => {
-                if (element.semester_id === semester.semester_id) {
-                    isSaved = true;
-                }
-            });
-        });
-        return isSaved;
     }
 
     addNewCourse(course) {
@@ -111,14 +105,25 @@ export class FirebaseService {
         return this.courses.remove(id);
     }
 
-    addNewSemester(semester) {
-        var isAlreadySaved: Boolean = this.semesterAlreadySaved(semester);
-        if (!isAlreadySaved) {
-            this.semesters.push(semester);
-            return true;
-        } else {
-            return false;
-        }
+    // Salva um novo semestre na lista de semestres
+    saveSemester(semester: Semester) {
+        this.db.database.ref('semesters/' + semester.getId())
+        .set(semester.toFirebaseObject());
+    }
+
+    // Adiciona um Id de semeste à lista de todos os Ids de semestres
+    addSemester(semesterId: String) {
+        var self = this;
+        this.db.database.ref(this.ALL_SEMESTERS_PATH).once('value')
+        .then(function(snapshot) {
+            var semestersIds = snapshot.val() as String[];
+            if (semestersIds == null) {
+                self.allSemesters.set([semesterId]);
+            } else if (semestersIds.indexOf(semesterId) < 0) {
+                semestersIds.push(semesterId);
+                self.allSemesters.set(semestersIds);
+            }
+        });
     }
 
     getSemesters() {
@@ -130,7 +135,7 @@ export class FirebaseService {
     }
 
     saveProfessorRestriction(restriction: ProfessorRestriction) {        
-        this.db.database.ref('professorRestrictions/' + restriction.SIAPSemester)
-        .set(restriction.getFirebaseObject());
+        this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPSemester())
+        .set(restriction.toFirebaseObject());
     }
 }

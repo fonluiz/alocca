@@ -1,24 +1,24 @@
 <md-card class="add-restriction-card">
- <form>
+ <form (ngSubmit)="submitRestrictionsForm()" #restrictionsForm="ngForm">
   <!--Toolbar-->
-    <md-toolbar color="primary" class="new-professor-card-toolbar">
+    <md-toolbar color="primary">
       Restrições  
       <div class="mdl-layout-spacer"></div>
       <button md-button style="margin-right: 5px">Cancelar</button> 
-      <button md-button>Salvar</button>
+      <button md-button type="submit" [disabled]="!restrictionsForm.form.valid">Salvar</button>
     </md-toolbar>
 
     <md-card-content class="add-restriction-card-content">
+       <md-input-container class="credits-input">
+        <input mdInput placeholder="Mínimo de créditos" type="number" [(ngModel)]="minCredits" name="minCredits" required>
+      </md-input-container>
+
       <md-input-container class="credits-input">
-        <input mdInput placeholder="Máximo de créditos" type="number">
+        <input mdInput placeholder="Máximo de créditos" type="number" [(ngModel)]="maxCredits" name="maxCredits" required>
       </md-input-container>
-
-       <md-input-container class="credits-input">
-        <input mdInput placeholder="Mínimo de créditos" type="number">
-      </md-input-container>
-
-       <md-input-container class="credits-input">
-        <input mdInput placeholder="Créditos pós-graduação" type="number">
+   
+      <md-input-container class="credits-input">
+        <input mdInput placeholder="Créditos pós-graduação" type="number" [(ngModel)]="graduateCredits" name="graduateCredits" required>
       </md-input-container>
 
       <hr>
@@ -37,7 +37,7 @@
           </thead>
 
           <!--Boby of the table-->
-          <tbody *ngFor="let hour of hours">
+          <tbody *ngFor="let hour of HOURS">
               <tr>
                 <td>{{ hour }}</td>
                 <td *ngFor="let i of [1,2,3,4,5]">
