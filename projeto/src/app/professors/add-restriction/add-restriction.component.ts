@@ -1,9 +1,3 @@
-/**
- * @api {component} projeto/src/app/professors/add-restriction/add-restriction.component.ts Add Restriction Component
- * @apiName Add Restriction Component
- * @apiGroup Professor
- */
-
 import { Component, OnInit } from '@angular/core';
  
 import {MdCheckbox} from '@angular/material';

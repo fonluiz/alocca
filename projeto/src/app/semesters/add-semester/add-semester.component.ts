@@ -1,9 +1,3 @@
-/**
- * @api {component} projeto/src/app/semesters/add-semester/add-semester.component.ts Add Semester Component
- * @apiName Add Semester Component
- * @apiGroup Semester
- */
-
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
