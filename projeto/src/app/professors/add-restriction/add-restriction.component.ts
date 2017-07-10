@@ -10,6 +10,7 @@ import  { MdCheckbox } from '@angular/material';
 import { ScheduleRestriction } from '../schedule-restriction.model'
 import { ProfessorRestriction } from '../professor-restriction.model'
 import { FirebaseService } from '../../services/firebase.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-add-restriction',
@@ -25,15 +26,19 @@ export class AddRestrictionComponent implements OnInit {
   HOURS = ["7:00 - 8:00", "8:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00",
           "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00"];
   integerHours = [7, 8, 10, 12, 14, 16, 18, 20, 22];
+  professor_id: string;
 
   constructor(
-    private FBservice: FirebaseService
+      private FBservice: FirebaseService,
+      private router: Router,
+      private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+      this.professor_id = this.route.snapshot.params['id']
   }
 
-  private getScheduleRestrictionsFromTable() {
+  private getScheduleRestrictionsFromTable = (): ScheduleRestriction => {
     // Monday
     var monday: number[] = [];
     var iteration = 0;
@@ -91,7 +96,7 @@ export class AddRestrictionComponent implements OnInit {
 
   private submitRestrictionsForm() {
     let restrictions = new ProfessorRestriction(
-      "xxxx",
+       this.professor_id,
        this.minCredits,
        this.maxCredits,
        this.graduateCredits,
@@ -99,6 +104,7 @@ export class AddRestrictionComponent implements OnInit {
     );
 
     this.FBservice.saveProfessorRestriction(restrictions);
+    this.router.navigate(['allocations']);
   }
 
 }
