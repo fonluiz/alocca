@@ -43,29 +43,31 @@ export class FirebaseService {
     }
     else if (allocation.professorTwoSIAP) {
       if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
-          course: this.getCourseName(allocation.courseKey),
-          courseType: this.getCourseType(allocation.courseKey),
-          courseCredits: this.getCourseCredits(allocation.courseKey),
-          classNumber: this.getClassesNumber(allocation.courseKey),
-          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-          professorOneSIAP: allocation.professorOneSIAP,
-          professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
-          professorTwoSIAP: allocation.professorTwoSIAP
-          //add note field
-        })){
+        caControl: false,
+        course: this.getCourseName(allocation.courseKey),
+        courseType: this.getCourseType(allocation.courseKey),
+        courseCredits: this.getCourseCredits(allocation.courseKey),
+        classNumber: this.getClassesNumber(allocation.courseKey),
+        professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
+        professorOneSIAP: allocation.professorOneSIAP,
+        professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
+        professorTwoSIAP: allocation.professorTwoSIAP
+        //add note field
+      })){
         return true;
       }else{
         return false;
       }
     } else {
       if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
-          course: this.getCourseName(allocation.courseKey),
-          courseType: this.getCourseType(allocation.courseKey),
-          courseCredits: this.getCourseCredits(allocation.courseKey),
-          classNumber: this.getClassesNumber(allocation.courseKey),
-          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-          professorOneSIAP: allocation.professorOneSIAP
-          //add note field
+        caControl: false,
+        course: this.getCourseName(allocation.courseKey),
+        courseType: this.getCourseType(allocation.courseKey),
+        courseCredits: this.getCourseCredits(allocation.courseKey),
+        classNumber: this.getClassesNumber(allocation.courseKey),
+        professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
+        professorOneSIAP: allocation.professorOneSIAP
+        //add note field
         })){
         return true;
       }else{
@@ -193,6 +195,11 @@ export class FirebaseService {
       isSaved = snapshot.exists();
     });
     return isSaved;
+  }
+  changeCAStatus(id,status){
+    this.db.database.ref("allocations/"+id).update({
+        "caControl": status
+    })
   }
 
   ///Professors

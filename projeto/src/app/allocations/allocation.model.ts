@@ -1,7 +1,6 @@
 export class Allocation {
     constructor(
-        //???
-        //caControl: boolean,
+        caControl: boolean,
         classNumber: number,
         professorOneName: string,
         professorOneSIAP: string,
@@ -10,6 +9,8 @@ export class Allocation {
         course: string,
         courseType: string,
         courseCredits: string,
+        courseOffererDepartment: string,
+        courseRequesterDepartment: string,
         note: String
         //alerts: Alerts[]
     ) {}

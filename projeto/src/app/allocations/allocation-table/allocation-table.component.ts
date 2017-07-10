@@ -25,5 +25,10 @@ export class AllocationTableComponent implements OnInit {
       this.router.navigate(['/allocations']);
     }
   }
+  onChangeCAStatus(id,stats){
+    if(this.FBservice.changeCAStatus(id,stats)){
+      this.router.navigate(['/allocations']);
+    }
+  }
 
 }

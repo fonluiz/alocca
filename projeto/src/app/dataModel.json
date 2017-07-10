@@ -32,6 +32,8 @@
                 "course": "Introdução à Computação",
                 "courseType": "Obrigatória",
                 "courseCredits": "4",
+                "courseOffererDepartment": "UASC",
+                "courseRequesterDepartment": "UASC",
                 "note": "", //nothing at first
                 "alerts": []//to change after creating the alerts entity
             }
@@ -77,7 +79,7 @@
         "schedules":{
             //DEFINE LATER
         },
-        "alserts":{
+        "alerts":{
             //DEFINE LATER
         }
     }
