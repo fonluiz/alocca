@@ -48,5 +48,9 @@ export class AddUserComponent implements OnInit {
 
 
   ngOnInit() {
+    let initiateUsers: any[];
+    this.FBservice.getUsers().subscribe(users =>{
+      initiateUsers = users;
+    });
   }
 }

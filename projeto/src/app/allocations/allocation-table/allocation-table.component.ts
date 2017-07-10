@@ -20,8 +20,10 @@ export class AllocationTableComponent implements OnInit {
     });
   }
 
-  onDeleteAllocation(id,course,credits){
-    this.FBservice.deleteAllocation(id,course+credits);
+  onDeleteAllocation(id,course,credits,classNumber){
+    if(this.FBservice.deleteAllocation(id,course+credits,classNumber)){
+      this.router.navigate(['/allocations']);
+    }
   }
 
 }

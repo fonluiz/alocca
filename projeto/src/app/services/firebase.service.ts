@@ -78,21 +78,9 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    if(this.addAllocation(allocation)){
-      if(this.deleteAllocation(id,allocation.oldCourseKey)){
-        return true;
-      }else{
-        return false;
-      }
-    }else{
-      return false;
-    }
-  }
-  deleteAllocation(id,courseKey){
-    //to update
-    if(courseKey){
-      if(this.deleteClass(courseKey)){
-        if (this.allocations.remove(id)){
+    if(this.allocationExists(allocation)){
+      if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
+        if(this.addAllocation(allocation)){
           return true;
         }else{
           return false;
@@ -100,13 +88,51 @@ export class FirebaseService {
       }else{
         return false;
       }
+    }
+  }
+  deleteAllocation(id,courseKey,allocationClassNumber){
+    if(courseKey){
+      console.log('inhereee11');
+      if(this.updateAllocationsClassNumber(courseKey,allocationClassNumber)){
+        console.log('inhereee2222');
+        if(this.deleteClass(courseKey)){
+          console.log('inhereee4444');
+          if (this.allocations.remove(id)){
+            console.log('inhereee555');
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
     }else{
-      if (this.allocations.remove(id)){
+      if(this.allocations.remove(id)){
         return true;
       }else{
         return false;
       }
     }
+  }
+  updateAllocationsClassNumber(courseKey,allocationClassNumber){
+    var mayDelete: boolean;
+    var thisObject: any = this;
+    return this.db.database.ref("allocations/").on("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if(childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val() === courseKey && childSnapshot.child('classNumber').val()>allocationClassNumber) {
+            console.log((childSnapshot.child('classNumber').val()) - 1);
+            console.log(childSnapshot.key);
+            if(thisObject.db.database.ref("allocations/"+childSnapshot.key).update({
+              "classNumber": (childSnapshot.child('classNumber').val() - 1)
+            })){
+              return true;
+            }
+        }
+      });
+    });
   }
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
@@ -118,11 +144,12 @@ export class FirebaseService {
   getClassesNumber(courseKey){
     var actualClassesNumber: number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-        actualClassesNumber = snapshot.child('classesNumber').val() + 1;
+        actualClassesNumber = (snapshot.child('classesNumber').val() + 1);
     });
     if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": actualClassesNumber
-    })){
+    }))
+    {
       return actualClassesNumber;
     }
   }
@@ -150,8 +177,8 @@ export class FirebaseService {
   deleteClass(courseKey){
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-      newClassesNumber = snapshot.child('classesNumber').val() - 1;
-    })
+      newClassesNumber = (snapshot.child('classesNumber').val() - 1);
+    });
     if (this.db.database.ref("courses/"+courseKey).update({
         "classesNumber": newClassesNumber
     }))
@@ -202,7 +229,9 @@ export class FirebaseService {
     this.db.database.ref("allocations/").once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         if (childSnapshot.child('professorOneSIAP').val() === id && !childSnapshot.child('professorTwoSIAP').val()){
-            thisObject.deleteAllocation(childSnapshot.key,(childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val()));
+            thisObject.deleteAllocation(childSnapshot.key,
+                      (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val()),
+                      childSnapshot.child('classNumber').val());
         }else if(childSnapshot.child('professorOneSIAP').val() === id){
           let allocation = {
             courseKey: childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val(),
@@ -263,7 +292,7 @@ export class FirebaseService {
     this.db.database.ref("allocations/").once("value").then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         if (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val() === id) {
-          thisObject.deleteAllocation(childSnapshot.key,null);
+          thisObject.deleteAllocation(childSnapshot.key,null,null);
         }
       });
     });
