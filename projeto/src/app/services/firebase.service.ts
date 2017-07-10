@@ -323,7 +323,7 @@ export class FirebaseService {
 
   }
   emailAlreadySaved(newUserKey){
-    var userEmail: boolean;
+    var userEmail: string;
     this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
       userEmail = snapshot.child('email').val();
     });
