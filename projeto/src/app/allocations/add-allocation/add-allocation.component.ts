@@ -65,7 +65,7 @@ export class AddAllocationComponent implements OnInit {
       this.professorOne = "";
       this.professorTwo = "";
 
-      this.router.navigate(['allocations']);
+      //this.router.navigate(['allocations']);
     }else{
       allocation = {
       course: this.course,
