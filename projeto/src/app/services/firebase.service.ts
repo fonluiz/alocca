@@ -51,7 +51,9 @@ export class FirebaseService {
         professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
         professorOneSIAP: allocation.professorOneSIAP,
         professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
-        professorTwoSIAP: allocation.professorTwoSIAP
+        professorTwoSIAP: allocation.professorTwoSIAP,
+        courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
+        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey)
         //add note field
       })){
         return true;
@@ -66,7 +68,9 @@ export class FirebaseService {
         courseCredits: this.getCourseCredits(allocation.courseKey),
         classNumber: this.getClassesNumber(allocation.courseKey),
         professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-        professorOneSIAP: allocation.professorOneSIAP
+        professorOneSIAP: allocation.professorOneSIAP,
+        courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
+        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey)
         //add note field
         })){
         return true;
@@ -200,6 +204,20 @@ export class FirebaseService {
     this.db.database.ref("allocations/"+id).update({
         "caControl": status
     })
+  }
+  getOffererDepartment(courseKey){
+    var department: string = '';
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      department = snapshot.child('offererDepartment').val();
+    })
+    return department;
+  }
+  getRequesterDepartment(courseKey){
+    var department: string = '';
+    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
+      department = snapshot.child('requesterDepartment').val();
+    })
+    return department;
   }
 
   ///Professors
