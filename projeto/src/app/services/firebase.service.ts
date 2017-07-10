@@ -314,7 +314,7 @@ export class FirebaseService {
     return this.users.remove(id);
   }
   addNewUser(newUser){
-      if (this.emailAlreadySaved(newUser.name)){
+      if (this.emailAlreadySaved(newUser.name)===newUser.email){
         return false;
       }else{
         this.db.database.ref("users/"+newUser.name).set(newUser);
@@ -323,11 +323,11 @@ export class FirebaseService {
 
   }
   emailAlreadySaved(newUserKey){
-    var isSaved: boolean;
+    var userEmail: boolean;
     this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
-      isSaved = snapshot.exists();
+      userEmail = snapshot.child('email').val();
     });
-    return isSaved;
+    return userEmail;
   }
 
   ///Requests
