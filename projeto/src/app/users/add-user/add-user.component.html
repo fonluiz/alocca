@@ -11,6 +11,10 @@
      <!--Form-->
     <md-card-content class="new-user-card-content">
       <div class="user-card-row">
+        <!-- user's SIAP -->
+        <md-input-container class="professor-SIAP-input" type="text">
+          <input mdInput placeholder="SIAP" [(ngModel)]="SIAP" name="SIAP" size="7" maxlength="7" pattern="[0-9]{7}" required>
+        </md-input-container>
         <!-- user's name -->
         <md-input-container class="user-name-input" type="text">
           <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>

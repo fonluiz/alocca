@@ -314,10 +314,10 @@ export class FirebaseService {
     return this.users.remove(id);
   }
   addNewUser(newUser){
-      if (this.emailAlreadySaved(newUser.name)===newUser.email){
+      if (this.emailAlreadySaved(newUser.SIAP)===newUser.email){
         return false;
       }else{
-        this.db.database.ref("users/"+newUser.name).set(newUser);
+        this.db.database.ref("users/"+newUser.SIAP).set(newUser);
         return true;
       }
 

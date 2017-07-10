@@ -67,8 +67,9 @@
             }
         },
         "users":{
-            //the key would be: 'sicrano'
-            "userName":{
+            //the key would be: '1000000'
+            "userSIAP":{
+                "SIAP": "1000000",
                 "name": "sicrano",
                 "email": "sicrano.silva@computacao.ufcg.edu.br"
             }

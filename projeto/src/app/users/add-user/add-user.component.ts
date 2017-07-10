@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class AddUserComponent implements OnInit {
   email: string;
   name: string;
+  SIAP: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
@@ -26,13 +27,15 @@ export class AddUserComponent implements OnInit {
 
   onAddNewUser(){
     let user = {
+      SIAP: this.SIAP,
       email: this.email,
       name: this.name
     }
 
     let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
     console.log(this.email);
-    
+
+    this.SIAP = null;
     this.email = null;
     this.name = null;
 
