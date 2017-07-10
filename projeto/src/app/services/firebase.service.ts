@@ -11,7 +11,7 @@ import { ProfessorRestriction } from '../professors/professor-restriction.model'
 export class FirebaseService {
 
     ALL_SEMESTERS_PATH = '/allSemesters/ids';
-    PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions';
+    PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
 
     //"local"
     allocations: FirebaseListObservable<any[]>;
