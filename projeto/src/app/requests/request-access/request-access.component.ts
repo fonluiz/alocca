@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class RequestAccessComponent implements OnInit {
   email: string;
   name: string;
+  SIAP: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Sua solicitação foi enviada!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que você já enviou uma solicitação. Paciência.";
   TIMEOUT_SAVED_MESSAGE = 2500;
@@ -26,6 +27,7 @@ export class RequestAccessComponent implements OnInit {
 
   onAddNewRequest(){
     let request = {
+      SIAP: this.SIAP,
       email: this.email,
       name: this.name
     }
@@ -33,10 +35,12 @@ export class RequestAccessComponent implements OnInit {
     let savedSuccessfully: boolean = this.FBservice.addNewRequest(request);
     console.log(savedSuccessfully);
     
+    this.SIAP = null;
     this.email = null;
     this.name = null;
 
     if(savedSuccessfully===true){
+      console.log(true);
         this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
     }
     else{
@@ -48,7 +52,7 @@ export class RequestAccessComponent implements OnInit {
 
   ngOnInit() {
     let initiateRequests: any[];
-    this.FBservice.getRequests().subscribe(requests =>{
+    this.FBservice.getRequestsEmails().subscribe(requests =>{
       initiateRequests = requests;
     });
   }
