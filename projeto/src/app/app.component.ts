@@ -19,7 +19,6 @@ export class AppComponent {
   user: Observable<firebase.User>;
   TIMEOUT_NOT_REGISTERED = 5000;
   NOT_REGISTERED_MESSAGE: string = "Opa! Parece que você não está cadastrado. Entre em contato com o administrador.";
-  loggedIn: Boolean;
 
   constructor(
     public FBservice: FirebaseService,
@@ -27,7 +26,6 @@ export class AppComponent {
     private _flashMessagesService: FlashMessagesService,
     private router: Router) {
     this.user = dbAuth.authState;
-    this.loggedIn = false;
   }
   ngOnInit(){
     var initiateEmails: any[];

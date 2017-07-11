@@ -8,16 +8,25 @@
   padding: 30px 30px 30px 30px;
 }
 
+.user-SIAP-input {
+  width: 10%;
+  margin-top: 10px;
+  margin-bottom: 1px;
+  margin-left: 5%;
+}
+
 .user-name-input {
-  width: 40%;
+  width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
+  margin-left: 8%;
 }
 .user-email-input {
-  width: 40%;
+  width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
-  margin-left: 10%
+  margin-left: 8%;
+  margin-right: 5%;
 }
 
 .spacer {
