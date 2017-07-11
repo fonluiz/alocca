@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { Router } from '@angular/router';
+import { FirebaseService } from './services/firebase.service';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -21,7 +22,7 @@ export class AppComponent {
   loggedIn: Boolean;
 
   constructor(
-    public db: AngularFireDatabase,
+    public FBservice: FirebaseService,
     public dbAuth: AngularFireAuth,
     private _flashMessagesService: FlashMessagesService,
     private router: Router) {
@@ -29,6 +30,10 @@ export class AppComponent {
     this.loggedIn = false;
   }
   ngOnInit(){
+    var initiateEmails: any[];
+    this.FBservice.getUsersEmails().subscribe(emails =>{
+      initiateEmails = emails;
+    });
   }
 
   login(){
@@ -37,30 +42,16 @@ export class AppComponent {
       //pegar UID do usuário
       //console.log(this.dbAuth.auth.currentUser.uid);
       console.log(userEmail);
-      var usersList = this.db.list('/users') as FirebaseListObservable<User[]>;
-      var isRegistered: Boolean = false;
-      var executionOrder: Boolean = false;
-      return usersList.subscribe(users => {
-        users.forEach(usr => {
-          executionOrder = true;
-          console.log(executionOrder+'execution');
-          if (usr.email === userEmail) {
-            isRegistered = true;
-            console.log('acchou o email');
-          }
-        });
-        if(executionOrder){
-          console.log('entrou');
-          if(isRegistered===false){
-            this.logout();
-            console.log('pegou o logout');
-            this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
-          }else if(isRegistered===true){
-            this.loggedIn = true;
-            this.router.navigate(['/home-body']);
-          }
+      var isRegistered: boolean = this.FBservice.isUserRegistered(userEmail);
+      console.log(isRegistered);
+      if(isRegistered===false){
+        if(this.logout()){
+          console.log('pegou o logout');
+          this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
         }
-      });
+      }else{
+        this.router.navigate(['/home-body']);
+      }
     });
 
   }
@@ -69,5 +60,6 @@ export class AppComponent {
 
   logout(){
     this.dbAuth.auth.signOut();
+    return true;
   }
 }

@@ -18,6 +18,7 @@ export class FirebaseService {
   courses: FirebaseListObservable<any[]>;
   course: FirebaseObjectObservable<any>;
   users: FirebaseListObservable<any[]>;
+  usersEmails: FirebaseListObservable<any[]>;
   user: FirebaseObjectObservable<any>;
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
@@ -29,6 +30,7 @@ export class FirebaseService {
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
+    this.usersEmails = db.list('/usersEmails') as FirebaseListObservable<any[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
     this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
   }
@@ -353,6 +355,9 @@ export class FirebaseService {
   getUsers(){
     return this.users;
   }
+  getUsersEmails(){
+    return this.usersEmails;
+  }
   deleteUser(id){
     return this.users.remove(id);
   }
@@ -371,6 +376,18 @@ export class FirebaseService {
       userEmail = snapshot.child('email').val();
     });
     return userEmail;
+  }
+  isUserRegistered(userEmail){
+    var isRegistered: boolean = false;
+    this.db.database.ref("usersEmails/").on("value",function(snapshot){
+      snapshot.forEach(function(childSnapshot){
+        if(childSnapshot.child('email').val()===userEmail){
+          isRegistered = true;
+          return true;
+        }
+      });
+    });
+    return isRegistered;
   }
 
   ///Requests
