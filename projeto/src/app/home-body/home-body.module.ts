@@ -9,7 +9,7 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {NavbarComponent} from './navbar.component';
+import {HomeBodyComponent} from './home-body.component';
 
 @NgModule({
     imports: [
@@ -19,8 +19,10 @@ import {NavbarComponent} from './navbar.component';
         BrowserAnimationsModule,
         FlashMessagesModule,
         AppRoutingModule],
-    declarations: [NavbarComponent],
-    exports: [NavbarComponent]
+    declarations: [
+        HomeBodyComponent
+    ],
+    exports: []
 })
 
-export class NavbarModule {}
+export class HomeBodyModule {}
