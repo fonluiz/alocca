@@ -7,9 +7,12 @@ import {Allocation} from '../allocations/allocation.model';
 import {User} from '../users/user.model';
 import {Request} from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
+import { ProfessorRestriction } from '../professors/professor-restriction.model'
 
 @Injectable()
 export class FirebaseService {
+  ALL_SEMESTERS_PATH = '/allSemesters/ids';
+  PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
@@ -24,7 +27,8 @@ export class FirebaseService {
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
   semesters: FirebaseListObservable<any[]>;
-  semester: FirebaseObjectObservable<any>;
+  professorRestrictions: FirebaseListObservable<any[]>;
+  allSemesters: FirebaseObjectObservable<string[]>;
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -35,6 +39,8 @@ export class FirebaseService {
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
     this.requestsEmails = db.list('/requestsEmails') as FirebaseListObservable<any[]>;
     this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
+    this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
+    this.allSemesters = db.object(this.ALL_SEMESTERS_PATH) as FirebaseObjectObservable<string[]>;
   }
 
   ///Allocation
@@ -454,27 +460,43 @@ export class FirebaseService {
   }
 
   ///Semesters
-  addNewSemester(newSemester) {
-    var isSaved: Boolean = this.semesterExists(newSemester.semesterKey)
-    if(this.semesterExists(newSemester.name)){
-      return false
-    }else{
-      this.db.database.ref("semesters/"+(newSemester.semesterKey)).set({
-        semester_id: newSemester.semester_id
-        //add allocations?
-      })
-      return true
-    }
+  // Salva um novo semestre na lista de semestres
+  saveSemester(semester: Semester) {
+      this.db.database.ref('semesters/' + semester.getId())
+          .set(semester.toFirebaseObject());
   }
+
+  // Adiciona um Id de semeste à lista de todos os Ids de semestres
+  addSemester(semesterId: String) {
+      var self = this;
+      this.db.database.ref(this.ALL_SEMESTERS_PATH).once('value')
+          .then(function (snapshot) {
+              var semestersIds = snapshot.val() as String[];
+              if (semestersIds == null) {
+                  self.allSemesters.set([semesterId]);
+              } else if (semestersIds.indexOf(semesterId) < 0) {
+                  semestersIds.push(semesterId);
+                  self.allSemesters.set(semestersIds);
+              }
+          });
+  }
+
   getSemesters() {
       return this.semesters;
   }
-  semesterExists(newSemesterKey) {
-    var isSaved: boolean;
-    this.db.database.ref("semesters/"+newSemesterKey).once("value",function(snapshot){
-      isSaved = snapshot.exists();
-    });
-    return isSaved;
+
+  getSemestersIds() {
+      return this.allSemesters;
+  }
+
+  // Restrictions
+  getProfessorRestrictions() {
+      return this.professorRestrictions;
+  }
+
+  saveProfessorRestriction(restriction: ProfessorRestriction) {
+      this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPSemester())
+          .set(restriction.toFirebaseObject());
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { User } from './users/user.model';
+import { NavbarService } from "app/navbar/navbar.service";
 
 @Component({
   selector: 'app-root',
@@ -54,9 +55,7 @@ export class AppComponent {
 
   }
 
-
-
-  logout(){
+  logout() {
     this.dbAuth.auth.signOut();
     return true;
   }

@@ -1,4 +1,4 @@
-.add-restriction-card {
+﻿.add-restriction-card {
     margin: 50px 50px 50px 50px;
     padding: 0px 0px 0px 0px;
 }
@@ -9,6 +9,7 @@
 
 .credits-input {
     margin-right: 5%;
+    width: 15%;
 }
 
 .table-container {

@@ -1,7 +1,6 @@
-//modules
+﻿//modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 ///extra modules
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +16,6 @@ import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { HomeBodyModule } from './home-body/home-body.module';
 import { RequestsModule } from './requests/requests.module';
-
 ///angular material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -34,16 +32,11 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 ///dialogs
 import { DialogsComponent } from './dialogs/dialogs.component';
-
-
-
-
+import { NavbarService } from "./navbar/navbar.service";
 
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
-    CommonModule,
     HttpModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -70,7 +63,7 @@ import { DialogsComponent } from './dialogs/dialogs.component';
     ],
   entryComponents:[DialogsComponent],
   exports: [DialogsComponent],
-  providers: [FirebaseService,DialogsService],
+  providers: [FirebaseService, DialogsService, NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

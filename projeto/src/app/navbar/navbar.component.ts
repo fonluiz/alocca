@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -9,6 +9,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { FirebaseService } from '../services/firebase.service';
+import { NavbarService } from "./navbar.service";
 //import { User } from '../users/user.model';
 
 @Component({
@@ -18,6 +19,7 @@ import { FirebaseService } from '../services/firebase.service';
 })
 export class NavbarComponent implements OnInit {
   semesters: string[];
+  selectedSemesterID: string;
   user: Observable<firebase.User>;
   TIMEOUT_NOT_REGISTERED = 5000;
   NOT_REGISTERED_MESSAGE: string = "Opa! Parece que você não está cadastrado. Entre em contato com o administrador.";
@@ -28,11 +30,12 @@ export class NavbarComponent implements OnInit {
     public db: AngularFireDatabase,
     public dbAuth: AngularFireAuth,
     private _flashMessagesService: FlashMessagesService,
+    private navbarService: NavbarService,
     private router: Router) {
     this.user = dbAuth.authState
   }
   ngOnInit(){
-    this.FBservice.getSemesters().subscribe(semesters => {
+    this.FBservice.getSemestersIds().subscribe(semesters => {
           this.semesters = semesters;
     });
   }
@@ -47,5 +50,11 @@ export class NavbarComponent implements OnInit {
 
   logout(){
     this.dbAuth.auth.signOut();
+  }
+
+  checkSemester() {
+      console.log(this.selectedSemesterID);
+      this.navbarService.setSemester(this.selectedSemesterID);
+      console.log(this.navbarService.getSemester());
   }
 }

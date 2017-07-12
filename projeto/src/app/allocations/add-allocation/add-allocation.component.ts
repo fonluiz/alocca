@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import {FormControl} from '@angular/forms';
@@ -73,7 +73,6 @@ export class AddAllocationComponent implements OnInit {
       this.professorOneSIAP = null;
       this.professorTwoSIAP = null;
       this.note = null;
-
     }else{
       allocation = {
       courseKey: this.courseKey,

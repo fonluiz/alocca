@@ -1,10 +1,10 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+﻿﻿<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title" [routerLink]="['/home-body']">ALOCCA</span>
       <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only" >
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
         <!--Register button-->
         <button id="demo-menu-lower-left-profs"
           class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
@@ -28,20 +28,19 @@
           <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
         </ul>
         <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="checkSemester()" [routerLink]="['/allocations']" style="margin-left: 5px">
         Alocações
         </button>
       </nav>
       
         <div class="mdl-layout-spacer"></div>
-
-        <md-select class="semester-select mdl-color-text--white" style="margin-right: 10px">
+        <md-select (change)="checkSemester()" class="semester-select mdl-color-text--white" [(ngModel)]="selectedSemesterID" name="selectedSemesterID" style="margin-right: 10px">
           <md-option (click)="openDialog()">
             <!--<md-icon>add_circle_outline</md-icon>-->
             Novo Semestre
           </md-option>
           <md-option *ngFor="let sem of semesters" [value]="sem">
-            {{ sem.semester_id }}
+            {{ sem.replace('-','.') }}
           </md-option>
         </md-select>
 
