@@ -16,7 +16,7 @@
     <tr *ngFor = 'let aloc of allocationsList'>
       <th>{{aloc.ca}}</th>
       <th>{{aloc.course}}</th>
-      <a [routerLink]="['/add-restriction/'+aloc.professorOne]"><th>{{aloc.professorOne}}</th></a>
+      <a (click)="getSelectedSemester()" [routerLink]="['/add-restriction/'+aloc.professorOne+'-'+this.navbarService.getSemester()]"><th>{{aloc.professorOne}}</th></a>
       <th>{{aloc.professorTwo}}</th>
       <th>{{aloc.type}}</th>
       <th>{{aloc.credits}}</th>

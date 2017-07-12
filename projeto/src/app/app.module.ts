@@ -1,4 +1,4 @@
-//modules
+﻿//modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
@@ -18,6 +18,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from './services/firebase.service';
 //components
 import { AppComponent } from './app.component';
+import { NavbarService } from "./navbar/navbar.service";
 
 @NgModule({
   imports: [
@@ -36,7 +37,7 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent
   ],
-  providers: [FirebaseService],
+  providers: [FirebaseService, NavbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
