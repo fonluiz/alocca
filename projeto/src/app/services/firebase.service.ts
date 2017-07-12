@@ -95,19 +95,25 @@ export class FirebaseService {
   }
   updateAllocation(id,allocation){
     if(id!=allocation.professorOneSIAP+allocation.courseKey){
+      console.log('what??');
       if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
+        console.log('what??2222');
         return false;
-      }
-    }else{
-      if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
-        if(this.addAllocation(allocation)){
-          return true;
+      }else{
+        if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
+          console.log('what??33333');
+          if(this.addAllocation(allocation)){
+            console.log('what??4444');
+            return true;
+          }else{
+            return false;
+          }
         }else{
           return false;
         }
-      }else{
-        return false;
       }
+    }else{
+      return false;
     }
   }
   deleteAllocation(id,courseKey,allocationClassNumber){
@@ -465,7 +471,6 @@ export class FirebaseService {
       this.db.database.ref('semesters/' + semester.getId())
           .set(semester.toFirebaseObject());
   }
-
   // Adiciona um Id de semeste à lista de todos os Ids de semestres
   addSemester(semesterId: String) {
       var self = this;
@@ -480,11 +485,9 @@ export class FirebaseService {
               }
           });
   }
-
   getSemesters() {
       return this.semesters;
   }
-
   getSemestersIds() {
       return this.allSemesters;
   }

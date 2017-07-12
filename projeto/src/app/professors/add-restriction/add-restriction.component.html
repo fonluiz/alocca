@@ -4,7 +4,7 @@
     <md-toolbar color="primary">
       Restrições  
       <div class="mdl-layout-spacer"></div>
-      <button md-button style="margin-right: 5px">Cancelar</button> 
+      <button md-button style="margin-right: 5px" [routerLink]="['/allocations']">Cancelar</button> 
       <button md-button type="submit" [disabled]="!restrictionsForm.form.valid">Salvar</button>
     </md-toolbar>
 

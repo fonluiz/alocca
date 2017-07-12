@@ -24,19 +24,19 @@
         </thead>
         <tbody>
           <tr *ngFor = 'let aloc of allocationsList'>
-            <th *ngIf='aloc.caControl' ><a (click)="onChangeCAStatus(aloc.$key,false)"><div class="foo green"></div></a></th>
-            <th *ngIf='!aloc.caControl'><a (click)="onChangeCAStatus(aloc.$key,true)"><div class="foo red"></div></a></th>
-            <th>{{aloc.classNumber}}</th>
-            <th>{{aloc.course}}</th>
-            <a [routerLink]="['/add-restriction/'+aloc.professorOneSIAP+'-'+this.navbarService.getSemester()]"><th>{{aloc.professorOneName}}</th></a>
-            <a [routerLink]="['/add-restriction/'+aloc.professorTwoSIAP+'-'+this.navbarService.getSemester()]"><th>{{aloc.professorTwoName}}</th></a>
-            <th>{{aloc.courseType}}</th>
-            <th>{{aloc.courseCredits}}</th>
-            <th>{{aloc.courseOffererDepartment}}</th>
-            <th>{{aloc.courseRequesterDepartment}}</th>
-            <th>{{aloc.note}}</th>
-            <th><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></th>
-            <th><a (click)="onDeleteAllocation(aloc.$key,aloc.course,aloc.courseCredits,aloc.classNumber)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></th>
+            <td *ngIf='aloc.caControl' ><a (click)="onChangeCAStatus(aloc.$key,false)"><div class="foo green"></div></a></td>
+            <td *ngIf='!aloc.caControl'><a (click)="onChangeCAStatus(aloc.$key,true)"><div class="foo red"></div></a></td>
+            <td>{{aloc.classNumber}}</td>
+            <td>{{aloc.course}}</td>
+            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorOneSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorOneName}}</a></td>
+            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorTwoSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorTwoName}}</a></td>
+            <td>{{aloc.courseType}}</td>
+            <td>{{aloc.courseCredits}}</td>
+            <td>{{aloc.courseOffererDepartment}}</td>
+            <td>{{aloc.courseRequesterDepartment}}</td>
+            <td>{{aloc.note}}</td>
+            <td><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></td>
+            <td><a (click)="onDeleteAllocation(aloc.$key,aloc.course,aloc.courseCredits,aloc.classNumber)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></td>
           </tr>
         </tbody>
       </table>
