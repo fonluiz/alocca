@@ -13,6 +13,8 @@ export class EditAllocationComponent implements OnInit {
   course;
   courseKey;
   oldCourseKey;
+  note;
+  oldNote;
   professorOneName;
   professorTwoName;
   professorOneSIAP;
@@ -31,6 +33,7 @@ export class EditAllocationComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    console.log(this.id);
 
     this.FBservice.getProfessors().subscribe(professorsnames =>{
       this.professorsList = professorsnames;
@@ -45,6 +48,7 @@ export class EditAllocationComponent implements OnInit {
         this.professorTwoName = allocation.professorTwoName;
       }
       this.oldCourseKey = allocation.course+allocation.courseCredits;
+      this.oldNote = allocation.note;
     });
   }
 
@@ -55,7 +59,8 @@ export class EditAllocationComponent implements OnInit {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
       professorTwoSIAP: this.professorTwoSIAP,
-      oldCourseKey: this.oldCourseKey
+      oldCourseKey: this.oldCourseKey,
+      note: this.note
     };
       if(this.FBservice.updateAllocation(this.id,allocation)){
         //change to flash_message
@@ -70,7 +75,8 @@ export class EditAllocationComponent implements OnInit {
       allocation = {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
-      oldCourseKey: this.oldCourseKey
+      oldCourseKey: this.oldCourseKey,
+      note: this.note
     };
       if(this.FBservice.updateAllocation(this.id,allocation)){
         //change to flash_message

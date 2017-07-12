@@ -55,8 +55,8 @@ export class FirebaseService {
         professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
         professorTwoSIAP: allocation.professorTwoSIAP,
         courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
-        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey)
-        //add note field
+        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
+        note: allocation.note
       })){
         return true;
       }else{
@@ -72,8 +72,8 @@ export class FirebaseService {
         professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
         professorOneSIAP: allocation.professorOneSIAP,
         courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
-        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey)
-        //add note field
+        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
+        note: allocation.note
         })){
         return true;
       }else{
@@ -86,7 +86,7 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    if(this.allocationExists(id)){
+    if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
       return false;
     }else{
       if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){

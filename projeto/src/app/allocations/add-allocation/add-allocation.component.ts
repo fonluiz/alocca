@@ -21,6 +21,7 @@ export class AddAllocationComponent implements OnInit {
   courseKey: any;
   professorOneSIAP: any;
   professorTwoSIAP: any;
+  note: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a turma já foi alocada.";
   TIMEOUT_SAVED_MESSAGE = 2500;
@@ -63,6 +64,7 @@ export class AddAllocationComponent implements OnInit {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
       professorTwoSIAP: this.professorTwoSIAP,
+      note: this.note
     };
 
       this.addAlocationToFirebase(allocation);
@@ -70,16 +72,19 @@ export class AddAllocationComponent implements OnInit {
       this.courseKey = null;
       this.professorOneSIAP = null;
       this.professorTwoSIAP = null;
+      this.note = null;
 
     }else{
       allocation = {
       courseKey: this.courseKey,
       professorOneSIAP: this.professorOneSIAP,
+      note: this.note,
     };
       this.addAlocationToFirebase(allocation);
 
       this.courseKey = null;
       this.professorOneSIAP = null;
+      this.note = null;
       
     }
   }

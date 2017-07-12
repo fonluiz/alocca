@@ -12,6 +12,7 @@
         <label style="color: gray" [ngModel]="course" name="course" class="course-name2-input">{{course}}</label>
         <label style="color: gray" [ngModel]="professorOneName" name="professorOneName" class="professor1-name2-input">{{professorOneName}}</label>
         <label style="color: gray" [ngModel]="professorTwoName" name="professorTwoName" class="professor2-name2-input">{{professorTwoName}}</label>
+        <label style="color: gray" [ngModel]="oldNote" name="note" class="note-name2-input">{{oldNote}}</label>
       </div>
       <div class="edit-allocation-card-row">
         <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
@@ -31,8 +32,14 @@
             {{ prof.name }}
           </md-option>
         </md-select>
+
+
+        <md-input-container class="allocation-note-container">
+          <input mdInput class="allocation-note-input" placeholder="Observação" [(ngModel)]="note" name="note">
+        </md-input-container>
+
       </div>
-      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>
+      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alterar</button>
     </md-card-content>
   </form>
 </md-card>

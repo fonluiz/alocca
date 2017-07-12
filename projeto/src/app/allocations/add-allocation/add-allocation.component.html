@@ -19,11 +19,16 @@
           </md-option>
         </md-select>
 
-        <md-select class="professor2-name-input" placeholder="Docente 1" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
+        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
           <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
             {{ prof.name }}
           </md-option>
         </md-select>
+
+        <md-input-container class="allocation-note-container">
+          <input mdInput class="allocation-note-input" placeholder="Observação" [(ngModel)]="note" name="note">
+        </md-input-container>
+
       </div>
       <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>
     </md-card-content>
