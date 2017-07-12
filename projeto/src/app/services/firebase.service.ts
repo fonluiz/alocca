@@ -22,6 +22,7 @@ export class FirebaseService {
   user: FirebaseObjectObservable<any>;
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
+  requestsEmails: FirebaseListObservable<any[]>;
   semesters: FirebaseListObservable<any[]>;
   semester: FirebaseObjectObservable<any>;
 
@@ -32,6 +33,7 @@ export class FirebaseService {
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
     this.usersEmails = db.list('/usersEmails') as FirebaseListObservable<any[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
+    this.requestsEmails = db.list('/requestsEmails') as FirebaseListObservable<any[]>;
     this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
   }
 
@@ -362,7 +364,7 @@ export class FirebaseService {
     return this.users.remove(id);
   }
   addNewUser(newUser){
-      if (this.emailAlreadySaved(newUser.SIAP)===newUser.email){
+      if (this.emailAlreadySaved(newUser.SIAP)){
         return false;
       }else{
         this.db.database.ref("users/"+newUser.SIAP).set(newUser);
@@ -371,9 +373,9 @@ export class FirebaseService {
 
   }
   emailAlreadySaved(newUserKey){
-    var userEmail: string;
+    var userEmail: boolean;
     this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
-      userEmail = snapshot.child('email').val();
+      userEmail = snapshot.exists();
     });
     return userEmail;
   }
@@ -394,23 +396,34 @@ export class FirebaseService {
   getRequests(){
     return this.requests;
   }
+  getRequestsEmails(){
+    return this.requestsEmails;
+  }
   addNewRequest(newRequest){
-    if(this.requestExists(newRequest.name)){
+    if(this.requestExists(newRequest.email)){
       return false;
     }else{
-      this.db.database.ref("requests/"+newRequest.name).set(newRequest);
+      this.db.database.ref("requests/"+newRequest.SIAP).set(newRequest);
+      this.requestsEmails.push({
+        email: newRequest.email
+      });
       return true;
     }
   }
   deleteRequest(id){
     this.requests.remove(id);
   }
-  requestExists(newRequestKey){
-    var isSaved: boolean;
-    this.db.database.ref("requests/"+newRequestKey).once("value",function(snapshot){
-      isSaved = snapshot.exists();
+  requestExists(requestEmail){
+    var isRegistered: boolean = false;
+    this.db.database.ref("requestsEmails/").on("value",function(snapshot){
+      snapshot.forEach(function(childSnapshot){
+        if(childSnapshot.child('email').val()===requestEmail){
+          isRegistered = true;
+          return true;
+        }
+      });
     });
-    return isSaved;
+    return isRegistered;
   }
 
   ///Semesters

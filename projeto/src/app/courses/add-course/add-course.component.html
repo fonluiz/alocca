@@ -4,7 +4,7 @@
     <md-toolbar color="primary" class="new-course-card-toolbar">
         Cadastrar Disciplina
         <span class="spacer"></span>
-        <button md-button style="margin-right: 5px">Cancelar</button>
+        <button md-button style="margin-right: 5px" [routerLink]="['/view-courses']">Cancelar</button>
         <button md-button [disabled]="!courseForm.form.valid" type="submit">Salvar</button>
     </md-toolbar>
 
