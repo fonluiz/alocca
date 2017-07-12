@@ -1,0 +1,4 @@
+/* Remove the blue outline from a selected option*/
+*:focus {
+outline: none;
+}
