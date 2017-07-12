@@ -88,8 +88,10 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
-      return false;
+    if(id!=allocation.professorOneSIAP+allocation.courseKey){
+      if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
+        return false;
+      }
     }else{
       if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
         if(this.addAllocation(allocation)){
