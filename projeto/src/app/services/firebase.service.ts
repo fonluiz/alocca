@@ -362,8 +362,18 @@ export class FirebaseService {
   getUsersEmails(){
     return this.usersEmails;
   }
-  deleteUser(id){
-    return this.users.remove(id);
+  deleteUser(user){
+    var thisObject = this;
+    if(this.users.remove(user.$key)){
+      this.db.database.ref("usersEmails/").on("value",function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          if(childSnapshot.child('email').val()===user.email){
+            thisObject.usersEmails.remove(childSnapshot.key);
+            return true;
+          }
+        })
+      })
+    }
   }
   addNewUser(newUser){
       if (this.emailAlreadySaved(newUser.SIAP)){
@@ -412,8 +422,23 @@ export class FirebaseService {
       return true;
     }
   }
-  deleteRequest(id){
-    this.requests.remove(id);
+  acceptRequest(request){
+    if(this.addNewUser(request)){
+      this.deleteRequest(request);
+    }
+  }
+  deleteRequest(request){
+    var thisObject = this;
+    if(this.requests.remove(request.$key)){
+      this.db.database.ref("requestsEmails/").on("value",function(snapshot){
+        snapshot.forEach(function(childSnapshot){
+          if(childSnapshot.child('email').val()===request.email){
+            thisObject.requestsEmails.remove(childSnapshot.key);
+            return true;
+          }
+        })
+      })
+    }
   }
   requestExists(requestEmail){
     var isRegistered: boolean = false;

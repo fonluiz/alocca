@@ -26,8 +26,14 @@ export class ViewRequestsComponent implements OnInit {
     });
   }
 
-  onDeleteRequest(id){
-    this.FBservice.deleteRequest(id);
+  onDeleteRequest(request){
+    this.FBservice.deleteRequest(request);
     this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
   }
+
+  onAcceptRequest(request){
+    this.FBservice.acceptRequest(request);
+
+  }
+
 }

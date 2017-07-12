@@ -19,7 +19,7 @@
         <tr *ngFor="let user of users">
           <td>{{user.name}}</td>
           <td>{{user.email}}</td>
-          <td><button (click)="onDeleteUser(user.$key)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+          <td><button (click)="onDeleteUser(user)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
         </tr>
       </tbody>
     </table>

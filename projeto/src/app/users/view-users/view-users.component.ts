@@ -26,8 +26,8 @@ export class ViewUsersComponent implements OnInit {
     });
   }
 
-  onDeleteUser(id){
-    this.FBservice.deleteUser(id);
+  onDeleteUser(user){
+    this.FBservice.deleteUser(user);
     this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
   }
 
