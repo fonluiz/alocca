@@ -1,7 +1,9 @@
-export class ScheduleRestriction {
+﻿export class ScheduleRestriction {
     constructor(
-        public tough: string[],
-        public tractable: string[]
+        private monday: number[],
+        private tuesday: number[],
+        private wednesday: number[],
+        private thursday: number[],
+        private friday: number[]
     ) { }
-
 }

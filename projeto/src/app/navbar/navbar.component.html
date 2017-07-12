@@ -1,72 +1,43 @@
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title" [routerLink]="['/home-body']">ALOCCA</span>
-      <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only" >
-        <!--Register button-->
-        <button id="demo-menu-lower-left-profs"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
-        Professores
-        <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-          for="demo-menu-lower-left-profs">
-          <li class="mdl-menu__item" [routerLink]="['/add-professor']">Cadastrar</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-professors']">Cadastrados</li>
-          <li class="mdl-menu__item" [routerLink]="['/add-restriction']">restricoes-test</li>
-        </ul>
-        <button id="demo-menu-lower-left-courses"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 5px">
-        Disciplinas
-          <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
-        </button>
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-          for="demo-menu-lower-left-courses">
-          <li class="mdl-menu__item" [routerLink]="['/add-course']">Cadastrar</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
-        </ul>
-        <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/allocations']" style="margin-left: 5px">
-        Alocações
-        </button>
-      </nav>
-      
-        <div class="mdl-layout-spacer"></div>
-
-        <md-select class="semester-select mdl-color-text--white" style="margin-right: 10px">
-          <md-option (click)="openDialog()">
-            <!--<md-icon>add_circle_outline</md-icon>-->
-            Novo Semestre
-          </md-option>
-          <md-option *ngFor="let sem of semesters" [value]="sem">
-            {{ sem.semester_id }}
-          </md-option>
-        </md-select>
-
-        <button id="demo-menu-lower-left-users"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-right: 5px">
-        Usuários
-        <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
-        </button >
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-          for="demo-menu-lower-left-users">
-          <li class="mdl-menu__item" [routerLink]="['/add-user']">Cadastrar</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-users']">Cadastrados</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-requests']">Requisições</li>
-        </ul>
-
-        <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="logout()" [routerLink]="['/home']">
-        <b>Sair</b>
-        </button>
-    </div>
-  </header>
-  <flash-messages></flash-messages>
-  <main class="mdl-layout__content">
-      <div class="page-content">
-        <router-outlet></router-outlet>
-      </div>
-  </main>
+﻿﻿<div class="mdl-layout__header-row">
+  <!-- Title -->
+  <span class="mdl-layout-title" [routerLink]="['/']">ALOCCA</span>
+  <!-- Navigation. We hide it in small screens. -->
+  <nav class="mdl-navigation mdl-layout--large-screen-only">
+    <!--Register button-->
+    <button id="demo-menu-lower-left-profs"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
+    Professores
+    <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+      for="demo-menu-lower-left-profs">
+      <li class="mdl-menu__item" [routerLink]="['/add-professor']">Cadastrar</li>
+      <li class="mdl-menu__item" [routerLink]="['/view-professors']">Cadastrados</li>
+      <li class="mdl-menu__item" [routerLink]="['/add-restriction']">restricoes-test</li>
+    </ul>
+    <button id="demo-menu-lower-left-courses"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 5px">
+    Disciplinas
+      <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+      for="demo-menu-lower-left-courses">
+      <li class="mdl-menu__item" [routerLink]="['/add-course']">Cadastrar</li>
+      <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
+    </ul>
+    <button id="demo-menu-lower-left"
+      class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="checkSemester()" [routerLink]="['/allocations']" style="margin-left: 5px">
+    Alocações
+    </button>
+  </nav>
+<div class="mdl-layout-spacer"></div>
+  <md-select (change)="checkSemester()" class="semester-select mdl-color-text--white" [(ngModel)]="selectedSemesterID" name="selectedSemesterID">
+      <md-option (click)="openDialog()">
+        <!--<md-icon>add_circle_outline</md-icon>-->
+        Novo Semestre
+      </md-option>
+      <md-option *ngFor="let sem of semesters" [value]="sem">
+        {{ sem }}
+      </md-option>
+    </md-select>
 </div>

@@ -1,4 +1,10 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿/**
+ * @api {component} projeto/src/app/professors/view-professors/view-professors.component.ts View Professors Component
+ * @apiName View Professors Component
+ * @apiGroup Professor
+ */
+
+import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Professor } from '../professor.model';

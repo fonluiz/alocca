@@ -1,4 +1,4 @@
-<md-card class="visualize-allocation-card">
+﻿<md-card class="visualize-allocation-card">
   <md-toolbar color="primary" class="view-allocation-card-toolbar">
     Alocações Cadastradas
     <span class="spacer"></span>
@@ -28,8 +28,8 @@
             <th *ngIf='!aloc.caControl'><a (click)="onChangeCAStatus(aloc.$key,true)"><div class="foo red"></div></a></th>
             <th>{{aloc.classNumber}}</th>
             <th>{{aloc.course}}</th>
-            <th>{{aloc.professorOneName}}</th>
-            <th>{{aloc.professorTwoName}}</th>
+            <a [routerLink]="['/add-restriction/'+aloc.professorOneSIAP+'-'+this.navbarService.getSemester()]"><th>{{aloc.professorOneName}}</th></a>
+            <a [routerLink]="['/add-restriction/'+aloc.professorTwoSIAP+'-'+this.navbarService.getSemester()]"><th>{{aloc.professorTwoName}}</th></a>
             <th>{{aloc.courseType}}</th>
             <th>{{aloc.courseCredits}}</th>
             <th>{{aloc.courseOffererDepartment}}</th>

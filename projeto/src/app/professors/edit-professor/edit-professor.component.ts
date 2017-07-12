@@ -1,4 +1,10 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿/**
+ * @api {component} projeto/src/app/professors/edit-professor/edit-professor.component.ts Edit Professor Component
+ * @apiName Edit Professor Component
+ * @apiGroup Professor
+ */
+
+import { Component, OnInit } from '@angular/core';
 //import { FlashMessagesService } from 'angular2-flash-messages';
 import { Professor } from '../professor.model';
 import { FirebaseService } from '../../services/firebase.service';

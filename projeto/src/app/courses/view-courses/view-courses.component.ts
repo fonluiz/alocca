@@ -1,3 +1,9 @@
+﻿/**
+ * @api {component} projeto/src/app/courses/view-courses/view-courses.component.ts View Courses Component
+ * @apiName View Courses Component
+ * @apiGroup Course
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
