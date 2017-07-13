@@ -99,18 +99,15 @@ export class FirebaseService {
       if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
         console.log('what??2222');
         return false;
+      }
+    }
+    if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
+      console.log('what??33333');
+      if(this.addAllocation(allocation)){
+        console.log('what??4444');
+        return true;
       }else{
-        if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
-          console.log('what??33333');
-          if(this.addAllocation(allocation)){
-            console.log('what??4444');
-            return true;
-          }else{
-            return false;
-          }
-        }else{
-          return false;
-        }
+        return false;
       }
     }else{
       return false;

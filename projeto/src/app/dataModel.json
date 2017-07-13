@@ -1,10 +1,11 @@
 {
     "root":{
+///fixed        
         "professors":{
             //the key would be: '9837248'
             "SIAP":{
-                "SIAP": "9837248",
-                "name": "Joseana"
+                "name": "Joseana",
+                "nickname": "Jozzyh"///new
             }
         },
         "courses":{
@@ -17,53 +18,12 @@
                 "maximumSemester": "1",
                 "offererDepartment": "UASC",
                 "requesterDepartment": "UASC",
-                "classesNumber": 0 //0 at first, then it changes according to classes being allocated
-            }
-        },
-        "allocations":{
-            //the key would be: '9837248Introdução à Computação4'
-            "professorOneSIAP+courseKey":{
-                "caControl": "false",//checker, false at first
-                "classNumber": 2,//current classesNumber of the allocated course
-                "professorOneName": "Joseana",
-                "professorOneSIAP": "9837248",
-                "professorTwoName": "",
-                "professorTwoSIAP": "",
-                "course": "Introdução à Computação",
-                "courseType": "Obrigatória",
-                "courseCredits": "4",
-                "courseOffererDepartment": "UASC",
-                "courseRequesterDepartment": "UASC",
-                "note": "", //nothing at first
-                "alerts": []//to change after creating the alerts entity
-            }
-        },
-        "professorRestrictions":{
-            //the key would be: '98372482017_1'
-            "professorSIAP+semesterKey":{
-                //"professorName": "", I think it could be useful
-                "minCredits": 4,
-                "maxCredits": 8,
-                "posGraduatedCredits": 3,
-                "scheduleRestrictions": [
-                    [14,16],//monday
-                    [14],//tuesday
-                    [8],//wednesday
-                    [],//thursday
-                    [8,10]//friday
-                ]
-            }
-        },
-        "semesters":{
-            //the key would be: '2017_1'
-            "semesterKey":{
-                "semester_id": "2017.1",
-                "allocations": ["9837248Introdução à Computação4"]
+                "classesNumber": 2 //?????? nem???
             }
         },
         "requests":{
-            //the key would be: 'fulano'
-            "requesterName":{
+            //the key would be: '2390480'
+            "requestSIAP":{
                 "name": "fulano",
                 "email": "fulano.carvalho@ccc.ufcg.edu.br"
             }
@@ -71,16 +31,70 @@
         "users":{
             //the key would be: '1000000'
             "userSIAP":{
-                "SIAP": "1000000",
                 "name": "sicrano",
                 "email": "sicrano.silva@computacao.ufcg.edu.br"
             }
         },
-        "schedules":{
-            //DEFINE LATER
+        "semestersIDs":{//do we need this?
+            //the key would be: '2017_1'
+            "semesterKey":{
+                "semester_id": "2017.1"
+                ///it had allocations ids
+            }
         },
-        "alerts":{
-            //DEFINE LATER
+///every semester
+        //
+        "semesters":{
+            //the key would be: 2017_1
+            "semesterKey":{
+                ///old allocations
+                "classes":{
+                    //the key would be: 'Introdução à Computação4'
+                    "courseKey":{
+                        "caControl": "false",
+                        "classNumber": 2, //remover ??
+                        "professorOneName": "Joseana",
+                        "professorOneSIAP": "9837248",
+                        "professorTwoName": "",//??
+                        "professorTwoSIAP": "",//??
+                        "course": "Introdução à Computação",//mudar nome??
+                        "courseType": "Obrigatória",
+                        "courseCredits": "4",
+                        "courseOffererDepartment": "UASC",
+                        "courseRequesterDepartment": "UASC",
+                        "note": "", //nothing at first
+                        "hasAlert": false, //"alerts": []//to change after creating the alerts entity
+                        "scheduleDay": 2,
+                        "scheduleTime": 8
+                    }
+                },
+                "professorRestrictions":{
+                    //the key would be: '98372482017_1'
+                    "professorSIAP+semesterKey":{
+                        "minCredits": 4,
+                        "maxCredits": 8,
+                        "posGraduatedCredits": 3,
+                        "scheduleRestrictions": [
+                            [14,16],//monday
+                            [14],//tuesday
+                            [8],//wednesday
+                            [],//thursday
+                            [8,10]//friday
+                        ]
+                    }
+                },
+                "schedules":{
+                    "2":[["classesIDs"],["classesIDs"],[]],
+                    "3":[[],["classesIDs"],[]],
+                    "4":[[],[],["classesIDs"]],
+                    "5":[["classesIDs"],["classesIDs"],["classesIDs"]],
+                    "6":[["classesIDs"],[],["classesIDs"]]
+                },
+                "scheduleAlerts":{
+                    "classID": "Introdução à Computação4",
+                    "message":"esse professor não pode dar aula nesse horário"
+                }
+            }
         }
     }
 }

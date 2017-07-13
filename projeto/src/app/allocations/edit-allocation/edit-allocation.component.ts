@@ -19,7 +19,7 @@ export class EditAllocationComponent implements OnInit {
   course;
   courseKey;
   oldCourseKey;
-  note;
+  note: string = "";
   oldNote;
   professorOneName;
   professorTwoName;
