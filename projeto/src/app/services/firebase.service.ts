@@ -335,6 +335,7 @@ export class FirebaseService {
       }
       this.deleteCourse(id);
       this.addNewCourse(course);
+      return true;
     }else if(this.courses.update(id,course)){
       return true;
     }else{
@@ -358,7 +359,7 @@ export class FirebaseService {
   }
   courseExists(newCourseKey){
     var isSaved: boolean;
-    this.db.database.ref("courses/"+newCourseKey).once("value",function(snapshot){
+    this.db.database.ref("courses/"+newCourseKey).on("value",function(snapshot){
       isSaved = snapshot.exists();
     });
     return isSaved;

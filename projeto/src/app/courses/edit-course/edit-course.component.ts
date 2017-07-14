@@ -18,6 +18,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class EditCourseComponent implements OnInit {
   id;
   name;
+  shortName;
   credits;
   type;
   minimumSemester;
@@ -43,6 +44,7 @@ export class EditCourseComponent implements OnInit {
     this.id = this.route.snapshot.params['id'],
     this.FBservice.getCourseDetails(this.id).subscribe(course =>{
         this.name = course.name;
+        this.shortName = course.shortName;
         this.credits = course.credits;
         this.type = course.type;
         this.minimumSemester = course.minimumSemester;
@@ -59,6 +61,7 @@ export class EditCourseComponent implements OnInit {
   onEditCourse(){
     let course = {
           name: this.name,
+          shortName: this.shortName,
           credits: this.credits,
           type: this.type,
           minimumSemester: this.minimumSemester,

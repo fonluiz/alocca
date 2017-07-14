@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class AddCourseComponent implements OnInit {
   name: string;
+  shortName: string;
   credits: string;
   type: string;
   minimumSemester: number;
@@ -41,6 +42,7 @@ export class AddCourseComponent implements OnInit {
   onAddNewCourse(){
     let course = {
       name: this.name,
+      shortName: this.shortName,
       credits: this.credits,
       type: this.type,
       minimumSemester: this.minimumSemester,
@@ -53,6 +55,7 @@ export class AddCourseComponent implements OnInit {
     let savedSuccessfully: boolean = this.FBservice.addNewCourse(course);
 
     this.name = null;
+    this.shortName = null;
     this.credits = null;
     this.type = null;
     this.minimumSemester = null;
