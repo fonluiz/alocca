@@ -13,7 +13,6 @@ import { EditProfessorComponent } from './professors/edit-professor/edit-profess
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 //home
 import { HomeComponent } from './home/home.component';
-import { HomeBodyComponent } from './home-body/home-body.component';
 //navbar
 import { NavbarComponent } from './navbar/navbar.component';
 //users
@@ -29,7 +28,6 @@ import { AddRestrictionComponent } from './professors/add-restriction/add-restri
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'home-body', component: HomeBodyComponent},
     {path: 'navbar', component: NavbarComponent},
 
     {path: 'allocations', component: AddAllocationComponent},

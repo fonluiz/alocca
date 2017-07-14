@@ -14,7 +14,6 @@ import { ProfessorsModule } from './professors/professors.module';
 import { SemesterModule } from './semesters/semester.module';
 import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
-import { HomeBodyModule } from './home-body/home-body.module';
 import { RequestsModule } from './requests/requests.module';
 ///angular material
 import { MaterialModule } from '@angular/material';
@@ -54,7 +53,6 @@ import { NavbarService } from "./navbar/navbar.service";
     NavbarModule,
     HomeModule,
     UsersModule,
-    HomeBodyModule,
     RequestsModule
   ],
   declarations: [
