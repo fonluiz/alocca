@@ -1,10 +1,10 @@
-﻿﻿<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
       <span class="mdl-layout-title" [routerLink]="['/home-body']">ALOCCA</span>
       <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
+      <nav class="mdl-navigation mdl-layout--large-screen-only" >
         <!--Register button-->
         <button id="demo-menu-lower-left-profs"
           class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
@@ -33,6 +33,7 @@
       </nav>
       
         <div class="mdl-layout-spacer"></div>
+
         <md-select (change)="checkSemester()" class="semester-select mdl-color-text--white" [(ngModel)]="selectedSemesterID" name="selectedSemesterID" style="margin-right: 10px">
           <md-option (click)="openDialog()">
             <!--<md-icon>add_circle_outline</md-icon>-->
