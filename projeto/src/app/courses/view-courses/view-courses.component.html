@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Sigla</th>
           <th>Tipo</th>
           <th>Créditos</th>
           <th>Semestre Mínimo Recomendado</th>
@@ -24,6 +25,7 @@
       <tbody>
         <tr *ngFor="let course of courses">
           <td>{{course.name}}</td>
+          <td>{{course.shortName}}</td>
           <td>{{course.type}}</td>
           <td>{{course.credits}}</td>
           <td>{{course.minimumSemester}}</td>

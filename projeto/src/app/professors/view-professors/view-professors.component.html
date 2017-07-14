@@ -11,6 +11,7 @@
       <thead>
         <tr>
           <th>Nome</th>
+          <th>Apelido</th>
           <th>Matrícula SIAP</th>
           <th></th>
           <th></th>
@@ -19,6 +20,7 @@
       <tbody>
         <tr *ngFor="let professor of professors">
           <td>{{professor.name}}</td>
+          <td>{{professor.nickname}}</td>
           <td>{{professor.SIAP}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
           <!--mudar para atualizar melhor??-->
