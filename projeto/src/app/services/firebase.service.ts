@@ -256,7 +256,7 @@ export class FirebaseService {
       if(this.professorExists(professor.SIAP)){
         return false;
       }
-      this.deleteProfessor(id,professor.name);
+      this.deleteProfessor(id);
       this.addNewProfessor(professor);
       return true;
     }else if(this.professors.update(id,professor)){
@@ -265,44 +265,12 @@ export class FirebaseService {
       return false;
     }
   }
-  deleteProfessor(id, professorName){
-    var thisObject = this;
-    this.db.database.ref("allocations/").on("value",function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        if (childSnapshot.child('professorOneSIAP').val() === id && !childSnapshot.child('professorTwoSIAP').val()){
-            thisObject.deleteAllocation(childSnapshot.key,
-                      (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val()),
-                      childSnapshot.child('classNumber').val());
-        }else if(childSnapshot.child('professorOneSIAP').val() === id){
-          let allocation = {
-            courseKey: childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val(),
-            professorOneSIAP: childSnapshot.child('professorTwoSIAP').val()
-          };
-          if(thisObject.deleteAllocation(childSnapshot.key,null,null)){
-            if(thisObject.addAllocation(allocation)){
-              return true;
-            }
-          }else{
-            return false;
-          }
-        }else if(childSnapshot.child('professorTwoSIAP').val() === id){
-          let allocation = {
-            courseKey: childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val(),
-            professorOneSIAP: childSnapshot.child('professorOneSIAP').val()
-          };
-          if (thisObject.deleteAllocation(childSnapshot.key,null,null)){
-            if(thisObject.addAllocation(allocation)){
-              return true;
-            }else{
-              return false;
-            }
-          }else{
-            return false;
-          }
-        }
-      });
-    });
-    return this.professors.remove(id);
+  deleteProfessor(id){
+    if(this.professors.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
     
   }
   professorExists(newProfessorKey){
@@ -344,19 +312,11 @@ export class FirebaseService {
     }
   }
   deleteCourse(id){
-    var thisObject = this;
-    this.db.database.ref("allocations/").on("value",function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        if (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val() === id) {
-          if (thisObject.deleteAllocation(childSnapshot.key,
-                      (childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val()),
-                      childSnapshot.child('classNumber').val())){
-                        return true;
-                      }
-        }
-      });
-    });
-    return this.courses.remove(id);
+    if (this.courses.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
   }
   courseExists(newCourseKey){
     var isSaved: boolean;
@@ -495,7 +455,6 @@ export class FirebaseService {
   getProfessorRestrictions() {
       return this.professorRestrictions;
   }
-
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPSemester())
           .set(restriction.toFirebaseObject());

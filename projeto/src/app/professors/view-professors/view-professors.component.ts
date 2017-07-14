@@ -41,12 +41,12 @@ export class ViewProfessorsComponent implements OnInit {
 
   onDeleteProfessor(id, professorName){
     var title = "Excluir Professor";
-    var message = "Deseja realmente excluir o(a) professor(a) "+professorName+" e atualizar a tabela de alocações?";
+    var message = "Deseja realmente excluir "+professorName+" ?";
     this.dialogsService
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          this.FBservice.deleteProfessor(id, professorName);
+          this.FBservice.deleteProfessor(id);
           this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
           this.router.navigate(['/view-professors']);
         }

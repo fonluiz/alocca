@@ -40,7 +40,7 @@ export class ViewCoursesComponent implements OnInit {
 
   onDeleteCourse(id, courseName){
     var title = "Excluir Disciplina";
-    var message = "Deseja realmente excluir a disciplina "+courseName+" e todas as suas alocações?";
+    var message = "Deseja realmente excluir a disciplina "+courseName+" ?";
     this.dialogsService
       .confirm(title, message)
       .subscribe(res => {
