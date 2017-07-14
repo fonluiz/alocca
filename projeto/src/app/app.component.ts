@@ -36,7 +36,7 @@ export class AppComponent {
   }
 
   login(){
-    this.dbAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() =>{
+    this.dbAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then(() => {
       var userEmail: String = this.dbAuth.auth.currentUser.email;
       //pegar UID do usuário
       //console.log(this.dbAuth.auth.currentUser.uid);
@@ -48,8 +48,6 @@ export class AppComponent {
           console.log('pegou o logout');
           this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
         }
-      }else{
-        this.router.navigate(['/home-body']);
       }
     });
 

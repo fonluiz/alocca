@@ -1,1 +1,2 @@
-<h1><h1><h1>Faça login</h1></h1></h1>
+<h1><h1><h1 *ngIf="!(dbAuth.authState | async)">Faça login</h1></h1></h1>
+<h1><h1><h1 *ngIf="(dbAuth.authState | async)">Muito bem</h1></h1></h1>
