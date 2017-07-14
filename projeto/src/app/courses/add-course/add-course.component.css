@@ -16,7 +16,7 @@
 }
 
 .course-name-input {
-    width: 40%;
+    width: 38%;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -26,6 +26,13 @@
     margin-top: 10px;
     margin-bottom: 10px;  
     margin-left: 10%;
+}
+
+.course-shortName-input {
+    width: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;  
+    margin-left: 3%;
 }
 
 .course-type-input {
