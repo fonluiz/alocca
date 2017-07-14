@@ -17,6 +17,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class EditProfessorComponent implements OnInit {
   name;
+  nickname;
   SIAP;
   max_creditos;
   min_creditos;
@@ -39,6 +40,8 @@ export class EditProfessorComponent implements OnInit {
     this.FBservice.getProfessorDetails(this.id).subscribe(professor =>{
         this.name = professor.name;
         this.SIAP = professor.SIAP;
+        this.nickname = professor.nickname;
+
     });
     let initiateProfessors: any[];
     this.FBservice.getProfessors().subscribe(professors =>{
@@ -48,8 +51,9 @@ export class EditProfessorComponent implements OnInit {
 
   onEditProfessor(){
     let professor = {
-          name: this.name,
-          SIAP: this.SIAP
+      nickname: this.nickname,
+      name: this.name,
+      SIAP: this.SIAP
     }
         
     this.FBservice.updateProfessor(this.id,professor);

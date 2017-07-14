@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class AddProfessorComponent implements OnInit {
   name: any;
+  nickname: any;
   SIAP: any;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Professor salvo com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
@@ -34,12 +35,14 @@ export class AddProfessorComponent implements OnInit {
   onAddNewProfessor(){
     let professor = {
     name: this.name,
+    nickname: this.nickname,
     SIAP: this.SIAP
   }
     
     let savedSuccessfully: boolean = this.FBservice.addNewProfessor(professor);
 
     this.name = null;
+    this.nickname = null;
     this.SIAP = null;
 
     // Queria colocar essa verificação em um método. Será que isso é possível?

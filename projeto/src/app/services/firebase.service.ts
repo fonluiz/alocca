@@ -258,6 +258,7 @@ export class FirebaseService {
       }
       this.deleteProfessor(id,professor.name);
       this.addNewProfessor(professor);
+      return true;
     }else if(this.professors.update(id,professor)){
       return true;
     }else{
