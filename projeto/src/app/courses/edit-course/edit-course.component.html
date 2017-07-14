@@ -16,6 +16,11 @@
                 <input mdInput placeholder="Nome" type="text" [(ngModel)]="name" name="name" required>
             </md-input-container>
 
+            <!-- Course short name -->
+            <md-input-container class="course-shortName-input">
+                <input mdInput placeholder="Abreviação" type="text" [(ngModel)]="shortName" name="shortName" required>
+            </md-input-container>
+
             <!-- Credits -->
             <md-input-container class="course-credits-input">
                 <input mdInput placeholder="Créditos" type="number" [(ngModel)]="credits" min="0" onkeypress="return event.charCode >= 48" name="credits" required>
