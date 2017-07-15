@@ -1,0 +1,26 @@
+.visualize-schedules-card{
+    width: 100%;
+}
+
+.classes-schedules-table{
+    width: 90%;
+}
+
+.table-head{
+    /*change color*/
+    background-color: lightsteelblue ;
+}
+
+.week-day{
+    text-align: center;
+}
+
+.week-hours{
+    /*change color*/
+    background-color: lightblue;
+}
+
+.new-class-selection{
+    width: 100%;
+    text-align: center;
+}

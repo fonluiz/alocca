@@ -11,6 +11,8 @@ import { ViewCoursesComponent } from './courses/view-courses/view-courses.compon
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
+//restrictions
+import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
 //home
 import { HomeComponent } from './home/home.component';
 //navbar
@@ -22,8 +24,8 @@ import { ViewRequestsComponent } from './requests/view-requests/view-requests.co
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
 //semesters
 import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
-//restrictions
-import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
+//scheudles
+import { SchedulesTableComponent } from './schedules/schedules-table/schedules-table.component';
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -38,7 +40,7 @@ const appRoutes: Routes = [
     {path: 'view-courses', component: ViewCoursesComponent},
     
     {path: 'add-professor', component: AddProfessorComponent},
-    //{path: 'add-restriction', component: AddRestrictionComponent},
+    {path: 'add-restriction/:id', component: AddRestrictionComponent },
     {path: 'edit-professor/:id', component: EditProfessorComponent},
     {path: 'view-professors', component: ViewProfessorsComponent},
 
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
 
     {path: 'add-semester', component: AddSemesterComponent },
 
-    {path: 'add-restriction/:id', component: AddRestrictionComponent }
+    {path: 'schedules-table', component: SchedulesTableComponent}
+
 ];
 
 @NgModule({

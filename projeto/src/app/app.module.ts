@@ -15,6 +15,7 @@ import { SemesterModule } from './semesters/semester.module';
 import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { RequestsModule } from './requests/requests.module';
+import { SchedulesModule } from './schedules/schedules.module';
 ///angular material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -53,7 +54,8 @@ import { NavbarService } from "./navbar/navbar.service";
     NavbarModule,
     HomeModule,
     UsersModule,
-    RequestsModule
+    RequestsModule,
+    SchedulesModule
   ],
   declarations: [
     AppComponent,

@@ -1,0 +1,155 @@
+<md-card class="visualize-schedules-card">  
+  <md-card-content class="classes-schedules-table">
+      <table align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead class="table-head">
+          <tr>
+            <th ></th>
+            <th class="week-day">Segunda</th>
+            <th class="week-day">Terça</th>
+            <th class="week-day">Quarta</th>
+            <th class="week-day">Quinta</th>
+            <th class="week-day">Sexta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = 'let aloc of [7,8,10,12,14,16,18]'>
+            <td class="week-hours">
+              {{aloc}}
+            </td>
+            
+            <!--Monday-->
+            <td>
+              <table>
+                <thead>
+                  <th>Disciplina</th>
+                  <th>Docente</th>
+                  <th>Período</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor = 'let aloc of [7,8]'>
+                    <td>testando {{aloc}}</td>
+                    <td>testando {{aloc}} + 2</td>
+                    <td>testando {{aloc}} + 3</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <md-select class="new-class-selection" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
+                          {{ course }}
+                        </md-option>
+                      </md-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!--Tuesday-->
+            <td>
+              <table>
+                <thead>
+                  <th>Disciplina</th>
+                  <th>Docente</th>
+                  <th>Período</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor = 'let aloc of [7,8]'>
+                    <td>testando {{aloc}}</td>
+                    <td>testando {{aloc}} + 2</td>
+                    <td>testando {{aloc}} + 3</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <md-select class="new-class-selection" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
+                          {{ course }}
+                        </md-option>
+                      </md-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!--Wednesday-->
+            <td>
+              <table>
+                <thead>
+                  <th>Disciplina</th>
+                  <th>Docente</th>
+                  <th>Período</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor = 'let aloc of [7,8]'>
+                    <td>testando {{aloc}}</td>
+                    <td>testando {{aloc}} + 2</td>
+                    <td>testando {{aloc}} + 3</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <md-select class="new-class-selection" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
+                          {{ course }}
+                        </md-option>
+                      </md-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!--Thursday-->
+            <td>
+              <table>
+                <thead>
+                  <th>Disciplina</th>
+                  <th>Docente</th>
+                  <th>Período</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor = 'let aloc of [7,8]'>
+                    <td>testando {{aloc}}</td>
+                    <td>testando {{aloc}} + 2</td>
+                    <td>testando {{aloc}} + 3</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <md-select class="new-class-selection" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
+                          {{ course }}
+                        </md-option>
+                      </md-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <!--Friday-->
+            <td>
+              <table>
+                <thead>
+                  <th>Disciplina</th>
+                  <th>Docente</th>
+                  <th>Período</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor = 'let aloc of [7,8]'>
+                    <td>testando {{aloc}}</td>
+                    <td>testando {{aloc}} + 2</td>
+                    <td>testando {{aloc}} + 3</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">
+                      <md-select class="new-class-selection" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
+                          {{ course }}
+                        </md-option>
+                      </md-select>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+  </md-card-content>
+</md-card>
