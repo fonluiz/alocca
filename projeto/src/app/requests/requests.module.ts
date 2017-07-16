@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
-import { FlashMessagesModule} from 'angular2-flash-messages';
 
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -18,8 +17,7 @@ import { ViewRequestsComponent } from './view-requests/view-requests.component';
         FormsModule,
         MaterialModule,
         BrowserAnimationsModule,
-        AppRoutingModule,
-        FlashMessagesModule],
+        AppRoutingModule],
     declarations: [
         RequestAccessComponent,
         ViewRequestsComponent],

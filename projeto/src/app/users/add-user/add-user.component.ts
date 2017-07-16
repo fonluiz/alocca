@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { FirebaseService } from '../../services/firebase.service';
 import { User } from '../user.model';
 import { Router } from '@angular/router';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-add-user',
@@ -21,7 +21,7 @@ export class AddUserComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) {
   }
 
@@ -40,10 +40,10 @@ export class AddUserComponent implements OnInit {
     this.name = null;
 
     if(savedSuccessfully){
-        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE, this.TIMEOUT_SAVED_MESSAGE);
     }
     else{
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });      
+        this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE);
     }    
     this.router.navigate(['/add-user']);
   }

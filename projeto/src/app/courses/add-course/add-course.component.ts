@@ -1,12 +1,6 @@
-﻿/**
- * @api {component} projeto/src/app/courses/add-course/add-course.component.ts Add Course Component
- * @apiName Add Course Component
- * @apiGroup Course
- */
-
-import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { SnackbarsService } from '../../services/snackbars.service';
 import { Course } from '../course.model';
 import { Router } from '@angular/router';
 
@@ -36,7 +30,7 @@ export class AddCourseComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) {  }
 
   onAddNewCourse(){
@@ -64,9 +58,9 @@ export class AddCourseComponent implements OnInit {
     this.requesterDepartment = null;
 
     if (savedSuccessfully) {
-        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+       this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
     } else {
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE);
     }
   }
 

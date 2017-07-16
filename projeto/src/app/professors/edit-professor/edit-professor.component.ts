@@ -1,14 +1,8 @@
-﻿/**
- * @api {component} projeto/src/app/professors/edit-professor/edit-professor.component.ts Edit Professor Component
- * @apiName Edit Professor Component
- * @apiGroup Professor
- */
-
-import { Component, OnInit } from '@angular/core';
-//import { FlashMessagesService } from 'angular2-flash-messages';
+﻿import { Component, OnInit } from '@angular/core';
 import { Professor } from '../professor.model';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-edit-professor',
@@ -25,14 +19,16 @@ export class EditProfessorComponent implements OnInit {
   great;
   restricoes_horarios;
   id;
-  //DELETED_MESSAGE: string = "Professor deletado com sucesso!";
-  //TIMEOUT_DELETED_MESSAGE = 2500;
+  EDITED_PROFESSOR_MESSAGE: string = "Professor deletado com sucesso!";
+  NOT_EDITED_PROFESSOR_MESSAGE: string = "Já existe um professor com o SIAP escolhido!";
+  TIMEOUT_EDITED_MESSAGE = 2500;
+  TIMEOUT_NOT_EDITED_MESSAGE = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    //private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ){    }
 
   ngOnInit(){
@@ -56,8 +52,11 @@ export class EditProfessorComponent implements OnInit {
       SIAP: this.SIAP
     }
         
-    this.FBservice.updateProfessor(this.id,professor);
-    console.log(professor);
+    if(this.FBservice.updateProfessor(this.id,professor)){
+      this.snackService.openSnackBar(this.EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_EDITED_MESSAGE);
+    }else{
+      this.snackService.openSnackBar(this.NOT_EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_NOT_EDITED_MESSAGE);
+    }
     this.router.navigate(['view-professors']);
 
   }

@@ -1,14 +1,8 @@
-﻿/**
- * @api {component} projeto/src/app/professors/add-professor/add-professor.component.ts Add Professor Component
- * @apiName Add Professor Component
- * @apiGroup Professor
- */
-
-import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Professor } from '../professor.model';
 import { Router } from '@angular/router';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-add-professor',
@@ -22,13 +16,13 @@ export class AddProfessorComponent implements OnInit {
   SAVED_SUCCESSFULLY_MESSAGE: string = "Professor salvo com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
-  TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  TIMEOUT_NOT_SAVED_MESSAGE = 8000;
   
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) {
   }
 
@@ -47,9 +41,9 @@ export class AddProfessorComponent implements OnInit {
 
     // Queria colocar essa verificação em um método. Será que isso é possível?
     if (savedSuccessfully) {
-        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
     } else {
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE)
     }
   }
 

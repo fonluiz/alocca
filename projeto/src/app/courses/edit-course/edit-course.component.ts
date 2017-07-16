@@ -1,13 +1,7 @@
-﻿/**
- * @api {component} projeto/src/app/courses/edit-course/edit-course.component.ts Edit Course Component
- * @apiName Edit Course Component
- * @apiGroup Course
- */
-
-import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
+﻿import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { FirebaseService } from '../../services/firebase.service';
+import { SnackbarsService } from '../../services/snackbars.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -37,7 +31,7 @@ export class EditCourseComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) { }
 
   ngOnInit() {
@@ -73,9 +67,9 @@ export class EditCourseComponent implements OnInit {
     let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course);
 
     if (savedSuccessfully) {
-        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
     } else {
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
+      this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE);
     }
 
     this.router.navigate(['/view-courses']);

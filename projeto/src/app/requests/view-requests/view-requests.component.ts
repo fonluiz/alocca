@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-view-requests',
@@ -11,13 +11,19 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ViewRequestsComponent implements OnInit {
   requests: any[];
   DELETED_MESSAGE: string = "Requisição ignorada!";
+  NOT_DELETED_MESSAGE: string = "Não foi possível remover a requisição. Tente novamente!";
+  ACCEPTED_MESSAGE: string = "Requisição aceita!";
+  NOT_ACCEPTED_MESSAGE: string = "Não foi possível aceitar a requisição. Tente novamente!";
   TIMEOUT_DELETED_MESSAGE = 2500;
+  TIMEOUT_ACCEPTED_MESSAGE = 2500;
+  TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+  TIMEOUT_NOT_ACCEPTED_MESSAGE = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) { }
 
   ngOnInit() {
@@ -27,12 +33,19 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   onDeleteRequest(request){
-    this.FBservice.deleteRequest(request);
-    this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
+    if(this.FBservice.deleteRequest(request)){
+      this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+    }else{
+      this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+    }
   }
 
   onAcceptRequest(request){
-    this.FBservice.acceptRequest(request);
+    if(this.FBservice.acceptRequest(request)){
+      this.snackService.openSnackBar(this.ACCEPTED_MESSAGE,this.TIMEOUT_ACCEPTED_MESSAGE);
+    }else{
+      this.snackService.openSnackBar(this.NOT_ACCEPTED_MESSAGE,this.TIMEOUT_NOT_ACCEPTED_MESSAGE);
+    }
 
   }
 

@@ -1,16 +1,10 @@
-﻿/**
- * @api {component} projeto/src/app/professors/view-professors/view-professors.component.ts View Professors Component
- * @apiName View Professors Component
- * @apiGroup Professor
- */
-
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { DialogsService } from '../../services/dialogs.service';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-view-professors',
@@ -22,14 +16,16 @@ export class ViewProfessorsComponent implements OnInit {
     professors: any;
     id: any;
     DELETED_MESSAGE: string = "Professor deletado com sucesso!";
+    NOT_DELETED_MESSAGE: string = "Não foi possível remover o professor. Tente novamente!";
     TIMEOUT_DELETED_MESSAGE = 2500;
+    TIMEOUT_NOT_DELETED_MESSAGE = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private _flashMessagesService: FlashMessagesService,
-    private dialogsService: DialogsService
+    private dialogsService: DialogsService,
+    private snackService: SnackbarsService
   ) {}
 
   ngOnInit() {
@@ -46,9 +42,11 @@ export class ViewProfessorsComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          this.FBservice.deleteProfessor(id);
-          this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
-          this.router.navigate(['/view-professors']);
+          if(this.FBservice.deleteProfessor(id)){
+          this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+          }else{
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+          }
         }
       });
   }

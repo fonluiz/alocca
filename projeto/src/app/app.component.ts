@@ -11,6 +11,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { User } from './users/user.model';
 import { NavbarService } from "app/navbar/navbar.service";
 
+import { SnackbarsService } from './services/snackbars.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -25,7 +27,8 @@ export class AppComponent {
     public FBservice: FirebaseService,
     public dbAuth: AngularFireAuth,
     private _flashMessagesService: FlashMessagesService,
-    private router: Router) {
+    private router: Router,
+    private snackService: SnackbarsService) {
     this.user = dbAuth.authState;
   }
   ngOnInit(){
@@ -36,7 +39,7 @@ export class AppComponent {
   }
 
   login(){
-    this.dbAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then(() => {
+    this.dbAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
       var userEmail: String = this.dbAuth.auth.currentUser.email;
       //pegar UID do usuário
       //console.log(this.dbAuth.auth.currentUser.uid);
@@ -45,8 +48,10 @@ export class AppComponent {
       console.log(isRegistered);
       if(isRegistered===false){
         if(this.logout()){
+          console.log(userEmail);
           console.log('pegou o logout');
-          this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
+          //this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
+          this.snackService.openSnackBar(this.NOT_REGISTERED_MESSAGE,this.TIMEOUT_NOT_REGISTERED);
         }
       }
     });

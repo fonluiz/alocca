@@ -33,6 +33,8 @@ import { AppComponent } from './app.component';
 ///dialogs
 import { DialogsComponent } from './dialogs/dialogs.component';
 import { NavbarService } from "./navbar/navbar.service";
+///snackbars
+import { SnackbarsService} from './services/snackbars.service';
 
 @NgModule({
   imports: [
@@ -63,7 +65,7 @@ import { NavbarService } from "./navbar/navbar.service";
     ],
   entryComponents:[DialogsComponent],
   exports: [DialogsComponent],
-  providers: [FirebaseService, DialogsService, NavbarService],
+  providers: [FirebaseService, DialogsService, NavbarService, SnackbarsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

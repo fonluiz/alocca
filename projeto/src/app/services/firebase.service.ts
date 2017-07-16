@@ -261,8 +261,6 @@ export class FirebaseService {
       return true;
     }else if(this.professors.update(id,professor)){
       return true;
-    }else{
-      return false;
     }
   }
   deleteProfessor(id){
@@ -342,8 +340,9 @@ export class FirebaseService {
             thisObject.usersEmails.remove(childSnapshot.key);
             return true;
           }
-        })
-      })
+        });
+      });
+      return true;
     }
   }
   addNewUser(newUser){

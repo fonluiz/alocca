@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { FirebaseService } from '../../services/firebase.service';
+import { SnackbarsService } from '../../services/snackbars.service';
 import { Request } from '../request.model';
 import { Router } from '@angular/router';
 
@@ -21,7 +21,7 @@ export class RequestAccessComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) { }
 
 
@@ -41,13 +41,14 @@ export class RequestAccessComponent implements OnInit {
 
     if(savedSuccessfully===true){
       console.log(true);
-        this._flashMessagesService.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
+        this.router.navigate(['/home']);
     }
     else{
       console.log(savedSuccessfully);
-        this._flashMessagesService.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_SAVED_MESSAGE });
+        this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE);
         
-    }  
+    }
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
-import { FlashMessagesService } from 'angular2-flash-messages';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-view-users',
@@ -11,13 +11,15 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 export class ViewUsersComponent implements OnInit {
   users: any[];
   DELETED_MESSAGE: string = "Usuário deletado com sucesso!";
+  NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
   TIMEOUT_DELETED_MESSAGE = 2500;
+  TIMEOUT_NOT_DELETED_MESSAGE = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private _flashMessagesService: FlashMessagesService
+    private snackService: SnackbarsService
   ) { }
 
   ngOnInit() {
@@ -27,8 +29,11 @@ export class ViewUsersComponent implements OnInit {
   }
 
   onDeleteUser(user){
-    this.FBservice.deleteUser(user);
-    this._flashMessagesService.show(this.DELETED_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_DELETED_MESSAGE });
+    if(this.FBservice.deleteUser(user)){
+      this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+    }else{
+      this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+    }
   }
 
 }
