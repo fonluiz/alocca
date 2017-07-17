@@ -334,15 +334,20 @@ export class FirebaseService {
   deleteUser(user){
     var thisObject = this;
     if(this.users.remove(user.$key)){
-      this.db.database.ref("usersEmails/").on("value",function(snapshot){
+      if(this.db.database.ref("usersEmails/").on("value",function(snapshot){
         snapshot.forEach(function(childSnapshot){
           if(childSnapshot.child('email').val()===user.email){
             thisObject.usersEmails.remove(childSnapshot.key);
             return true;
           }
         });
-      });
-      return true;
+      })){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
     }
   }
   addNewUser(newUser){
@@ -350,6 +355,9 @@ export class FirebaseService {
         return false;
       }else{
         this.db.database.ref("users/"+newUser.SIAP).set(newUser);
+        this.usersEmails.push({
+          email: newUser.email
+        });
         return true;
       }
 
@@ -394,20 +402,32 @@ export class FirebaseService {
   }
   acceptRequest(request){
     if(this.addNewUser(request)){
-      this.deleteRequest(request);
+      if(this.deleteRequest(request)){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
     }
   }
   deleteRequest(request){
     var thisObject = this;
     if(this.requests.remove(request.$key)){
-      this.db.database.ref("requestsEmails/").on("value",function(snapshot){
+      if(this.db.database.ref("requestsEmails/").on("value",function(snapshot){
         snapshot.forEach(function(childSnapshot){
           if(childSnapshot.child('email').val()===request.email){
             thisObject.requestsEmails.remove(childSnapshot.key);
             return true;
           }
-        })
-      })
+        });
+      })){
+        return true;
+      }else{
+        return false;
+      }
+    }else{
+      return false;
     }
   }
   requestExists(requestEmail){

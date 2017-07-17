@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { SnackbarsService } from '../../services/snackbars.service';
+import { DialogsService } from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-view-requests',
@@ -23,6 +24,7 @@ export class ViewRequestsComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
+    private dialogsService: DialogsService,
     private snackService: SnackbarsService
   ) { }
 
@@ -33,11 +35,19 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   onDeleteRequest(request){
-    if(this.FBservice.deleteRequest(request)){
-      this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
-    }else{
-      this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
-    }
+    var title = "Excluir Requisição";
+    var message = "Deseja realmente excluir a requisição feita por "+request.name+" ?";
+    this.dialogsService
+      .confirm(title, message)
+      .subscribe(res => {
+        if (res) {
+          if(this.FBservice.deleteRequest(request)){
+            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+          }else{
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+          }
+        }
+      });
   }
 
   onAcceptRequest(request){

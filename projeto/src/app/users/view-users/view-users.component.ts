@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
+import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class ViewUsersComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
+    private dialogsService: DialogsService,
     private snackService: SnackbarsService
   ) { }
 
@@ -29,11 +31,20 @@ export class ViewUsersComponent implements OnInit {
   }
 
   onDeleteUser(user){
-    if(this.FBservice.deleteUser(user)){
-      this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
-    }else{
-      this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
-    }
+    var title = "Excluir Usuário";
+    var message = "Deseja realmente excluir "+user.name+" ?";
+    this.dialogsService
+      .confirm(title, message)
+      .subscribe(res => {
+        if (res) {
+          if(this.FBservice.deleteUser(user)){
+            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+          }else{
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+          }
+          this.router.navigate(['/view-users']);
+        }
+      });
   }
 
 }
