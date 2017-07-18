@@ -9,7 +9,9 @@ export class SnackbarsService {
     
     openSnackBar(message,time) {
     this.snackMessage = message;
-    var snackB = this.snackbar.open(this.snackMessage);
-    snackB._dismissAfter(time);
+    var snackB = this.snackbar.open(this.snackMessage, null, { duration: time });
+    // Eu coloquei o parâmetro action = null pra consertar um erro que estava dando.
+    // É preciso consertar isso pq foi uma gambiarra provisória.
+    // O jeito de consertar é receber uma action como parâmetro e passar essa action como argumento
   }
 }
