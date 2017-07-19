@@ -28,8 +28,8 @@
             <td *ngIf='!aloc.caControl'><a (click)="onChangeCAStatus(aloc.$key,true)"><div class="foo red"></div></a></td>
             <td>{{aloc.classNumber}}</td>
             <td>{{aloc.course}}</td>
-            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorOneSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorOneName}}</a></td>
-            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorTwoSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorTwoName}}</a></td>
+            <td>{{aloc.professorOneName}}</td>
+            <td>{{aloc.professorTwoName}}</td>
             <td>{{aloc.courseType}}</td>
             <td>{{aloc.courseCredits}}</td>
             <td>{{aloc.courseOffererDepartment}}</td>

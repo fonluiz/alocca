@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
-import { NavbarService } from "app/navbar/navbar.service";
 
 @Component({
   selector: 'app-allocation-table',
@@ -10,18 +9,15 @@ import { NavbarService } from "app/navbar/navbar.service";
 })
 export class AllocationTableComponent implements OnInit {
     allocationsList: any[];
-    selectedSemesterID: string;
   constructor(
     private FBservice: FirebaseService,
-    private router: Router,
-    private navbarService: NavbarService
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.FBservice.getAllocations().subscribe( allocations =>{
       this.allocationsList = allocations;
       });
-    this.getSelectedSemester();
   }
 
   onDeleteAllocation(id,course,credits,classNumber){
@@ -34,8 +30,6 @@ export class AllocationTableComponent implements OnInit {
       this.router.navigate(['/allocations']);
     }
   }
-  getSelectedSemester() {
-      this.selectedSemesterID = this.navbarService.getSemester();
-  }
+
 }
 

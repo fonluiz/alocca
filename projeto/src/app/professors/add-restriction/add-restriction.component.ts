@@ -96,7 +96,7 @@ export class AddRestrictionComponent implements OnInit {
     );
 
     this.FBservice.saveProfessorRestriction(restrictions);
-    this.router.navigate(['allocations']);
+    this.router.navigate(['view-professors']);
   }
 
 }
