@@ -1,100 +1,79 @@
 {
-    "root":{
-///fixed        
+    "root":{        
         "professors":{
-            //the key would be: '9837248'
             "SIAP":{
                 "name": "Joseana",
-                "nickname": "Jozzyh"///new
+                "nickname": "Jozzyh"
             }
         },
         "courses":{
-            //the key would be: 'Introdução à Computação4'
             "courseName+CourseCredits":{
                 "name": "Introdução à Computação",
+                "shortName":"IC",
                 "credits": "4",
                 "type": "Obrigatória",
                 "minimumSemester": "1",
                 "maximumSemester": "1",
                 "offererDepartment": "UASC",
-                "requesterDepartment": "UASC",
-                "classesNumber": 2 //?????? nem???
+                "requesterDepartment": "UASC"
             }
         },
         "requests":{
-            //the key would be: '2390480'
             "requestSIAP":{
                 "name": "fulano",
                 "email": "fulano.carvalho@ccc.ufcg.edu.br"
             }
         },
         "users":{
-            //the key would be: '1000000'
             "userSIAP":{
                 "name": "sicrano",
                 "email": "sicrano.silva@computacao.ufcg.edu.br"
             }
         },
-        "semestersIDs":{//do we need this?
-            //the key would be: '2017_1'
+        "semesters":{
+            //2017_1
             "semesterKey":{
-                "semester_id": "2017.1"
-                ///it had allocations ids
+                "semesterId": "2017.1",
+                "classes":[],
+                "professorsRestrictions":[],
+                "alerts":[]
             }
         },
-///every semester
-        //
-        "semesters":{
-            //the key would be: 2017_1
-            "semesterKey":{
-                ///old allocations
-                "classes":{
-                    //the key would be: 'Introdução à Computação4'
-                    "courseKey":{
-                        "caControl": "false",
-                        "classNumber": 2, //remover ??
-                        "professorOneName": "Joseana",
-                        "professorOneSIAP": "9837248",
-                        "professorTwoName": "",//??
-                        "professorTwoSIAP": "",//??
-                        "course": "Introdução à Computação",//mudar nome??
-                        "courseType": "Obrigatória",
-                        "courseCredits": "4",
-                        "courseOffererDepartment": "UASC",
-                        "courseRequesterDepartment": "UASC",
-                        "note": "", //nothing at first
-                        "hasAlert": false, //"alerts": []//to change after creating the alerts entity
-                        "scheduleDay": 2,
-                        "scheduleTime": 8
+        "classes":{
+            "courseKey+classNumber":{
+                "caControl": "false",
+                "classCode": null, //Cod-turma 1109035-02
+                "course": "<courseKey>",
+                "classNumber":2, //number of classes that semester (consultation)
+                "professorOne": "<professorId>",
+                "professorTwo": "<professorId>",
+                "schedules": {
+                    "scheduleKey":{
+                        "weekday":"seg",
+                        "startTime": 8,
+                        "endTime": 10
                     }
                 },
-                "professorRestrictions":{
-                    //the key would be: '98372482017_1'
-                    "professorSIAP+semesterKey":{
-                        "minCredits": 4,
-                        "maxCredits": 8,
-                        "posGraduatedCredits": 3,
-                        "scheduleRestrictions": [
-                            [14,16],//monday
-                            [14],//tuesday
-                            [8],//wednesday
-                            [],//thursday
-                            [8,10]//friday
-                        ]
-                    }
-                },
-                "schedules":{
-                    "2":[["classesIDs"],["classesIDs"],[]],
-                    "3":[[],["classesIDs"],[]],
-                    "4":[[],[],["classesIDs"]],
-                    "5":[["classesIDs"],["classesIDs"],["classesIDs"]],
-                    "6":[["classesIDs"],[],["classesIDs"]]
-                },
-                "scheduleAlerts":{
-                    "classID": "Introdução à Computação4",
-                    "message":"esse professor não pode dar aula nesse horário"
+                "note": "", //nothing at first
+                "hasAlert": false //"alerts": []//to change after creating the alerts entity //to change color
+            }
+        },
+        "professorRestrictions":{
+            "professorSIAP+semesterKey":{
+                "minimumCredits":2,
+                "maximumCredits":10,
+                "gradCredits":4,
+                "scheduleRestrictions":{
+                    "2":[12,18],
+                    "3":[14,16,18],
+                    "4":[8,9,10,18],
+                    "5":[18],
+                    "6":[18]
                 }
             }
+        },
+        "schedules":{
+            //just fo sho
         }
     }
 }
