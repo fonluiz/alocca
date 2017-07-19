@@ -1,13 +1,13 @@
 ﻿import { Injectable } from '@angular/core';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import {Professor} from '../professors/professor.model';
-import {Course} from '../courses/course.model';
-import {Allocation} from '../allocations/allocation.model';
-import {User} from '../users/user.model';
-import {Request} from '../requests/request.model';
+import { Professor } from '../professors/professor.model';
+import { Course } from '../courses/course.model';
+import { Allocation } from '../allocations/allocation.model';
+import { User } from '../users/user.model';
+import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
-import { ProfessorRestriction } from '../professors/professor-restriction.model'
+import { ProfessorRestriction } from '../professors/professor-restriction.model';
 
 @Injectable()
 export class FirebaseService {

@@ -47,13 +47,14 @@
                 "classNumber":2, //number of classes that semester (consultation)
                 "professorOne": "<professorId>",
                 "professorTwo": "<professorId>",
-                "schedules": {
-                    "scheduleKey":{
-                        "weekday":"seg",
+                "schedules": [
+                    {
+                        "weekday": 2,
                         "startTime": 8,
                         "endTime": 10
-                    }
-                },
+                    },
+                    {}
+                ],
                 "note": "", //nothing at first
                 "hasAlert": false //"alerts": []//to change after creating the alerts entity //to change color
             }
@@ -73,7 +74,12 @@
             }
         },
         "schedules":{
-            //just fo sho
+            "scheduleKey":{
+                "classID": "string",
+                "weekday": 2,
+                "startTime": 10,
+                "endTime": 12
+            }
         }
     }
 }

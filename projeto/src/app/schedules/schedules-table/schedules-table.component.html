@@ -12,13 +12,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = 'let aloc of [7,8,10,12,14,16,18]'>
+          <!--(CLASS) HOURS OF THE DAY-->
+          <tr *ngFor = 'let hour of [7,8,10,12,14,16,18]'>
             <td class="week-hours">
-              {{aloc}}
+              {{hour}}
             </td>
-            
-            <!--Monday-->
-            <td>
+            <!--DAYS OF THE WEEK MON-FRI -->
+            <td *ngFor = 'let day of [2,3,4,5,6]'>
               <table>
                 <thead>
                   <th>Disciplina</th>
@@ -26,120 +26,19 @@
                   <th>Período</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor = 'let aloc of [7,8]'>
-                    <td>testando {{aloc}}</td>
-                    <td>testando {{aloc}} + 2</td>
-                    <td>testando {{aloc}} + 3</td>
+                  <!--CHANGE <td>s TO GET CLASS DATA AND APPLY TIME AND DAY CONDITIONS-->
+                  <tr *ngFor = 'let scheduled of schedules'>
+                    <td>testando {{scheduled.getClassID()}}</td>
+                    <td>testando {{scheduled.getClassID()}} + 2</td>
+                    <td>testando {{scheduled.getClassID()}} + 3</td>
                   </tr>
                   <tr>
                     <td colspan="3">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
-                          {{ course }}
-                        </md-option>
-                      </md-select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <!--Tuesday-->
-            <td>
-              <table>
-                <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor = 'let aloc of [7,8]'>
-                    <td>testando {{aloc}}</td>
-                    <td>testando {{aloc}} + 2</td>
-                    <td>testando {{aloc}} + 3</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
-                          {{ course }}
-                        </md-option>
-                      </md-select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <!--Wednesday-->
-            <td>
-              <table>
-                <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor = 'let aloc of [7,8]'>
-                    <td>testando {{aloc}}</td>
-                    <td>testando {{aloc}} + 2</td>
-                    <td>testando {{aloc}} + 3</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
-                          {{ course }}
-                        </md-option>
-                      </md-select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <!--Thursday-->
-            <td>
-              <table>
-                <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor = 'let aloc of [7,8]'>
-                    <td>testando {{aloc}}</td>
-                    <td>testando {{aloc}} + 2</td>
-                    <td>testando {{aloc}} + 3</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
-                          {{ course }}
-                        </md-option>
-                      </md-select>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </td>
-            <!--Friday-->
-            <td>
-              <table>
-                <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor = 'let aloc of [7,8]'>
-                    <td>testando {{aloc}}</td>
-                    <td>testando {{aloc}} + 2</td>
-                    <td>testando {{aloc}} + 3</td>
-                  </tr>
-                  <tr>
-                    <td colspan="3">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let course of [1,2,3,4,5]" [value]="course.$key">
-                          {{ course }}
+                      <md-select class="new-class-selection" placeholder="Turma" required>
+                        <!--CHANGE TO LIST OF CLASSES-->
+                        <md-option *ngFor="let schedule of schedules" [value]="schedule.classId">
+                          <!--CHANGE TO GET CLASS NAME-->
+                          {{ schedule.getClassID() }}
                         </md-option>
                       </md-select>
                     </td>
