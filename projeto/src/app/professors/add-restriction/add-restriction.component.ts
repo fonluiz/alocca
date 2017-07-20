@@ -15,6 +15,8 @@ export class AddRestrictionComponent implements OnInit {
   maxCredits: number;
   minCredits: number;
   graduateCredits: number;
+  restrictionFromFB: ProfessorRestriction;
+  scheduleRestrictions: ScheduleRestriction;
   HOURS = ["7:00 - 8:00", "8:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00",
           "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00"];
   integerHours = [7, 8, 10, 12, 14, 16, 18, 20, 22];
@@ -27,7 +29,15 @@ export class AddRestrictionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-      this.professor_id = this.route.snapshot.params['id']
+      this.professor_id = this.route.snapshot.params['id'];
+      this.FBservice.getProfessorRestrictions(this.professor_id).subscribe(professorRestriction => {
+          this.restrictionFromFB = professorRestriction;
+          this.maxCredits = professorRestriction.maxCredits;
+          this.minCredits = professorRestriction.minCredits;
+          this.graduateCredits = professorRestriction.graduateCredits;
+          this.scheduleRestrictions = professorRestriction.scheduleRestrictions;
+      });
+      //this.maxCredits = this.restrictionFromFB.test();
   }
 
   private getScheduleRestrictionsFromTable = (): ScheduleRestriction => {
