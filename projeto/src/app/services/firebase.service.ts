@@ -11,7 +11,7 @@ import { ProfessorRestriction } from '../professors/professor-restriction.model'
 
 @Injectable()
 export class FirebaseService {
-  ALL_SEMESTERS_PATH = '/allSemesters/ids';
+  SEMESTERS_PATH = '/semesters/';
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   allocations: FirebaseListObservable<any[]>;
@@ -26,9 +26,8 @@ export class FirebaseService {
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
-  semesters: FirebaseListObservable<any[]>;
-  professorRestrictions: FirebaseListObservable<any[]>;
-  allSemesters: FirebaseObjectObservable<string[]>;
+  semesters: FirebaseListObservable<Semester[]>;
+  professorRestrictions: FirebaseListObservable<any[]>
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -38,9 +37,8 @@ export class FirebaseService {
     this.usersEmails = db.list('/usersEmails') as FirebaseListObservable<any[]>;
     this.requests = db.list('/requests') as FirebaseListObservable<Request[]>;
     this.requestsEmails = db.list('/requestsEmails') as FirebaseListObservable<any[]>;
-    this.semesters = db.list('/semesters') as FirebaseListObservable<Semester[]>;
+    this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
-    this.allSemesters = db.object(this.ALL_SEMESTERS_PATH) as FirebaseObjectObservable<string[]>;
   }
 
   ///Allocation
@@ -443,31 +441,14 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  ///Semesters
-  // Salva um novo semestre na lista de semestres
+  // Semesters
   saveSemester(semester: Semester) {
-      this.db.database.ref('semesters/' + semester.getId())
+      this.db.database.ref(this.SEMESTERS_PATH + semester.getId())
           .set(semester.toFirebaseObject());
   }
-  // Adiciona um Id de semeste à lista de todos os Ids de semestres
-  addSemester(semesterId: String) {
-      var self = this;
-      this.db.database.ref(this.ALL_SEMESTERS_PATH).once('value')
-          .then(function (snapshot) {
-              var semestersIds = snapshot.val() as String[];
-              if (semestersIds == null) {
-                  self.allSemesters.set([semesterId]);
-              } else if (semestersIds.indexOf(semesterId) < 0) {
-                  semestersIds.push(semesterId);
-                  self.allSemesters.set(semestersIds);
-              }
-          });
-  }
+  
   getSemesters() {
       return this.semesters;
-  }
-  getSemestersIds() {
-      return this.allSemesters;
   }
 
   // Restrictions

@@ -10,6 +10,7 @@ import { AddSemesterComponent } from '../semesters/add-semester/add-semester.com
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { FirebaseService } from '../services/firebase.service';
 import { NavbarService } from "./navbar.service";
+import { Semester } from '../semesters/semester.model';
 //import { User } from '../users/user.model';
 
 @Component({
@@ -18,7 +19,7 @@ import { NavbarService } from "./navbar.service";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  semesters: string[];
+  semesters: Semester[];
   selectedSemesterID: string;
   user: Observable<firebase.User>;
   TIMEOUT_NOT_REGISTERED = 5000;
@@ -35,7 +36,7 @@ export class NavbarComponent implements OnInit {
     this.user = dbAuth.authState
   }
   ngOnInit(){
-    this.FBservice.getSemestersIds().subscribe(semesters => {
+    this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
     });
   }

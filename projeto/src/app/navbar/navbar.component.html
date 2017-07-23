@@ -46,7 +46,7 @@
             Novo Semestre
           </md-option>
           <md-option *ngFor="let sem of semesters" [value]="sem">
-            {{ sem.replace('-','.') }}
+            {{ sem.$key.replace('-','.') }}
           </md-option>
         </md-select>
 

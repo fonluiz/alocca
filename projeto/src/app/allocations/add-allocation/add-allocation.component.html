@@ -13,24 +13,16 @@
           </md-option>
         </md-select>
 
-        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>
-          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
-            {{ prof.name }}
-          </md-option>
-        </md-select>
-
-        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
-          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
-            {{ prof.name }}
-          </md-option>
-        </md-select>
-
-        <md-input-container class="allocation-note-container">
-          <input mdInput class="allocation-note-input" placeholder="Observação" [(ngModel)]="note" name="note">
+         <md-input-container>
+          <input mdInput placeholder="Turmas" type="number" [(ngModel)]="classesNumber" min="1" step="1" required>
         </md-input-container>
 
+      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        Criar turmas
+      </button>
+
       </div>
-      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>
+  
     </md-card-content>
   </form>
 </md-card>
