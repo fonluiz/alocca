@@ -7,7 +7,8 @@ import {Allocation} from '../allocations/allocation.model';
 import {User} from '../users/user.model';
 import {Request} from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
-import { ProfessorRestriction } from '../professors/professor-restriction.model'
+import { ProfessorRestriction } from '../professors/professor-restriction.model';
+import { Class } from '../classes/class.model'
 
 @Injectable()
 export class FirebaseService {
@@ -27,7 +28,8 @@ export class FirebaseService {
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
   semesters: FirebaseListObservable<Semester[]>;
-  professorRestrictions: FirebaseListObservable<any[]>
+  professorRestrictions: FirebaseListObservable<any[]>;
+  classes: FirebaseListObservable<Class[]>;
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -39,6 +41,7 @@ export class FirebaseService {
     this.requestsEmails = db.list('/requestsEmails') as FirebaseListObservable<any[]>;
     this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
+    this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
   }
 
   ///Allocation
@@ -464,6 +467,10 @@ export class FirebaseService {
   addClass(Class) {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
+  }
+
+  getClasses(){
+    return this.classes;
   }
 
 }

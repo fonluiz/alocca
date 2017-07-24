@@ -11,6 +11,7 @@ import 'hammerjs';
 import { AppRoutingModule } from '../app-routing.module';
 
 import { AddClassComponent } from './add-class/add-class.component';
+import { ViewClassComponent } from './view-class/view-class.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { AddClassComponent } from './add-class/add-class.component';
     AppRoutingModule,
     FlashMessagesModule],
   declarations: [
-    AddClassComponent
+    AddClassComponent,
+    ViewClassComponent
   ]
 })
 export class ClassesModule { }
