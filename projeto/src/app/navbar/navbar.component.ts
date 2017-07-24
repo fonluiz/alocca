@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
     this.user = dbAuth.authState
   }
   ngOnInit(){
-    this.FBservice.getSemestersIds().subscribe(semesters => {
+    this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
     });
   }
