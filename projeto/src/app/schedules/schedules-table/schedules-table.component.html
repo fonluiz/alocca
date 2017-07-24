@@ -1,8 +1,9 @@
-<md-card class="visualize-schedules-card">  
+<md-card class="visualize-schedules-card">
   <md-card-content class="classes-schedules-table">
-      <table align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <div class= "div-table">
+      <table class="geral-table" align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead class="table-head">
-          <tr>
+          <tr class="geral-table">
             <th ></th>
             <th class="week-day">Segunda</th>
             <th class="week-day">Terça</th>
@@ -11,21 +12,21 @@
             <th class="week-day">Sexta</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="geral-table">
           <tr *ngFor = 'let aloc of [7,8,10,12,14,16,18]'>
             <td class="week-hours">
               {{aloc}}
             </td>
-            
+
             <!--Monday-->
             <td>
-              <table>
+              <table class="hour-table">
                 <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
+                  <th class="hour-th">Disciplina</th>
+                  <th class="hour-th">Docente</th>
+                  <th class="hour-th">Período</th>
                 </thead>
-                <tbody>
+                <tbody class="hour-td">
                   <tr *ngFor = 'let aloc of [7,8]'>
                     <td>testando {{aloc}}</td>
                     <td>testando {{aloc}} + 2</td>
@@ -45,13 +46,13 @@
             </td>
             <!--Tuesday-->
             <td>
-              <table>
+              <table class="hour-table">
                 <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
+                  <th class="hour-th">Disciplina</th>
+                  <th class="hour-th">Docente</th>
+                  <th class="hour-th">Período</th>
                 </thead>
-                <tbody>
+                <tbody class="hour-td">
                   <tr *ngFor = 'let aloc of [7,8]'>
                     <td>testando {{aloc}}</td>
                     <td>testando {{aloc}} + 2</td>
@@ -71,13 +72,13 @@
             </td>
             <!--Wednesday-->
             <td>
-              <table>
+              <table class="hour-table">
                 <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
+                  <th class="hour-th">Disciplina</th>
+                  <th class="hour-th">Docente</th>
+                  <th class="hour-th">Período</th>
                 </thead>
-                <tbody>
+                <tbody class="hour-td">
                   <tr *ngFor = 'let aloc of [7,8]'>
                     <td>testando {{aloc}}</td>
                     <td>testando {{aloc}} + 2</td>
@@ -97,13 +98,13 @@
             </td>
             <!--Thursday-->
             <td>
-              <table>
+              <table class="hour-table">
                 <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
+                  <th class="hour-th">Disciplina</th>
+                  <th class="hour-th">Docente</th>
+                  <th class="hour-th">Período</th>
                 </thead>
-                <tbody>
+                <tbody class="hour-td">
                   <tr *ngFor = 'let aloc of [7,8]'>
                     <td>testando {{aloc}}</td>
                     <td>testando {{aloc}} + 2</td>
@@ -123,13 +124,13 @@
             </td>
             <!--Friday-->
             <td>
-              <table>
+              <table class="hour-table">
                 <thead>
-                  <th>Disciplina</th>
-                  <th>Docente</th>
-                  <th>Período</th>
+                  <th class="hour-th">Disciplina</th>
+                  <th class="hour-th">Docente</th>
+                  <th class="hour-th">Período</th>
                 </thead>
-                <tbody>
+                <tbody class="hour-td">
                   <tr *ngFor = 'let aloc of [7,8]'>
                     <td>testando {{aloc}}</td>
                     <td>testando {{aloc}} + 2</td>
@@ -151,5 +152,6 @@
           </tr>
         </tbody>
       </table>
+    </div>
   </md-card-content>
 </md-card>
