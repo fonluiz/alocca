@@ -1,0 +1,28 @@
+<md-card class="new-class-card">
+  <form (ngSubmit)="onAddNewClass()" #classForm="ngForm" align="center">
+    <md-toolbar color="primary" class="new-class-card-toolbar">
+        Adicionar Turma
+    </md-toolbar>
+
+    <md-card-content class="new-class-card-content">
+      <div class="new-class-card-row">
+
+        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseName" name="courseName" required>
+          <md-option *ngFor="let course of coursesList" [(value)]="course.name">
+            {{ course.name }}
+          </md-option>
+        </md-select>
+
+         <md-input-container>
+          <input mdInput placeholder="Turmas" type="number" [(ngModel)]="classesNumber" name="classesNumber" min="1" step="1" required>
+        </md-input-container>
+
+      <button md-button [disabled]="!classForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        Criar turma(s)
+      </button>
+
+      </div>
+
+    </md-card-content>
+  </form>
+</md-card>

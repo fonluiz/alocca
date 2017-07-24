@@ -460,4 +460,10 @@ export class FirebaseService {
           .set(restriction.toFirebaseObject());
   }
 
+  // Classes
+  addClass(Class) {
+    this.db.database.ref("classes/" + Class.classKey).set(Class);
+    return true;
+  }
+
 }
