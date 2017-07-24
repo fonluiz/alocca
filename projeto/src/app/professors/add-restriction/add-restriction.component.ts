@@ -17,6 +17,7 @@ export class AddRestrictionComponent implements OnInit {
   graduateCredits: number;
   restrictionFromFB: ProfessorRestriction;
   scheduleRestrictions: ScheduleRestriction;
+  allScheduleRestrictions: number[];
   monday: number[];
   tuesday: number[];
   wednesday: number[];
@@ -26,6 +27,11 @@ export class AddRestrictionComponent implements OnInit {
           "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00"];
   integerHours = [7, 8, 10, 12, 14, 16, 18, 20, 22];
   professor_id: string;
+  MONDAY_START_INDEX = 1;
+  TUESDAY_START_INDEX = 2;
+  WEDNESDAY_START_INDEX = 3;
+  THURSDAY_START_INDEX = 4;
+  FRIDAY_START_INDEX = 5;
 
   constructor(
       private FBservice: FirebaseService,
@@ -46,61 +52,22 @@ export class AddRestrictionComponent implements OnInit {
           this.thursday = professorRestriction.scheduleRestrictions.thursday;
           this.friday = professorRestriction.scheduleRestrictions.friday;
       });
-      //this.maxCredits = this.restrictionFromFB.test();
-      //this.verify(5);
+      this.allScheduleRestrictions = this.getRestrictionsFromDatabase();
   }
 
   private getScheduleRestrictionsFromTable = (): ScheduleRestriction => {
-    // Monday
-    var monday: number[] = [];
-    var iteration = 0;
-    for (var i = 1; i <= 40; i+=5) {
-      var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-"+i);
-      if (checkbox.checked) {
-        monday.push(this.integerHours[iteration]);
-      }
-      iteration++;
-    }
-    // Tuesday
-    var tuesday: number[] = [];
-    var iteration = 0;
-    for (var i = 2; i <= 40; i+=5) {
-      var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-"+i);
-      if (checkbox.checked) {
-        tuesday.push(this.integerHours[iteration]);
-      }
-      iteration++;
-    }
-    // Wednesday
-    var wednesday: number[] = [];
-    var iteration = 0;
-    for (var i = 3; i <= 40; i+=5) {
-      var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-"+i);
-      if (checkbox.checked) {
-        wednesday.push(this.integerHours[iteration]);
-      }
-      iteration++;
-    }
-    // Thursday
-    var thursday: number[] = [];
-    var iteration = 0;
-    for (var i = 4; i <= 40; i+=5) {
-      var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-"+i);
-      if (checkbox.checked) {
-        thursday.push(this.integerHours[iteration]);
-      }
-      iteration++;
-    }
-    // Friday
-    var friday: number[] = [];
-    var iteration = 0;
-    for (var i = 5; i <= 40; i+=5) {
-      var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-"+i);
-      if (checkbox.checked) {
-        friday.push(this.integerHours[iteration]);
-      }
-      iteration++;
-    } 
+
+      var monday: number[] = [];
+      var tuesday: number[] = [];
+      var wednesday: number[] = [];
+      var thursday: number[] = [];
+      var friday: number[] = [];
+
+      this.getRestrictionsFromCheckbox(this.MONDAY_START_INDEX, monday);
+      this.getRestrictionsFromCheckbox(this.TUESDAY_START_INDEX, tuesday);
+      this.getRestrictionsFromCheckbox(this.WEDNESDAY_START_INDEX, wednesday);
+      this.getRestrictionsFromCheckbox(this.THURSDAY_START_INDEX, thursday);
+      this.getRestrictionsFromCheckbox(this.FRIDAY_START_INDEX, friday);
 
     let scheduleRestrictions = new ScheduleRestriction(monday, tuesday, wednesday, thursday, friday);
     return scheduleRestrictions;
@@ -119,70 +86,50 @@ export class AddRestrictionComponent implements OnInit {
     this.router.navigate(['view-professors']);
   }
 
-  verify(id: any) {
+  // TODO: Set this method to private
+  getRestrictionsFromCheckbox(startIndex: number, restrictionsArray: number[]) {
+      var iteration = 0;
+      for (var i = startIndex; i <= 40; i += 5) {
+          var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-" + i);
+          if (checkbox.checked) {
+              restrictionsArray.push(this.integerHours[iteration]);
+          }
+          iteration++;
+      }
+  }
+
+  // TODO: Turn allScheduleRestrictions into a global variable, fix the function that uses this list and
+  // call this function on ngOnInit()
+  getRestrictionsFromDatabase() {
+
       var allScheduleRestrictions: number[] = [];
-
-      //console.log(this.scheduleRestrictions);
-
       for (var i = 0; i <= 40; i += 1) {
           allScheduleRestrictions.push(0);
       }
 
-      // Monday
-      var monday: number[] = this.monday;
+      this.getRestrictionsOfTheDay(this.MONDAY_START_INDEX, allScheduleRestrictions, this.monday);
+      this.getRestrictionsOfTheDay(this.TUESDAY_START_INDEX, allScheduleRestrictions, this.tuesday);
+      this.getRestrictionsOfTheDay(this.WEDNESDAY_START_INDEX, allScheduleRestrictions, this.wednesday);
+      this.getRestrictionsOfTheDay(this.THURSDAY_START_INDEX, allScheduleRestrictions, this.thursday);
+      this.getRestrictionsOfTheDay(this.FRIDAY_START_INDEX, allScheduleRestrictions, this.friday);
+
+      return allScheduleRestrictions;
+  }
+
+  // TODO: Set this method to private
+  getRestrictionsOfTheDay(startIndex: number, restrictionsArray: number[], dayRestrictions: number[]) {
       var iteration = 0;
-      for (var i = 1; i <= 40; i += 5) {
+      for (var i = startIndex; i <= 40; i += 5) {
           try {
-              allScheduleRestrictions.splice(i, 1, monday[iteration]);
+              restrictionsArray.splice(i, 1, dayRestrictions[iteration]);
               iteration++;
-          } catch (Error){}
-          
+          } catch (Error) { }
       }
+  }
 
-      // Tuesday
-      var tuesday: number[] = this.tuesday;
-      var iteration = 0;
-      for (var i = 2; i <= 40; i += 5) {
-          try {
-              allScheduleRestrictions.splice(i, 1, tuesday[iteration]);
-              iteration++;
-          } catch (Error){}
-      }
-
-      // Wednesday
-      var wednesday: number[] = this.wednesday;
-      var iteration = 0;
-      for (var i = 3; i <= 40; i += 5) {
-          try {
-              allScheduleRestrictions.splice(i, 1, wednesday[iteration]);
-              iteration++;
-          } catch (Error) {}
-      }
-
-      // Thursday
-      var thursday: number[] = this.thursday;
-      var iteration = 0;
-      for (var i = 4; i <= 40; i += 5) {
-          try {
-              allScheduleRestrictions.splice(i, 1, thursday[iteration]);
-              iteration++;
-          } catch (Error) {}
-      }
-
-      // Friday
-      var friday: number[] = this.friday;
-      var iteration = 0;
-      for (var i = 5; i <= 40; i += 5) {
-          try {
-              allScheduleRestrictions.splice(i, 1, friday[iteration]);
-              iteration++;
-          } catch (Error){}
-      }
-
-
-      console.log(allScheduleRestrictions);
-      //return allScheduleRestrictions[id] > 0;
-      return true;
+  verifyRestriction(id: number) {
+      //return this.allScheduleRestrictions[id] > 0;
+      return false;
   }
 
 }
