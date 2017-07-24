@@ -17,6 +17,11 @@ export class AddRestrictionComponent implements OnInit {
   graduateCredits: number;
   restrictionFromFB: ProfessorRestriction;
   scheduleRestrictions: ScheduleRestriction;
+  monday: number[];
+  tuesday: number[];
+  wednesday: number[];
+  thursday: number[];
+  friday: number[];
   HOURS = ["7:00 - 8:00", "8:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00",
           "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00", "20:00 - 22:00"];
   integerHours = [7, 8, 10, 12, 14, 16, 18, 20, 22];
@@ -35,9 +40,14 @@ export class AddRestrictionComponent implements OnInit {
           this.maxCredits = professorRestriction.maxCredits;
           this.minCredits = professorRestriction.minCredits;
           this.graduateCredits = professorRestriction.graduateCredits;
-          this.scheduleRestrictions = professorRestriction.scheduleRestrictions;
+          this.monday = professorRestriction.scheduleRestrictions.monday;
+          this.tuesday = professorRestriction.scheduleRestrictions.tuesday;
+          this.wednesday = professorRestriction.scheduleRestrictions.wednesday;
+          this.thursday = professorRestriction.scheduleRestrictions.thursday;
+          this.friday = professorRestriction.scheduleRestrictions.friday;
       });
       //this.maxCredits = this.restrictionFromFB.test();
+      //this.verify(5);
   }
 
   private getScheduleRestrictionsFromTable = (): ScheduleRestriction => {
@@ -107,6 +117,72 @@ export class AddRestrictionComponent implements OnInit {
 
     this.FBservice.saveProfessorRestriction(restrictions);
     this.router.navigate(['view-professors']);
+  }
+
+  verify(id: any) {
+      var allScheduleRestrictions: number[] = [];
+
+      //console.log(this.scheduleRestrictions);
+
+      for (var i = 0; i <= 40; i += 1) {
+          allScheduleRestrictions.push(0);
+      }
+
+      // Monday
+      var monday: number[] = this.monday;
+      var iteration = 0;
+      for (var i = 1; i <= 40; i += 5) {
+          try {
+              allScheduleRestrictions.splice(i, 1, monday[iteration]);
+              iteration++;
+          } catch (Error){}
+          
+      }
+
+      // Tuesday
+      var tuesday: number[] = this.tuesday;
+      var iteration = 0;
+      for (var i = 2; i <= 40; i += 5) {
+          try {
+              allScheduleRestrictions.splice(i, 1, tuesday[iteration]);
+              iteration++;
+          } catch (Error){}
+      }
+
+      // Wednesday
+      var wednesday: number[] = this.wednesday;
+      var iteration = 0;
+      for (var i = 3; i <= 40; i += 5) {
+          try {
+              allScheduleRestrictions.splice(i, 1, wednesday[iteration]);
+              iteration++;
+          } catch (Error) {}
+      }
+
+      // Thursday
+      var thursday: number[] = this.thursday;
+      var iteration = 0;
+      for (var i = 4; i <= 40; i += 5) {
+          try {
+              allScheduleRestrictions.splice(i, 1, thursday[iteration]);
+              iteration++;
+          } catch (Error) {}
+      }
+
+      // Friday
+      var friday: number[] = this.friday;
+      var iteration = 0;
+      for (var i = 5; i <= 40; i += 5) {
+          try {
+              allScheduleRestrictions.splice(i, 1, friday[iteration]);
+              iteration++;
+          } catch (Error){}
+      }
+
+
+      console.log(allScheduleRestrictions);
+      //return allScheduleRestrictions[id] > 0;
+      return true;
   }
 
 }
