@@ -16,6 +16,7 @@ import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { RequestsModule } from './requests/requests.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { ClassesModule } from './classes/classes.module';
 ///angular material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -35,6 +36,7 @@ import { DialogsComponent } from './dialogs/dialogs.component';
 import { NavbarService } from "./navbar/navbar.service";
 ///snackbars
 import { SnackbarsService} from './services/snackbars.service';
+import { AddClassComponent } from './classes/add-class/add-class.component';
 
 @NgModule({
   imports: [
@@ -57,12 +59,12 @@ import { SnackbarsService} from './services/snackbars.service';
     HomeModule,
     UsersModule,
     RequestsModule,
-    SchedulesModule
+    SchedulesModule,
+    ClassesModule
   ],
   declarations: [
     AppComponent,
-    DialogsComponent
-    ],
+    DialogsComponent],
   entryComponents:[DialogsComponent],
   exports: [DialogsComponent],
   providers: [FirebaseService, DialogsService, NavbarService, SnackbarsService],

@@ -30,7 +30,7 @@ export class FirebaseService {
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
   semesters: FirebaseListObservable<Semester[]>;
-  professorRestrictions: FirebaseListObservable<any[]>
+  professorRestrictions: FirebaseListObservable<any[]>;
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
@@ -43,6 +43,7 @@ export class FirebaseService {
     this.requestsEmails = db.list('/requestsEmails') as FirebaseListObservable<any[]>;
     this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
+    this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
   }
 
   ///Allocation
@@ -490,4 +491,9 @@ export class FirebaseService {
           .set(restriction.toFirebaseObject());
   }
 
+  // Classes
+  addClass(Class) {
+    this.db.database.ref("classes/" + Class.classKey).set(Class);
+    return true;
+  }
 }

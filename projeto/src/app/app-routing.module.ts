@@ -26,6 +26,7 @@ import { RequestAccessComponent } from './requests/request-access/request-access
 import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
 //scheudles
 import { SchedulesTableComponent } from './schedules/schedules-table/schedules-table.component';
+import { AddClassComponent } from './classes/add-class/add-class.component';
 
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
@@ -52,7 +53,9 @@ const appRoutes: Routes = [
 
     {path: 'add-semester', component: AddSemesterComponent },
 
-    {path: 'schedules-table', component: SchedulesTableComponent}
+    {path: 'schedules-table', component: SchedulesTableComponent},
+
+    {path: 'add-class', component: AddClassComponent}
 
 ];
 
