@@ -1,6 +1,6 @@
-﻿<md-card class="visualize-allocation-card">
-  <md-toolbar color="primary" class="view-allocation-card-toolbar">
-    Alocações Cadastradas
+﻿<md-card class="view-class-card">
+  <md-toolbar color="primary" class="view-class-card-toolbar">
+    Turmas Cadastradas
     <span class="spacer"></span>
   </md-toolbar>
 
@@ -8,35 +8,26 @@
       <table align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
         <thead>
           <tr>
-            <th>CA</th>
-            <th>Turma</th>
             <th>Disciplina</th>
+            <th>Turma</th>
             <th>Docente 1</th>
             <th>Docente 2</th>
-            <th>Tipo</th>
-            <th>Créditos</th>
-            <th>UA Ofertante</th>
-            <th>UA Requerente</th>
-            <th>Obs.</th>
+            <th>Horários</th>
+            <th>Obs.</th> 
             <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor = 'let aloc of allocationsList'>
-            <td *ngIf='aloc.caControl' ><a (click)="onChangeCAStatus(aloc.$key,false)"><div class="foo green"></div></a></td>
-            <td *ngIf='!aloc.caControl'><a (click)="onChangeCAStatus(aloc.$key,true)"><div class="foo red"></div></a></td>
-            <td>{{aloc.classNumber}}</td>
-            <td>{{aloc.course}}</td>
-            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorOneSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorOneName}}</a></td>
-            <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+aloc.professorTwoSIAP+'-'+this.navbarService.getSemester()]">{{aloc.professorTwoName}}</a></td>
-            <td>{{aloc.courseType}}</td>
-            <td>{{aloc.courseCredits}}</td>
-            <td>{{aloc.courseOffererDepartment}}</td>
-            <td>{{aloc.courseRequesterDepartment}}</td>
-            <td>{{aloc.note}}</td>
-            <td><a class="mdl-button mdl-js-button mdl-button--primary" [routerLink]="['/edit-allocation/'+aloc.$key]">Editar</a></td>
-            <td><a (click)="onDeleteAllocation(aloc.$key,aloc.course,aloc.courseCredits,aloc.classNumber)" class="mdl-button mdl-js-button mdl-button--accent" >Excluir</a></td>
+          <tr *ngFor = 'let class of classesList'>
+            <td>{{class.course}}</td>
+            <td>{{class.number}}</td>
+            <td>{{class.professorOne}}</td>
+            <td>{{class.professorTwo}}</td>
+            <td>{{class.schedules}}</td>
+            <td>{{class.note}}</td>
+            <td>Editar</td>
+            <td>Excluir</td>
           </tr>
         </tbody>
       </table>

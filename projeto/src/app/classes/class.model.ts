@@ -1,3 +1,4 @@
+
 /**
  * @api {model} projeto/src/app/classes/class.model.ts Class Model
  * @apiName Class Model
