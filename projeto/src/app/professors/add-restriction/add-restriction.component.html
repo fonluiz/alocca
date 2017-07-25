@@ -37,11 +37,11 @@
           </thead>
 
           <!--Boby of the table-->
-          <tbody *ngFor="let hour of HOURS">
+          <tbody *ngFor="let hour of HOURS; let j = index">
               <tr>
                 <td>{{ hour }}</td>
                 <td *ngFor="let i of [1,2,3,4,5]">
-                  <md-checkbox [checked]="verifyRestriction(5)">
+                  <md-checkbox [checked]="verifyRestriction(5*j + i)">
                   </md-checkbox>
                   </td>
             </tr>

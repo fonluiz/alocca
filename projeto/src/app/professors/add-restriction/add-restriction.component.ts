@@ -93,10 +93,12 @@ export class AddRestrictionComponent implements OnInit {
           var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-" + i);
           if (checkbox.checked) {
               restrictionsArray.push(this.integerHours[iteration]);
-          }
+          } else restrictionsArray.push(0);
           iteration++;
       }
   }
+
+
 
   // TODO: Turn allScheduleRestrictions into a global variable, fix the function that uses this list and
   // call this function on ngOnInit()
@@ -128,8 +130,11 @@ export class AddRestrictionComponent implements OnInit {
   }
 
   verifyRestriction(id: number) {
-      //return this.allScheduleRestrictions[id] > 0;
-      return false;
+      this.allScheduleRestrictions = this.getRestrictionsFromDatabase();
+      //console.log(this.allScheduleRestrictions);
+      //console.log(id);
+      var isRestricted: boolean = (this.allScheduleRestrictions[id] > 0);
+      return isRestricted;
   }
 
 }
