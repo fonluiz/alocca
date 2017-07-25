@@ -18,8 +18,7 @@ export class Course {
         minimumSemester: number,
         maximumSemester: number,
         offererDepartment: string,
-        requesterDepartment: String,
-        classesNumber: number
+        requesterDepartment: String
     ) {}
 
 }

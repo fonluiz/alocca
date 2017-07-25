@@ -8,12 +8,15 @@ import {User} from '../users/user.model';
 import {Request} from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model'
+import { Class } from '../allocations/class.model';
 
 @Injectable()
 export class FirebaseService {
+  CLASSES_PATH = '/classes/';
   SEMESTERS_PATH = '/semesters/';
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
+  classes: FirebaseListObservable<any[]>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
@@ -31,6 +34,7 @@ export class FirebaseService {
 
   constructor(private db: AngularFireDatabase)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
+    this.classes = db.list(this.CLASSES_PATH) as FirebaseListObservable<Class[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -153,6 +157,32 @@ export class FirebaseService {
       });
     });
   }
+
+  saveClass(classToSave: Class) {
+    let key = this.classes.push(classToSave).key;
+    this.addClassToSemester(key);
+  }
+
+  getClasses() {
+    return this.classes;
+  }
+
+  private addClassToSemester(classId: string) {
+    var semester = this.db.database.ref(this.SEMESTERS_PATH + '2017-2');
+    semester.transaction(
+      function(snapshot) {
+        if (snapshot.noDataYet) {
+          return {classes: [classId]};
+        } else {
+          var classes = snapshot.classes as string[];
+          classes.push(classId);
+          snapshot.classes = classes;
+          return snapshot;
+        }
+      }
+    );
+  }
+
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
     this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){

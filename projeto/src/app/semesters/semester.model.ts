@@ -6,7 +6,7 @@
     constructor(private id: String) {
         this.classes = [];
         this.professorRestrictions = [];
-        this.alerts = []
+        this.alerts = [];
     }
 
     getId() {

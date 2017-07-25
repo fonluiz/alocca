@@ -1,5 +1,5 @@
 <md-card class="new-allocation-card">
-  <form (ngSubmit)="onAddNewAllocation()" #allocationForm="ngForm" align="center">
+  <form (ngSubmit)="saveNewClasses()" #allocationForm="ngForm" align="center">
     <md-toolbar color="primary" class="new-allocation-card-toolbar">
         Adicionar Alocação
     </md-toolbar>
@@ -14,7 +14,7 @@
         </md-select>
 
          <md-input-container>
-          <input mdInput placeholder="Turmas" type="number" [(ngModel)]="classesNumber" min="1" step="1" required>
+          <input mdInput placeholder="Turmas" type="number" [(ngModel)]="classesNumber" name="classesNumber" min="1" step="1" required>
         </md-input-container>
 
       <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
