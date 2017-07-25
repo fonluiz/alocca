@@ -19,7 +19,7 @@ export class EditProfessorComponent implements OnInit {
   great;
   restricoes_horarios;
   id;
-  EDITED_PROFESSOR_MESSAGE: string = "Professor deletado com sucesso!";
+  EDITED_PROFESSOR_MESSAGE: string = "Alterações efetuadas com sucesso!";
   NOT_EDITED_PROFESSOR_MESSAGE: string = "Já existe um professor com o SIAP escolhido!";
   TIMEOUT_EDITED_MESSAGE = 2500;
   TIMEOUT_NOT_EDITED_MESSAGE = 5000;

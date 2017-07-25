@@ -3,7 +3,22 @@
 }
 
 .classes-schedules-table{
-    width: 90%;
+    width: 100%;
+}
+
+.div-table{
+  align: center;
+  width:100%;
+}
+
+.geral-table{
+  background-color: #07304C;
+  height: 10%;
+}
+
+.hour-table{
+  background-color: white;
+  height: 10%;
 }
 
 .table-head{
@@ -11,16 +26,43 @@
     background-color: lightsteelblue ;
 }
 
+.hour-th{
+  text-align: center;
+  vertical-align: bottom;
+  background-color: #1f8dd8;
+  color: white;
+  font-size: 105%;
+  height: 10%;
+}
+
+.hour-td{
+  background-color: white;
+  vertical-align: center;
+  color: black;
+  height: 10%;
+}
+
 .week-day{
     text-align: center;
+    vertical-align: center;
+    color: white;
+    font-weight: 900;
+    font-size: 150%;
 }
 
 .week-hours{
-    /*change color*/
-    background-color: lightblue;
+  text-align: center;
+  vertical-align: center;
+  color: white;
+  font-weight: 900;
+  font-size: 150%;
 }
 
 .new-class-selection{
     width: 100%;
     text-align: center;
+}
+
+.nohover:hover{
+  background-color: #07304C;
 }
