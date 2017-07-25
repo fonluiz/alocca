@@ -66,3 +66,7 @@
 .nohover:hover{
   background-color: #07304C;
 }
+
+.foo-red{
+  color: red;
+}

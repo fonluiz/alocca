@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { ClassesStub } from '../classes.stub';
 import { Schedule } from '../schedule.model';
+import { SnackbarsService } from '../../services/snackbars.service';
 
 @Component({
   selector: 'app-schedules-table',
@@ -11,10 +12,13 @@ import { Schedule } from '../schedule.model';
 })
 export class SchedulesTableComponent implements OnInit {
   schedules: Schedule[];
+  DELETED_SUCCESSFULLY_MESSAGE: string =  "Aula removida do horário";
+  TIMEOUT_DELETED_MESSAGE: number = 3000;
 
   constructor(
     private FBservice: FirebaseService,
-    private schedulesStub: ClassesStub
+    private schedulesStub: ClassesStub,
+    private snackService: SnackbarsService
   ) {
   }
 
@@ -25,6 +29,11 @@ export class SchedulesTableComponent implements OnInit {
     });
     */
     this.schedules = this.schedulesStub.getSchedules();
+  }
+
+  onDeleteClassSchedule(){
+    //add the delete function from firebase
+    this.snackService.openSnackBar(this.DELETED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
   }
 
 
