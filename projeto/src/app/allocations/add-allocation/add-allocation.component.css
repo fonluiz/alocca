@@ -10,7 +10,6 @@
 .course-name-input {
     width: 25%;
     margin-top: 10px;
-    margin-bottom: 10px;
     margin-right: 24px;  
 }
 
@@ -25,7 +24,6 @@
 
 .classes-container {
     padding: 1.6% 1.6% 1.6% 1.6%;
-    background: #E1F5FE;
 }
 
 .new-classes-header {
@@ -43,4 +41,5 @@
     background: white;
     margin-bottom: 24px;
     padding: 10px 10px 10px 10px;
+    margin-right: 24px;
 }

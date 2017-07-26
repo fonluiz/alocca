@@ -1,27 +1,7 @@
-.visualize-allocation-card {
-  margin: 50px 50px 50px 50px;
-  padding: 0px 0px 0px 0px;
-}
-
-.allocation-card-content {
-  text-align: center;
-  padding: 30px 30px 30px 30px;
-}
 .spacer {
   flex: 1 1 auto;
 }
-.foo {
-  align-self: center;
-  width: 15px;
-  height: 15px;
-  margin: 0px 0px 5px 8px;
-  border: 3px solid rgba(0, 0, 0, .2);
-}
 
-.green {
-  background: green;
-}
-
-.red {
-  background: red;
+.table-container {
+  margin-bottom: 24px;
 }
