@@ -3,18 +3,29 @@ import { Course } from '../courses/course.model';
 import { Professor } from '../professors/professor.model';
 
 export class Class {
-
-    private isVerified: boolean;
-
+        public CAcontrol: boolean;
+        public course: Course;
+        public number: number;
+        public professor1: string;
+        public professor2: string;
+        public schedules: Schedule[];
+        public note: string;
     constructor(
-        private course: Course,
-        private number: number,
-        private professor1: string,
-        private professor2: string,
-        private schedules: Schedule[],
-        private note: string
+        CAcontrol: boolean,
+        course: Course,
+        number: number,
+        professor1: string,
+        professor2: string,
+        schedules: Schedule[],
+        note: string
     ) {
-        this.isVerified = false;
+        this.CAcontrol = CAcontrol;
+        this.course = course;
+        this.number = number;
+        this.professor1 = professor1;
+        this.professor2 = professor2;
+        this.schedules = schedules;
+        this.note = note;
     };
 
 }

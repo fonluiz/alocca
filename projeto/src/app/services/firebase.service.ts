@@ -167,8 +167,19 @@ export class FirebaseService {
 
 // Functions regarding to Classes
   saveClass(classToSave: Class) {
-    let key = this.classes.push(classToSave).key;
+    let key = firebase.database().ref().child('classes').push().key;
+    this.db.database.ref("classes/"+key).set({
+      CAcontrol: classToSave.CAcontrol,
+      course: classToSave.course,
+      number: classToSave.number,
+      professorOne: classToSave.professor1,
+      professorTwo: classToSave.professor2,
+      schedules: classToSave.schedules,
+      note: classToSave.note
+    })
+    // let key = this.classes.push(classToSave).key;
     this.addClassToSemester(key);
+
   }
 
   getClasses() {
