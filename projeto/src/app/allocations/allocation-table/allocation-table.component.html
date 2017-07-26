@@ -10,12 +10,15 @@
         <th>Professor 2</th>
         <th>Horários</th>
         <th>Comentário</th> 
+        <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor = 'let class of classesList'>
         <td><md-checkbox></md-checkbox></td>
         <td>{{class.course}}</td>
+        <td><!--CHANGE TO GET RECOMENDED SEMESTER--></td>
         <td>{{class.number}}</td>
         <td>{{class.professorOne}}</td>
         <td>{{class.professorTwo}}</td>
