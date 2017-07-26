@@ -9,8 +9,9 @@ import { NavbarService } from "app/navbar/navbar.service";
   styleUrls: ['./allocation-table.component.css']
 })
 export class AllocationTableComponent implements OnInit {
-    allocationsList: any[];
-    selectedSemesterID: string;
+  classesList: any[];
+  selectedSemesterID: string;
+
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
@@ -18,11 +19,14 @@ export class AllocationTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.FBservice.getAllocations().subscribe( allocations =>{
-      this.allocationsList = allocations;
+    this.FBservice.getClasses().subscribe( classes =>{
+      this.classesList = classes;
       });
-    this.getSelectedSemester();
+      this.selectedSemesterID = this.navbarService.getSemester();
+
+      console.log(this.FBservice.getClasses());
   }
+
 
   onDeleteAllocation(id,course,credits,classNumber){
     if(this.FBservice.deleteAllocation(id,course+credits,classNumber)){

@@ -27,7 +27,7 @@
           <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
         </ul>
         <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="checkSemester()" [routerLink]="['/allocations']" style="margin-left: 5px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="checkSemester()" [routerLink]="['/add-class']" style="margin-left: 5px">
         Turmas
         </button>
         <!--Add the checkSemester function-->
@@ -46,7 +46,7 @@
             Novo Semestre
           </md-option>
           <md-option *ngFor="let sem of semesters" [value]="sem">
-            {{ sem.replace('-','.') }}
+            {{ sem.$key.replace('-','.') }}
           </md-option>
         </md-select>
 

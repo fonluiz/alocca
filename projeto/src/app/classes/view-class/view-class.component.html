@@ -1,0 +1,23 @@
+<md-card class="view-class-card">
+  <md-toolbar color="primary" class="view-class-card-toolbar">
+    Turmas Cadastradas
+    <span class="spacer"></span>
+  </md-toolbar>
+
+  <md-card-content class="allocation-card-content">
+      <table align="center" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+        <thead>
+          <tr>
+            <th>Disciplina</th>
+            <th>Turma</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor = 'let class of classesList'>
+            <td>{{class.courseName}}</td>
+            <td>{{class.classNumber}}</td>
+          </tr>
+        </tbody>
+      </table>
+  </md-card-content>
+</md-card>

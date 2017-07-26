@@ -7,6 +7,9 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 
+import { Class } from '../class.model'
+import { Schedule } from '../schedule.model'
+
 @Component({
   selector: 'app-add-allocation',
   templateUrl: './add-allocation.component.html',
@@ -15,17 +18,13 @@ import 'rxjs/add/operator/map';
 export class AddAllocationComponent implements OnInit {
   // courseCtrl:FormControl;
   // filteredCourses: any;
-
-  professorsList: any[];
-  coursesList: any[];
-  courseKey: any;
-  professorOneSIAP: any;
-  professorTwoSIAP: any;
-  note: string = "";
   SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a turma já foi alocada.";
   TIMEOUT_SAVED_MESSAGE = 2500;
   TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  coursesList: any[];
+  courseKey: any;
+  classesNumber: number;
 
   constructor(
     private FBservice: FirebaseService,
@@ -45,46 +44,15 @@ export class AddAllocationComponent implements OnInit {
 
 
   ngOnInit() {
-    this.FBservice.getProfessors().subscribe(professorsnames =>{
-      this.professorsList = professorsnames;
-    });
     this.FBservice.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
     });
   }
 
-  onAddNewAllocation(){
-    let allocation: any;
-    console.log(this.professorOneSIAP+this.courseKey);
-
-    if(this.professorOneSIAP==this.professorTwoSIAP){
-      this.flashMessage.show('Escolha Docentes diferentes.', {cssClass: 'alert-danger', timeout: 7000});
-    }else if(this.professorTwoSIAP){
-      allocation = {
-      courseKey: this.courseKey,
-      professorOneSIAP: this.professorOneSIAP,
-      professorTwoSIAP: this.professorTwoSIAP,
-      note: this.note
-    };
-
-      this.addAlocationToFirebase(allocation);
-
-      this.courseKey = null;
-      this.professorOneSIAP = null;
-      this.professorTwoSIAP = null;
-      this.note = null;
-    }else{
-      allocation = {
-      courseKey: this.courseKey,
-      professorOneSIAP: this.professorOneSIAP,
-      note: this.note,
-    };
-      this.addAlocationToFirebase(allocation);
-
-      this.courseKey = null;
-      this.professorOneSIAP = null;
-      this.note = null;
-      
+  saveNewClasses(){
+    for (var _i = 1; _i <= this.classesNumber; _i++) {
+          let newClass = new Class(this.courseKey, _i, null, null, null, null); 
+          this.FBservice.saveClass(newClass);
     }
   }
 

@@ -3,33 +3,43 @@
   padding: 0px 0px 0px 0px;
 }
 
-.new-allocation-card-toolbar {
-  
-}
-
 .new-allocation-card-content {
     padding: 30px 30px 30px 30px;
 }
 
-
 .course-name-input {
-    width: 40%;
+    width: 25%;
     margin-top: 10px;
-    margin-bottom: 10px;  
+    margin-right: 24px;  
 }
 
-.professor1-name-input {
-    width: 15%;
-    margin-top: 10px;
-    margin-bottom: 10px;  
-}
-
-.professor2-name-input {
-    width: 15%;
-    margin-top: 10px;
-    margin-bottom: 10px;  
+.classes-number-input {
+    margin-right: 24px;
+    width: auto;
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.classes-container {
+    padding: 1.6% 1.6% 1.6% 1.6%;
+}
+
+.new-classes-header {
+    padding: 8px 8px 8px 8px;
+    font-style: bold;
+    font-size: 1.5em;
+    text-align: left;
+}
+
+.new-classes-content {
+    margin: 8px 8px 8px 8px;
+}
+
+.create-classes-container {
+    background: white;
+    margin-bottom: 24px;
+    padding: 10px 10px 10px 10px;
+    margin-right: 24px;
 }

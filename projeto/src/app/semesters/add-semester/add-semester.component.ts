@@ -38,9 +38,9 @@ export class AddSemesterComponent implements OnInit {
   onAddNewSemester() {
       var semesterId = this.year + "-" + this.semester
 
-      let semester = new Semester(semesterId, []);
+      let semester = new Semester(semesterId);
 
-      this.FBservice.addSemester(semesterId);
+      this.FBservice.saveSemester(semester);
   }
 
   ngOnInit() {

@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-add-allocation',
+  selector: 'app-edit-allocation',
   templateUrl: './edit-allocation.component.html',
   styleUrls: ['./edit-allocation.component.css']
 })
