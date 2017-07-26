@@ -82,17 +82,17 @@ export class EditAllocationComponent implements OnInit {
   }
 
   onUpdateClass(){
-    let newClass = new Class(
-      this.CAcontrol, 
-      this.courseName, 
-      this.number, 
-      this.professor1, 
-      this.professor2, 
-      this.schedules, 
-      this.note
-    );
-    console.log(newClass);
-    this.FBservice.updateClass(this.id, newClass);
+    // let newClass = new Class(
+    //   this.CAcontrol, 
+    //   this.courseName, 
+    //   this.number, 
+    //   this.professor1, 
+    //   this.professor2, 
+    //   this.schedules, 
+    //   this.note
+    // );
+    // console.log(newClass);
+    // this.FBservice.updateClass(this.id, newClass);
   }
 
   onUpdateAllocation(){

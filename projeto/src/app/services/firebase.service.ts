@@ -167,15 +167,11 @@ export class FirebaseService {
     });
   }
 
-<<<<<<< HEAD
   updateClass(id, classToUpdate: Class){
     this.deleteClass(id);
     this.saveClass(classToUpdate);
   }
 
-=======
-// Functions regarding to Classes
->>>>>>> 9bb7cd6f54fb221dacaae53704b942d7e9b004e9
   saveClass(classToSave: Class) {
     this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId()).
     set(classToSave.toFirebaseObject());
@@ -185,7 +181,6 @@ export class FirebaseService {
     return this.classes;
   }
 
-<<<<<<< HEAD
   getClassDetails(id){
     this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
     return this.class_;
@@ -207,8 +202,6 @@ export class FirebaseService {
     );
   }
 
-=======
->>>>>>> 9bb7cd6f54fb221dacaae53704b942d7e9b004e9
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
     this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){
