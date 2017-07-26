@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { FlashMessagesService } from 'angular2-flash-messages';
@@ -18,6 +18,7 @@ import { Semester } from '../semesters/semester.model';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
   semesters: Semester[];
   selectedSemesterID: string;
@@ -44,7 +45,6 @@ export class NavbarComponent implements OnInit {
   openDialog() {
       let dialogRef = this.dialog.open(AddSemesterComponent);
     dialogRef.afterClosed().subscribe(result => {
-      // this.selectedOption = result;
     });
   }
 
@@ -53,9 +53,7 @@ export class NavbarComponent implements OnInit {
     this.dbAuth.auth.signOut();
   }
 
-  checkSemester() {
-      console.log(this.selectedSemesterID);
-      this.navbarService.setSemester(this.selectedSemesterID);
-      console.log(this.navbarService.getSemester());
+  emitSemesterSelected() {
+      this.navbarService.emitSemesterSelected(this.selectedSemesterID);
   }
 }

@@ -36,10 +36,7 @@ export class AddSemesterComponent implements OnInit {
     }
 
   onAddNewSemester() {
-      var semesterId = this.year + "-" + this.semester
-
-      let semester = new Semester(semesterId);
-
+      let semester = new Semester(this.year, this.semester);
       this.FBservice.saveSemester(semester);
   }
 

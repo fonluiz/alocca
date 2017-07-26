@@ -1,42 +1,31 @@
 ﻿export class Semester {
-    private classes: String[];
-    private professorRestrictions: String[];
-    private alerts: String[];
+    private id: string;
+    private name: string;
 
-    constructor(private id: String) {
-        this.classes = [];
-        this.professorRestrictions = [];
-        this.alerts = [];
+    constructor(year: number, semester: number) {
+        this.id = year + '-' + semester;
+        this.name = year + '.' + semester;
     }
 
     getId() {
         return this.id;
     }
 
-    getClasses() {
-        return this.classes;
+    getName() {
+        return this.name;
     }
 
-    setId(newId: String) {
+    setId(newId: string) {
         this.id = newId;
     }
 
-    setClasses(newClasses: String[]) {
-        this.classes = newClasses;
+    setName(newName: string) {
+        this.name = newName;
     }
 
     toFirebaseObject() {
-        var firebaseObject: any;
-        if (this.classes.length > 0 || this.professorRestrictions.length > 0 || this.alerts.length > 0) {
-            firebaseObject = {
-                'classes': this.classes,
-                'professorRestrictions': this.professorRestrictions,
-                'alerts': this.alerts
-             };
-        } else {
-            firebaseObject = {
-                'noDataYet': true
-            }
+        var firebaseObject: any = {
+            name: this.name
         }
         return <JSON>firebaseObject;
     }

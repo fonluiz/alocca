@@ -4,6 +4,8 @@ import { Professor } from '../professors/professor.model';
 
 export class Class {
 
+    private isVerified: boolean;
+
     constructor(
         private course: Course,
         private number: number,
@@ -11,6 +13,8 @@ export class Class {
         private professor2: string,
         private schedules: Schedule[],
         private note: string
-    ) {};
+    ) {
+        this.isVerified = false;
+    };
 
 }
