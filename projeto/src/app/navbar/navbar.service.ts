@@ -13,3 +13,5 @@ export class NavbarService {
         this.selectedSemester = newSemester;
     }
 }
+
+//TO DO: MOVE THIS CLASS TO ../services and update references

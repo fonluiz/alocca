@@ -1,9 +1,29 @@
 ﻿export class ScheduleRestriction {
     constructor(
-        private monday: number[],
-        private tuesday: number[],
-        private wednesday: number[],
-        private thursday: number[],
-        private friday: number[]
+        public monday: number[],
+        public tuesday: number[],
+        public wednesday: number[],
+        public thursday: number[],
+        public friday: number[]
     ) { }
+
+    get getMonday() {
+        return this.monday;
+    }
+
+    get getTuesday() {
+        return this.tuesday;
+    }
+
+    get getWednesday() {
+        return this.wednesday;
+    }
+
+    get getThursday() {
+        return this.thursday;
+    }
+
+    get getFriday() {
+        return this.friday;
+    }
 }

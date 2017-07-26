@@ -2,11 +2,11 @@
 
 export class ProfessorRestriction {
     constructor(
-        private SIAPSemester: string,
-        private minCredits: number,
-        private maxCredits: number,
-        private graduateCredits: number,
-        private scheduleRestrictions: ScheduleRestriction
+        public SIAPSemester: string,
+        public minCredits: number,
+        public maxCredits: number,
+        public graduateCredits: number,
+        public scheduleRestrictions: ScheduleRestriction
     ) { }
 
     getSIAPSemester() {
@@ -25,9 +25,13 @@ export class ProfessorRestriction {
         this.minCredits = newMinCredits;
     }
 
-    getMaxCredits() {
+   get getMaxCredits(): number {
         return this.maxCredits;
     }
+
+   public test = (): number => {
+       return 4;
+   }
 
     setMaxCredits(newMaxCredits: number) {
         this.minCredits = newMaxCredits;

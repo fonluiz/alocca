@@ -38,8 +38,6 @@ export class AllocationTableComponent implements OnInit {
       this.router.navigate(['/allocations']);
     }
   }
-  getSelectedSemester() {
-      this.selectedSemesterID = this.navbarService.getSemester();
-  }
+
 }
 

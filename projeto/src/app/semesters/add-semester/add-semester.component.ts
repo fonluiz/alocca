@@ -4,9 +4,9 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Semester } from '../semester.model';
 
 @Component({
-  selector: 'app-add-semester',
-  templateUrl: './add-semester.component.html',
-  styleUrls: ['./add-semester.component.css']
+    selector: 'app-add-semester',
+    templateUrl: './add-semester.component.html',
+    styleUrls: ['./add-semester.component.css']
 })
 export class AddSemesterComponent implements OnInit {
     MAX_YEAR: number;
@@ -27,23 +27,21 @@ export class AddSemesterComponent implements OnInit {
         this.semesters = [1, 2];
     }
 
-  private initialize_years = () => {
-      var i = 2017;
-      do {
-          this.years.push(i);
-          i++;
-      } while (i <= this.MAX_YEAR);
+    private initialize_years = () => {
+        var i = 2017;
+        do {
+            this.years.push(i);
+            i++;
+        } while (i <= this.MAX_YEAR);
     }
 
-  onAddNewSemester() {
-      var semesterId = this.year + "-" + this.semester
-
-      let semester = new Semester(semesterId);
-
-      this.FBservice.saveSemester(semester);
+    onAddNewSemester() {
+        var semesterId = this.year + "-" + this.semester
+        let semester = new Semester(semesterId);
+        this.FBservice.saveSemester(semester);
   }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

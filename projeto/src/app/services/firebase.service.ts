@@ -483,12 +483,16 @@ export class FirebaseService {
   }
 
   // Restrictions
-  getProfessorRestrictions() {
+  getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPSemester())
           .set(restriction.toFirebaseObject());
+  }
+
+  getProfessorRestrictions(restriction_id: string) {
+      return this.db.object(this.PROFESSORS_RESTRICTIONS_PATH + restriction_id) as FirebaseObjectObservable<ProfessorRestriction>;
   }
 
   // Classes
