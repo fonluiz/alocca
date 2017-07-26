@@ -166,10 +166,20 @@ export class FirebaseService {
     });
   }
 
-// Functions regarding to Classes
+//Classes
   saveClass(classToSave: Class) {
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId()).
-    set(classToSave.toFirebaseObject());
+    var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
+    // Only saves the data if it does not exists already
+   classRef.once('value').then(
+      function(snapshot) {
+        if (snapshot.val() == null) {
+          classRef.set(classToSave.toFirebaseObject());
+          return true;
+        } else {
+          return false;
+        }
+      }
+    );
   }
 
   getClasses() {
