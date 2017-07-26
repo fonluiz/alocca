@@ -24,13 +24,7 @@ export class AddAllocationComponent implements OnInit {
   courseKey: any;
   classesNumber: number;
 
-  CAcontrol: boolean;
   courseName: string;
-  number: number;
-  professor1: string;
-  professor2: string;
-  schedules: string;
-  note: string;
 
   constructor(
     private FBservice: FirebaseService,

@@ -18,6 +18,7 @@ export class FirebaseService {
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   classes: FirebaseListObservable<any[]>;
+  class_: FirebaseObjectObservable<any>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
@@ -166,7 +167,15 @@ export class FirebaseService {
     });
   }
 
+<<<<<<< HEAD
 //Classes
+=======
+  updateClass(id, classToUpdate: Class){
+    this.deleteClass(id);
+    this.saveClass(classToUpdate);
+  }
+
+>>>>>>> 6e81d3d489f8b0f141780b5a2227ac7a6c591408
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
     // Only saves the data if it does not exists already
@@ -184,6 +193,27 @@ export class FirebaseService {
 
   getClasses() {
     return this.classes;
+  }
+
+  getClassDetails(id){
+    this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
+    return this.class_;
+  }
+
+  private addClassToSemester(classId: string) {
+    var semester = this.db.database.ref(this.SEMESTERS_PATH + '2017-2');
+    semester.transaction(
+      function(snapshot) {
+        if (snapshot.noDataYet) {
+          return {classes: [classId]};
+        } else {
+          var classes = snapshot.classes as string[];
+          classes.push(classId);
+          snapshot.classes = classes;
+          return snapshot;
+        }
+      }
+    );
   }
 
   getProfessorNameWithSIAP(professorSIAP) {
@@ -227,6 +257,7 @@ export class FirebaseService {
     return credits;
   }
   deleteClass(courseKey){
+    this.classes.remove(courseKey);
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
       newClassesNumber = (snapshot.child('classesNumber').val() - 1);

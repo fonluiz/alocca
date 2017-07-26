@@ -23,6 +23,7 @@ export class Class {
         this.note = null;
     };
 
+
     getId() {
         return this.id;
     }
