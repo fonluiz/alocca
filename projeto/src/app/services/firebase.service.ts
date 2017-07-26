@@ -9,11 +9,12 @@ import {Request} from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model'
 import { Class } from '../allocations/class.model';
+import { NavbarService } from "app/navbar/navbar.service";
 
 @Injectable()
 export class FirebaseService {
-  CLASSES_PATH = '/classes/';
-  SEMESTERS_PATH = '/semesters/';
+  CLASSES_PATH = '/classes';
+  SEMESTERS_PATH = '/semesters';
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   classes: FirebaseListObservable<any[]>;
@@ -30,12 +31,13 @@ export class FirebaseService {
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
-  semesters: FirebaseListObservable<Semester[]>;
+  semesters: FirebaseListObservable<any[]>;
   professorRestrictions: FirebaseListObservable<any[]>;
-
-  constructor(private db: AngularFireDatabase)  {
+  private currentSemester: string;
+  
+  constructor(private db: AngularFireDatabase,
+              private  navbarService: NavbarService)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    this.classes = db.list(this.CLASSES_PATH) as FirebaseListObservable<Class[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -45,6 +47,11 @@ export class FirebaseService {
     this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
     this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
+
+    this.navbarService.getSemesterSelectedEmitter().subscribe(sem => {
+      this.currentSemester = sem;
+      this.classes = db.list(this.CLASSES_PATH + '/' + this.currentSemester) as FirebaseListObservable<Class[]>;
+    })
   }
 
   ///Allocation
@@ -160,31 +167,25 @@ export class FirebaseService {
     });
   }
 
+<<<<<<< HEAD
   updateClass(id, classToUpdate: Class){
     this.deleteClass(id);
     this.saveClass(classToUpdate);
   }
 
+=======
+// Functions regarding to Classes
+>>>>>>> 9bb7cd6f54fb221dacaae53704b942d7e9b004e9
   saveClass(classToSave: Class) {
-    let key = firebase.database().ref().child('classes').push().key;
-    this.db.database.ref("classes/"+key).set({
-      CAcontrol: classToSave.CAcontrol,
-      course: classToSave.course,
-      number: classToSave.number,
-      professorOne: classToSave.professor1,
-      professorTwo: classToSave.professor2,
-      schedules: classToSave.schedules,
-      note: classToSave.note
-    })
-    // let key = this.classes.push(classToSave).key;
-    this.addClassToSemester(key);
-
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId()).
+    set(classToSave.toFirebaseObject());
   }
 
   getClasses() {
     return this.classes;
   }
 
+<<<<<<< HEAD
   getClassDetails(id){
     this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
     return this.class_;
@@ -206,6 +207,8 @@ export class FirebaseService {
     );
   }
 
+=======
+>>>>>>> 9bb7cd6f54fb221dacaae53704b942d7e9b004e9
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
     this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){
@@ -497,7 +500,7 @@ export class FirebaseService {
 
   // Semesters
   saveSemester(semester: Semester) {
-      this.db.database.ref(this.SEMESTERS_PATH + semester.getId())
+      this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
   }
   
@@ -514,9 +517,4 @@ export class FirebaseService {
           .set(restriction.toFirebaseObject());
   }
 
-  // Classes
-  addClass(Class) {
-    this.db.database.ref("classes/" + Class.classKey).set(Class);
-    return true;
-  }
 }

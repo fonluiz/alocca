@@ -53,7 +53,7 @@ export class AddAllocationComponent implements OnInit {
 
   saveNewClasses(){
     for (var _i = 1; _i <= this.classesNumber; _i++) {
-          let newClass = new Class(null, this.courseName, _i, null, null, null, null);
+          let newClass = new Class(this.courseName, _i);
           this.FBservice.saveClass(newClass);
     }
   }

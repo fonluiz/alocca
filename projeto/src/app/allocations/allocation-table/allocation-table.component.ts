@@ -23,8 +23,9 @@ export class AllocationTableComponent implements OnInit {
   ngOnInit() {
     this.FBservice.getClasses().subscribe( classes =>{
       this.classesList = classes;
-      });
-      this.selectedSemesterID = this.navbarService.getSemester();
+    });
+
+      // this.selectedSemesterID = this.navbarService.get();
 
       console.log(this.FBservice.getClasses());
   }
@@ -46,7 +47,7 @@ export class AllocationTableComponent implements OnInit {
     }
   }
   getSelectedSemester() {
-      this.selectedSemesterID = this.navbarService.getSemester();
+      // this.selectedSemesterID = this.navbarService.getSemester();
   }
 
 }
