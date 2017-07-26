@@ -17,6 +17,7 @@ export class FirebaseService {
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   classes: FirebaseListObservable<any[]>;
+  class_: FirebaseObjectObservable<any>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
@@ -159,6 +160,11 @@ export class FirebaseService {
     });
   }
 
+  updateClass(id, classToUpdate: Class){
+    this.deleteClass(id);
+    this.saveClass(classToUpdate);
+  }
+
   saveClass(classToSave: Class) {
     let key = firebase.database().ref().child('classes').push().key;
     this.db.database.ref("classes/"+key).set({
@@ -177,6 +183,11 @@ export class FirebaseService {
 
   getClasses() {
     return this.classes;
+  }
+
+  getClassDetails(id){
+    this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
+    return this.class_;
   }
 
   private addClassToSemester(classId: string) {
@@ -236,6 +247,7 @@ export class FirebaseService {
     return credits;
   }
   deleteClass(courseKey){
+    this.classes.remove(courseKey);
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
       newClassesNumber = (snapshot.child('classesNumber').val() - 1);

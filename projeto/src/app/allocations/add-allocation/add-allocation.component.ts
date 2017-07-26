@@ -26,13 +26,7 @@ export class AddAllocationComponent implements OnInit {
   courseKey: any;
   classesNumber: number;
 
-  CAcontrol: boolean;
   courseName: string;
-  number: number;
-  professor1: string;
-  professor2: string;
-  schedules: string;
-  note: string;
 
   constructor(
     private FBservice: FirebaseService,
@@ -58,9 +52,8 @@ export class AddAllocationComponent implements OnInit {
   }
 
   saveNewClasses(){
-    console.log(this.courseName);
     for (var _i = 1; _i <= this.classesNumber; _i++) {
-          let newClass = new Class(null, this.courseName, _i, null, null, null, null); ''
+          let newClass = new Class(null, this.courseName, _i, null, null, null, null);
           this.FBservice.saveClass(newClass);
     }
   }

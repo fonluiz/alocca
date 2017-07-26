@@ -9,25 +9,25 @@
     <md-card-content class="edit-allocation-card-content">
       <div class="edit-allocation-card-row">
         <!--MAKE IT PRETTIER?? (and more intuitive)-->
-        <label style="color: gray" [ngModel]="course" name="course" class="course-name2-input">{{course}}</label>
-        <label style="color: gray" [ngModel]="professorOneName" name="professorOneName" class="professor1-name2-input">{{professorOneName}}</label>
-        <label style="color: gray" [ngModel]="professorTwoName" name="professorTwoName" class="professor2-name2-input">{{professorTwoName}}</label>
+        <label style="color: gray" [ngModel]="courseName" name="courseName" class="course-name2-input">{{courseName}}</label>
+        <label style="color: gray" [ngModel]="professor1" name="professor1" class="professor1-name2-input">{{professor1}}</label>
+        <label style="color: gray" [ngModel]="professor2" name="professor2" class="professor2-name2-input">{{professor2}}</label>
         <label style="color: gray" [ngModel]="oldNote" name="oldNote" class="note-name2-input">{{oldNote}}</label>
       </div>
       <div class="edit-allocation-card-row">
-        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseName" name="courseName" required>
           <md-option *ngFor="let course of coursesList" [value]="course.$key">
             {{ course.name }}
           </md-option>
         </md-select>
 
-        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>
+        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professor1" name="professor1" required>
           <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
             {{ prof.name }}
           </md-option>
         </md-select>
 
-        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
+        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professor2" name="professor2">
           <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
             {{ prof.name }}
           </md-option>
