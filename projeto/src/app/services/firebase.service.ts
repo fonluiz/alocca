@@ -13,7 +13,7 @@ import { NavbarService } from "app/navbar/navbar.service";
 
 @Injectable()
 export class FirebaseService {
-  CLASSES_PATH = '/classes/';
+  CLASSES_PATH = '/classes';
   SEMESTERS_PATH = '/semesters';
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
@@ -37,7 +37,6 @@ export class FirebaseService {
   constructor(private db: AngularFireDatabase,
               private  navbarService: NavbarService)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    this.classes = db.list(this.CLASSES_PATH) as FirebaseListObservable<Class[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -47,8 +46,10 @@ export class FirebaseService {
     this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
     this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
+
     this.navbarService.getSemesterSelectedEmitter().subscribe(sem => {
       this.currentSemester = sem;
+      this.classes = db.list(this.CLASSES_PATH + '/' + this.currentSemester) as FirebaseListObservable<Class[]>;
     })
   }
 
@@ -167,41 +168,13 @@ export class FirebaseService {
 
 // Functions regarding to Classes
   saveClass(classToSave: Class) {
-    let key = firebase.database().ref().child('classes').push().key;
-    this.db.database.ref("classes/"+key).set({
-      CAcontrol: classToSave.CAcontrol,
-      course: classToSave.course,
-      number: classToSave.number,
-      professorOne: classToSave.professor1,
-      professorTwo: classToSave.professor2,
-      schedules: classToSave.schedules,
-      note: classToSave.note
-    })
-    // let key = this.classes.push(classToSave).key;
-    this.addClassToSemester(key);
-
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId()).
+    set(classToSave.toFirebaseObject());
   }
 
   getClasses() {
     return this.classes;
   }
-
-  private addClassToSemester(classId: string) {
-    var semester = this.db.database.ref(this.SEMESTERS_PATH + '2017-2');
-    semester.transaction(
-      function(snapshot) {
-        if (snapshot.noDataYet) {
-          return {classes: [classId]};
-        } else {
-          var classes = snapshot.classes as string[];
-          classes.push(classId);
-          snapshot.classes = classes;
-          return snapshot;
-        }
-      }
-    );
-  }
-
 
   getProfessorNameWithSIAP(professorSIAP) {
     var professorName: String = "-";
