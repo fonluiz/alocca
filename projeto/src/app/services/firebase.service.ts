@@ -383,11 +383,11 @@ export class FirebaseService {
       if (this.emailAlreadySaved(newUser.SIAPE)){
         return false;
       }else{
-        this.db.database.ref("users/"+newUser.SIAPE).set(newUser);
-        this.usersEmails.push({
-          email: newUser.email
-        });
-        return true;
+        if(this.db.database.ref("users/"+newUser.SIAPE).set(newUser)){
+          if(this.usersEmails.push({email: newUser.email})){
+            return true;
+          }
+        }
       }
 
   }
