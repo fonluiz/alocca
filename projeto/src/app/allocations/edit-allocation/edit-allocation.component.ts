@@ -23,8 +23,8 @@ export class EditAllocationComponent implements OnInit {
   oldNote;
   professorOneName;
   professorTwoName;
-  professorOneSIAP;
-  professorTwoSIAP;
+  professorOneSIAPE;
+  professorTwoSIAPE;
   professorsList: any[];
   coursesList: any[];
 
@@ -60,11 +60,11 @@ export class EditAllocationComponent implements OnInit {
 
   onUpdateAllocation(){
     let allocation: any;
-    if(this.professorTwoSIAP){
+    if(this.professorTwoSIAPE){
       allocation = {
       courseKey: this.courseKey,
-      professorOneSIAP: this.professorOneSIAP,
-      professorTwoSIAP: this.professorTwoSIAP,
+      professorOneSIAPE: this.professorOneSIAPE,
+      professorTwoSIAPE: this.professorTwoSIAPE,
       oldCourseKey: this.oldCourseKey,
       note: this.note
     };
@@ -80,7 +80,7 @@ export class EditAllocationComponent implements OnInit {
     }else{
       allocation = {
       courseKey: this.courseKey,
-      professorOneSIAP: this.professorOneSIAP,
+      professorOneSIAPE: this.professorOneSIAPE,
       oldCourseKey: this.oldCourseKey,
       note: this.note
     };

@@ -787,12 +787,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> SIAP</b>
+                            <b> SIAPE</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>SIAP:     <code></code>
+                            <code>SIAPE:     <code></code>
     </bcode>
                         </td>
                     </tr>
@@ -830,9 +830,9 @@
           &lt;input mdInput placeholder&#x3D;&quot;Nome&quot; [(ngModel)]&#x3D;&quot;name&quot; name&#x3D;&quot;name&quot; required&gt;
         &lt;/md-input-container&gt;
 
-        &lt;!-- Professor&#x27;s SIAP --&gt;
-        &lt;md-input-container class&#x3D;&quot;edit-professor-SIAP-input&quot; type&#x3D;&quot;text&quot;&gt;
-          &lt;input mdInput placeholder&#x3D;&quot;SIAP&quot; [(ngModel)]&#x3D;&quot;SIAP&quot; name&#x3D;&quot;SIAP&quot; name&#x3D;&quot;SIAP&quot; size&#x3D;&quot;7&quot; maxlength&#x3D;&quot;7&quot; pattern&#x3D;&quot;[0-9]{7}&quot; required&gt;
+        &lt;!-- Professor&#x27;s SIAPE --&gt;
+        &lt;md-input-container class&#x3D;&quot;edit-professor-SIAPE-input&quot; type&#x3D;&quot;text&quot;&gt;
+          &lt;input mdInput placeholder&#x3D;&quot;SIAPE&quot; [(ngModel)]&#x3D;&quot;SIAPE&quot; name&#x3D;&quot;SIAPE&quot; name&#x3D;&quot;SIAPE&quot; size&#x3D;&quot;7&quot; maxlength&#x3D;&quot;7&quot; pattern&#x3D;&quot;[0-9]{7}&quot; required&gt;
         &lt;/md-input-container&gt;
       &lt;/div&gt;
     &lt;/md-card-content&gt;
@@ -863,7 +863,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="edit-professor-card">  <form (ngSubmit)="onEditProfessor()" #editarProfessorForm="ngForm">    <!--Toolbar-->    <md-toolbar color="primary" class="new-professor-card-toolbar">      Editar Professor      <span class="spacer"></span>      <button md-button style="margin-right: 5px" [routerLink]="[\'/view-professors\']">Cancelar</button>      <button md-button [disabled]="!editarProfessorForm.form.valid">Salvar</button>    </md-toolbar>    <!--Form-->    <md-card-content class="edit-professor-card-content">      <div class="professor-card-row">        <!-- Professor name -->        <md-input-container class="edit-professor-name-input" type="text">          <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>        </md-input-container>        <!-- Professor\'s SIAP -->        <md-input-container class="edit-professor-SIAP-input" type="text">          <input mdInput placeholder="SIAP" [(ngModel)]="SIAP" name="SIAP" name="SIAP" size="7" maxlength="7" pattern="[0-9]{7}" required>        </md-input-container>      </div>    </md-card-content>  </form></md-card></div>'
+        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="edit-professor-card">  <form (ngSubmit)="onEditProfessor()" #editarProfessorForm="ngForm">    <!--Toolbar-->    <md-toolbar color="primary" class="new-professor-card-toolbar">      Editar Professor      <span class="spacer"></span>      <button md-button style="margin-right: 5px" [routerLink]="[\'/view-professors\']">Cancelar</button>      <button md-button [disabled]="!editarProfessorForm.form.valid">Salvar</button>    </md-toolbar>    <!--Form-->    <md-card-content class="edit-professor-card-content">      <div class="professor-card-row">        <!-- Professor name -->        <md-input-container class="edit-professor-name-input" type="text">          <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>        </md-input-container>        <!-- Professor\'s SIAPE -->        <md-input-container class="edit-professor-SIAPE-input" type="text">          <input mdInput placeholder="SIAPE" [(ngModel)]="SIAPE" name="SIAPE" name="SIAPE" size="7" maxlength="7" pattern="[0-9]{7}" required>        </md-input-container>      </div>    </md-card-content>  </form></md-card></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeBodyComponent', 'selector': 'app-home-body'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EditProfessorComponent'};

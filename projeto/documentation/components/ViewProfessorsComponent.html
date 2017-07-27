@@ -824,7 +824,7 @@ export class ViewProfessorsComponent implements OnInit {
       &lt;thead&gt;
         &lt;tr&gt;
           &lt;th&gt;Nome&lt;/th&gt;
-          &lt;th&gt;Matrícula SIAP&lt;/th&gt;
+          &lt;th&gt;Matrícula SIAPE&lt;/th&gt;
           &lt;th&gt;&lt;/th&gt;
           &lt;th&gt;&lt;/th&gt;
         &lt;/tr&gt;
@@ -832,7 +832,7 @@ export class ViewProfessorsComponent implements OnInit {
       &lt;tbody&gt;
         &lt;tr *ngFor&#x3D;&quot;let professor of professors&quot;&gt;
           &lt;td&gt;{{professor.name}}&lt;/td&gt;
-          &lt;td&gt;{{professor.SIAP}}&lt;/td&gt;
+          &lt;td&gt;{{professor.SIAPE}}&lt;/td&gt;
           &lt;td&gt;&lt;button class&#x3D;&quot;mdl-button mdl-js-button mdl-button--primary&quot; [routerLink] &#x3D; &quot;[&#x27;/edit-professor/&#x27; + professor.$key]&quot;&gt;Editar&lt;/button&gt;&lt;/td&gt;
           &lt;!--mudar para atualizar melhor??--&gt;
           &lt;td&gt;&lt;button (click)&#x3D;&quot;onDeleteProfessor(professor.$key, professor.name)&quot; class&#x3D;&quot;mdl-button mdl-js-button mdl-button--accent&quot;&gt;Excluir&lt;/button&gt;&lt;/td&gt;
@@ -867,7 +867,7 @@ export class ViewProfessorsComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="visualize-professor-card">  <!--Toolbar-->  <md-toolbar color="primary" class="new-professor-card-toolbar">    Professores Cadastrados    <span class="spacer"></span>  </md-toolbar>  <md-card-content class="professor-card-content">    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">      <thead>        <tr>          <th>Nome</th>          <th>Matrícula SIAP</th>          <th></th>          <th></th>        </tr>      </thead>      <tbody>        <tr *ngFor="let professor of professors">          <td>{{professor.name}}</td>          <td>{{professor.SIAP}}</td>          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "[\'/edit-professor/\' + professor.$key]">Editar</button></td>          <!--mudar para atualizar melhor??-->          <td><button (click)="onDeleteProfessor(professor.$key, professor.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>        </tr>      </tbody>    </table>  </md-card-content></md-card></div>'
+        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="visualize-professor-card">  <!--Toolbar-->  <md-toolbar color="primary" class="new-professor-card-toolbar">    Professores Cadastrados    <span class="spacer"></span>  </md-toolbar>  <md-card-content class="professor-card-content">    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">      <thead>        <tr>          <th>Nome</th>          <th>Matrícula SIAPE</th>          <th></th>          <th></th>        </tr>      </thead>      <tbody>        <tr *ngFor="let professor of professors">          <td>{{professor.name}}</td>          <td>{{professor.SIAPE}}</td>          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "[\'/edit-professor/\' + professor.$key]">Editar</button></td>          <!--mudar para atualizar melhor??-->          <td><button (click)="onDeleteProfessor(professor.$key, professor.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>        </tr>      </tbody>    </table>  </md-card-content></md-card></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeBodyComponent', 'selector': 'app-home-body'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ViewProfessorsComponent'};

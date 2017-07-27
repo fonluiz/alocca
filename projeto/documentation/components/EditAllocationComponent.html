@@ -753,12 +753,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> professorOneSIAP</b>
+                            <b> professorOneSIAPE</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>professorOneSIAP:     <code></code>
+                            <code>professorOneSIAPE:     <code></code>
     </bcode>
                         </td>
                     </tr>
@@ -819,12 +819,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> professorTwoSIAP</b>
+                            <b> professorTwoSIAPE</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>professorTwoSIAP:     <code></code>
+                            <code>professorTwoSIAPE:     <code></code>
     </bcode>
                         </td>
                     </tr>
@@ -866,14 +866,14 @@
           &lt;/md-option&gt;
         &lt;/md-select&gt;
 
-        &lt;md-select class&#x3D;&quot;professor1-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorOneSIAP&quot; name&#x3D;&quot;professorOneSIAP&quot; required&gt;
-          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAP&quot;&gt;
+        &lt;md-select class&#x3D;&quot;professor1-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorOneSIAPE&quot; name&#x3D;&quot;professorOneSIAPE&quot; required&gt;
+          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAPE&quot;&gt;
             {{ prof.name }}
           &lt;/md-option&gt;
         &lt;/md-select&gt;
 
-        &lt;md-select class&#x3D;&quot;professor2-name-input&quot; placeholder&#x3D;&quot;Docente 2&quot; [(ngModel)]&#x3D;&quot;professorTwoSIAP&quot; name&#x3D;&quot;professorTwoSIAP&quot;&gt;
-          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAP&quot;&gt;
+        &lt;md-select class&#x3D;&quot;professor2-name-input&quot; placeholder&#x3D;&quot;Docente 2&quot; [(ngModel)]&#x3D;&quot;professorTwoSIAPE&quot; name&#x3D;&quot;professorTwoSIAPE&quot;&gt;
+          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAPE&quot;&gt;
             {{ prof.name }}
           &lt;/md-option&gt;
         &lt;/md-select&gt;
@@ -907,7 +907,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><md-card class="edit-allocation-card">  <form (submit)="onUpdateAllocation()" #allocationForm="ngForm" align="center">    <md-toolbar color="primary" class="edit-allocation-card-toolbar">        Editar Alocação        <span class="spacer"></span>        <button md-button style="margin-right: 5px" [routerLink]="[\'/allocations\']">Cancelar</button>    </md-toolbar>    <md-card-content class="edit-allocation-card-content">      <div class="edit-allocation-card-row">        <!--MAKE IT PRETTIER?? (and more intuitive)-->        <label style="color: gray" [ngModel]="course" name="course" class="course-name2-input">{{course}}</label>        <label style="color: gray" [ngModel]="professorOneName" name="professorOneName" class="professor1-name2-input">{{professorOneName}}</label>        <label style="color: gray" [ngModel]="professorTwoName" name="professorTwoName" class="professor2-name2-input">{{professorTwoName}}</label>      </div>      <div class="edit-allocation-card-row">        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>          <md-option *ngFor="let course of coursesList" [value]="course.$key">            {{ course.name }}          </md-option>        </md-select>        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">            {{ prof.name }}          </md-option>        </md-select>        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">            {{ prof.name }}          </md-option>        </md-select>      </div>      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>    </md-card-content>  </form></md-card></div>'
+        var COMPONENT_TEMPLATE = '<div><md-card class="edit-allocation-card">  <form (submit)="onUpdateAllocation()" #allocationForm="ngForm" align="center">    <md-toolbar color="primary" class="edit-allocation-card-toolbar">        Editar Alocação        <span class="spacer"></span>        <button md-button style="margin-right: 5px" [routerLink]="[\'/allocations\']">Cancelar</button>    </md-toolbar>    <md-card-content class="edit-allocation-card-content">      <div class="edit-allocation-card-row">        <!--MAKE IT PRETTIER?? (and more intuitive)-->        <label style="color: gray" [ngModel]="course" name="course" class="course-name2-input">{{course}}</label>        <label style="color: gray" [ngModel]="professorOneName" name="professorOneName" class="professor1-name2-input">{{professorOneName}}</label>        <label style="color: gray" [ngModel]="professorTwoName" name="professorTwoName" class="professor2-name2-input">{{professorTwoName}}</label>      </div>      <div class="edit-allocation-card-row">        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>          <md-option *ngFor="let course of coursesList" [value]="course.$key">            {{ course.name }}          </md-option>        </md-select>        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAPE" name="professorOneSIAPE" required>          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">            {{ prof.name }}          </md-option>        </md-select>        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAPE" name="professorTwoSIAPE">          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">            {{ prof.name }}          </md-option>        </md-select>      </div>      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>    </md-card-content>  </form></md-card></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeBodyComponent', 'selector': 'app-home-body'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EditAllocationComponent'};

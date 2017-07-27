@@ -761,12 +761,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> professorOneSIAP</b>
+                            <b> professorOneSIAPE</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>professorOneSIAP:     <code>any</code>
+                            <code>professorOneSIAPE:     <code>any</code>
     </bcode>
                         </td>
                     </tr>
@@ -813,12 +813,12 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <b> professorTwoSIAP</b>
+                            <b> professorTwoSIAPE</b>
                         </td>
                     </tr>
                     <tr>
                         <td class="col-md-4">
-                            <code>professorTwoSIAP:     <code>any</code>
+                            <code>professorTwoSIAPE:     <code>any</code>
     </bcode>
                         </td>
                     </tr>
@@ -940,14 +940,14 @@
           &lt;/md-option&gt;
         &lt;/md-select&gt;
 
-        &lt;md-select class&#x3D;&quot;professor1-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorOneSIAP&quot; name&#x3D;&quot;professorOneSIAP&quot; required&gt;
-          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAP&quot;&gt;
+        &lt;md-select class&#x3D;&quot;professor1-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorOneSIAPE&quot; name&#x3D;&quot;professorOneSIAPE&quot; required&gt;
+          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAPE&quot;&gt;
             {{ prof.name }}
           &lt;/md-option&gt;
         &lt;/md-select&gt;
 
-        &lt;md-select class&#x3D;&quot;professor2-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorTwoSIAP&quot; name&#x3D;&quot;professorTwoSIAP&quot;&gt;
-          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAP&quot;&gt;
+        &lt;md-select class&#x3D;&quot;professor2-name-input&quot; placeholder&#x3D;&quot;Docente 1&quot; [(ngModel)]&#x3D;&quot;professorTwoSIAPE&quot; name&#x3D;&quot;professorTwoSIAPE&quot;&gt;
+          &lt;md-option *ngFor&#x3D;&quot;let prof of professorsList&quot; [value]&#x3D;&quot;prof.SIAPE&quot;&gt;
             {{ prof.name }}
           &lt;/md-option&gt;
         &lt;/md-select&gt;
@@ -982,7 +982,7 @@
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><md-card class="new-allocation-card">  <form (ngSubmit)="onAddNewAllocation()" #allocationForm="ngForm" align="center">    <md-toolbar color="primary" class="new-allocation-card-toolbar">        Adicionar Alocação    </md-toolbar>    <md-card-content class="new-allocation-card-content">      <div class="new-allocation-card-row">        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>          <md-option *ngFor="let course of coursesList" [value]="course.$key">            {{ course.name }}          </md-option>        </md-select>        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">            {{ prof.name }}          </md-option>        </md-select>        <md-select class="professor2-name-input" placeholder="Docente 1" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">            {{ prof.name }}          </md-option>        </md-select>      </div>      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>    </md-card-content>  </form></md-card><app-allocation-table></app-allocation-table></div>'
+        var COMPONENT_TEMPLATE = '<div><md-card class="new-allocation-card">  <form (ngSubmit)="onAddNewAllocation()" #allocationForm="ngForm" align="center">    <md-toolbar color="primary" class="new-allocation-card-toolbar">        Adicionar Alocação    </md-toolbar>    <md-card-content class="new-allocation-card-content">      <div class="new-allocation-card-row">        <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>          <md-option *ngFor="let course of coursesList" [value]="course.$key">            {{ course.name }}          </md-option>        </md-select>        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAPE" name="professorOneSIAPE" required>          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">            {{ prof.name }}          </md-option>        </md-select>        <md-select class="professor2-name-input" placeholder="Docente 1" [(ngModel)]="professorTwoSIAPE" name="professorTwoSIAPE">          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">            {{ prof.name }}          </md-option>        </md-select>      </div>      <button md-button [disabled]="!allocationForm.form.valid" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Alocar</button>    </md-card-content>  </form></md-card><app-allocation-table></app-allocation-table></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeBodyComponent', 'selector': 'app-home-body'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AddAllocationComponent'};

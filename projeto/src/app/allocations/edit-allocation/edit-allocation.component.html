@@ -21,14 +21,14 @@
           </md-option>
         </md-select>
 
-        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAP" name="professorOneSIAP" required>
-          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+        <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professorOneSIAPE" name="professorOneSIAPE" required>
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">
             {{ prof.name }}
           </md-option>
         </md-select>
 
-        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAP" name="professorTwoSIAP">
-          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAP">
+        <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professorTwoSIAPE" name="professorTwoSIAPE">
+          <md-option *ngFor="let prof of professorsList" [value]="prof.SIAPE">
             {{ prof.name }}
           </md-option>
         </md-select>

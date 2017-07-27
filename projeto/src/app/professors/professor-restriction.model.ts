@@ -2,19 +2,19 @@
 
 export class ProfessorRestriction {
     constructor(
-        public SIAPSemester: string,
+        public SIAPESemester: string,
         public minCredits: number,
         public maxCredits: number,
         public graduateCredits: number,
         public scheduleRestrictions: ScheduleRestriction
     ) { }
 
-    getSIAPSemester() {
-        return this.SIAPSemester;
+    getSIAPESemester() {
+        return this.SIAPESemester;
     }
 
-    setSIAPSemester(newSIAPSemester: string) {
-        this.SIAPSemester = newSIAPSemester;
+    setSIAPESemester(newSIAPESemester: string) {
+        this.SIAPESemester = newSIAPESemester;
     }
 
     getMinCredits() {

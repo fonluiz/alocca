@@ -12,7 +12,7 @@ import { SnackbarsService } from '../../services/snackbars.service';
 export class AddUserComponent implements OnInit {
   email: string;
   name: string;
-  SIAP: string;
+  SIAPE: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
   TIMEOUT_SAVED_MESSAGE = 2500;
@@ -27,7 +27,7 @@ export class AddUserComponent implements OnInit {
 
   onAddNewUser(){
     let user = {
-      SIAP: this.SIAP,
+      SIAPE: this.SIAPE,
       email: this.email,
       name: this.name
     }
@@ -35,7 +35,7 @@ export class AddUserComponent implements OnInit {
     let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
     console.log(this.email);
 
-    this.SIAP = null;
+    this.SIAPE = null;
     this.email = null;
     this.name = null;
 

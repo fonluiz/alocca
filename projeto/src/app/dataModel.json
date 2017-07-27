@@ -1,7 +1,7 @@
 {
     "root":{        
         "professors":{
-            "SIAP":{
+            "SIAPE":{
                 "name": "Joseana",
                 "nickname": "Jozzyh"
             }
@@ -19,13 +19,13 @@
             }
         },
         "requests":{
-            "requestSIAP":{
+            "requestSIAPE":{
                 "name": "fulano",
                 "email": "fulano.carvalho@ccc.ufcg.edu.br"
             }
         },
         "users":{
-            "userSIAP":{
+            "userSIAPE":{
                 "name": "sicrano",
                 "email": "sicrano.silva@computacao.ufcg.edu.br"
             }
@@ -60,7 +60,7 @@
             }
         },
         "professorRestrictions":{
-            "professorSIAP+semesterKey":{
+            "professorSIAPE+semesterKey":{
                 "minimumCredits":2,
                 "maximumCredits":10,
                 "gradCredits":4,

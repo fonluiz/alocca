@@ -679,12 +679,12 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> getProfessorNameWithSIAP</b>
+                                    <b> getProfessorNameWithSIAPE</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>getProfessorNameWithSIAP(professorSIAP: )</code>
+            <code>getProfessorNameWithSIAPE(professorSIAPE: )</code>
                                 </td>
                             </tr>
             
@@ -1968,19 +1968,19 @@ export class FirebaseService {
     return this.allocations;
   }
   addAllocation(allocation){
-    if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
+    if(this.allocationExists(allocation.professorOneSIAPE+allocation.courseKey)){
       return false;
     }
-    if (allocation.professorTwoSIAP) {
-      if(this.db.database.ref(&quot;allocations/&quot;+allocation.professorOneSIAP+allocation.courseKey).set({
+    if (allocation.professorTwoSIAPE) {
+      if(this.db.database.ref(&quot;allocations/&quot;+allocation.professorOneSIAPE+allocation.courseKey).set({
           course: this.getCourseName(allocation.courseKey),
           courseType: this.getCourseType(allocation.courseKey),
           courseCredits: this.getCourseCredits(allocation.courseKey),
           classNumber: this.getClassesNumber(allocation.courseKey),
-          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-          professorOneSIAP: allocation.professorOneSIAP,
-          professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
-          professorTwoSIAP: allocation.professorTwoSIAP
+          professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
+          professorOneSIAPE: allocation.professorOneSIAPE,
+          professorTwoName: this.getProfessorNameWithSIAPE(allocation.professorTwoSIAPE),
+          professorTwoSIAPE: allocation.professorTwoSIAPE
           //add note field
         })){
         return true;
@@ -1988,13 +1988,13 @@ export class FirebaseService {
         return false;
       }
     } else {
-      if(this.db.database.ref(&quot;allocations/&quot;+allocation.professorOneSIAP+allocation.courseKey).set({
+      if(this.db.database.ref(&quot;allocations/&quot;+allocation.professorOneSIAPE+allocation.courseKey).set({
           course: this.getCourseName(allocation.courseKey),
           courseType: this.getCourseType(allocation.courseKey),
           courseCredits: this.getCourseCredits(allocation.courseKey),
           classNumber: this.getClassesNumber(allocation.courseKey),
-          professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-          professorOneSIAP: allocation.professorOneSIAP
+          professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
+          professorOneSIAPE: allocation.professorOneSIAPE
           //add note field
         })){
         return true;
@@ -2039,9 +2039,9 @@ export class FirebaseService {
       }
     }
   }
-  getProfessorNameWithSIAP(professorSIAP) {
+  getProfessorNameWithSIAPE(professorSIAPE) {
     var professorName: String &#x3D; &quot;-&quot;;
-    this.db.database.ref(&quot;professors/&quot;+professorSIAP).once(&quot;value&quot;, function(snapshot){
+    this.db.database.ref(&quot;professors/&quot;+professorSIAPE).once(&quot;value&quot;, function(snapshot){
       professorName &#x3D; snapshot.child(&#x27;name&#x27;).val();
     });
     return professorName;
@@ -2105,10 +2105,10 @@ export class FirebaseService {
 
   ///Professors
   addNewProfessor(newprofessor){
-    if(this.professorExists(newprofessor.SIAP)){
+    if(this.professorExists(newprofessor.SIAPE)){
         return false;
     }else{
-      this.db.database.ref(&quot;professors/&quot;+newprofessor.SIAP).set(newprofessor);
+      this.db.database.ref(&quot;professors/&quot;+newprofessor.SIAPE).set(newprofessor);
       return true;
     }  
   }
@@ -2120,8 +2120,8 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
-    if (id!&#x3D;&#x3D;professor.SIAP){
-      if(this.professorExists(professor.SIAP)){
+    if (id!&#x3D;&#x3D;professor.SIAPE){
+      if(this.professorExists(professor.SIAPE)){
         return false;
       }
       this.deleteProfessor(id,professor.name);
@@ -2136,18 +2136,18 @@ export class FirebaseService {
     var thisObject &#x3D; this;
     this.db.database.ref(&quot;allocations/&quot;).once(&quot;value&quot;).then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        if (childSnapshot.child(&#x27;professorOneSIAP&#x27;).val() &#x3D;&#x3D;&#x3D; id &amp;&amp; !childSnapshot.child(&#x27;professorTwoSIAP&#x27;).val()){
+        if (childSnapshot.child(&#x27;professorOneSIAPE&#x27;).val() &#x3D;&#x3D;&#x3D; id &amp;&amp; !childSnapshot.child(&#x27;professorTwoSIAPE&#x27;).val()){
             thisObject.deleteAllocation(childSnapshot.key,(childSnapshot.child(&#x27;course&#x27;).val()+childSnapshot.child(&#x27;courseCredits&#x27;).val()));
-        }else if(childSnapshot.child(&#x27;professorOneSIAP&#x27;).val() &#x3D;&#x3D;&#x3D; id){
+        }else if(childSnapshot.child(&#x27;professorOneSIAPE&#x27;).val() &#x3D;&#x3D;&#x3D; id){
           let allocation &#x3D; {
             courseKey: childSnapshot.child(&#x27;course&#x27;).val()+childSnapshot.child(&#x27;courseCredits&#x27;).val(),
-            professorOneSIAP: childSnapshot.child(&#x27;professorTwoSIAP&#x27;).val()
+            professorOneSIAPE: childSnapshot.child(&#x27;professorTwoSIAPE&#x27;).val()
           };
           thisObject.updateAllocation(childSnapshot.key,allocation);
-        }else if(childSnapshot.child(&#x27;professorTwoSIAP&#x27;).val() &#x3D;&#x3D;&#x3D; id){
+        }else if(childSnapshot.child(&#x27;professorTwoSIAPE&#x27;).val() &#x3D;&#x3D;&#x3D; id){
           let allocation &#x3D; {
             courseKey: childSnapshot.child(&#x27;course&#x27;).val()+childSnapshot.child(&#x27;courseCredits&#x27;).val(),
-            professorOneSIAP: childSnapshot.child(&#x27;professorOneSIAP&#x27;).val()
+            professorOneSIAPE: childSnapshot.child(&#x27;professorOneSIAPE&#x27;).val()
           };
           thisObject.updateAllocation(childSnapshot.key,allocation);
         }

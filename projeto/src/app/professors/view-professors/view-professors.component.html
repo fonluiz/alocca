@@ -12,16 +12,16 @@
         <tr>
           <th>Nome</th>
           <th>Apelido</th>
-          <th>Matrícula SIAP</th>
+          <th>Matrícula SIAPE</th>
           <th></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let professor of professors">
-          <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+professor.SIAP+'-'+this.navbarService.getSemester()]">{{professor.name}}</a></td>
+          <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+professor.SIAPE+'-'+this.navbarService.getSemester()]">{{professor.name}}</a></td>
           <td>{{professor.nickname}}</td>
-          <td>{{professor.SIAP}}</td>
+          <td>{{professor.SIAPE}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
           <!--mudar para atualizar melhor??-->
           <td><button (click)="onDeleteProfessor(professor.$key,professor.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>

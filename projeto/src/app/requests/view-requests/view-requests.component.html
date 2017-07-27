@@ -10,7 +10,7 @@
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
-          <th>SIAP</th>
+          <th>SIAPE</th>
           <th>Nome</th>
           <th>Email</th>
           <th></th>
@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let request of requests">
-          <td>{{request.SIAP}}</td>
+          <td>{{request.SIAPE}}</td>
           <td>{{request.name}}</td>
           <td>{{request.email}}</td>
           <td><button (click)="onAcceptRequest(request)" class="mdl-button mdl-js-button mdl-button--primary">Aceitar</button></td>

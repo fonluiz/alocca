@@ -51,20 +51,20 @@ export class FirebaseService {
     return this.allocations;
   }
   addAllocation(allocation){
-    if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
+    if(this.allocationExists(allocation.professorOneSIAPE+allocation.courseKey)){
       return false;
     }
-    else if (allocation.professorTwoSIAP) {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
+    else if (allocation.professorTwoSIAPE) {
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAPE+allocation.courseKey).set({
         caControl: false,
         course: this.getCourseName(allocation.courseKey),
         courseType: this.getCourseType(allocation.courseKey),
         courseCredits: this.getCourseCredits(allocation.courseKey),
         classNumber: this.getClassesNumber(allocation.courseKey),
-        professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-        professorOneSIAP: allocation.professorOneSIAP,
-        professorTwoName: this.getProfessorNameWithSIAP(allocation.professorTwoSIAP),
-        professorTwoSIAP: allocation.professorTwoSIAP,
+        professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
+        professorOneSIAPE: allocation.professorOneSIAPE,
+        professorTwoName: this.getProfessorNameWithSIAPE(allocation.professorTwoSIAPE),
+        professorTwoSIAPE: allocation.professorTwoSIAPE,
         courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
         courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
         note: allocation.note
@@ -74,14 +74,14 @@ export class FirebaseService {
         return false;
       }
     } else {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAP+allocation.courseKey).set({
+      if(this.db.database.ref("allocations/"+allocation.professorOneSIAPE+allocation.courseKey).set({
         caControl: false,
         course: this.getCourseName(allocation.courseKey),
         courseType: this.getCourseType(allocation.courseKey),
         courseCredits: this.getCourseCredits(allocation.courseKey),
         classNumber: this.getClassesNumber(allocation.courseKey),
-        professorOneName: this.getProfessorNameWithSIAP(allocation.professorOneSIAP),
-        professorOneSIAP: allocation.professorOneSIAP,
+        professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
+        professorOneSIAPE: allocation.professorOneSIAPE,
         courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
         courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
         note: allocation.note
@@ -97,9 +97,9 @@ export class FirebaseService {
     return this.allocation;
   }
   updateAllocation(id,allocation){
-    if(id!=allocation.professorOneSIAP+allocation.courseKey){
+    if(id!=allocation.professorOneSIAPE+allocation.courseKey){
       console.log('what??');
-      if(this.allocationExists(allocation.professorOneSIAP+allocation.courseKey)){
+      if(this.allocationExists(allocation.professorOneSIAPE+allocation.courseKey)){
         console.log('what??2222');
         return false;
       }
@@ -184,9 +184,9 @@ export class FirebaseService {
     );
   }
 
-  getProfessorNameWithSIAP(professorSIAP) {
+  getProfessorNameWithSIAPE(professorSIAPE) {
     var professorName: String = "-";
-    this.db.database.ref("professors/"+professorSIAP).once("value", function(snapshot){
+    this.db.database.ref("professors/"+professorSIAPE).once("value", function(snapshot){
       professorName = snapshot.child('name').val();
     });
     return professorName;
@@ -266,10 +266,10 @@ export class FirebaseService {
 
   ///Professors
   addNewProfessor(newprofessor){
-    if(this.professorExists(newprofessor.SIAP)){
+    if(this.professorExists(newprofessor.SIAPE)){
         return false;
     }else{
-      this.db.database.ref("professors/"+newprofessor.SIAP).set(newprofessor);
+      this.db.database.ref("professors/"+newprofessor.SIAPE).set(newprofessor);
       return true;
     }  
   }
@@ -281,8 +281,8 @@ export class FirebaseService {
     return this.professor;
   }
   updateProfessor(id, professor){
-    if (id!==professor.SIAP){
-      if(this.professorExists(professor.SIAP)){
+    if (id!==professor.SIAPE){
+      if(this.professorExists(professor.SIAPE)){
         return false;
       }
       this.deleteProfessor(id);
@@ -380,10 +380,10 @@ export class FirebaseService {
     }
   }
   addNewUser(newUser){
-      if (this.emailAlreadySaved(newUser.SIAP)){
+      if (this.emailAlreadySaved(newUser.SIAPE)){
         return false;
       }else{
-        this.db.database.ref("users/"+newUser.SIAP).set(newUser);
+        this.db.database.ref("users/"+newUser.SIAPE).set(newUser);
         this.usersEmails.push({
           email: newUser.email
         });
@@ -422,7 +422,7 @@ export class FirebaseService {
     if(this.requestExists(newRequest.email)){
       return false;
     }else{
-      this.db.database.ref("requests/"+newRequest.SIAP).set(newRequest);
+      this.db.database.ref("requests/"+newRequest.SIAPE).set(newRequest);
       this.requestsEmails.push({
         email: newRequest.email
       });
@@ -487,7 +487,7 @@ export class FirebaseService {
       return this.professorRestrictions;
   }
   saveProfessorRestriction(restriction: ProfessorRestriction) {
-      this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPSemester())
+      this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPESemester())
           .set(restriction.toFirebaseObject());
   }
 

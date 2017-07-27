@@ -90,6 +90,8 @@ export class AddRestrictionComponent implements OnInit {
   getRestrictionsFromCheckbox(startIndex: number, restrictionsArray: number[]) {
       var iteration = 0;
       for (var i = startIndex; i <= 40; i += 5) {
+          console.log(document.getElementsByName("graduateCredits"));
+          console.log(document.getElementById("input-md-checkbox-" + i));
           var checkbox = <MdCheckbox><any>document.getElementById("input-md-checkbox-" + i);
           if (checkbox.checked) {
               restrictionsArray.push(this.integerHours[iteration]);
