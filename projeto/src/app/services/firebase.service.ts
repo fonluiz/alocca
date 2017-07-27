@@ -189,7 +189,8 @@ export class FirebaseService {
   }
 
   getClasses() {
-    return this.classes;
+    let classesList = this.db.list('/classes/'+this.currentSemester) as FirebaseListObservable<any[]>;
+    return classesList;
   }
 
   getClassDetails(id){

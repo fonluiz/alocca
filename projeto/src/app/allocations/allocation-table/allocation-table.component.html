@@ -18,11 +18,11 @@
       <tr *ngFor = 'let class of classesList'>
         <td><md-checkbox></md-checkbox></td>
         <td>{{class.course}}</td>
-        <td><!--CHANGE TO GET RECOMENDED SEMESTER--></td>
+        <!--CHANGE TO GET RECOMENDED SEMESTER-->
         <td>{{class.number}}</td>
         <td>{{class.period}}</td>
-        <td>{{class.professorOne}}</td>
-        <td>{{class.professorTwo}}</td>
+        <td>{{class.professor1}}</td>
+        <td>{{class.professor2}}</td>
         <td>{{class.schedules}}</td>
         <td>{{class.note}}</td>
         <td [routerLink]="['/edit-allocation/'+class.$key]">Editar</td>

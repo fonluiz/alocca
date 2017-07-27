@@ -55,5 +55,10 @@ export class NavbarComponent implements OnInit {
 
   emitSemesterSelected() {
       this.navbarService.emitSemesterSelected(this.selectedSemesterID);
+      let currentPage = this.router.url;
+      console.log(currentPage);
+      this.router.navigate(['/home']).then(()=>{
+        this.router.navigateByUrl(currentPage);
+      });
   }
 }

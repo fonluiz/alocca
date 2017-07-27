@@ -5,7 +5,7 @@ import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarsService } from '../../services/snackbars.service';
-import { NavbarService } from "app/navbar/navbar.service";
+import { NavbarService } from "../../navbar/navbar.service";
 
 @Component({
   selector: 'app-view-professors',
@@ -35,7 +35,6 @@ export class ViewProfessorsComponent implements OnInit {
     this.FBservice.getProfessors().subscribe(professors =>{
       this.professors = professors;
       });
-    this.getSelectedSemester();
   }
 
 
@@ -54,10 +53,5 @@ export class ViewProfessorsComponent implements OnInit {
         }
       });
   }
-
-  getSelectedSemester() {
-      this.selectedSemesterID = this.navbarService.getSemester();
-  }
-  
 
 }
