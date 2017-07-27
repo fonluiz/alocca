@@ -4,8 +4,8 @@
       <tr>
         <th>Verificado</th>
         <th>Disciplina</th>
-        <th>Período</th>
         <th>Turma</th>
+        <th>Período</th>
         <th>Professor 1</th>
         <th>Professor 2</th>
         <th>Horários</th>
@@ -20,12 +20,13 @@
         <td>{{class.course}}</td>
         <td><!--CHANGE TO GET RECOMENDED SEMESTER--></td>
         <td>{{class.number}}</td>
+        <td>{{class.period}}</td>
         <td>{{class.professorOne}}</td>
         <td>{{class.professorTwo}}</td>
         <td>{{class.schedules}}</td>
         <td>{{class.note}}</td>
-        <td>Editar</td>
-        <td>Excluir</td>
+        <td [routerLink]="['/edit-allocation/'+class.$key]">Editar</td>
+        <td (click)="onDeleteClass(class.$key)">Excluir</td>
       </tr>
     </tbody>
   </table>

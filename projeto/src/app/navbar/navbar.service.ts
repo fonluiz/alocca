@@ -1,16 +1,15 @@
-﻿import { Injectable } from "@angular/core";
+﻿import { Injectable, EventEmitter } from "@angular/core";
 
 @Injectable()
 export class NavbarService {
+    semesterSelected: EventEmitter<string> = new EventEmitter();
 
-    private selectedSemester: string;
-
-    public getSemester(): string {
-        return this.selectedSemester;
+    public getSemesterSelectedEmitter() {
+        return this.semesterSelected;
     }
 
-    public setSemester(newSemester: string){
-        this.selectedSemester = newSemester;
+    public emitSemesterSelected(semester: string){
+        this.semesterSelected.emit(semester)
     }
 }
 

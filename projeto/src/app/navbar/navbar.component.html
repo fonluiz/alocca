@@ -40,13 +40,13 @@
       
         <div class="mdl-layout-spacer"></div>
 
-        <md-select (change)="checkSemester()" class="semester-select mdl-color-text--white" [(ngModel)]="selectedSemesterID" name="selectedSemesterID" style="margin-right: 10px">
+        <md-select (change)="emitSemesterSelected()" [(ngModel)]="selectedSemesterID" name="selectedSemesterID" style="margin-right: 10px">
           <md-option (click)="openDialog()">
             <!--<md-icon>add_circle_outline</md-icon>-->
             Novo Semestre
           </md-option>
           <md-option *ngFor="let sem of semesters" [value]="sem.$key">
-            {{ sem.$key.replace('-','.') }}
+            {{ sem.name }}
           </md-option>
         </md-select>
 

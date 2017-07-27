@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { SnackbarsService } from '../../services/snackbars.service'
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -16,31 +17,20 @@ import { Schedule } from '../schedule.model'
   styleUrls: ['./add-allocation.component.css']
 })
 export class AddAllocationComponent implements OnInit {
-  // courseCtrl:FormControl;
-  // filteredCourses: any;
-  SAVED_SUCCESSFULLY_MESSAGE: string = "Alocação salva com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a alocação. Verifique se a turma já foi alocada.";
-  TIMEOUT_SAVED_MESSAGE = 2500;
-  TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  SAVED_SUCCESSFULLY_MESSAGE: string = "Novas turmas criadas!";
+  NOT_SAVED_MESSAGE: string = "Erro ao salvar. Verifique se a turma já foi cadastrada.";
+  MESSAGES_TIME = 4000;
   coursesList: any[];
   courseKey: any;
   classesNumber: number;
 
+  courseName: string;
+
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private flashMessage: FlashMessagesService
-    ) {
-      // this.courseCtrl = new FormControl();
-      // this.filteredCourses = this.courseCtrl.valueChanges
-      //   .startWith(null)
-      //   .map(name => this.filterCourses(name));
-  }
-
-  // filterCourses(val: string) {
-  //   return val ? this.coursesList.filter(s => s.toLowerCase().indexOf(val.toLowerCase()) === 0)
-  //              : this.coursesList;
-  // }
+    private snackbarsService: SnackbarsService
+    ) {}
 
 
   ngOnInit() {
@@ -51,19 +41,15 @@ export class AddAllocationComponent implements OnInit {
 
   saveNewClasses(){
     for (var _i = 1; _i <= this.classesNumber; _i++) {
-          let newClass = new Class(this.courseKey, _i, null, null, null, null); 
+          let newClass = new Class(this.courseName, _i);
           this.FBservice.saveClass(newClass);
     }
-  }
 
-  addAlocationToFirebase(allocation) {
-    let savedSuccessfully: boolean = this.FBservice.addAllocation(allocation);
+    // if (savedSuccessfully) {
+    //   this.snackbarsService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE, this.MESSAGES_TIME);
+    // } else {
+    //   this.snackbarsService.openSnackBar(this.NOT_SAVED_MESSAGE, this.MESSAGES_TIME);
+    // }
 
-    if (savedSuccessfully) {
-        this.flashMessage.show(this.SAVED_SUCCESSFULLY_MESSAGE, { cssClass: 'alert-success', timeout: this.TIMEOUT_SAVED_MESSAGE });
-    } else {
-        this.flashMessage.show(this.NOT_SAVED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_SAVED_MESSAGE });
-    }
-    this.router.navigate(['/allocations']);
   }
 }

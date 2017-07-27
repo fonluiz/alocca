@@ -9,14 +9,16 @@ import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model';
 import { Class } from '../allocations/class.model';
+import { NavbarService } from "app/navbar/navbar.service";
 
 @Injectable()
 export class FirebaseService {
-  CLASSES_PATH = '/classes/';
-  SEMESTERS_PATH = '/semesters/';
+  CLASSES_PATH = '/classes';
+  SEMESTERS_PATH = '/semesters';
   PROFESSORS_RESTRICTIONS_PATH = '/professorRestrictions/';
   //"local"
   classes: FirebaseListObservable<any[]>;
+  class_: FirebaseObjectObservable<any>;
   allocations: FirebaseListObservable<any[]>;
   allocation: FirebaseObjectObservable<any>;
   professors: FirebaseListObservable<any[]>;
@@ -29,12 +31,13 @@ export class FirebaseService {
   requests: FirebaseListObservable<any[]>;
   request: FirebaseObjectObservable<any>;
   requestsEmails: FirebaseListObservable<any[]>;
-  semesters: FirebaseListObservable<Semester[]>;
+  semesters: FirebaseListObservable<any[]>;
   professorRestrictions: FirebaseListObservable<any[]>;
-
-  constructor(private db: AngularFireDatabase)  {
+  private currentSemester: string;
+  
+  constructor(private db: AngularFireDatabase,
+              private  navbarService: NavbarService)  {
     this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
-    this.classes = db.list(this.CLASSES_PATH) as FirebaseListObservable<Class[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -44,6 +47,11 @@ export class FirebaseService {
     this.semesters = db.list(this.SEMESTERS_PATH) as FirebaseListObservable<any[]>;
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
     this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
+
+    this.navbarService.getSemesterSelectedEmitter().subscribe(sem => {
+      this.currentSemester = sem;
+      this.classes = db.list(this.CLASSES_PATH + '/' + this.currentSemester) as FirebaseListObservable<Class[]>;
+    })
   }
 
   ///Allocation
@@ -159,13 +167,34 @@ export class FirebaseService {
     });
   }
 
+//Classes
+  updateClass(id, classToUpdate: Class){
+    this.deleteClass(id);
+    this.saveClass(classToUpdate);
+  }
+
   saveClass(classToSave: Class) {
-    let key = this.classes.push(classToSave).key;
-    this.addClassToSemester(key);
+    var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
+    // Only saves the data if it does not exists already
+   classRef.once('value').then(
+      function(snapshot) {
+        if (snapshot.val() == null) {
+          classRef.set(classToSave.toFirebaseObject());
+          return true;
+        } else {
+          return false;
+        }
+      }
+    );
   }
 
   getClasses() {
     return this.classes;
+  }
+
+  getClassDetails(id){
+    this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
+    return this.class_;
   }
 
   private addClassToSemester(classId: string) {
@@ -225,6 +254,7 @@ export class FirebaseService {
     return credits;
   }
   deleteClass(courseKey){
+    this.classes.remove(courseKey);
     var newClassesNumber:number;
     this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
       newClassesNumber = (snapshot.child('classesNumber').val() - 1);
@@ -474,7 +504,7 @@ export class FirebaseService {
 
   // Semesters
   saveSemester(semester: Semester) {
-      this.db.database.ref(this.SEMESTERS_PATH + semester.getId())
+      this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
   }
   

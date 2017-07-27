@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { NavbarService } from "app/navbar/navbar.service";
 
+
 @Component({
   selector: 'app-allocation-table',
   templateUrl: './allocation-table.component.html',
@@ -12,19 +13,26 @@ export class AllocationTableComponent implements OnInit {
   classesList: any[];
   selectedSemesterID: string;
 
+
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private navbarService: NavbarService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.FBservice.getClasses().subscribe( classes =>{
       this.classesList = classes;
-      });
-      this.selectedSemesterID = this.navbarService.getSemester();
+    });
+
+      // this.selectedSemesterID = this.navbarService.get();
 
       console.log(this.FBservice.getClasses());
+  }
+
+  onDeleteClass(id){
+    this.FBservice.deleteClass(id);
+
   }
 
 
@@ -37,6 +45,9 @@ export class AllocationTableComponent implements OnInit {
     if(this.FBservice.changeCAStatus(id,stats)){
       this.router.navigate(['/allocations']);
     }
+  }
+  getSelectedSemester() {
+      // this.selectedSemesterID = this.navbarService.getSemester();
   }
 
 }
