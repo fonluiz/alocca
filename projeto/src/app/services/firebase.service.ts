@@ -500,4 +500,10 @@ export class FirebaseService {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
   }
+
+  //EXTRA METHODS FOR TESTING/STUB
+  getClassesOnSchedule(){
+    let classesList = this.db.list('/classes/2017-1') as FirebaseListObservable<any[]>;
+    return classesList;
+  }
 }
