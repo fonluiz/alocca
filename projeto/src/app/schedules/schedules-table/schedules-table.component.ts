@@ -12,7 +12,8 @@ import { SnackbarsService } from '../../services/snackbars.service';
 })
 export class SchedulesTableComponent implements OnInit {
   //chane type to class[]
-  schedules: any[];
+  scheduledClasses: any[];
+  classesToSchedule: any[];
   DELETED_SUCCESSFULLY_MESSAGE: string =  "Aula removida do horário";
   TIMEOUT_DELETED_MESSAGE: number = 3000;
 
@@ -24,8 +25,10 @@ export class SchedulesTableComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.FBservice.getClassesOnSchedule().subscribe(classes =>{
-      this.schedules = classes;
+    this.FBservice.getClasses().subscribe(currentClasses =>{
+      this.scheduledClasses = currentClasses;
+      //change to the ones left to schedule (not all of them)
+      this.classesToSchedule = currentClasses;
     })
   }
 
