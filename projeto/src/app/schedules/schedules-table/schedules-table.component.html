@@ -47,9 +47,11 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let class of classesToSchedule" [value]="course">
-                          {{class.course}} - t{{class.number}}
-                        </md-option>
+                        <span *ngFor="let class of classesToSchedule">
+                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                            {{class.course}} - t{{class.number}}
+                          </md-option>
+                        </span>
                       </md-select>
                     </td>
                   </tr>
@@ -85,9 +87,11 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let class of classesToSchedule" [value]="course">
-                          {{class.course}} - t{{class.number}}
-                        </md-option>
+                        <span *ngFor="let class of classesToSchedule">
+                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                            {{class.course}} - t{{class.number}}
+                          </md-option>
+                        </span>
                       </md-select>
                     </td>
                   </tr>
@@ -123,9 +127,11 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let class of classesToSchedule" [value]="course">
-                          {{class.course}} - t{{class.number}}
-                        </md-option>
+                        <span *ngFor="let class of classesToSchedule">
+                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                            {{class.course}} - t{{class.number}}
+                          </md-option>
+                        </span>
                       </md-select>
                     </td>
                   </tr>
@@ -161,9 +167,11 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let class of classesToSchedule" [value]="course">
-                          {{class.course}} - t{{class.number}}
-                        </md-option>
+                        <span *ngFor="let class of classesToSchedule">
+                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                            {{class.course}} - t{{class.number}}
+                          </md-option>
+                        </span>
                       </md-select>
                     </td>
                   </tr>
@@ -199,9 +207,11 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <md-option *ngFor="let class of classesToSchedule" [value]="course">
-                          {{class.course}} - t{{class.number}}
-                        </md-option>
+                        <span *ngFor="let class of classesToSchedule">
+                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                            {{class.course}} - t{{class.number}}
+                          </md-option>
+                        </span>
                       </md-select>
                     </td>
                   </tr>
