@@ -20,6 +20,8 @@ export class ViewProfessorsComponent implements OnInit {
     NOT_DELETED_MESSAGE: string = "Não foi possível remover o professor. Tente novamente!";
     TIMEOUT_DELETED_MESSAGE = 2500;
     TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+    NO_SEMESTER_SELECTED: string = "Selecione um semestre ou crie um novo";
+    TIMEOUT_NO_SEMESTER_SELECTED = 5000;
     selectedSemesterID: string;
 
   constructor(
@@ -35,6 +37,15 @@ export class ViewProfessorsComponent implements OnInit {
     this.FBservice.getProfessors().subscribe(professors =>{
       this.professors = professors;
       });
+  }
+
+  onEditRestrictions(siape: string){
+    this.selectedSemesterID = this.FBservice.getCurrentSemester()
+    if(this.selectedSemesterID){
+      this.router.navigate(['/add-restriction/'+siape+'-'+this.selectedSemesterID]);
+    }else{
+      this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
+    }
   }
 
 
