@@ -18,9 +18,9 @@
     },
     "requests": {
       ".read": "auth != null",
-    	".write": "auth != null"
+    	".write": "true"
     },
-    "requestEmails": {
+    "requestsEmails": {
       ".read": "true",
     	".write": "true"
     },
