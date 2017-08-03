@@ -3,14 +3,14 @@
   padding: 0px 0px 0px 0px;
 }
 
-.new-semester-card-content {
+#new-semester-card-content {
   display: inline-block;
 }
 
-.year-input {
+#year-input {
   margin-right: 30px;
 }
 
-.dialog-actions {
+#dialog-actions {
   margin-top: 20px;
 }
