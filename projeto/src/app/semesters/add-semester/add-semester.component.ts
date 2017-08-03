@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { Semester } from '../semester.model';
 
 @Component({
@@ -9,37 +8,58 @@ import { Semester } from '../semester.model';
     styleUrls: ['./add-semester.component.css']
 })
 export class AddSemesterComponent implements OnInit {
+    /**
+     * Maximum year for the creation of a semester.
+     */
     MAX_YEAR: number;
+    /**
+     * List with all years available for selection to create a new semester.
+     */
     years: number[];
-    semesters: number[];
+    /**
+     * Academic year halves available for selection to create a new semester.
+     */
+    halves: number[];
+    /**
+     * Selected year for the new semester.
+     */
     year: number;
-    semester: number;
+    /**
+     * Selected academic year half for the new semester.
+     */
+    half: number;
 
     constructor(
         private FBservice: FirebaseService
     ) {
-        this.MAX_YEAR = 2030;
         this.years = [];
-        // initialize years calling the function below. not working yet
-        // for now, this initialization should be enough.
-        this.initialize_years();
-        //this.years = [2017, 2018, 2019, 2020, 2021];
-        this.semesters = [1, 2];
+        this.MAX_YEAR = 2030;
+        this.initializeYears();
+        this.halves = [1, 2];
     }
 
-    private initialize_years = () => {
-        var i = 2017;
-        do {
-            this.years.push(i);
-            i++;
-        } while (i <= this.MAX_YEAR);
+    /**
+     * Populates the list of years, from 2017 to the MAX_YEAR defined (2030).
+     */
+    private initializeYears() {
+        var yearToBeAdded = 2017;
+        while (yearToBeAdded <= this.MAX_YEAR) {
+            this.years.push(yearToBeAdded);
+            yearToBeAdded++;
+        }
     }
-
-  onAddNewSemester() {
-      let semester = new Semester(this.year, this.semester);
+    
+    /**
+     * Creates a new semester.
+     */
+    onAddNewSemester() {
+      let semester = new Semester(this.year, this.half);
       this.FBservice.saveSemester(semester);
-  }
+    }
 
+    /**
+     * Executes its commands once the class constructor is called.
+     */
     ngOnInit() {
     }
 

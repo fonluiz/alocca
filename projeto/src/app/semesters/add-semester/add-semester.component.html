@@ -11,9 +11,9 @@
         </md-option>
       </md-select>
 
-      <md-select class="semester-input" placeholder="Semestre" [(ngModel)]="semester" name="semester" floatPlaceholder="never">
-        <md-option *ngFor="let semester of semesters" [value]="semester">
-          {{ semester }}
+      <md-select class="semester-input" placeholder="Semestre" [(ngModel)]="half" name="half" floatPlaceholder="never">
+        <md-option *ngFor="let half of halves" [value]="half">
+          {{ half }}
         </md-option>
       </md-select>
     </div>
