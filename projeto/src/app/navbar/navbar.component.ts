@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
    * Open the dialog(form) to create a new semester.
    */
   openDialog() {
-    let dialogRef = this.dialog.open(AddSemesterComponent);
+    var dialogRef = this.dialog.open(AddSemesterComponent);
     dialogRef.afterClosed().subscribe(result => {
       if (result===true){
         this.selectedSemesterID = this.FBservice.getCurrentSemester();

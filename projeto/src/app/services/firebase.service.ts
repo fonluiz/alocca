@@ -508,8 +508,10 @@ export class FirebaseService {
    * 
    * @param semester 
    * New (object) Semester to be saved.
+   * 
+   * @returns Status of the semester to be saved
    */
-  saveSemester(semester: Semester) {
+  saveSemester(semester: Semester): boolean {
       this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
       this.navbarService.emitSemesterSelected(semester.getId());
@@ -517,16 +519,18 @@ export class FirebaseService {
   }
 
   /**
-   * Obtain list of available semesters from firebase.
+   * 
+   * @returns List of available semesters from firebase.
    */
-  getSemesters() {
+  getSemesters(): FirebaseListObservable<any[]> {
       return this.semesters;
   }
 
   /**
-   * Obtain the current selected semester.
+   * 
+   * @returns Current selected semester.
    */
-  getCurrentSemester(){
+  getCurrentSemester(): string{
     return this.currentSemester;
   }
 
