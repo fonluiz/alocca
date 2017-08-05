@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { SnackbarsService } from '../../services/snackbars.service';
 import { Semester } from '../semester.model';
 
 @Component({
@@ -28,9 +29,18 @@ export class AddSemesterComponent implements OnInit {
      * Selected academic year-half for the new semester.
      */
     half: number;
+    /**
+     * Message to display when a semester is created.
+     */
+    SAVED_SUCCESSFULLY_MESSAGE: string = "Semestre criado com sucesso!";
+    /**
+     * Timeout for the message displayed in the snackbar.
+     */
+    TIMEOUT_SAVED_MESSAGE: number = 2500;
 
     constructor(
-        private FBservice: FirebaseService
+        private FBservice: FirebaseService,
+        private snackService: SnackbarsService
     ) {
         this.years = [];
         this.MAX_YEAR = 2030;
@@ -54,7 +64,9 @@ export class AddSemesterComponent implements OnInit {
      */
     onAddNewSemester() {
       let semester = new Semester(this.year, this.half);
-      this.FBservice.saveSemester(semester);
+      if(this.FBservice.saveSemester(semester)){
+          this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
+      }
     }
 
     /**

@@ -5,20 +5,19 @@
 }
 
 
-/* Remove the blue outline from a selected option*/
+/* Remove the blue outline from a selected option. */
 *:focus {
 outline: none;
 }
 
-.semester-select {
-  color: white;
+#selected-semester {
+  width: auto;
   display: inline-block;
+  margin-right: 2%;
 }
 
-.new-semester-selection {
-    display: inline;
-    align-content: center;
-    align-items: center;
+#add-semester-option{
+  vertical-align: middle;
 }
 
 .page-content{

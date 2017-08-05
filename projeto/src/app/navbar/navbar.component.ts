@@ -20,7 +20,13 @@ import { Semester } from '../semesters/semester.model';
 })
 
 export class NavbarComponent implements OnInit {
+  /**
+   * Semester options for selection.
+   */
   semesters: Semester[];
+  /**
+   * Current selected semester.
+   */
   selectedSemesterID: string;
   user: Observable<firebase.User>;
   TIMEOUT_NOT_REGISTERED = 5000;
@@ -36,29 +42,38 @@ export class NavbarComponent implements OnInit {
     private router: Router) {
     this.user = dbAuth.authState
   }
+  
   ngOnInit(){
     this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
     });
   }
 
+  /**
+   * Open the dialog(form) to create a new semester.
+   */
   openDialog() {
-      let dialogRef = this.dialog.open(AddSemesterComponent);
+    let dialogRef = this.dialog.open(AddSemesterComponent);
     dialogRef.afterClosed().subscribe(result => {
+      if (result===true){
+        this.selectedSemesterID = this.FBservice.getCurrentSemester();
+      }
     });
   }
 
-
-  logout(){
-    this.dbAuth.auth.signOut();
-  }
-
+  /**
+   * Emit the selected semester and reload the page data.
+   */
   emitSemesterSelected() {
       this.navbarService.emitSemesterSelected(this.selectedSemesterID);
-      let currentPage = this.router.url;
+      var currentPage = this.router.url;
       console.log(currentPage);
       this.router.navigate(['/home']).then(()=>{
         this.router.navigateByUrl(currentPage);
       });
+  }
+
+  logout(){
+    this.dbAuth.auth.signOut();
   }
 }

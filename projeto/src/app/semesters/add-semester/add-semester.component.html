@@ -27,7 +27,7 @@
     <div class="mdl-layout-spacer"></div>
 
     <!-- Cancels a new semester creation and closes the dialog -->
-    <button md-button md-dialog-close class="mdl-button mdl-js-button mdl-button--primary"
+    <button md-button [md-dialog-close]="false" class="mdl-button mdl-js-button mdl-button--primary"
             style="margin-right: 10px;">Cancelar</button>
             
     <!-- Closes the dialog and calls the onAddNewSemester function -->
