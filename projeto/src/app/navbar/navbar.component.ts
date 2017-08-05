@@ -9,7 +9,7 @@ import { MdDialog, MdDialogRef } from '@angular/material';
 import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { FirebaseService } from '../services/firebase.service';
-import { NavbarService } from "./navbar.service";
+import { NavbarService } from "../services/navbar.service";
 import { Semester } from '../semesters/semester.model';
 //import { User } from '../users/user.model';
 

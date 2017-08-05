@@ -9,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { User } from './users/user.model';
-import { NavbarService } from "app/navbar/navbar.service";
 
 import { SnackbarsService } from './services/snackbars.service';
 

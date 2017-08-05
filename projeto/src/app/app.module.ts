@@ -32,7 +32,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AppComponent } from './app.component';
 ///dialogs
 import { DialogsComponent } from './dialogs/dialogs.component';
-import { NavbarService } from "./navbar/navbar.service";
+import { NavbarService } from "./services/navbar.service";
 ///snackbars
 import { SnackbarsService} from './services/snackbars.service';
 

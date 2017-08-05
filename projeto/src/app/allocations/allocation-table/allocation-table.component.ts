@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
-import { NavbarService } from "app/navbar/navbar.service";
+import { NavbarService } from "../../services/navbar.service";
 
 
 @Component({
