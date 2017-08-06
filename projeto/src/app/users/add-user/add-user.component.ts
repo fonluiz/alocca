@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { User } from '../user.model';
 import { Router } from '@angular/router';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-user',
@@ -21,7 +21,7 @@ export class AddUserComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) {
   }
 

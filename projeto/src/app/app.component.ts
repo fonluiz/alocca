@@ -11,7 +11,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { User } from './users/user.model';
 import { NavbarService } from "app/navbar/navbar.service";
 
-import { SnackbarsService } from './services/snackbars.service';
+import { SnackbarService } from './services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +28,7 @@ export class AppComponent {
     public dbAuth: AngularFireAuth,
     private _flashMessagesService: FlashMessagesService,
     private router: Router,
-    private snackService: SnackbarsService) {
+    private snackService: SnackbarService) {
     this.user = dbAuth.authState;
   }
   ngOnInit(){

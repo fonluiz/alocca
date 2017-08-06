@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-view-users',
@@ -21,7 +21,7 @@ export class ViewUsersComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialogsService: DialogsService,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) { }
 
   ngOnInit() {

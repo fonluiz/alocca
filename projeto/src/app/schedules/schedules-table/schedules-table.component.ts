@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { ClassesStub } from '../classes.stub';
 import { Schedule } from '../schedule.model';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-schedules-table',
@@ -19,7 +19,7 @@ export class SchedulesTableComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private schedulesStub: ClassesStub,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) {
   }
 

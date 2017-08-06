@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
 import { Request } from '../request.model';
 import { Router } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-request-access',
@@ -21,7 +21,7 @@ export class RequestAccessComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) { }
 
 
