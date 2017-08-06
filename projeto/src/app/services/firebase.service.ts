@@ -359,8 +359,8 @@ export class FirebaseService {
     return this.course;
   }
   updateCourse(id, course){
-    if(id!==(course.name+course.credits)){
-      if(this.courseExists(course.name+course.credits)){
+    if(id!==(course.code)){
+      if(this.courseExists(course.code)){
         return false;
       }
       this.deleteCourse(id);
