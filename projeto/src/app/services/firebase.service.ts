@@ -344,10 +344,10 @@ export class FirebaseService {
 
   ///Courses
   addNewCourse(newCourse){
-    if(this.courseExists(newCourse.name+newCourse.credits)){
+    if(this.courseExists(newCourse.code)){
       return false;
     }else{
-      this.db.database.ref("courses/"+newCourse.name+newCourse.credits).set(newCourse);
+      this.db.database.ref("courses/"+newCourse.code).set(newCourse);
       return true;
     }
   }
