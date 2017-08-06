@@ -4,6 +4,12 @@ import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
 
+const DELETED_MESSAGE: string = "Usuário deletado com sucesso!";
+const NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
+const TIMEOUT_DELETED_MESSAGE = 2500;
+const TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Usuário";
+
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
@@ -11,11 +17,6 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class ViewUsersComponent implements OnInit {
   users: any[];
-  DELETED_MESSAGE: string = "Usuário deletado com sucesso!";
-  NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
-  TIMEOUT_DELETED_MESSAGE = 2500;
-  TIMEOUT_NOT_DELETED_MESSAGE = 5000;
-  CONFIRM_DELETE_DIALOG_TITLE = "Excluir Usuário";
 
   constructor(
     private FBservice: FirebaseService,
@@ -33,13 +34,13 @@ export class ViewUsersComponent implements OnInit {
 
   onDeleteUser(user){
     this.dialogsService
-            .confirm(this.CONFIRM_DELETE_DIALOG_TITLE, this.deleteConfirmationMessage(user.name))
+            .confirm(CONFIRM_DELETE_DIALOG_TITLE, this.deleteConfirmationMessage(user.name))
       .subscribe(res => {
         if (res) {
           if(this.FBservice.deleteUser(user)){
-            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+            this.snackService.openSnackBar(DELETED_MESSAGE, TIMEOUT_DELETED_MESSAGE);
           }else{
-            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+            this.snackService.openSnackBar(NOT_DELETED_MESSAGE, TIMEOUT_NOT_DELETED_MESSAGE);
           }
           this.router.navigate(['/view-users']);
         }
