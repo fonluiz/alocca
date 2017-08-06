@@ -10,6 +10,8 @@ import { AddSemesterComponent } from '../semesters/add-semester/add-semester.com
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { FirebaseService } from '../services/firebase.service';
 import { NavbarService } from "../services/navbar.service";
+import { SnackbarsService } from '../services/snackbars.service';
+import { DialogsService } from '../services/dialogs.service';
 import { Semester } from '../semesters/semester.model';
 //import { User } from '../users/user.model';
 
@@ -31,6 +33,26 @@ export class NavbarComponent implements OnInit {
   user: Observable<firebase.User>;
   TIMEOUT_NOT_REGISTERED = 5000;
   NOT_REGISTERED_MESSAGE: string = "Opa! Parece que você não está cadastrado. Entre em contato com o administrador.";
+  /**
+   * Message to display when a semester is deleted.
+   */
+  DELETED_SEMESTER: string = "Semestre removido com sucesso!"
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when a semester is deleted.
+   */
+  TIMEOUT_DELETED_SEMESTER: number = 2500;
+  /**
+   * Message to display when a semester is not deleted.
+   */
+  NOT_DELETED_SEMESTER: string = "Não foi possível remover o semestre. Tente novamente!"
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when a semester is not deleted.
+   */
+  TIMEOUT_NOT_DELETED_SEMESTER: number = 5000;
 
   constructor(
     public dialog: MdDialog,
@@ -39,7 +61,9 @@ export class NavbarComponent implements OnInit {
     public dbAuth: AngularFireAuth,
     private _flashMessagesService: FlashMessagesService,
     private navbarService: NavbarService,
-    private router: Router) {
+    private router: Router,
+    private snackService: SnackbarsService,
+    private dialogService: DialogsService) {
     this.user = dbAuth.authState
   }
   
@@ -57,6 +81,7 @@ export class NavbarComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result===true){
         this.selectedSemesterID = this.FBservice.getCurrentSemester();
+        this.emitSemesterSelected();
       }
     });
   }
@@ -70,6 +95,30 @@ export class NavbarComponent implements OnInit {
       console.log(currentPage);
       this.router.navigate(['/home']).then(()=>{
         this.router.navigateByUrl(currentPage);
+      });
+  }
+
+  /**
+   * Removes the selected semester from the system.
+   * 
+   * @param id 
+   * ID of the semester do be deleted.
+   */
+  removeSemester(id: string){
+    var title = "Excluir semestre";
+    var message = "Deseja realmente excluir esse semestre ?";
+    this.dialogService
+      .confirm(title, message)
+      .subscribe(res => {
+        if (res) {
+          if(this.FBservice.removeSemester(id)){
+            this.snackService.openSnackBar(this.DELETED_SEMESTER,this.TIMEOUT_DELETED_SEMESTER);
+            this.selectedSemesterID = null;
+            this.emitSemesterSelected();
+          }else{
+            this.snackService.openSnackBar(this.NOT_DELETED_SEMESTER,this.TIMEOUT_NOT_DELETED_SEMESTER);
+          }
+        }
       });
   }
 

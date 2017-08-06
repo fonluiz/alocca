@@ -17,6 +17,17 @@ outline: none;
 }
 
 #add-semester-option{
+  width: auto;
+  vertical-align: middle;
+}
+
+#select-semester-option{
+  width: auto;
+  vertical-align: middle;
+  align-content: center;
+}
+
+.remove-semester{
   vertical-align: middle;
 }
 

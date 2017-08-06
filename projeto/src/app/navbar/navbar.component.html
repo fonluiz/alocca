@@ -44,10 +44,12 @@
         <md-select id="selected-semester" (change)="emitSemesterSelected()" [(ngModel)]="selectedSemesterID" name="selectedSemesterID">
           <!--Added new semester-->
           <md-option (click)="openDialog()">
-            <i id="add-semester-option" class="material-icons">add_circle_outline</i> semestre
+            <md-icon id="add-semester-option">add_circle_outline</md-icon> 
+            semestre
           </md-option>
           <!--Added semesters-->
-          <md-option *ngFor="let sem of semesters" [value]="sem.$key">
+          <md-option class="select-semester-option" *ngFor="let sem of semesters" [value]="sem.$key">
+            <md-icon (click)="removeSemester(sem.$key)" class="remove-semester" *ngIf="selectedSemesterID!==sem.$key">remove_circle_outline</md-icon> 
             {{ sem.name }}
           </md-option>
         </md-select>

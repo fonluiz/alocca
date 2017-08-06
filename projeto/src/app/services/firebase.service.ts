@@ -534,7 +534,21 @@ export class FirebaseService {
     return this.currentSemester;
   }
 
-
+  /**
+   * 
+   * @param id 
+   * ID of the semester to be deleted.
+   * 
+   * @returns {boolean}
+   * Status of the operation: true if deleted.
+   */
+  removeSemester(id: string): boolean {
+    if (this.semesters.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 // Restrictions
   getProfessorRestrictionsList() {

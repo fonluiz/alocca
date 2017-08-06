@@ -2119,6 +2119,55 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
+                                    <b> removeSemester</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>removeSemester(id: string)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="545" class="link-to-prism">src/app/services/firebase.service.ts:545</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <ul class="jsdoc-params">
+                                                        <li>
+                                                            <div>
+                                                                <b>id</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>ID of the semester to be deleted.</p>
+            
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code>boolean</code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                <p>Status of the operation: true if deleted.</p>
+            
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
                                     <b> getProfessorRestrictionsList</b>
                                 </td>
                             </tr>
@@ -2131,7 +2180,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="540" class="link-to-prism">src/app/services/firebase.service.ts:540</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="554" class="link-to-prism">src/app/services/firebase.service.ts:554</a></div>
                                         </td>
                                     </tr>
             
@@ -2162,7 +2211,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="543" class="link-to-prism">src/app/services/firebase.service.ts:543</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="557" class="link-to-prism">src/app/services/firebase.service.ts:557</a></div>
                                         </td>
                                     </tr>
             
@@ -2193,7 +2242,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="548" class="link-to-prism">src/app/services/firebase.service.ts:548</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="562" class="link-to-prism">src/app/services/firebase.service.ts:562</a></div>
                                         </td>
                                     </tr>
             
@@ -2224,7 +2273,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="553" class="link-to-prism">src/app/services/firebase.service.ts:553</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="567" class="link-to-prism">src/app/services/firebase.service.ts:567</a></div>
                                         </td>
                                     </tr>
             
@@ -3304,7 +3353,21 @@ export class FirebaseService {
     return this.currentSemester;
   }
 
-
+  /**
+   * 
+   * @param id 
+   * ID of the semester to be deleted.
+   * 
+   * @returns {boolean}
+   * Status of the operation: true if deleted.
+   */
+  removeSemester(id: string): boolean {
+    if (this.semesters.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
 // Restrictions
   getProfessorRestrictionsList() {
