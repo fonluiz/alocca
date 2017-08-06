@@ -34,21 +34,17 @@ export class RequestAccessComponent implements OnInit {
     }
 
     let savedSuccessfully: boolean = this.FBservice.addNewRequest(request);
-    console.log(savedSuccessfully);
     
     this.SIAPE = null;
     this.email = null;
     this.name = null;
 
-    if(savedSuccessfully===true){
-      console.log(true);
+    if(savedSuccessfully){
         this.snackService.openSnackBar(SAVED_SUCCESSFULLY_MESSAGE, TIMEOUT_SAVED_MESSAGE);
         this.router.navigate(['/home']);
     }
     else{
-      console.log(savedSuccessfully);
         this.snackService.openSnackBar(NOT_SAVED_MESSAGE, TIMEOUT_NOT_SAVED_MESSAGE);
-        
     }
   }
 
