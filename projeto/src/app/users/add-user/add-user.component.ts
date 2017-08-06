@@ -35,8 +35,6 @@ export class AddUserComponent implements OnInit {
     }
 
     let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
-    console.log(this.email);
-
     this.SIAPE = null;
     this.email = null;
     this.name = null;
@@ -51,7 +49,7 @@ export class AddUserComponent implements OnInit {
   }
 
   ngOnInit() {
-    let initiateUsers: any[];
+    let initiateUsers: User[];
     this.FBservice.getUsers().subscribe(users =>{
       initiateUsers = users;
     });
