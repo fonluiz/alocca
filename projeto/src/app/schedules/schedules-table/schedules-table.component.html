@@ -88,7 +88,7 @@
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
+                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -128,7 +128,7 @@
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
+                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -168,7 +168,7 @@
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
+                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -208,7 +208,7 @@
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
+                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
