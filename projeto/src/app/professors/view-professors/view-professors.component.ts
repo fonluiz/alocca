@@ -5,7 +5,7 @@ import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarsService } from '../../services/snackbars.service';
-import { NavbarService } from "../../navbar/navbar.service";
+import { NavbarService } from "../../services/navbar.service";
 
 @Component({
   selector: 'app-view-professors',
@@ -20,6 +20,8 @@ export class ViewProfessorsComponent implements OnInit {
     NOT_DELETED_MESSAGE: string = "Não foi possível remover o professor. Tente novamente!";
     TIMEOUT_DELETED_MESSAGE = 2500;
     TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+    NO_SEMESTER_SELECTED: string = "Selecione um semestre ou crie um novo";
+    TIMEOUT_NO_SEMESTER_SELECTED = 5000;
     selectedSemesterID: string;
 
   constructor(
@@ -35,6 +37,15 @@ export class ViewProfessorsComponent implements OnInit {
     this.FBservice.getProfessors().subscribe(professors =>{
       this.professors = professors;
       });
+  }
+
+  onEditRestrictions(siape: string){
+    this.selectedSemesterID = this.FBservice.getCurrentSemester()
+    if(this.selectedSemesterID){
+      this.router.navigate(['/add-restriction/'+siape+'-'+this.selectedSemesterID]);
+    }else{
+      this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
+    }
   }
 
 
