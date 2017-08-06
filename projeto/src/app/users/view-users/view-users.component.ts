@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { User } from "app/users/user.model";
 
 const DELETED_MESSAGE: string = "Usuário deletado com sucesso!";
 const NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
@@ -16,7 +17,8 @@ const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Usuário";
   styleUrls: ['./view-users.component.css']
 })
 export class ViewUsersComponent implements OnInit {
-  users: any[];
+  // should be private, but if so, maybe it won't work correctly.
+  users: User[];
 
   constructor(
     private FBservice: FirebaseService,
