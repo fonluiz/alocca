@@ -9,7 +9,7 @@ import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model';
 import { Class } from '../allocations/class.model';
-import { NavbarService } from "app/navbar/navbar.service";
+import { NavbarService } from "./navbar.service";
 
 @Injectable()
 export class FirebaseService {

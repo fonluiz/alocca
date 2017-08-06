@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
-import { NavbarService } from "../../navbar/navbar.service";
+import { NavbarService } from '../../services/navbar.service';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
