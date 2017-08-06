@@ -15,6 +15,7 @@ export class ViewUsersComponent implements OnInit {
   NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
   TIMEOUT_DELETED_MESSAGE = 2500;
   TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+  CONFIRM_DELETE_DIALOG_TITLE = "Excluir Usuário";
 
   constructor(
     private FBservice: FirebaseService,
@@ -31,10 +32,8 @@ export class ViewUsersComponent implements OnInit {
   }
 
   onDeleteUser(user){
-    var title = "Excluir Usuário";
-    var message = "Deseja realmente excluir "+user.name+" ?";
     this.dialogsService
-      .confirm(title, message)
+            .confirm(this.CONFIRM_DELETE_DIALOG_TITLE, this.deleteConfirmationMessage(user.name))
       .subscribe(res => {
         if (res) {
           if(this.FBservice.deleteUser(user)){
@@ -45,6 +44,11 @@ export class ViewUsersComponent implements OnInit {
           this.router.navigate(['/view-users']);
         }
       });
+  }
+
+  deleteConfirmationMessage(name) {
+      var message = "Deseja realmente excluir " + name + " ?";
+      return message;
   }
 
 }
