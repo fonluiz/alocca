@@ -28,7 +28,7 @@
                   <th class="hour-th"></th>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
+                  <tr *ngFor = 'let class of classes'>
                     <td>{{class.course}} - t{{class.number}}</td>
 
                     <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
@@ -47,8 +47,8 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -68,7 +68,7 @@
                   <th class="hour-th"></th>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
+                  <tr *ngFor = 'let class of classes'>
                     <td>{{class.course}} - t{{class.number}}</td>
 
                     <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
@@ -87,8 +87,8 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -108,7 +108,7 @@
                   <th class="hour-th"></th>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
+                  <tr *ngFor = 'let class of classes'>
                     <td>{{class.course}} - t{{class.number}}</td>
 
                     <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
@@ -127,8 +127,8 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -148,7 +148,7 @@
                   <th class="hour-th"></th>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
+                  <tr *ngFor = 'let class of classes'>
                     <td>{{class.course}} - t{{class.number}}</td>
 
                     <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
@@ -167,8 +167,8 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -188,7 +188,7 @@
                   <th class="hour-th"></th>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
+                  <tr *ngFor = 'let class of classes'>
                     <td>{{class.course}} - t{{class.number}}</td>
 
                     <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
@@ -207,8 +207,8 @@
                   <tr>
                     <td colspan="4">
                       <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.scheduledHours>=0" [value]="course">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
