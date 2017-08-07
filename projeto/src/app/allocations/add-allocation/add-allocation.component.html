@@ -7,8 +7,8 @@
      
         <div class="new-classes-content">
 
-          <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseName" name="courseName" required>
-            <md-option *ngFor="let course of coursesList" [(value)]="course.name">
+          <md-select class="course-name-input" placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
+            <md-option *ngFor="let course of coursesList" [(value)]="course.$key">
               {{ course.name }}
             </md-option>
           </md-select>
@@ -25,9 +25,6 @@
 
     </form>
   </md-card>
-  <div>
-    <app-allocation-table></app-allocation-table>
-  </div>
 </div>
 
 

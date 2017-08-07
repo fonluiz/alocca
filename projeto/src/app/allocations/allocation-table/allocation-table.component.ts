@@ -24,9 +24,7 @@ export class AllocationTableComponent implements OnInit {
     this.FBservice.getClasses().subscribe( classes =>{
       this.classesList = classes;
     });
-
       // this.selectedSemesterID = this.navbarService.get();
-
       console.log(this.FBservice.getClasses());
   }
 

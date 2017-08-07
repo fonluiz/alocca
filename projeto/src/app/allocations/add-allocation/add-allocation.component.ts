@@ -21,10 +21,8 @@ export class AddAllocationComponent implements OnInit {
   NOT_SAVED_MESSAGE: string = "Erro ao salvar. Verifique se a turma já foi cadastrada.";
   MESSAGES_TIME = 4000;
   coursesList: any[];
-  courseKey: any;
+  courseKey: string;
   classesNumber: number;
-
-  courseName: string;
 
   constructor(
     private FBservice: FirebaseService,
@@ -41,7 +39,7 @@ export class AddAllocationComponent implements OnInit {
 
   saveNewClasses(){
     for (var _i = 1; _i <= this.classesNumber; _i++) {
-          let newClass = new Class(this.courseName, _i);
+          let newClass = new Class(this.courseKey, _i);
           this.FBservice.saveClass(newClass);
     }
 
