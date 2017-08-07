@@ -45,15 +45,9 @@ export class AppComponent {
     this.dbAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
       var userEmail: String = this.dbAuth.auth.currentUser.email;
       //pegar UID do usuário
-      //console.log(this.dbAuth.auth.currentUser.uid);
-      console.log(userEmail);
       var isRegistered: boolean = this.FBservice.isUserRegistered(userEmail);
-      console.log(isRegistered);
-      if(isRegistered===false){
+      if(!isRegistered){
         if(this.logout()){
-          console.log(userEmail);
-          console.log('pegou o logout');
-          //this._flashMessagesService.show(this.NOT_REGISTERED_MESSAGE, { cssClass: 'alert-danger', timeout: this.TIMEOUT_NOT_REGISTERED });
           this.snackService.openSnackBar(NOT_REGISTERED_MESSAGE, TIMEOUT_NOT_REGISTERED);
         }
       }
