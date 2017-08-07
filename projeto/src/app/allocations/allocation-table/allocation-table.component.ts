@@ -23,16 +23,13 @@ export class AllocationTableComponent implements OnInit {
   ngOnInit() {
     this.FBservice.getClasses().subscribe( classes =>{
       this.classesList = classes;
-    });
-      // this.selectedSemesterID = this.navbarService.get();
-      console.log(this.FBservice.getClasses());
+    })
   }
 
   onDeleteClass(id){
     this.FBservice.deleteClass(id);
 
   }
-
 
   onDeleteAllocation(id,course,credits,classNumber){
     if(this.FBservice.deleteAllocation(id,course+credits,classNumber)){
@@ -43,9 +40,6 @@ export class AllocationTableComponent implements OnInit {
     if(this.FBservice.changeCAStatus(id,stats)){
       this.router.navigate(['/allocations']);
     }
-  }
-  getSelectedSemester() {
-      // this.selectedSemesterID = this.navbarService.getSemester();
   }
 
 }
