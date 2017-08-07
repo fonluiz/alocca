@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { Request } from '../request.model';
 
 const DELETED_MESSAGE: string = "Requisição ignorada!";
 const NOT_DELETED_MESSAGE: string = "Não foi possível remover a requisição. Tente novamente!";
@@ -20,7 +21,7 @@ const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Requisição";
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
-  requests: any[];
+  requests: Request[];
 
   constructor(
     private FBservice: FirebaseService,
