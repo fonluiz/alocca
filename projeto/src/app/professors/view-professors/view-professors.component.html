@@ -19,7 +19,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let professor of professors">
+<<<<<<< HEAD
           <td><a class="mdl-color-text--primary" [routerLink]="['/add-restriction/'+professor.SIAPE+'-'+this.navbarService.getSemesterSelectedEmitter()]">{{professor.name}}</a></td>
+=======
+          <td><a class="mdl-color-text--primary" (click)="onEditRestrictions(professor.SIAPE)">{{professor.name}}</a></td>
+>>>>>>> clientRequests
           <td>{{professor.nickname}}</td>
           <td>{{professor.SIAPE}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
