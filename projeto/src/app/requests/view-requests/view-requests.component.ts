@@ -12,6 +12,7 @@ const TIMEOUT_DELETED_MESSAGE = 2500;
 const TIMEOUT_ACCEPTED_MESSAGE = 2500;
 const TIMEOUT_NOT_DELETED_MESSAGE = 5000;
 const TIMEOUT_NOT_ACCEPTED_MESSAGE = 5000;
+const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Requisição";
 
 @Component({
   selector: 'app-view-requests',
@@ -36,10 +37,8 @@ export class ViewRequestsComponent implements OnInit {
   }
 
   onDeleteRequest(request){
-    var title = "Excluir Requisição";
-    var message = "Deseja realmente excluir a requisição feita por "+request.name+" ?";
     this.dialogsService
-      .confirm(title, message)
+        .confirm(CONFIRM_DELETE_DIALOG_TITLE, this.deleteConfirmationMessage(request.name))
       .subscribe(res => {
         if (res) {
           if(this.FBservice.deleteRequest(request)){
@@ -57,7 +56,11 @@ export class ViewRequestsComponent implements OnInit {
     }else{
       this.snackService.openSnackBar(NOT_ACCEPTED_MESSAGE, TIMEOUT_NOT_ACCEPTED_MESSAGE);
     }
+  }
 
+  deleteConfirmationMessage(name) {
+      var message = "Deseja realmente excluir " + name + " ?";
+      return message;
   }
 
 }
