@@ -7,9 +7,9 @@ import { User } from "app/users/user.model";
 
 const DELETED_MESSAGE: string = "Usuário deletado com sucesso!";
 const NOT_DELETED_MESSAGE: string = "Não foi possível remover o usuário. Tente novamente!";
-const TIMEOUT_DELETED_MESSAGE = 2500;
-const TIMEOUT_NOT_DELETED_MESSAGE = 5000;
-const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Usuário";
+const CONFIRM_DELETE_DIALOG_TITLE: string = "Excluir Usuário";
+const TIMEOUT_DELETED_MESSAGE: number = 2500;
+const TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
 
 @Component({
   selector: 'app-view-users',

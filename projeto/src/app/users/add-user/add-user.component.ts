@@ -6,8 +6,8 @@ import { SnackbarService } from '../../services/snackbar.service';
 
 const SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
 const NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
-const TIMEOUT_SAVED_MESSAGE = 2500;
-const TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+const TIMEOUT_SAVED_MESSAGE: number = 2500;
+const TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
 @Component({
   selector: 'app-add-user',

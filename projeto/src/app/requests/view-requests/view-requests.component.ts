@@ -9,11 +9,11 @@ const DELETED_MESSAGE: string = "Requisição ignorada!";
 const NOT_DELETED_MESSAGE: string = "Não foi possível remover a requisição. Tente novamente!";
 const ACCEPTED_MESSAGE: string = "Requisição aceita!";
 const NOT_ACCEPTED_MESSAGE: string = "Não foi possível aceitar a requisição. Tente novamente!";
-const TIMEOUT_DELETED_MESSAGE = 2500;
-const TIMEOUT_ACCEPTED_MESSAGE = 2500;
-const TIMEOUT_NOT_DELETED_MESSAGE = 5000;
-const TIMEOUT_NOT_ACCEPTED_MESSAGE = 5000;
-const CONFIRM_DELETE_DIALOG_TITLE = "Excluir Requisição";
+const CONFIRM_DELETE_DIALOG_TITLE: string = "Excluir Requisição";
+const TIMEOUT_DELETED_MESSAGE: number = 2500;
+const TIMEOUT_ACCEPTED_MESSAGE: number = 2500;
+const TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
+const TIMEOUT_NOT_ACCEPTED_MESSAGE: number = 5000;
 
 @Component({
   selector: 'app-view-requests',
