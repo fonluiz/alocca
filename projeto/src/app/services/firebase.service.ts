@@ -536,9 +536,23 @@ export class FirebaseService {
     return true;
   }
 
-  //EXTRA METHODS FOR TESTING/STUB
-  getClassesOnSchedule(){
-    let classesList = this.db.list('/classes/2017-1') as FirebaseListObservable<any[]>;
-    return classesList;
+  //Schedules
+  addClassToSchedule(classKey:string,day: string,hour: number){
+    var daySchedulesList: any[] = [];
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').on("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        daySchedulesList.push(childSnapshot.val());
+        if(!daySchedulesList){
+          return  true;
+        }
+      })
+    })
+    if (!(hour in daySchedulesList)){
+      daySchedulesList.push(hour);
+      this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList);
+      return true;
+    }else{
+      return false;
+    }
   }
 }

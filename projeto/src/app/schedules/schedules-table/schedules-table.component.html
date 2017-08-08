@@ -35,9 +35,9 @@
                 </thead>
                 <tbody class="hour-td">
                   <!--Scheduled classes-->
-                  <span *ngFor = 'let class of classes'>
-                    <span *ngFor = 'let time of class.schedules.monday.hours'>
-                      <span *ngIf = 'time === hour'>
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.monday.hours'>
+                      <div *ngIf = 'time === hour'>
                         <tr>
                           <td>{{class.course}} - t{{class.number}}</td>
 
@@ -54,16 +54,16 @@
                           <!--CHANGE FUNCTION PARAMETER-->
                           <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
                         </tr>
-                      </span>
-                    </span>
-                  </span>
+                      </div>
+                    </div>
+                  </div>
                   
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('monday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -90,9 +90,9 @@
                 </thead>
                 <tbody class="hour-td">
                   <!--Scheduled classes-->
-                  <span *ngFor = 'let class of classes'>
-                    <span *ngFor = 'let time of class.schedules.tuesday.hours'>
-                      <span *ngIf = 'time === hour'>
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.tuesday.hours'>
+                      <div *ngIf = 'time === hour'>
                         <tr>
                           <td>{{class.course}} - t{{class.number}}</td>
 
@@ -109,16 +109,16 @@
                           <!--CHANGE FUNCTION PARAMETER-->
                           <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
                         </tr>
-                      </span>
-                    </span>
-                  </span>
+                      </div>
+                    </div>
+                  </div>
                   
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('tuesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -145,9 +145,9 @@
                 </thead>
                 <tbody class="hour-td">
                   <!--Scheduled classes-->
-                  <span *ngFor = 'let class of classes'>
-                    <span *ngFor = 'let time of class.schedules.wednesday.hours'>
-                      <span *ngIf = 'time === hour'>
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.wednesday.hours'>
+                      <div *ngIf = 'time === hour'>
                         <tr>
                           <td>{{class.course}} - t{{class.number}}</td>
 
@@ -164,16 +164,16 @@
                           <!--CHANGE FUNCTION PARAMETER-->
                           <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
                         </tr>
-                      </span>
-                    </span>
-                  </span>
+                      </div>
+                    </div>
+                  </div>
                   
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('wednesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -200,9 +200,9 @@
                 </thead>
                 <tbody class="hour-td">
                   <!--Scheduled classes-->
-                  <span *ngFor = 'let class of classes'>
-                    <span *ngFor = 'let time of class.schedules.thursday.hours'>
-                      <span *ngIf = 'time === hour'>
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.thursday.hours'>
+                      <div *ngIf = 'time === hour'>
                         <tr>
                           <td>{{class.course}} - t{{class.number}}</td>
 
@@ -219,16 +219,16 @@
                           <!--CHANGE FUNCTION PARAMETER-->
                           <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
                         </tr>
-                      </span>
-                    </span>
-                  </span>
+                      </div>
+                    </div>
+                  </div>
                   
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('thursday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -255,9 +255,9 @@
                 </thead>
                 <tbody class="hour-td">
                   <!--Scheduled classes-->
-                  <span *ngFor = 'let class of classes'>
-                    <span *ngFor = 'let time of class.schedules.friday.hours'>
-                      <span *ngIf = 'time === hour'>
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.friday.hours'>
+                      <div *ngIf = 'time === hour'>
                         <tr>
                           <td>{{class.course}} - t{{class.number}}</td>
 
@@ -274,16 +274,16 @@
                           <!--CHANGE FUNCTION PARAMETER-->
                           <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
                         </tr>
-                      </span>
-                    </span>
-                  </span>
+                      </div>
+                    </div>
+                  </div>
                   
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('friday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
                         <span *ngFor="let class of classes">
-                          <md-option *ngIf = "class.scheduledHours>0" [value]="course">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>

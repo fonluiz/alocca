@@ -13,6 +13,7 @@ import { SnackbarsService } from '../../services/snackbars.service';
 export class SchedulesTableComponent implements OnInit {
   //chane type to class[]
   classes: any[];
+  currentClassKey: string;
   DELETED_SUCCESSFULLY_MESSAGE: string =  "Aula removida do horário";
   TIMEOUT_DELETED_MESSAGE: number = 3000;
 
@@ -27,6 +28,11 @@ export class SchedulesTableComponent implements OnInit {
     this.FBservice.getClasses().subscribe(currentClasses =>{
       this.classes = currentClasses;
     })
+  }
+
+  onAddClassToSchedule(day: string, hour: number){
+    console.log(this.FBservice.addClassToSchedule(this.currentClassKey,day,hour));
+    this.currentClassKey = null;
   }
 
   onDeleteClassSchedule(){
