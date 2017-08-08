@@ -24,8 +24,8 @@ export class AddCourseComponent implements OnInit {
   departments = ["UASC", "Outro"];
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina salva com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a disciplina. Verifique se esta já está cadastrada.";
-  TIMEOUT_SAVED_MESSAGE = 2500;
-  TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  TIMEOUT_SAVED_MESSAGE: number = 2500;
+  TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,

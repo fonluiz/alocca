@@ -12,13 +12,13 @@ import { SnackbarsService } from '../../services/snackbars.service';
   styleUrls: ['./view-courses.component.css']
 })
 export class ViewCoursesComponent implements OnInit {
-  courses: any
+  courses: any;
   id: any;
   public result: any;
   DELETED_MESSAGE: string = "Disicplina deletada com sucesso!";
   NOT_DELETED_MESSAGE: string = "Não foi possível remover a disciplina. Tente novamente!";
-  TIMEOUT_DELETED_MESSAGE = 2500;
-  TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+  TIMEOUT_DELETED_MESSAGE: number = 2500;
+  TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
