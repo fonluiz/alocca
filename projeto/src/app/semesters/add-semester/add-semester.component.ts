@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 import { Semester } from '../semester.model';
 
 @Component({
@@ -40,7 +40,7 @@ export class AddSemesterComponent implements OnInit {
 
     constructor(
         private FBservice: FirebaseService,
-        private snackService: SnackbarsService
+        private snackService: SnackbarService
     ) {
         this.years = [];
         this.MAX_YEAR = 2030;
@@ -58,7 +58,7 @@ export class AddSemesterComponent implements OnInit {
             yearToBeAdded++;
         }
     }
-    
+
     /**
      * Creates a new semester.
      */

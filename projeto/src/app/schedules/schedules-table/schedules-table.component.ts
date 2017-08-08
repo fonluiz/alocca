@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-schedules-table',
@@ -16,7 +16,7 @@ export class SchedulesTableComponent implements OnInit {
 
   constructor(
     private FBservice: FirebaseService,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) {
   }
 

@@ -2,26 +2,15 @@
 
 @Injectable()
 export class NavbarService {
-    /**
-     * Selected semester.
-     */
     semesterSelected: EventEmitter<string> = new EventEmitter();
 
-    /**
-    * Provide a reference for the emitter of the current selected semester.
-    * 
-    * @returns {EventEmitter<string>}
-    */
-    public getSemesterSelectedEmitter(): EventEmitter<string> {
+    public getSemesterSelectedEmitter() {
         return this.semesterSelected;
     }
 
-    /**
-    * 
-    * @param semester 
-    * Selected semester to be emitted.
-    */
     public emitSemesterSelected(semester: string){
         this.semesterSelected.emit(semester)
     }
 }
+
+//TO DO: MOVE THIS CLASS TO ../services and update references
