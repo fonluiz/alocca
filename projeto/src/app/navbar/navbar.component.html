@@ -27,7 +27,7 @@
           <li class="mdl-menu__item" [routerLink]="['/view-courses']">Cadastradas</li>
         </ul>
         <button id="demo-menu-lower-left"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="checkSemester()" [routerLink]="['/add-class']" style="margin-left: 5px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/add-class']" style="margin-left: 5px">
         Turmas
         </button>
         <!--Add the checkSemester function-->
@@ -40,20 +40,24 @@
       
         <div class="mdl-layout-spacer"></div>
 
-        <md-select (change)="emitSemesterSelected()" [(ngModel)]="selectedSemesterID" name="selectedSemesterID" style="margin-right: 10px">
+        <!--Semester selection-->
+        <md-select id="selected-semester" (change)="emitSemesterSelected()" [(ngModel)]="selectedSemesterID" name="selectedSemesterID">
+          <!--Added new semester-->
           <md-option (click)="openDialog()">
-            <!--<md-icon>add_circle_outline</md-icon>-->
-            Novo Semestre
+            <md-icon id="add-semester-option">add_circle_outline</md-icon> 
+            semestre
           </md-option>
-          <md-option *ngFor="let sem of semesters" [value]="sem.$key">
+          <!--Added semesters-->
+          <md-option class="select-semester-option" *ngFor="let sem of semesters" [value]="sem.$key">
+            <md-icon (click)="removeSemester(sem.$key)" class="remove-semester" *ngIf="selectedSemesterID!==sem.$key">remove_circle_outline</md-icon> 
             {{ sem.name }}
           </md-option>
         </md-select>
 
         <button id="demo-menu-lower-left-users"
           class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-right: 5px">
-        Usuários
-        <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
+          Usuários
+          <md-icon style="vertical-align: middle;"> arrow_drop_down </md-icon>
         </button >
         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
           for="demo-menu-lower-left-users">
@@ -64,7 +68,7 @@
 
         <button id="demo-menu-lower-left"
           class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="logout()" [routerLink]="['/home']">
-        <b>Sair</b>
+          <b>Sair</b>
         </button>
     </div>
   </header>
