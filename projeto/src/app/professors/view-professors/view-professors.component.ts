@@ -4,8 +4,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Professor } from '../professor.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
-import { SnackbarsService } from '../../services/snackbars.service';
-import { NavbarService } from "../../navbar/navbar.service";
+import { NavbarService } from '../../services/navbar.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-view-professors',
@@ -27,7 +27,7 @@ export class ViewProfessorsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialogsService: DialogsService,
-    private snackService: SnackbarsService,
+    private snackService: SnackbarService,
     private navbarService: NavbarService
   ) {}
 

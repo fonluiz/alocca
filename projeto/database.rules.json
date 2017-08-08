@@ -1,0 +1,40 @@
+{
+  "rules": {
+    "classes": {
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+    "courses": {
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+    "professors": {
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+    "professorRestrictions": {
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+    "requests": {
+      ".read": "auth != null",
+    	".write": "true"
+    },
+    "requestsEmails": {
+      ".read": "true",
+    	".write": "true"
+    },
+    "semesters": {
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+    "users": {
+      ".read": "true",
+    	".write": "true"
+    },
+    "usersEmails": {
+      ".read": "true",
+    	".write": "true"
+    }
+  }
+}

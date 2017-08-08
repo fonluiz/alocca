@@ -73,7 +73,7 @@ export class AddRestrictionComponent implements OnInit {
     return scheduleRestrictions;
   }
 
-  private submitRestrictionsForm() {
+  submitRestrictionsForm() {
     let restrictions = new ProfessorRestriction(
        this.professor_id,
        this.minCredits,

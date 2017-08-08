@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
 import { AddCourseComponent } from '../courses/add-course/add-course.component';
 import { FirebaseService } from '../services/firebase.service';
-import { NavbarService } from "./navbar.service";
+import { NavbarService } from '../services/navbar.service';
 import { Semester } from '../semesters/semester.model';
 
 @Component({
@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
     private router: Router) {
     this.user = dbAuth.authState
   }
+  
   ngOnInit(){
     this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
