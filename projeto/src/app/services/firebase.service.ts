@@ -9,7 +9,7 @@ import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model';
 import { Class } from '../allocations/class.model';
-import { NavbarService } from "app/navbar/navbar.service";
+import { NavbarService } from "./navbar.service";
 
 @Injectable()
 export class FirebaseService {
@@ -58,6 +58,7 @@ export class FirebaseService {
     return this.currentSemester;
   }
   ///Allocation
+
   getAllocations(){
     return this.allocations;
   }
@@ -298,7 +299,7 @@ export class FirebaseService {
     return department;
   }
 
-  ///Professors
+///Professors
   addNewProfessor(newprofessor){
     if(this.professorExists(newprofessor.SIAPE)){
         return false;
@@ -342,7 +343,7 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Courses
+///Courses
   addNewCourse(newCourse){
     if(this.courseExists(newCourse.code)){
       return false;
@@ -387,7 +388,7 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Users
+///Users
   getUsers(){
     return this.users;
   }
@@ -445,7 +446,7 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  ///Requests
+///Requests
   getRequests(){
     return this.requests;
   }
@@ -506,17 +507,54 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  // Semesters
-  saveSemester(semester: Semester) {
+// Semesters
+  /**
+   * 
+   * @param semester 
+   * New (object) Semester to be saved.
+   * 
+   * @returns Status of the semester to be saved
+   */
+  saveSemester(semester: Semester): boolean {
       this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
+      this.navbarService.emitSemesterSelected(semester.getId());
+      return true;
   }
-  
-  getSemesters() {
+
+  /**
+   * 
+   * @returns List of available semesters from firebase.
+   */
+  getSemesters(): FirebaseListObservable<any[]> {
       return this.semesters;
   }
 
-  // Restrictions
+  /**
+   * 
+   * @returns Current selected semester.
+   */
+  getCurrentSemester(): string{
+    return this.currentSemester;
+  }
+
+  /**
+   * 
+   * @param id 
+   * ID of the semester to be deleted.
+   * 
+   * @returns {boolean}
+   * Status of the operation: true if deleted.
+   */
+  removeSemester(id: string): boolean {
+    if (this.semesters.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+// Restrictions
   getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
@@ -529,15 +567,9 @@ export class FirebaseService {
       return this.db.object(this.PROFESSORS_RESTRICTIONS_PATH + restriction_id) as FirebaseObjectObservable<ProfessorRestriction>;
   }
 
-  // Classes
+// Classes
   addClass(Class) {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
-  }
-
-  //EXTRA METHODS FOR TESTING/STUB
-  getClassesOnSchedule(){
-    let classesList = this.db.list('/classes/2017-1') as FirebaseListObservable<any[]>;
-    return classesList;
   }
 }

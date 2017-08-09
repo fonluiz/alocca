@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
 import { Course } from '../course.model';
 import { Router } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-course',
@@ -32,7 +32,7 @@ export class AddCourseComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) {  }
 
   onAddNewCourse(){

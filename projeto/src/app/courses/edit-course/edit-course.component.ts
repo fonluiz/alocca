@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -33,7 +33,7 @@ export class EditCourseComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) { }
 
   ngOnInit() {
