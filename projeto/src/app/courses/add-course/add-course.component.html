@@ -11,6 +11,12 @@
     <!--Form-->
     <md-card-content class="new-course-card-content">
         <div class="course-card-row">
+
+            <!-- Course code -->
+            <md-input-container class="professor-code-input" type="text">
+                <input mdInput placeholder="Código" [(ngModel)]="code" name="code" size="7" maxlength="7" pattern="[0-9]{7}" required>
+            </md-input-container>
+
             <!-- Course name -->
             <md-input-container class="course-name-input">
                 <input mdInput placeholder="Nome" type="text" [(ngModel)]="name" name="name" required>
@@ -65,15 +71,15 @@
         </div>
 
        <div class="course-card-row">
-        <!--Offerer department-->
-           <md-select class="course-department-input" placeholder="UA Ofertante" [(ngModel)]="offererDepartment" name="offererDepartment" required>
+            <!--Offerer department-->
+           <md-select id="offerer-department" class="course-department-input" placeholder="UA Ofertante" [(ngModel)]="offererDepartment" name="offererDepartment" required>
                 <md-option *ngFor="let dep of departments" [value]="dep">
                     {{ dep }}
                 </md-option>
            </md-select>
 
-           <!--requerer department-->
-            <md-select class="course-department-input" style="margin-left: 30%; width:21%;" placeholder="UA Solicitante" [(ngModel)]="requesterDepartment" name="requesterDepartment" required>
+           <!--Requerer department-->
+            <md-select id="requerer-department" class="course-department-input" placeholder="UA Solicitante" [(ngModel)]="requesterDepartment" name="requesterDepartment" required>
                     <md-option *ngFor="let dep of departments" [value]="dep">
                         {{ dep }}
                     </md-option>

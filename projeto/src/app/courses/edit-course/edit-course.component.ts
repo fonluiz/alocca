@@ -11,9 +11,11 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class EditCourseComponent implements OnInit {
   id;
+  code: string;
   name;
   shortName;
-  credits;
+  credits: number;
+  hoursToSchedule: number;
   type;
   minimumSemester;
   maximumSemester;
@@ -37,9 +39,11 @@ export class EditCourseComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.params['id'],
     this.FBservice.getCourseDetails(this.id).subscribe(course =>{
+        this.code = course.code;
         this.name = course.name;
         this.shortName = course.shortName;
         this.credits = course.credits;
+        this.hoursToSchedule = course.hoursToSchedule;
         this.type = course.type;
         this.minimumSemester = course.minimumSemester;
         this.maximumSemester = course.maximumSemester;
@@ -53,10 +57,18 @@ export class EditCourseComponent implements OnInit {
   }
 
   onEditCourse(){
+    if (this.credits===0){
+      this.hoursToSchedule = 2;
+    }else{
+      this.hoursToSchedule = this.credits;
+    }
+
     let course = {
+          code: this.code,
           name: this.name,
           shortName: this.shortName,
           credits: this.credits,
+          hoursToSchedule: this.hoursToSchedule,
           type: this.type,
           minimumSemester: this.minimumSemester,
           maximumSemester: this.maximumSemester,

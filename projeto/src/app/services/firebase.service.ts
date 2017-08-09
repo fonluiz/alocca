@@ -54,7 +54,11 @@ export class FirebaseService {
     })
   }
 
-///Allocation
+  getCurrentSemester(){
+    return this.currentSemester;
+  }
+  ///Allocation
+
   getAllocations(){
     return this.allocations;
   }
@@ -341,10 +345,10 @@ export class FirebaseService {
 
 ///Courses
   addNewCourse(newCourse){
-    if(this.courseExists(newCourse.name+newCourse.credits)){
+    if(this.courseExists(newCourse.code)){
       return false;
     }else{
-      this.db.database.ref("courses/"+newCourse.name+newCourse.credits).set(newCourse);
+      this.db.database.ref("courses/"+newCourse.code).set(newCourse);
       return true;
     }
   }
@@ -356,8 +360,8 @@ export class FirebaseService {
     return this.course;
   }
   updateCourse(id, course){
-    if(id!==(course.name+course.credits)){
-      if(this.courseExists(course.name+course.credits)){
+    if(id!==(course.code)){
+      if(this.courseExists(course.code)){
         return false;
       }
       this.deleteCourse(id);

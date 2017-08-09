@@ -10,9 +10,11 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
+  code: string;
   name: string;
   shortName: string;
-  credits: string;
+  credits: number;
+  hoursToSchedule: number;
   type: string;
   minimumSemester: number;
   maximumSemester: number;
@@ -34,10 +36,18 @@ export class AddCourseComponent implements OnInit {
   ) {  }
 
   onAddNewCourse(){
+    if (this.credits===0){
+      this.hoursToSchedule = 2;
+    }else{
+      this.hoursToSchedule = this.credits;
+    }
+
     let course = {
+      code: this.code,
       name: this.name,
       shortName: this.shortName,
       credits: this.credits,
+      hoursToSchedule: this.hoursToSchedule,
       type: this.type,
       minimumSemester: this.minimumSemester,
       maximumSemester: this.maximumSemester,
@@ -48,6 +58,7 @@ export class AddCourseComponent implements OnInit {
 
     let savedSuccessfully: boolean = this.FBservice.addNewCourse(course);
 
+    this.code = null;
     this.name = null;
     this.shortName = null;
     this.credits = null;
