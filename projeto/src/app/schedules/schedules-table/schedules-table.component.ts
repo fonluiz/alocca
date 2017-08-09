@@ -3,6 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { ClassesStub } from '../classes.stub';
 import { Schedule } from '../schedule.model';
 import { SnackbarsService } from '../../services/snackbars.service';
+import { DialogsService} from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-schedules-table',
@@ -26,7 +27,8 @@ export class SchedulesTableComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private schedulesStub: ClassesStub,
-    private snackService: SnackbarsService
+    private snackService: SnackbarsService,
+    private dialogService: DialogsService
   ) {
   }
 
@@ -45,12 +47,20 @@ export class SchedulesTableComponent implements OnInit {
     this.currentClassKey = null;
   }
 
-  onDeleteClassSchedule(classKey: string, day: string, hour:number){
-    if(this.FBservice.deleteClassFromSchedule(classKey,day,hour)){
-      this.snackService.openSnackBar(this.DELETED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
-    }else{
-      this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
-    }
+  onDeleteClassSchedule(classCourse: string, classNumber:number, classKey: string, day: string, hour:number){
+    var title = "Desalocar disciplina";
+    var message = "Deseja realmente remover "+classCourse+" - t"+ classNumber +" das "+hour+"h?";
+    this.dialogService
+      .confirm(title, message)
+      .subscribe(res => {
+        if (res) {
+          if(this.FBservice.deleteClassFromSchedule(classKey,day,hour)){
+            this.snackService.openSnackBar(this.DELETED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
+          }else{
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
+          }
+        }
+      });
   }
 
 
