@@ -17,7 +17,7 @@
     	".write": "auth != null"
     },
     "requests": {
-      ".read": "auth != null",
+      ".read": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'",
     	".write": "true"
     },
     "requestsEmails": {
@@ -25,12 +25,12 @@
     	".write": "true"
     },
     "semesters": {
-      ".read": "auth != null",
+      ".read": "true",
     	".write": "auth != null"
     },
     "users": {
-      ".read": "true",
-    	".write": "true"
+      ".read": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'",
+    	".write": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'"
     },
     "usersEmails": {
       ".read": "true",
