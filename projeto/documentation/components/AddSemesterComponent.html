@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -630,7 +630,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, snackService: <a href="../injectables/SnackbarsService.html">SnackbarsService</a>)</code>
+                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, snackService: <a href="../injectables/SnackbarService.html">SnackbarService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -948,7 +948,7 @@
     <div class="tab-pane fade tab-source-code" id="source">
         <pre class="line-numbers"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { FirebaseService } from &#x27;../../services/firebase.service&#x27;;
-import { SnackbarsService } from &#x27;../../services/snackbars.service&#x27;;
+import { SnackbarService } from &#x27;../../services/snackbar.service&#x27;;
 import { Semester } from &#x27;../semester.model&#x27;;
 
 @Component({
@@ -988,7 +988,7 @@ export class AddSemesterComponent implements OnInit {
 
     constructor(
         private FBservice: FirebaseService,
-        private snackService: SnackbarsService
+        private snackService: SnackbarService
     ) {
         this.years &#x3D; [];
         this.MAX_YEAR &#x3D; 2030;
@@ -1006,7 +1006,7 @@ export class AddSemesterComponent implements OnInit {
             yearToBeAdded++;
         }
     }
-    
+
     /**
      * Creates a new semester.
      */
@@ -1023,7 +1023,8 @@ export class AddSemesterComponent implements OnInit {
     ngOnInit() {
     }
 
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade" id="templateData">
@@ -1054,14 +1055,10 @@ export class AddSemesterComponent implements OnInit {
   &lt;!--Actions--&gt;
   &lt;md-dialog-actions id&#x3D;&quot;dialog-actions&quot;&gt;
     &lt;div class&#x3D;&quot;mdl-layout-spacer&quot;&gt;&lt;/div&gt;
-
-    &lt;!-- Cancels a new semester creation and closes the dialog --&gt;
-    &lt;button md-button [md-dialog-close]&#x3D;&quot;false&quot; class&#x3D;&quot;mdl-button mdl-js-button mdl-button--primary&quot;
+    &lt;button md-button md-dialog-close class&#x3D;&quot;mdl-button mdl-js-button mdl-button--primary&quot;
             style&#x3D;&quot;margin-right: 10px;&quot;&gt;Cancelar&lt;/button&gt;
-            
-    &lt;!-- Closes the dialog and calls the onAddNewSemester function --&gt;
-    &lt;button md-button class&#x3D;&quot;mdl-button mdl-js-button mdl-button--primary&quot; [md-dialog-close]&#x3D;&quot;true&quot; 
-            [disabled]&#x3D;&quot;!semesterForm.form.valid&quot; (click)&#x3D;&quot;onAddNewSemester()&quot;&gt;Salvar&lt;/button&gt;
+    &lt;!-- Can optionally provide a result for the closing dialog. --&gt;
+    &lt;button md-button class&#x3D;&quot;mdl-button mdl-js-button mdl-button--primary&quot; [md-dialog-close]&#x3D;&quot;true&quot; (click)&#x3D;&quot;onAddNewSemester()&quot;&gt;Salvar&lt;/button&gt;
   &lt;/md-dialog-actions&gt;
   &lt;/form&gt;</code></pre>
     </div>
@@ -1089,7 +1086,7 @@ export class AddSemesterComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>﻿﻿<!--Title--><h2 md-dialog-title>Novo Semestre</h2><!--Content--><form (ngSubmit)="onAddNewSemester()" #semesterForm="ngForm">  <md-dialog-content>    <div id="new-semester-card-content">      <!-- Year Input -->      <md-select id="year-input" placeholder="Ano" [(ngModel)]="year" name="year" floatPlaceholder="never" required>        <md-option *ngFor="let year of years" [value]="year">          {{ year }}        </md-option>      </md-select>      <!-- Half Input -->      <md-select id="half-input" placeholder="Semestre" [(ngModel)]="half" name="half" floatPlaceholder="never" required>        <md-option *ngFor="let half of halves" [value]="half">          {{ half }}        </md-option>      </md-select>    </div>  </md-dialog-content>  <!--Actions-->  <md-dialog-actions id="dialog-actions">    <div class="mdl-layout-spacer"></div>    <!-- Cancels a new semester creation and closes the dialog -->    <button md-button [md-dialog-close]="false" class="mdl-button mdl-js-button mdl-button--primary"            style="margin-right: 10px;">Cancelar</button>                <!-- Closes the dialog and calls the onAddNewSemester function -->    <button md-button class="mdl-button mdl-js-button mdl-button--primary" [md-dialog-close]="true"             [disabled]="!semesterForm.form.valid" (click)="onAddNewSemester()">Salvar</button>  </md-dialog-actions>  </form></div>'
+        var COMPONENT_TEMPLATE = '<div>﻿﻿<!--Title--><h2 md-dialog-title>Novo Semestre</h2><!--Content--><form (ngSubmit)="onAddNewSemester()" #semesterForm="ngForm">  <md-dialog-content>    <div id="new-semester-card-content">      <!-- Year Input -->      <md-select id="year-input" placeholder="Ano" [(ngModel)]="year" name="year" floatPlaceholder="never" required>        <md-option *ngFor="let year of years" [value]="year">          {{ year }}        </md-option>      </md-select>      <!-- Half Input -->      <md-select id="half-input" placeholder="Semestre" [(ngModel)]="half" name="half" floatPlaceholder="never" required>        <md-option *ngFor="let half of halves" [value]="half">          {{ half }}        </md-option>      </md-select>    </div>  </md-dialog-content>  <!--Actions-->  <md-dialog-actions id="dialog-actions">    <div class="mdl-layout-spacer"></div>    <button md-button md-dialog-close class="mdl-button mdl-js-button mdl-button--primary"            style="margin-right: 10px;">Cancelar</button>    <!-- Can optionally provide a result for the closing dialog. -->    <button md-button class="mdl-button mdl-js-button mdl-button--primary" [md-dialog-close]="true" (click)="onAddNewSemester()">Salvar</button>  </md-dialog-actions>  </form></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AlertsComponent', 'selector': 'app-alerts'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ClassesSchedulesComponent', 'selector': 'app-classes-schedules'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-edit-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'SchedulesTableComponent', 'selector': 'app-schedules-table'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AddSemesterComponent'};

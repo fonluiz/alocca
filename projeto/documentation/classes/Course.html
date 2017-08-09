@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -582,12 +582,12 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <code>constructor(name: string, credits: string, type: string, minimumSemester: number, maximumSemester: number, offererDepartment: string, requesterDepartment: String)</code>
+                                    <code>constructor(name: string, code: string, credits: number, hoursToSchedule: number, type: string, minimumSemester: number, maximumSemester: number, offererDepartment: string, requesterDepartment: String)</code>
                                 </td>
                             </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/courses/course.model.ts:13</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="1" class="link-to-prism">src/app/courses/course.model.ts:1</a></div>
                                         </td>
                                     </tr>
             
@@ -604,7 +604,9 @@
         <pre class="line-numbers"><code class="language-typescript">export class Course {
     constructor(
         name: string,
-        credits: string,
+        code: string,
+        credits: number,
+        hoursToSchedule: number,
         type: string,
         minimumSemester: number,
         maximumSemester: number,

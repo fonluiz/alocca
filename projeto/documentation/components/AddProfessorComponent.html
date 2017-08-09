@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -630,7 +630,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, snackService: <a href="../injectables/SnackbarsService.html">SnackbarsService</a>)</code>
+                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, snackService: <a href="../injectables/SnackbarService.html">SnackbarService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -916,7 +916,7 @@
 import { FirebaseService } from &#x27;../../services/firebase.service&#x27;;
 import { Professor } from &#x27;../professor.model&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import { SnackbarsService } from &#x27;../../services/snackbars.service&#x27;;
+import { SnackbarService } from &#x27;../../services/snackbar.service&#x27;;
 
 @Component({
   selector: &#x27;app-add-professor&#x27;,
@@ -936,7 +936,7 @@ export class AddProfessorComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) {
   }
 
@@ -995,7 +995,7 @@ export class AddProfessorComponent implements OnInit {
         &lt;/md-input-container&gt;
         &lt;!-- Professor nickname --&gt;
         &lt;md-input-container class&#x3D;&quot;professor-nickname-input&quot; type&#x3D;&quot;text&quot;&gt;
-          &lt;input mdInput placeholder&#x3D;&quot;Apelido&quot; [(ngModel)]&#x3D;&quot;nickname&quot; name&#x3D;&quot;nickname&quot; required&gt;
+          &lt;input mdInput placeholder&#x3D;&quot;Apelido&quot; [(ngModel)]&#x3D;&quot;nickname&quot; name&#x3D;&quot;nickname&quot; size&#x3D;&quot;10&quot; maxlength&#x3D;&quot;10&quot; required&gt;
         &lt;/md-input-container&gt;
       &lt;/div&gt;
     &lt;/md-card-content&gt;
@@ -1026,7 +1026,7 @@ export class AddProfessorComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="new-professor-card">  <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">    <!--Toolbar-->    <md-toolbar color="primary" class="new-professor-card-toolbar">      Cadastrar Professor         <span class="spacer"></span>      <button md-button style="margin-right: 5px" [routerLink]="[\'/view-professors\']">Cancelar</button>       <button md-button [disabled]="!professorForm.form.valid" >Salvar</button>    </md-toolbar>    <!--Form-->    <md-card-content class="new-professor-card-content">      <div class="professor-card-row">        <!-- Professor\'s SIAPE -->        <md-input-container class="professor-SIAPE-input" type="text">          <input mdInput placeholder="SIAPE" [(ngModel)]="SIAPE" name="SIAPE" size="7" maxlength="7" pattern="[0-9]{7}" required>        </md-input-container>        <!-- Professor name -->        <md-input-container class="professor-name-input" type="text">          <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>        </md-input-container>        <!-- Professor nickname -->        <md-input-container class="professor-nickname-input" type="text">          <input mdInput placeholder="Apelido" [(ngModel)]="nickname" name="nickname" required>        </md-input-container>      </div>    </md-card-content>  </form></md-card></div>'
+        var COMPONENT_TEMPLATE = '<div>﻿<md-card class="new-professor-card">  <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">    <!--Toolbar-->    <md-toolbar color="primary" class="new-professor-card-toolbar">      Cadastrar Professor         <span class="spacer"></span>      <button md-button style="margin-right: 5px" [routerLink]="[\'/view-professors\']">Cancelar</button>       <button md-button [disabled]="!professorForm.form.valid" >Salvar</button>    </md-toolbar>    <!--Form-->    <md-card-content class="new-professor-card-content">      <div class="professor-card-row">        <!-- Professor\'s SIAPE -->        <md-input-container class="professor-SIAPE-input" type="text">          <input mdInput placeholder="SIAPE" [(ngModel)]="SIAPE" name="SIAPE" size="7" maxlength="7" pattern="[0-9]{7}" required>        </md-input-container>        <!-- Professor name -->        <md-input-container class="professor-name-input" type="text">          <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>        </md-input-container>        <!-- Professor nickname -->        <md-input-container class="professor-nickname-input" type="text">          <input mdInput placeholder="Apelido" [(ngModel)]="nickname" name="nickname" size="10" maxlength="10" required>        </md-input-container>      </div>    </md-card-content>  </form></md-card></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AlertsComponent', 'selector': 'app-alerts'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ClassesSchedulesComponent', 'selector': 'app-classes-schedules'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-edit-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'SchedulesTableComponent', 'selector': 'app-schedules-table'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AddProfessorComponent'};

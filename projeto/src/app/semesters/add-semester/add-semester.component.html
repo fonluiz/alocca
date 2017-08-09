@@ -28,6 +28,6 @@
     <button md-button md-dialog-close class="mdl-button mdl-js-button mdl-button--primary"
             style="margin-right: 10px;">Cancelar</button>
     <!-- Can optionally provide a result for the closing dialog. -->
-    <button md-button class="mdl-button mdl-js-button mdl-button--primary" [md-dialog-close]="true" (click)="onAddNewSemester()">Salvar</button>
+    <button md-button [disabled]="!semesterForm.form.valid" class="mdl-button mdl-js-button mdl-button--primary" [md-dialog-close]="true" (click)="onAddNewSemester()">Salvar</button>
   </md-dialog-actions>
   </form>

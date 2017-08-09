@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -630,7 +630,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, route: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank">ActivatedRoute</a>, dialogsService: <a href="../injectables/DialogsService.html">DialogsService</a>, snackService: <a href="../injectables/SnackbarsService.html">SnackbarsService</a>, navbarService: <a href="../injectables/NavbarService.html">NavbarService</a>)</code>
+                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, route: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank">ActivatedRoute</a>, dialogsService: <a href="../injectables/DialogsService.html">DialogsService</a>, snackService: <a href="../injectables/SnackbarService.html">SnackbarService</a>, navbarService: <a href="../injectables/NavbarService.html">NavbarService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -1005,8 +1005,8 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Professor } from &#x27;../professor.model&#x27;;
 import { Router, ActivatedRoute,Params } from &#x27;@angular/router&#x27;;
 import { DialogsService } from &#x27;../../services/dialogs.service&#x27;;
-import { SnackbarsService } from &#x27;../../services/snackbars.service&#x27;;
-import { NavbarService } from &quot;../../services/navbar.service&quot;;
+import { NavbarService } from &#x27;../../services/navbar.service&#x27;;
+import { SnackbarService } from &#x27;../../services/snackbar.service&#x27;;
 
 @Component({
   selector: &#x27;app-view-professors&#x27;,
@@ -1030,7 +1030,7 @@ export class ViewProfessorsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dialogsService: DialogsService,
-    private snackService: SnackbarsService,
+    private snackService: SnackbarService,
     private navbarService: NavbarService
   ) {}
 
@@ -1041,9 +1041,9 @@ export class ViewProfessorsComponent implements OnInit {
   }
 
   onEditRestrictions(siape: string){
-    this.selectedSemesterID &#x3D; this.FBservice.getCurrentSemester()
-    if(this.selectedSemesterID){
-      this.router.navigate([&#x27;/add-restriction/&#x27;+siape+&#x27;-&#x27;+this.selectedSemesterID]);
+    var currentSemester: string;
+    if(this.FBservice.getCurrentSemester()){
+      this.router.navigate([&#x27;/add-restriction/&#x27;+siape+&#x27;-&#x27;+this.FBservice.getCurrentSemester()]);
     }else{
       this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
     }

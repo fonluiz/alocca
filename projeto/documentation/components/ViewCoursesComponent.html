@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -630,7 +630,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, route: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank">ActivatedRoute</a>, snackService: <a href="../injectables/SnackbarsService.html">SnackbarsService</a>, dialogsService: <a href="../injectables/DialogsService.html">DialogsService</a>)</code>
+                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, route: <a href="https://angular.io/docs/ts/latest/api/router/index/ActivatedRoute-interface.html" target="_blank">ActivatedRoute</a>, snackService: <a href="../injectables/SnackbarService.html">SnackbarService</a>, dialogsService: <a href="../injectables/DialogsService.html">DialogsService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -918,7 +918,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Course } from &#x27;../course.model&#x27;;
 import { Router, ActivatedRoute,Params } from &#x27;@angular/router&#x27;;
 import { DialogsService } from &#x27;../../services/dialogs.service&#x27;;
-import { SnackbarsService } from &#x27;../../services/snackbars.service&#x27;;
+import { SnackbarService } from &#x27;../../services/snackbar.service&#x27;;
 
 @Component({
   selector: &#x27;app-view-courses&#x27;,
@@ -938,7 +938,7 @@ export class ViewCoursesComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarsService,
+    private snackService: SnackbarService,
     private dialogsService: DialogsService
   ) { }
 
@@ -980,6 +980,7 @@ export class ViewCoursesComponent implements OnInit {
     &lt;table class&#x3D;&quot;mdl-data-table mdl-js-data-table mdl-shadow--2dp&quot;&gt;
       &lt;thead&gt;
         &lt;tr&gt;
+          &lt;th&gt;Código&lt;/th&gt;
           &lt;th&gt;Nome&lt;/th&gt;
           &lt;th&gt;Sigla&lt;/th&gt;
           &lt;th&gt;Tipo&lt;/th&gt;
@@ -994,6 +995,7 @@ export class ViewCoursesComponent implements OnInit {
       &lt;/thead&gt;
       &lt;tbody&gt;
         &lt;tr *ngFor&#x3D;&quot;let course of courses&quot;&gt;
+          &lt;td&gt;{{course.code}}&lt;/td&gt;
           &lt;td&gt;{{course.name}}&lt;/td&gt;
           &lt;td&gt;{{course.shortName}}&lt;/td&gt;
           &lt;td&gt;{{course.type}}&lt;/td&gt;
@@ -1035,7 +1037,7 @@ export class ViewCoursesComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><md-card class="view-courses-card">  <!--Toolbar-->  <md-toolbar color="primary" class="view-courses-card-toolbar">    Disciplinas Cadastradas    <span class="spacer"></span>  </md-toolbar>  <md-card-content class="course-card-content">    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">      <thead>        <tr>          <th>Nome</th>          <th>Sigla</th>          <th>Tipo</th>          <th>Créditos</th>          <th>Semestre Mínimo Recomendado</th>          <th>Semestre Máximo Recomendado</th>          <th>UA Ofertante </th>          <th>UA Solicitante</th>          <th></th>          <th></th>        </tr>      </thead>      <tbody>        <tr *ngFor="let course of courses">          <td>{{course.name}}</td>          <td>{{course.shortName}}</td>          <td>{{course.type}}</td>          <td>{{course.credits}}</td>          <td>{{course.minimumSemester}}</td>          <td>{{course.maximumSemester}}</td>          <td>{{course.offererDepartment}}</td>          <td>{{course.requesterDepartment}}</td>          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "[\'/edit-course/\' + course.$key]">Editar</button></td>          <td><button (click)="onDeleteCourse(course.$key, course.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>        </tr>      </tbody>    </table>  </md-card-content></md-card></div>'
+        var COMPONENT_TEMPLATE = '<div><md-card class="view-courses-card">  <!--Toolbar-->  <md-toolbar color="primary" class="view-courses-card-toolbar">    Disciplinas Cadastradas    <span class="spacer"></span>  </md-toolbar>  <md-card-content class="course-card-content">    <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">      <thead>        <tr>          <th>Código</th>          <th>Nome</th>          <th>Sigla</th>          <th>Tipo</th>          <th>Créditos</th>          <th>Semestre Mínimo Recomendado</th>          <th>Semestre Máximo Recomendado</th>          <th>UA Ofertante </th>          <th>UA Solicitante</th>          <th></th>          <th></th>        </tr>      </thead>      <tbody>        <tr *ngFor="let course of courses">          <td>{{course.code}}</td>          <td>{{course.name}}</td>          <td>{{course.shortName}}</td>          <td>{{course.type}}</td>          <td>{{course.credits}}</td>          <td>{{course.minimumSemester}}</td>          <td>{{course.maximumSemester}}</td>          <td>{{course.offererDepartment}}</td>          <td>{{course.requesterDepartment}}</td>          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "[\'/edit-course/\' + course.$key]">Editar</button></td>          <td><button (click)="onDeleteCourse(course.$key, course.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>        </tr>      </tbody>    </table>  </md-card-content></md-card></div>'
     var COMPONENTS = [{'name': 'AddAllocationComponent', 'selector': 'app-add-allocation'},{'name': 'AddCourseComponent', 'selector': 'app-add-course'},{'name': 'AddProfessorComponent', 'selector': 'app-add-professor'},{'name': 'AddRestrictionComponent', 'selector': 'app-add-restriction'},{'name': 'AddSemesterComponent', 'selector': 'app-add-semester'},{'name': 'AddUserComponent', 'selector': 'app-add-user'},{'name': 'AlertsComponent', 'selector': 'app-alerts'},{'name': 'AllocationTableComponent', 'selector': 'app-allocation-table'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'ClassesSchedulesComponent', 'selector': 'app-classes-schedules'},{'name': 'DialogsComponent', 'selector': 'app-dialogs'},{'name': 'EditAllocationComponent', 'selector': 'app-edit-allocation'},{'name': 'EditCourseComponent', 'selector': 'app-edit-course'},{'name': 'EditProfessorComponent', 'selector': 'app-edit-professor'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'RequestAccessComponent', 'selector': 'app-request-access'},{'name': 'SchedulesTableComponent', 'selector': 'app-schedules-table'},{'name': 'ViewCoursesComponent', 'selector': 'app-view-courses'},{'name': 'ViewProfessorsComponent', 'selector': 'app-view-professors'},{'name': 'ViewRequestsComponent', 'selector': 'app-view-requests'},{'name': 'ViewUsersComponent', 'selector': 'app-view-users'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ViewCoursesComponent'};

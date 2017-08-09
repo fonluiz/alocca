@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html"  data-type="entity-link" class="active" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html"  data-type="entity-link" class="active" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -595,7 +595,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/services/navbar.service.ts:15</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/services/navbar.service.ts:7</a></div>
                                         </td>
                                     </tr>
             
@@ -603,14 +603,9 @@
                                 <td class="col-md-4">
             
                                         <div class="io-description">
-                                        </div>
-                                        <div class="io-description">
-                                            <b>Returns : </b>    <code>EventEmitter&lt;string&gt;</code>
+                                            <b>Returns : </b>    <code>void</code>
             
                                         </div>
-                                            <div class="io-description">
-                                                
-                                            </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -632,7 +627,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/services/navbar.service.ts:24</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/navbar.service.ts:11</a></div>
                                         </td>
                                     </tr>
             
@@ -640,26 +635,9 @@
                                 <td class="col-md-4">
             
                                         <div class="io-description">
-                                                <b>Parameters :</b>
-                                                <ul class="jsdoc-params">
-                                                        <li>
-                                                            <div>
-                                                                <b>semester</b>
-                                                            </div>
-                                                            <div>
-                                                                <p>Selected semester to be emitted.</p>
-            
-                                                            </div>
-                                                        </li>
-                                                </ul>
-                                        </div>
-                                        <div class="io-description">
                                             <b>Returns : </b>    <code>void</code>
             
                                         </div>
-                                            <div class="io-description">
-                                                
-                                            </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -692,7 +670,7 @@
                                 </tr>
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/services/navbar.service.ts:8</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/services/navbar.service.ts:5</a></div>
                                         </td>
                                     </tr>
                         </tbody>
@@ -706,29 +684,18 @@
 
 @Injectable()
 export class NavbarService {
-    /**
-     * Selected semester.
-     */
     semesterSelected: EventEmitter&lt;string&gt; &#x3D; new EventEmitter();
 
-    /**
-    * Provide a reference for the emitter of the current selected semester.
-    * 
-    * @returns {EventEmitter&lt;string&gt;}
-    */
-    public getSemesterSelectedEmitter(): EventEmitter&lt;string&gt; {
+    public getSemesterSelectedEmitter() {
         return this.semesterSelected;
     }
 
-    /**
-    * 
-    * @param semester 
-    * Selected semester to be emitted.
-    */
     public emitSemesterSelected(semester: string){
         this.semesterSelected.emit(semester)
     }
-}</code></pre>
+}
+
+//TO DO: MOVE THIS CLASS TO ../services and update references</code></pre>
     </div>
 </div>
 

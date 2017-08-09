@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -630,7 +630,7 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, snackbarsService: <a href="../injectables/SnackbarsService.html">SnackbarsService</a>)</code>
+                            <code>constructor(FBservice: <a href="../injectables/FirebaseService.html">FirebaseService</a>, router: <a href="https://angular.io/docs/ts/latest/api/router/index/Router-class.html" target="_blank">Router</a>, snackbarsService: <a href="../injectables/SnackbarService.html">SnackbarService</a>)</code>
                         </td>
                     </tr>
                             <tr>
@@ -918,7 +918,7 @@ import { FirebaseService } from &#x27;../../services/firebase.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { FormControl } from &#x27;@angular/forms&#x27;;
 import { FlashMessagesService } from &#x27;angular2-flash-messages&#x27;;
-import { SnackbarsService } from &#x27;../../services/snackbars.service&#x27;
+import { SnackbarService } from &#x27;../../services/snackbar.service&#x27;;
 
 import &#x27;rxjs/add/operator/startWith&#x27;;
 import &#x27;rxjs/add/operator/map&#x27;;
@@ -944,7 +944,7 @@ export class AddAllocationComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackbarsService: SnackbarsService
+    private snackbarsService: SnackbarService
     ) {}
 
 

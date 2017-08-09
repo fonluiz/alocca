@@ -246,7 +246,7 @@
                                     <a href="../injectables/NavbarService.html" >NavbarService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                    <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                 </li>
                         </ul>
                     </li>
@@ -508,7 +508,7 @@
                                            <a href="../injectables/NavbarService.html" >NavbarService</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../injectables/SnackbarsService.html" >SnackbarsService</a>
+                                           <a href="../injectables/SnackbarService.html" >SnackbarService</a>
                                        </li>
                                </ul>
                            </li>
@@ -2211,7 +2211,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="557" class="link-to-prism">src/app/services/firebase.service.ts:557</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="558" class="link-to-prism">src/app/services/firebase.service.ts:558</a></div>
                                         </td>
                                     </tr>
             
@@ -2242,7 +2242,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="562" class="link-to-prism">src/app/services/firebase.service.ts:562</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="563" class="link-to-prism">src/app/services/firebase.service.ts:563</a></div>
                                         </td>
                                     </tr>
             
@@ -2273,7 +2273,7 @@
             
                                     <tr>
                                         <td class="col-md-4">
-                                            <div class="io-line">Defined in <a href="" data-line="567" class="link-to-prism">src/app/services/firebase.service.ts:567</a></div>
+                                            <div class="io-line">Defined in <a href="" data-line="568" class="link-to-prism">src/app/services/firebase.service.ts:568</a></div>
                                         </td>
                                     </tr>
             
@@ -2284,6 +2284,222 @@
                                             <b>Returns : </b>    <code>void</code>
             
                                         </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> addClassToSchedule</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>addClassToSchedule(classKey: string, day: string, hour: number)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="585" class="link-to-prism">src/app/services/firebase.service.ts:585</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <ul class="jsdoc-params">
+                                                        <li>
+                                                            <div>
+                                                                <b>classKey</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The key of the class that will be added</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>day</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The day in the schedule of the class that will be added</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>hour</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The hour in the schedule of the class that will be added</p>
+            
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                                <b>Example :</b>
+                                                    <div class="jsdoc-example-ul">
+                                                        <p>addClassToSchedule(&#39;LES-1&#39;,&#39;monday&#39;,7)</p>
+            
+                                                    </div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code>boolean</code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                <p>status of the addition: true if class scheduled</p>
+            
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> deleteClassFromSchedule</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+            <code>deleteClassFromSchedule(classKey: string, day: string, hour: number)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="621" class="link-to-prism">src/app/services/firebase.service.ts:621</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <ul class="jsdoc-params">
+                                                        <li>
+                                                            <div>
+                                                                <b>classKey</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The key of the class that will be deleted</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>day</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The day in the schedule of the class that will be deleted</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>hour</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The hour in the schedule of the class that will be deleted</p>
+            
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                                <b>Example :</b>
+                                                    <div class="jsdoc-example-ul">
+                                                        <p>deleteClassFromSchedule(&#39;LES-1&#39;,&#39;monday&#39;,7)</p>
+            
+                                                    </div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code>boolean</code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                <p>status of the deletion: true if class unscheduled</p>
+            
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b><span class="modifier">Private</span> updateHoursToSchedule</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon method fa fa-play lock"></span>
+                                    <code>updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="656" class="link-to-prism">src/app/services/firebase.service.ts:656</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <ul class="jsdoc-params">
+                                                        <li>
+                                                            <div>
+                                                                <b>classKey</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The key of the class</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>hour</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>The hour in the schedule of the class</p>
+            
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div>
+                                                                <b>isAdd</b>
+                                                            </div>
+                                                            <div>
+                                                                <p>Is the method being used when a class is being scheduled or unscheduled</p>
+            
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                                <b>Example :</b>
+                                                    <div class="jsdoc-example-ul">
+                                                        <p>pdateHoursToSchedule(&#39;LES-1&#39;,8,true)</p>
+            
+                                                    </div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code>boolean</code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                
+                                            </div>
                                 </td>
                             </tr>
                         </tbody>
@@ -3160,10 +3376,10 @@ export class FirebaseService {
 
 ///Courses
   addNewCourse(newCourse){
-    if(this.courseExists(newCourse.name+newCourse.credits)){
+    if(this.courseExists(newCourse.code)){
       return false;
     }else{
-      this.db.database.ref(&quot;courses/&quot;+newCourse.name+newCourse.credits).set(newCourse);
+      this.db.database.ref(&quot;courses/&quot;+newCourse.code).set(newCourse);
       return true;
     }
   }
@@ -3175,8 +3391,8 @@ export class FirebaseService {
     return this.course;
   }
   updateCourse(id, course){
-    if(id!&#x3D;&#x3D;(course.name+course.credits)){
-      if(this.courseExists(course.name+course.credits)){
+    if(id!&#x3D;&#x3D;(course.code)){
+      if(this.courseExists(course.code)){
         return false;
       }
       this.deleteCourse(id);
@@ -3373,6 +3589,7 @@ export class FirebaseService {
   getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
+
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPESemester())
           .set(restriction.toFirebaseObject());
@@ -3386,6 +3603,121 @@ export class FirebaseService {
   addClass(Class) {
     this.db.database.ref(&quot;classes/&quot; + Class.classKey).set(Class);
     return true;
+  }
+
+//Schedules
+
+  /**
+   * 
+   * @param classKey The key of the class that will be added
+   * @param day The day in the schedule of the class that will be added
+   * @param hour The hour in the schedule of the class that will be added
+   * 
+   * @example addClassToSchedule(&#x27;LES-1&#x27;,&#x27;monday&#x27;,7)
+   * 
+   * @returns status of the addition: true if class scheduled
+   */
+  addClassToSchedule(classKey:string,day: string,hour: number): boolean{
+    var daySchedulesList: any[] &#x3D; [];
+    var alreadyScheduled: boolean &#x3D; false;
+    this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey+&#x27;/schedules/&#x27;+day+&#x27;/hours&#x27;)
+    .on(&quot;value&quot;, function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        daySchedulesList.push(childSnapshot.val());
+        if(childSnapshot.val()&#x3D;&#x3D;&#x3D;hour){
+          alreadyScheduled &#x3D; true;
+        }
+        if(!daySchedulesList){
+          return  true;
+        }
+      })
+    })
+    if (!alreadyScheduled){
+      daySchedulesList.push(hour);
+      if(this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey+&#x27;/schedules/&#x27;+day+&#x27;/hours&#x27;).set(daySchedulesList)){
+        this.updateHoursToSchedule(classKey,hour,true);
+        return true;
+      }
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class that will be deleted
+   * @param day The day in the schedule of the class that will be deleted
+   * @param hour The hour in the schedule of the class that will be deleted
+   * 
+   * @example deleteClassFromSchedule(&#x27;LES-1&#x27;,&#x27;monday&#x27;,7)
+   * 
+   * @returns {boolean} status of the deletion: true if class unscheduled
+   */
+  deleteClassFromSchedule(classKey:string,day:string,hour:number): boolean{
+    var hoursFromClass: any[] &#x3D; [];
+    this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey+&#x27;/schedules/&#x27;+day+&#x27;/hours&#x27;)
+    .on(&quot;value&quot;,function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if(childSnapshot.val()!&#x3D;&#x3D;hour){
+          hoursFromClass.push(childSnapshot.val());
+        }
+        if(hoursFromClass&#x3D;&#x3D;&#x3D;null){
+          return  true;
+        }
+      })
+    })
+    if(hoursFromClass.length&#x3D;&#x3D;&#x3D;0){
+      hoursFromClass.push(&quot;&quot;);
+    }
+    if(this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey+&#x27;/schedules/&#x27;+day+&#x27;/hours&#x27;)
+    .set(hoursFromClass)){
+      this.updateHoursToSchedule(classKey,hour,false)
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class
+   * @param hour The hour in the schedule of the class
+   * @param isAdd Is the method being used when a class is being scheduled or unscheduled
+   * 
+   * @example pdateHoursToSchedule(&#x27;LES-1&#x27;,8,true)
+   * 
+   * @return {boolean} status of the update: true if succesfull
+   */
+  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean): boolean{
+    var thisObject &#x3D; this;
+    var hourToAddOrSubtract:number &#x3D; 0;
+    var oldHours: number;
+    var newHours: number;
+    if(isAdd){
+      if(hour&#x3D;&#x3D;&#x3D;7){
+        hourToAddOrSubtract &#x3D; -1;
+      }else{
+        hourToAddOrSubtract &#x3D; -2;
+      }
+    }else{
+      if(hour&#x3D;&#x3D;&#x3D;7){
+        hourToAddOrSubtract &#x3D; 1;
+      }else{
+        hourToAddOrSubtract &#x3D; 2;
+      }
+    }
+    if (this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey)
+      .on(&quot;value&quot;, function(snapshot){
+        oldHours &#x3D; snapshot.child(&#x27;hoursToSchedule&#x27;).val();
+      }))
+    {
+      newHours &#x3D; oldHours + hourToAddOrSubtract;
+      this.db.database.ref(&quot;classes/&quot;+this.currentSemester+&quot;/&quot;+classKey+&#x27;/hoursToSchedule&#x27;).set(newHours);
+      return true;
+    }else{
+      return false;
+    }
+
   }
 }</code></pre>
     </div>
