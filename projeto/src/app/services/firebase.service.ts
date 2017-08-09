@@ -9,7 +9,7 @@ import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model';
 import { Class } from '../allocations/class.model';
-import { NavbarService } from "app/navbar/navbar.service";
+import { NavbarService } from "./navbar.service";
 
 @Injectable()
 export class FirebaseService {
@@ -54,7 +54,7 @@ export class FirebaseService {
     })
   }
 
-  ///Allocation
+///Allocation
   getAllocations(){
     return this.allocations;
   }
@@ -295,7 +295,7 @@ export class FirebaseService {
     return department;
   }
 
-  ///Professors
+///Professors
   addNewProfessor(newprofessor){
     if(this.professorExists(newprofessor.SIAPE)){
         return false;
@@ -339,12 +339,12 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Courses
+///Courses
   addNewCourse(newCourse){
-    if(this.courseExists(newCourse.name+newCourse.credits)){
+    if(this.courseExists(newCourse.code)){
       return false;
     }else{
-      this.db.database.ref("courses/"+newCourse.name+newCourse.credits).set(newCourse);
+      this.db.database.ref("courses/"+newCourse.code).set(newCourse);
       return true;
     }
   }
@@ -356,8 +356,8 @@ export class FirebaseService {
     return this.course;
   }
   updateCourse(id, course){
-    if(id!==(course.name+course.credits)){
-      if(this.courseExists(course.name+course.credits)){
+    if(id!==(course.code)){
+      if(this.courseExists(course.code)){
         return false;
       }
       this.deleteCourse(id);
@@ -384,7 +384,7 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Users
+///Users
   getUsers(){
     return this.users;
   }
@@ -442,7 +442,7 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  ///Requests
+///Requests
   getRequests(){
     return this.requests;
   }
@@ -503,20 +503,58 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  // Semesters
-  saveSemester(semester: Semester) {
+// Semesters
+  /**
+   * 
+   * @param semester 
+   * New (object) Semester to be saved.
+   * 
+   * @returns Status of the semester to be saved
+   */
+  saveSemester(semester: Semester): boolean {
       this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
+      this.navbarService.emitSemesterSelected(semester.getId());
+      return true;
   }
-  
-  getSemesters() {
+
+  /**
+   * 
+   * @returns List of available semesters from firebase.
+   */
+  getSemesters(): FirebaseListObservable<any[]> {
       return this.semesters;
   }
 
-  // Restrictions
+  /**
+   * 
+   * @returns Current selected semester.
+   */
+  getCurrentSemester(): string{
+    return this.currentSemester;
+  }
+
+  /**
+   * 
+   * @param id 
+   * ID of the semester to be deleted.
+   * 
+   * @returns {boolean}
+   * Status of the operation: true if deleted.
+   */
+  removeSemester(id: string): boolean {
+    if (this.semesters.remove(id)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+// Restrictions
   getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
+
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPESemester())
           .set(restriction.toFirebaseObject());
@@ -526,15 +564,124 @@ export class FirebaseService {
       return this.db.object(this.PROFESSORS_RESTRICTIONS_PATH + restriction_id) as FirebaseObjectObservable<ProfessorRestriction>;
   }
 
-  // Classes
+// Classes
   addClass(Class) {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
   }
 
-  //EXTRA METHODS FOR TESTING/STUB
-  getClassesOnSchedule(){
-    let classesList = this.db.list('/classes/2017-1') as FirebaseListObservable<any[]>;
-    return classesList;
+//Schedules
+
+  /**
+   * 
+   * @param classKey The key of the class that will be added
+   * @param day The day in the schedule of the class that will be added
+   * @param hour The hour in the schedule of the class that will be added
+   * 
+   * @example addClassToSchedule('LES-1','monday',7)
+   * 
+   * @returns status of the addition: true if class scheduled
+   */
+  addClassToSchedule(classKey:string,day: string,hour: number): boolean{
+    var daySchedulesList: any[] = [];
+    var alreadyScheduled: boolean = false;
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        daySchedulesList.push(childSnapshot.val());
+        if(childSnapshot.val()===hour){
+          alreadyScheduled = true;
+        }
+        if(!daySchedulesList){
+          return  true;
+        }
+      })
+    })
+    if (!alreadyScheduled){
+      daySchedulesList.push(hour);
+      if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList)){
+        this.updateHoursToSchedule(classKey,hour,true);
+        return true;
+      }
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class that will be deleted
+   * @param day The day in the schedule of the class that will be deleted
+   * @param hour The hour in the schedule of the class that will be deleted
+   * 
+   * @example deleteClassFromSchedule('LES-1','monday',7)
+   * 
+   * @returns {boolean} status of the deletion: true if class unscheduled
+   */
+  deleteClassFromSchedule(classKey:string,day:string,hour:number): boolean{
+    var hoursFromClass: any[] = [];
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value",function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if(childSnapshot.val()!==hour){
+          hoursFromClass.push(childSnapshot.val());
+        }
+        if(hoursFromClass===null){
+          return  true;
+        }
+      })
+    })
+    if(hoursFromClass.length===0){
+      hoursFromClass.push("");
+    }
+    if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .set(hoursFromClass)){
+      this.updateHoursToSchedule(classKey,hour,false)
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class
+   * @param hour The hour in the schedule of the class
+   * @param isAdd Is the method being used when a class is being scheduled or unscheduled
+   * 
+   * @example pdateHoursToSchedule('LES-1',8,true)
+   * 
+   * @return {boolean} status of the update: true if succesfull
+   */
+  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean): boolean{
+    var thisObject = this;
+    var hourToAddOrSubtract:number = 0;
+    var oldHours: number;
+    var newHours: number;
+    if(isAdd){
+      if(hour===7){
+        hourToAddOrSubtract = -1;
+      }else{
+        hourToAddOrSubtract = -2;
+      }
+    }else{
+      if(hour===7){
+        hourToAddOrSubtract = 1;
+      }else{
+        hourToAddOrSubtract = 2;
+      }
+    }
+    if (this.db.database.ref("classes/"+this.currentSemester+"/"+classKey)
+      .on("value", function(snapshot){
+        oldHours = snapshot.child('hoursToSchedule').val();
+      }))
+    {
+      newHours = oldHours + hourToAddOrSubtract;
+      this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/hoursToSchedule').set(newHours);
+      return true;
+    }else{
+      return false;
+    }
+
   }
 }

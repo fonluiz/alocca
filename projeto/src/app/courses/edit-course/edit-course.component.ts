@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -11,10 +11,12 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class EditCourseComponent implements OnInit {
   id: string;
+  code: string;
   name: string;
   shortName: string;
   credits: number;
   type: string;
+  hoursToSchedule: number;
   minimumSemester: number;
   maximumSemester: number;
   offererDepartment: string;
@@ -22,6 +24,7 @@ export class EditCourseComponent implements OnInit {
   courseTypes: string[] = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
   semesters: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   departments: string[] = ["UASC", "Outro"];
+
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina editada com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao editar a disciplina. Verifique se esta já está cadastrada.";
   TIMEOUT_SAVED_MESSAGE: number = 2500;
@@ -31,15 +34,17 @@ export class EditCourseComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'],
     this.FBservice.getCourseDetails(this.id).subscribe(course =>{
+        this.code = course.code;
         this.name = course.name;
         this.shortName = course.shortName;
         this.credits = course.credits;
+        this.hoursToSchedule = course.hoursToSchedule;
         this.type = course.type;
         this.minimumSemester = course.minimumSemester;
         this.maximumSemester = course.maximumSemester;
@@ -53,10 +58,18 @@ export class EditCourseComponent implements OnInit {
   }
 
   onEditCourse(){
+    if (this.credits===0){
+      this.hoursToSchedule = 2;
+    }else{
+      this.hoursToSchedule = this.credits;
+    }
+
     let course = {
+          code: this.code,
           name: this.name,
           shortName: this.shortName,
           credits: this.credits,
+          hoursToSchedule: this.hoursToSchedule,
           type: this.type,
           minimumSemester: this.minimumSemester,
           maximumSemester: this.maximumSemester,

@@ -3,7 +3,7 @@ import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { FlashMessagesService } from 'angular2-flash-messages';
-import { SnackbarsService } from '../../services/snackbars.service'
+import { SnackbarService } from '../../services/snackbar.service';
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -29,7 +29,7 @@ export class AddAllocationComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackbarsService: SnackbarsService
+    private snackbarsService: SnackbarService
     ) {}
 
 
