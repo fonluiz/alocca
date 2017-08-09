@@ -58,7 +58,7 @@ export class FirebaseService {
     return this.currentSemester;
   }
 
-  ///Allocation
+///Allocation
   getAllocations(){
     return this.allocations;
   }
@@ -299,7 +299,7 @@ export class FirebaseService {
     return department;
   }
 
-  ///Professors
+///Professors
   addNewProfessor(newprofessor){
     if(this.professorExists(newprofessor.SIAPE)){
         return false;
@@ -343,7 +343,7 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Courses
+///Courses
   addNewCourse(newCourse){
     if(this.courseExists(newCourse.name+newCourse.credits)){
       return false;
@@ -388,7 +388,7 @@ export class FirebaseService {
     return isSaved;
   }
 
-  ///Users
+///Users
   getUsers(){
     return this.users;
   }
@@ -446,7 +446,7 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  ///Requests
+///Requests
   getRequests(){
     return this.requests;
   }
@@ -507,7 +507,7 @@ export class FirebaseService {
     return isRegistered;
   }
 
-  // Semesters
+// Semesters
   saveSemester(semester: Semester) {
       this.db.database.ref(this.SEMESTERS_PATH + '/' + semester.getId())
           .set(semester.toFirebaseObject());
@@ -517,10 +517,11 @@ export class FirebaseService {
       return this.semesters;
   }
 
-  // Restrictions
+// Restrictions
   getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
+
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPESemester())
           .set(restriction.toFirebaseObject());
@@ -530,26 +531,55 @@ export class FirebaseService {
       return this.db.object(this.PROFESSORS_RESTRICTIONS_PATH + restriction_id) as FirebaseObjectObservable<ProfessorRestriction>;
   }
 
-  // Classes
+// Classes
   addClass(Class) {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
   }
 
-  //Schedules
+//Schedules
   addClassToSchedule(classKey:string,day: string,hour: number){
     var daySchedulesList: any[] = [];
-    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').on("value", function(snapshot) {
+    var alreadyScheduled: boolean = false;
+    var terminated: any = this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         daySchedulesList.push(childSnapshot.val());
+        if(childSnapshot.val()===hour){
+          alreadyScheduled = true;
+        }
         if(!daySchedulesList){
           return  true;
         }
       })
     })
-    if (!(hour in daySchedulesList)){
+    if (!alreadyScheduled){
       daySchedulesList.push(hour);
       this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList);
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  deleteClassFromSchedule(classKey:string,day:string,hour:number){
+    var hoursFromClass: any[] = [];
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value",function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if(childSnapshot.val()!==hour){
+          hoursFromClass.push(childSnapshot.val());
+        }
+        if(hoursFromClass===null){
+          return  true;
+        }
+      })
+    })
+    if(hoursFromClass.length===0){
+      hoursFromClass.push("");
+    }
+    if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .set(hoursFromClass)){
       return true;
     }else{
       return false;
