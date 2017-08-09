@@ -47,14 +47,23 @@
                 "classNumber":2, //number of classes that semester (consultation)
                 "professorOne": "<professorId>",
                 "professorTwo": "<professorId>",
-                "schedules": [
-                    {
-                        "weekday": 2,
-                        "startTime": 8,
-                        "endTime": 10
-                    },
-                    {}
-                ],
+                "schedules": {
+                        "monday": {
+                            "hours": [10]
+                        },
+                        "tuesday": {
+                            "hours": []
+                        },
+                        "wednesday": {
+                            "hours": [14]
+                        },
+                        "thursday": {
+                            "hours": []
+                        },
+                        "friday":{
+                            "hours": []
+                        }
+                },
                 "note": "", //nothing at first
                 "hasAlert": false //"alerts": []//to change after creating the alerts entity //to change color
             }

@@ -55,7 +55,6 @@ export class FirebaseService {
   }
 
 ///Allocation
-
   getAllocations(){
     return this.allocations;
   }
@@ -555,6 +554,7 @@ export class FirebaseService {
   getProfessorRestrictionsList() {
       return this.professorRestrictions;
   }
+
   saveProfessorRestriction(restriction: ProfessorRestriction) {
       this.db.database.ref(this.PROFESSORS_RESTRICTIONS_PATH + restriction.getSIAPESemester())
           .set(restriction.toFirebaseObject());
@@ -568,5 +568,120 @@ export class FirebaseService {
   addClass(Class) {
     this.db.database.ref("classes/" + Class.classKey).set(Class);
     return true;
+  }
+
+//Schedules
+
+  /**
+   * 
+   * @param classKey The key of the class that will be added
+   * @param day The day in the schedule of the class that will be added
+   * @param hour The hour in the schedule of the class that will be added
+   * 
+   * @example addClassToSchedule('LES-1','monday',7)
+   * 
+   * @returns status of the addition: true if class scheduled
+   */
+  addClassToSchedule(classKey:string,day: string,hour: number): boolean{
+    var daySchedulesList: any[] = [];
+    var alreadyScheduled: boolean = false;
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value", function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        daySchedulesList.push(childSnapshot.val());
+        if(childSnapshot.val()===hour){
+          alreadyScheduled = true;
+        }
+        if(!daySchedulesList){
+          return  true;
+        }
+      })
+    })
+    if (!alreadyScheduled){
+      daySchedulesList.push(hour);
+      if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList)){
+        this.updateHoursToSchedule(classKey,hour,true);
+        return true;
+      }
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class that will be deleted
+   * @param day The day in the schedule of the class that will be deleted
+   * @param hour The hour in the schedule of the class that will be deleted
+   * 
+   * @example deleteClassFromSchedule('LES-1','monday',7)
+   * 
+   * @returns {boolean} status of the deletion: true if class unscheduled
+   */
+  deleteClassFromSchedule(classKey:string,day:string,hour:number): boolean{
+    var hoursFromClass: any[] = [];
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .on("value",function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if(childSnapshot.val()!==hour){
+          hoursFromClass.push(childSnapshot.val());
+        }
+        if(hoursFromClass===null){
+          return  true;
+        }
+      })
+    })
+    if(hoursFromClass.length===0){
+      hoursFromClass.push("");
+    }
+    if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    .set(hoursFromClass)){
+      this.updateHoursToSchedule(classKey,hour,false)
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * 
+   * @param classKey The key of the class
+   * @param hour The hour in the schedule of the class
+   * @param isAdd Is the method being used when a class is being scheduled or unscheduled
+   * 
+   * @example pdateHoursToSchedule('LES-1',8,true)
+   * 
+   * @return {boolean} status of the update: true if succesfull
+   */
+  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean): boolean{
+    var thisObject = this;
+    var hourToAddOrSubtract:number = 0;
+    var oldHours: number;
+    var newHours: number;
+    if(isAdd){
+      if(hour===7){
+        hourToAddOrSubtract = -1;
+      }else{
+        hourToAddOrSubtract = -2;
+      }
+    }else{
+      if(hour===7){
+        hourToAddOrSubtract = 1;
+      }else{
+        hourToAddOrSubtract = 2;
+      }
+    }
+    if (this.db.database.ref("classes/"+this.currentSemester+"/"+classKey)
+      .on("value", function(snapshot){
+        oldHours = snapshot.child('hoursToSchedule').val();
+      }))
+    {
+      newHours = oldHours + hourToAddOrSubtract;
+      this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/hoursToSchedule').set(newHours);
+      return true;
+    }else{
+      return false;
+    }
+
   }
 }

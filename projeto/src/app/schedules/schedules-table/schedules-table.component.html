@@ -22,33 +22,48 @@
             <td>
               <table class="hour-table">
                 <thead>
-                  <th class="hour-th">Disciplina</th>
-                  <th class="hour-th">Docente(s)</th>
-                  <th class="hour-th">Período</th>
-                  <th class="hour-th"></th>
+                  <span>
+                    <span>
+                      <span>
+                        <th class="hour-th">Disciplina</th>
+                        <th class="hour-th">Docente(s)</th>
+                        <th class="hour-th">Período</th>
+                        <th class="hour-th"></th>
+                      </span>
+                    </span>
+                  </span>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
-                    <td>{{class.course}} - t{{class.number}}</td>
+                  <!--Scheduled classes-->
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.monday.hours'>
+                      <div *ngIf = 'time === hour'>
+                        <tr>
+                          <td>{{class.course}} - t{{class.number}}</td>
 
-                    <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
-                    <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
-                    <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
-                    <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
-                    <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
-                    <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
-                    
-                    <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
-                    TELL THEM TO DO SO.-->
-                    <td>{{class.recomendedSemester}}</td>
-                    <!--CHANGE FUNCTION PARAMETER-->
-                    <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
-                  </tr>
+                          <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
+                          <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
+                          <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
+                          <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
+                          <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
+                          <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
+                          
+                          <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
+                          TELL THEM TO DO SO.-->
+                          <td>{{class.recomendedSemester}}</td>
+                          <!--CHANGE FUNCTION PARAMETER-->
+                          <td><a (click)="onDeleteClassSchedule(class.course,class.number,class.$key,'monday',hour)" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
+                        </tr>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('monday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -62,33 +77,48 @@
             <td>
               <table class="hour-table">
                 <thead>
-                  <th class="hour-th">Disciplina</th>
-                  <th class="hour-th">Docente(s)</th>
-                  <th class="hour-th">Período</th>
-                  <th class="hour-th"></th>
+                  <span>
+                    <span>
+                      <span>
+                        <th class="hour-th">Disciplina</th>
+                        <th class="hour-th">Docente(s)</th>
+                        <th class="hour-th">Período</th>
+                        <th class="hour-th"></th>
+                      </span>
+                    </span>
+                  </span>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
-                    <td>{{class.course}} - t{{class.number}}</td>
+                  <!--Scheduled classes-->
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.tuesday.hours'>
+                      <div *ngIf = 'time === hour'>
+                        <tr>
+                          <td>{{class.course}} - t{{class.number}}</td>
 
-                    <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
-                    <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
-                    <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
-                    <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
-                    <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
-                    <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
-                    
-                    <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
-                    TELL THEM TO DO SO.-->
-                    <td>{{class.recomendedSemester}}</td>
-                    <!--CHANGE FUNCTION PARAMETER-->
-                    <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
-                  </tr>
+                          <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
+                          <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
+                          <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
+                          <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
+                          <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
+                          <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
+                          
+                          <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
+                          TELL THEM TO DO SO.-->
+                          <td>{{class.recomendedSemester}}</td>
+                          <!--CHANGE FUNCTION PARAMETER-->
+                          <td><a (click)="onDeleteClassSchedule(class.course,class.number,class.$key,'tuesday',hour)" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
+                        </tr>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('tuesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -102,33 +132,48 @@
             <td>
               <table class="hour-table">
                 <thead>
-                  <th class="hour-th">Disciplina</th>
-                  <th class="hour-th">Docente(s)</th>
-                  <th class="hour-th">Período</th>
-                  <th class="hour-th"></th>
+                  <span>
+                    <span>
+                      <span>
+                        <th class="hour-th">Disciplina</th>
+                        <th class="hour-th">Docente(s)</th>
+                        <th class="hour-th">Período</th>
+                        <th class="hour-th"></th>
+                      </span>
+                    </span>
+                  </span>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
-                    <td>{{class.course}} - t{{class.number}}</td>
+                  <!--Scheduled classes-->
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.wednesday.hours'>
+                      <div *ngIf = 'time === hour'>
+                        <tr>
+                          <td>{{class.course}} - t{{class.number}}</td>
 
-                    <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
-                    <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
-                    <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
-                    <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
-                    <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
-                    <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
-                    
-                    <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
-                    TELL THEM TO DO SO.-->
-                    <td>{{class.recomendedSemester}}</td>
-                    <!--CHANGE FUNCTION PARAMETER-->
-                    <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
-                  </tr>
+                          <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
+                          <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
+                          <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
+                          <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
+                          <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
+                          <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
+                          
+                          <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
+                          TELL THEM TO DO SO.-->
+                          <td>{{class.recomendedSemester}}</td>
+                          <!--CHANGE FUNCTION PARAMETER-->
+                          <td><a (click)="onDeleteClassSchedule(class.course,class.number,class.$key,'wednesday',hour)" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
+                        </tr>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('wednesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -142,33 +187,48 @@
             <td>
               <table class="hour-table">
                 <thead>
-                  <th class="hour-th">Disciplina</th>
-                  <th class="hour-th">Docente(s)</th>
-                  <th class="hour-th">Período</th>
-                  <th class="hour-th"></th>
+                  <span>
+                    <span>
+                      <span>
+                        <th class="hour-th">Disciplina</th>
+                        <th class="hour-th">Docente(s)</th>
+                        <th class="hour-th">Período</th>
+                        <th class="hour-th"></th>
+                      </span>
+                    </span>
+                  </span>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
-                    <td>{{class.course}} - t{{class.number}}</td>
+                  <!--Scheduled classes-->
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.thursday.hours'>
+                      <div *ngIf = 'time === hour'>
+                        <tr>
+                          <td>{{class.course}} - t{{class.number}}</td>
 
-                    <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
-                    <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
-                    <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
-                    <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
-                    <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
-                    <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
-                    
-                    <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
-                    TELL THEM TO DO SO.-->
-                    <td>{{class.recomendedSemester}}</td>
-                    <!--CHANGE FUNCTION PARAMETER-->
-                    <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
-                  </tr>
+                          <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
+                          <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
+                          <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
+                          <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
+                          <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
+                          <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
+                          
+                          <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
+                          TELL THEM TO DO SO.-->
+                          <td>{{class.recomendedSemester}}</td>
+                          <!--CHANGE FUNCTION PARAMETER-->
+                          <td><a (click)="onDeleteClassSchedule(class.course,class.number,class.$key,'thursday',hour)" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
+                        </tr>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('thursday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
@@ -182,33 +242,48 @@
             <td>
               <table class="hour-table">
                 <thead>
-                  <th class="hour-th">Disciplina</th>
-                  <th class="hour-th">Docente(s)</th>
-                  <th class="hour-th">Período</th>
-                  <th class="hour-th"></th>
+                  <span>
+                    <span>
+                      <span>
+                        <th class="hour-th">Disciplina</th>
+                        <th class="hour-th">Docente(s)</th>
+                        <th class="hour-th">Período</th>
+                        <th class="hour-th"></th>
+                      </span>
+                    </span>
+                  </span>
                 </thead>
                 <tbody class="hour-td">
-                  <tr *ngFor = 'let class of scheduledClasses'>
-                    <td>{{class.course}} - t{{class.number}}</td>
+                  <!--Scheduled classes-->
+                  <div *ngFor = 'let class of classes'>
+                    <div *ngFor = 'let time of class.schedules.friday.hours'>
+                      <div *ngIf = 'time === hour'>
+                        <tr>
+                          <td>{{class.course}} - t{{class.number}}</td>
 
-                    <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
-                    <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
-                    <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
-                    <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
-                    <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
-                    <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
-                    
-                    <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
-                    TELL THEM TO DO SO.-->
-                    <td>{{class.recomendedSemester}}</td>
-                    <!--CHANGE FUNCTION PARAMETER-->
-                    <td><a (click)="onDeleteClassSchedule()" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
-                  </tr>
+                          <!--IN CASE THE CLASS HAS TWO PROFESSORS-->
+                          <td *ngIf='class.professor2'>{{class.professor1}} - {{class.professor2}}</td>
+                          <!--IN CASE THE CLASS DOESN'T HAVE A PROFESSOR YET-->
+                          <td *ngIf='!class.professor1; else justOneProfessor'>???</td>
+                          <!--IN CASE THE CLASS HAS ONE PROFESSORS-->
+                          <ng-template #justOneProfessor><td *ngIf='!class.professor2'>{{class.professor1}}</td></ng-template>
+                          
+                          <!--IN CLASSES THEY'RE USING 'period'. IF THEY DON'T CHANGE IT,
+                          TELL THEM TO DO SO.-->
+                          <td>{{class.recomendedSemester}}</td>
+                          <!--CHANGE FUNCTION PARAMETER-->
+                          <td><a (click)="onDeleteClassSchedule(class.course,class.number,class.$key,'friday',hour)" class="foo-red" ><i class="material-icons">delete_forever</i></a></td>
+                        </tr>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <md-select class="new-class-selection" placeholder="Turma" [(ngModel)]="courseKey" name="courseKey" required>
-                        <span *ngFor="let class of classesToSchedule">
-                          <md-option *ngIf = "class.credits!=class.scheduledHours" [value]="course">
+                      <md-select class="new-class-selection" (change)="onAddClassToSchedule('friday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                        <span *ngFor="let class of classes">
+                          <md-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
                             {{class.course}} - t{{class.number}}
                           </md-option>
                         </span>
