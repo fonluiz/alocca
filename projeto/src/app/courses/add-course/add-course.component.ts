@@ -19,9 +19,9 @@ export class AddCourseComponent implements OnInit {
   offererDepartment: string;
   requesterDepartment: String;
   classesNumber: number = 0;
-  courseTypes = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
-  semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  departments = ["UASC", "Outro"];
+  courseTypes: string[] = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
+  semesters: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  departments: string[] = ["UASC", "Outro"];
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina salva com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a disciplina. Verifique se esta já está cadastrada.";
   TIMEOUT_SAVED_MESSAGE: number = 2500;

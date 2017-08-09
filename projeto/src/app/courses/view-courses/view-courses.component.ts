@@ -13,7 +13,7 @@ import { SnackbarsService } from '../../services/snackbars.service';
 })
 export class ViewCoursesComponent implements OnInit {
   courses: any;
-  id: any;
+  id: string;
   public result: any;
   DELETED_MESSAGE: string = "Disicplina deletada com sucesso!";
   NOT_DELETED_MESSAGE: string = "Não foi possível remover a disciplina. Tente novamente!";
