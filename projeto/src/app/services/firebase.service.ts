@@ -539,15 +539,17 @@ export class FirebaseService {
 
 //Schedules
 
-/**
- * 
- * @param classKey The key of the class that will be added
- * @param day The day in the schedule of the class that will be added
- * @param hour The hour in the schedule of the class that will be added
- * @example 
- *  addClassToSchedule('01','Monday','7')
- */
-  addClassToSchedule(classKey:string,day: string,hour: number){
+  /**
+   * 
+   * @param classKey The key of the class that will be added
+   * @param day The day in the schedule of the class that will be added
+   * @param hour The hour in the schedule of the class that will be added
+   * 
+   * @example addClassToSchedule('LES-1','monday',7)
+   * 
+   * @returns status of the addition: true if class scheduled
+   */
+  addClassToSchedule(classKey:string,day: string,hour: number): boolean{
     var daySchedulesList: any[] = [];
     var alreadyScheduled: boolean = false;
     this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
@@ -578,9 +580,12 @@ export class FirebaseService {
    * @param classKey The key of the class that will be deleted
    * @param day The day in the schedule of the class that will be deleted
    * @param hour The hour in the schedule of the class that will be deleted
-   * deleteClassFromSchedule('01','Monday','7')
+   * 
+   * @example deleteClassFromSchedule('LES-1','monday',7)
+   * 
+   * @returns {boolean} status of the deletion: true if class unscheduled
    */
-  deleteClassFromSchedule(classKey:string,day:string,hour:number){
+  deleteClassFromSchedule(classKey:string,day:string,hour:number): boolean{
     var hoursFromClass: any[] = [];
     this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
     .on("value",function(snapshot) {
@@ -605,7 +610,17 @@ export class FirebaseService {
     }
   }
 
-  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean){
+  /**
+   * 
+   * @param classKey The key of the class
+   * @param hour The hour in the schedule of the class
+   * @param isAdd Is the method being used when a class is being scheduled or unscheduled
+   * 
+   * @example pdateHoursToSchedule('LES-1',8,true)
+   * 
+   * @return {boolean} status of the update: true if succesfull
+   */
+  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean): boolean{
     var thisObject = this;
     var hourToAddOrSubtract:number = 0;
     var oldHours: number;

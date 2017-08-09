@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
-import { ClassesStub } from '../classes.stub';
-import { Schedule } from '../schedule.model';
 import { SnackbarsService } from '../../services/snackbars.service';
 import { DialogsService} from '../../services/dialogs.service';
 
 @Component({
   selector: 'app-schedules-table',
   templateUrl: './schedules-table.component.html',
-  styleUrls: ['./schedules-table.component.css'],
-  providers: [ClassesStub]
+  styleUrls: ['./schedules-table.component.css']
 })
 export class SchedulesTableComponent implements OnInit {
-  //chane type to class[]
   classes: any[];
   currentClassKey: string;
   SAVED_SUCCESSFULLY_MESSAGE: string = "Aula adicionada com sucesso!";
@@ -26,7 +22,6 @@ export class SchedulesTableComponent implements OnInit {
 
   constructor(
     private FBservice: FirebaseService,
-    private schedulesStub: ClassesStub,
     private snackService: SnackbarsService,
     private dialogService: DialogsService
   ) {
@@ -42,8 +37,8 @@ export class SchedulesTableComponent implements OnInit {
    * 
    * @param day The day of the class in the schedule
    * @param hour The hour of the Class in the schedule
-   * @example
-   *  onAddClassToSchedule('monday','10')
+   * 
+   * @example onAddClassToSchedule('monday','10')
    */
   onAddClassToSchedule(day: string, hour: number){
     if(this.FBservice.addClassToSchedule(this.currentClassKey,day,hour)){
@@ -55,12 +50,13 @@ export class SchedulesTableComponent implements OnInit {
   }
 
   /**
-   * 
+   * @param classCourse The name of the course of that course
+   * @param classNumber The number of that class for that course
    * @param classKey The key of the class that will be removed
    * @param day The day in the schedule of the class that will be removed
    * @param hour The hour in the schedules of the class that will be removed
-   * @example 
-   *  onDeleteClassSchedule('01','monday','8')
+   * 
+   * @example onDeleteClassSchedule('01','monday','8')
    */
   onDeleteClassSchedule(classCourse: string, classNumber:number, classKey: string, day: string, hour:number){
     var title = "Desalocar disciplina";
