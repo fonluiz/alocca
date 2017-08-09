@@ -541,7 +541,7 @@ export class FirebaseService {
   addClassToSchedule(classKey:string,day: string,hour: number){
     var daySchedulesList: any[] = [];
     var alreadyScheduled: boolean = false;
-    var terminated: any = this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
+    this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
     .on("value", function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         daySchedulesList.push(childSnapshot.val());
@@ -555,8 +555,10 @@ export class FirebaseService {
     })
     if (!alreadyScheduled){
       daySchedulesList.push(hour);
-      this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList);
-      return true;
+      if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours').set(daySchedulesList)){
+        this.updateHoursToSchedule(classKey,hour,true);
+        return true;
+      }
     }else{
       return false;
     }
@@ -580,9 +582,42 @@ export class FirebaseService {
     }
     if(this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
     .set(hoursFromClass)){
+      this.updateHoursToSchedule(classKey,hour,false)
       return true;
     }else{
       return false;
     }
+  }
+
+  private updateHoursToSchedule(classKey: string, hour: number, isAdd: boolean){
+    var thisObject = this;
+    var hourToAddOrSubtract:number = 0;
+    var oldHours: number;
+    var newHours: number;
+    if(isAdd){
+      if(hour===7){
+        hourToAddOrSubtract = -1;
+      }else{
+        hourToAddOrSubtract = -2;
+      }
+    }else{
+      if(hour===7){
+        hourToAddOrSubtract = 1;
+      }else{
+        hourToAddOrSubtract = 2;
+      }
+    }
+    if (this.db.database.ref("classes/"+this.currentSemester+"/"+classKey)
+      .on("value", function(snapshot){
+        oldHours = snapshot.child('hoursToSchedule').val();
+      }))
+    {
+      newHours = oldHours + hourToAddOrSubtract;
+      this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/hoursToSchedule').set(newHours);
+      return true;
+    }else{
+      return false;
+    }
+
   }
 }
