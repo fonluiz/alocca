@@ -54,10 +54,7 @@ export class FirebaseService {
     })
   }
 
-  getCurrentSemester(){
-    return this.currentSemester;
-  }
-  ///Allocation
+///Allocation
 
   getAllocations(){
     return this.allocations;
