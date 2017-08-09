@@ -538,6 +538,15 @@ export class FirebaseService {
   }
 
 //Schedules
+
+/**
+ * 
+ * @param classKey The key of the class that will be added
+ * @param day The day in the schedule of the class that will be added
+ * @param hour The hour in the schedule of the class that will be added
+ * @example 
+ *  addClassToSchedule('01','Monday','7')
+ */
   addClassToSchedule(classKey:string,day: string,hour: number){
     var daySchedulesList: any[] = [];
     var alreadyScheduled: boolean = false;
@@ -562,6 +571,13 @@ export class FirebaseService {
     }
   }
 
+  /**
+   * 
+   * @param classKey The key of the class that will be deleted
+   * @param day The day in the schedule of the class that will be deleted
+   * @param hour The hour in the schedule of the class that will be deleted
+   * deleteClassFromSchedule('01','Monday','7')
+   */
   deleteClassFromSchedule(classKey:string,day:string,hour:number){
     var hoursFromClass: any[] = [];
     this.db.database.ref("classes/"+this.currentSemester+"/"+classKey+'/schedules/'+day+'/hours')
