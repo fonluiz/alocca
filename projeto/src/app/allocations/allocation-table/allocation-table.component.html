@@ -5,7 +5,6 @@
         <th>Verificado</th>
         <th>Disciplina</th>
         <th>Turma</th>
-        <th>Período</th>
         <th>Professor 1</th>
         <th>Professor 2</th>
         <th>Horários</th>
@@ -17,16 +16,23 @@
     <tbody>
       <tr *ngFor = 'let class of classesList'>
         <td><md-checkbox></md-checkbox></td>
-        <td>{{class.course}}</td>
+        <td>{{ class.course }}</td>
         <!--CHANGE TO GET RECOMENDED SEMESTER-->
         <td>{{class.number}}</td>
-        <td>{{class.period}}</td>
         <td>{{class.professor1}}</td>
         <td>{{class.professor2}}</td>
         <td>{{class.schedules}}</td>
         <td>{{class.note}}</td>
-        <td [routerLink]="['/edit-allocation/'+class.$key]">Editar</td>
-        <td (click)="onDeleteClass(class.$key)">Excluir</td>
+        <td [routerLink]="['/edit-allocation/'+class.$key]">
+         <button md-icon-button type="submit" color="accent">
+          <md-icon>edit</md-icon>
+        </button>
+        </td>
+        <td (click)="onDeleteClass(class.$key)">
+           <button md-icon-button type="submit" color="warn">
+              <md-icon>delete</md-icon>
+           </button>
+        </td>
       </tr>
     </tbody>
   </table>

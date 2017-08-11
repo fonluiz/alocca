@@ -15,8 +15,8 @@ export class EditCourseComponent implements OnInit {
   name: string;
   shortName: string;
   credits: number;
-  type: string;
   hoursToSchedule: number;
+  type: string;
   minimumSemester: number;
   maximumSemester: number;
   offererDepartment: string;

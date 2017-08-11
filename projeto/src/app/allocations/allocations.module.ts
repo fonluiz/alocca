@@ -12,8 +12,8 @@ import { AppRoutingModule } from '../app-routing.module';
 import {AddAllocationComponent} from './add-allocation/add-allocation.component';
 import {AllocationTableComponent} from './allocation-table/allocation-table.component';
 import {EditAllocationComponent} from './edit-allocation/edit-allocation.component';
-import { ClassesSchedulesComponent } from './classes-schedules/classes-schedules.component';
 import { AlertsComponent } from './alerts/alerts.component';
+import { ClassesContainerComponent } from './classes-container/classes-container.component';
 
 @NgModule({
     imports: [
@@ -27,8 +27,8 @@ import { AlertsComponent } from './alerts/alerts.component';
         AddAllocationComponent,
         AllocationTableComponent,
         EditAllocationComponent,
-        ClassesSchedulesComponent,
-        AlertsComponent],
+        AlertsComponent,
+        ClassesContainerComponent],
     exports: []
 })
 
