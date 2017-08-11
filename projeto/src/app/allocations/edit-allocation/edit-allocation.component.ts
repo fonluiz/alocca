@@ -42,10 +42,7 @@ export class EditAllocationComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.FBservice.getProfessors().subscribe(professorsnames =>{
-      this.professorsList = professorsnames;
-    });
-    this.FBservice.getCourses().subscribe(coursesnames =>{
-      this.coursesList = coursesnames;
+      this.professorsList = professorsnames
     });
 
     this.FBservice.getClassDetails(this.id).subscribe(class_ =>{

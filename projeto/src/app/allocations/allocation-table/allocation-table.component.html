@@ -21,7 +21,33 @@
         <td>{{class.number}}</td>
         <td>{{class.professor1}}</td>
         <td>{{class.professor2}}</td>
-        <td>{{class.schedules}}</td>
+        <td>
+          <span *ngFor='let hour of class.schedules.monday.hours'>
+              <span *ngIf = 'hour'>
+                SEG - {{hour}}h
+              </span>
+          </span>
+          <span *ngFor='let hour of class.schedules.tuesday.hours'>
+              <span *ngIf = 'hour'>
+                TER - {{hour}}h
+              </span>
+          </span>
+          <span *ngFor='let hour of class.schedules.wednesday.hours'>
+              <span *ngIf = 'hour'>
+                QUA - {{hour}}h
+              </span>
+          </span>
+          <span *ngFor='let hour of class.schedules.thursday.hours'>
+              <span *ngIf = 'hour'>
+                QUI - {{hour}}h
+              </span>
+          </span>
+          <span *ngFor='let hour of class.schedules.friday.hours'>
+              <span *ngIf = 'hour'>
+                SEX - {{hour}}h
+              </span>
+          </span>
+        </td>
         <td>{{class.note}}</td>
         <td [routerLink]="['/edit-allocation/'+class.$key]">
          <button md-icon-button type="submit" color="accent">
