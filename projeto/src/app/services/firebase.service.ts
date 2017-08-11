@@ -168,9 +168,13 @@ export class FirebaseService {
   }
 
 //Classes
-  updateClass(id, classToUpdate: Class){
-    this.deleteClass(id);
-    this.saveClass(classToUpdate);
+  updateClass(id, classToUpdate){
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    .set(classToUpdate.professor1);
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
+    .set(classToUpdate.professor2);
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+    .set(classToUpdate.note);
   }
 
   saveClass(classToSave: Class) {
@@ -194,7 +198,7 @@ export class FirebaseService {
   }
 
   getClassDetails(id){
-    this.class_ = this.db.object('/classes/'+id) as FirebaseObjectObservable<Allocation>;
+    this.class_ = this.db.object('/classes/'+this.currentSemester+'/'+id) as FirebaseObjectObservable<Allocation>;
     return this.class_;
   }
 
