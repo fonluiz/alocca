@@ -13,7 +13,6 @@ export class AllocationTableComponent implements OnInit {
   classesList: any[];
   selectedSemesterID: string;
 
-
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
