@@ -1,16 +1,13 @@
-<md-card class="edit-allocation-card">
+<md-card class="edit-class-card">
   <form (ngSubmit)="onUpdateClass()" #allocationForm="ngForm" align="center">
-    <md-toolbar color="primary" class="edit-allocation-card-toolbar">
+    <md-toolbar color="primary" class="edit-class-card-toolbar">
         Editar {{course}}
         <span class="spacer"></span>
-        <button md-button style="margin-right: 5px" [routerLink]="['/add-class']">Cancelar</button>
+        <button md-button style="margin-right: 5px" [routerLink]="['/classes']">Cancelar</button>
     </md-toolbar>
 
-    <md-card-content class="edit-allocation-card-content">
-      <div class="edit-allocation-card-row">
-        
-      </div>
-      <div class="edit-allocation-card-row">
+    <md-card-content class="edit-class-card-content">
+      <div class="edit-class-card-row">
 
         <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professor1" name="professor1">
           <md-option *ngFor="let prof of professorsList" [value]="prof.name">
@@ -25,7 +22,7 @@
         </md-select>
 
 
-        <md-input-container class="allocation-note-container">
+        <md-input-container class="class-note-input">
           <input mdInput class="allocation-note-input" placeholder="Observação" [(ngModel)]="currentNote" name="currentNote">
         </md-input-container>
 

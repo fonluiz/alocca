@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { FlashMessagesModule} from 'angular2-flash-messages';
@@ -9,11 +9,10 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {AddAllocationComponent} from './add-allocation/add-allocation.component';
-import {AllocationTableComponent} from './allocation-table/allocation-table.component';
-import {EditAllocationComponent} from './edit-allocation/edit-allocation.component';
-import { AlertsComponent } from './alerts/alerts.component';
 import { ClassesContainerComponent } from './classes-container/classes-container.component';
+import { AddClassComponent } from './add-class/add-class.component';
+import { ClassTableComponent } from './class-table/class-table.component';
+import { EditClassComponent } from './edit-class/edit-class.component';
 
 @NgModule({
     imports: [
@@ -24,12 +23,11 @@ import { ClassesContainerComponent } from './classes-container/classes-container
         AppRoutingModule,
         FlashMessagesModule],
     declarations: [
-        AddAllocationComponent,
-        AllocationTableComponent,
-        EditAllocationComponent,
-        AlertsComponent,
-        ClassesContainerComponent],
+        ClassesContainerComponent,
+        AddClassComponent,
+        EditClassComponent,
+        ClassTableComponent],
     exports: []
 })
 
-export class AllocationsModule {}
+export class ClassesModule {}

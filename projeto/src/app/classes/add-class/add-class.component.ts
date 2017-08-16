@@ -1,22 +1,22 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import { FlashMessagesService } from 'angular2-flash-messages';
 import { SnackbarService } from '../../services/snackbar.service';
 
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/startWith'; remove??
+//import 'rxjs/add/operator/map'; remove??
 
 import { Class } from '../class.model'
 import { Schedule } from '../schedule.model'
 
 @Component({
-  selector: 'app-add-allocation',
-  templateUrl: './add-allocation.component.html',
-  styleUrls: ['./add-allocation.component.css']
+  selector: 'app-add-class',
+  templateUrl: './add-class.component.html',
+  styleUrls: ['./add-class.component.css']
 })
-export class AddAllocationComponent implements OnInit {
+export class AddClassComponent implements OnInit {
   SAVED_SUCCESSFULLY_MESSAGE: string = "Novas turmas criadas!";
   NOT_SAVED_MESSAGE: string = "Erro ao salvar. Verifique se a turma já foi cadastrada.";
   MESSAGES_TIME = 4000;
