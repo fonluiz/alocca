@@ -61,8 +61,46 @@ export class FirebaseService {
     this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
     .set(classToUpdate.note);
   }
+
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
+    var detailedCourse: any;
+    this.getCourseDetails(classToSave.getCourse()).subscribe(course_ => {
+      detailedCourse = course_;
+    })
+    var recomendedSemester: string = "";
+    if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
+      recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
+    }else{
+      recomendedSemester = detailedCourse.minimumSemester;
+    }
+    classRef.update({
+      "isVerified":false,
+      "recomendedSemester":recomendedSemester,
+      "course":detailedCourse.shortName,
+      "number":classToSave.getNumber(),
+      "professor1":"",
+      "professor2":"",
+      "schedules":{
+        "monday":{
+          "hours":""
+        },
+        "tuesday":{
+          "hours":""
+        },
+        "wednesday":{
+          "hours":""
+        },
+        "thursday":{
+          "hours":""
+        },
+        "friday":{
+          "hours":""
+        }
+      },
+      "hoursToSchedule": detailedCourse.hoursToSchedule,
+      "note":""
+    })
     // Only saves the data if it does not exists already
    classRef.once('value').then(
       function(snapshot) {
@@ -75,6 +113,7 @@ export class FirebaseService {
       }
     );
   }
+
   getClasses() {
     let classesList = this.db.list('/classes/'+this.currentSemester) as FirebaseListObservable<any[]>;
     return classesList;
