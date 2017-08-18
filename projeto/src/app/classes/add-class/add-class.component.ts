@@ -23,11 +23,13 @@ export class AddClassComponent implements OnInit {
   coursesList: any[];
   courseKey: string;
   classesNumber: number;
+  NO_SEMESTER_SELECTED: string = "Selecione um semestre ou crie um novo";
+  TIMEOUT_NO_SEMESTER_SELECTED = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackbarsService: SnackbarService
+    private snackService: SnackbarService
     ) {}
 
 
@@ -38,9 +40,13 @@ export class AddClassComponent implements OnInit {
   }
 
   saveNewClasses(){
-    for (var _i = 1; _i <= this.classesNumber; _i++) {
+    if(this.FBservice.getCurrentSemester()){
+      for (var _i = 1; _i <= this.classesNumber; _i++) {
           let newClass = new Class(this.courseKey, _i);
           this.FBservice.saveClass(newClass);
+      } 
+    }else{
+      this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
     }
 
     // if (savedSuccessfully) {
