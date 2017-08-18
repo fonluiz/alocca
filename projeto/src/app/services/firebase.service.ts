@@ -54,12 +54,21 @@ export class FirebaseService {
 
 //Classes
   updateClass(id, classToUpdate){
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    if (classToUpdate.professor1===classToUpdate.professor2){
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
     .set(classToUpdate.professor1);
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
-    .set(classToUpdate.professor2);
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
+    .set("");
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
     .set(classToUpdate.note);
+    }else{
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    .set(classToUpdate.professor1);
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
+    .set(classToUpdate.professor2);
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+    .set(classToUpdate.note);
+    }
   }
 
   saveClass(classToSave: Class) {
