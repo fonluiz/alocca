@@ -17,7 +17,7 @@
     	".write": "auth != null"
     },
     "requests": {
-      ".read": "auth.uid == 'ugh27puNVefcvl6gaXLRW0YtU6r2'",
+      ".read": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'",
     	".write": "true"
     },
     "requestsEmails": {
@@ -29,8 +29,8 @@
     	".write": "auth != null"
     },
     "users": {
-      ".read": "auth.uid == 'ugh27puNVefcvl6gaXLRW0YtU6r2'",
-    	".write": "auth.uid == 'ugh27puNVefcvl6gaXLRW0YtU6r2'"
+      ".read": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'",
+    	".write": "auth.uid == 'ZsmmGp4KCXeo62CLZe5K9yzyVMG3'"
     },
     "usersEmails": {
       ".read": "true",
