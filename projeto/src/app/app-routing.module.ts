@@ -1,8 +1,8 @@
 ﻿import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 //components
-import { EditAllocationComponent } from './allocations/edit-allocation/edit-allocation.component';
-import { ClassesContainerComponent } from './allocations/classes-container/classes-container.component'
+import { EditClassComponent } from './classes/edit-class/edit-class.component';
+import { ClassesContainerComponent } from './classes/classes-container/classes-container.component'
 //courses
 import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
@@ -32,7 +32,8 @@ const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'navbar', component: NavbarComponent},
 
-    {path: 'edit-allocation/:id', component: EditAllocationComponent},
+    {path: 'classes', component: ClassesContainerComponent},
+    {path: 'edit-class/:id', component: EditClassComponent},
 
     {path: 'add-course', component: AddCourseComponent},
     {path: 'edit-course/:id', component: EditCourseComponent},
@@ -51,9 +52,7 @@ const appRoutes: Routes = [
 
     {path: 'add-semester', component: AddSemesterComponent },
 
-    {path: 'schedules-table', component: SchedulesTableComponent},
-
-    {path: 'add-class', component: ClassesContainerComponent}
+    {path: 'schedules-table', component: SchedulesTableComponent}
 
 ];
 

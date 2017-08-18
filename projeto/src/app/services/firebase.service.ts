@@ -3,12 +3,11 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as firebase from 'firebase';
 import { Professor } from '../professors/professor.model';
 import { Course } from '../courses/course.model';
-import { Allocation } from '../allocations/allocation.model';
 import { User } from '../users/user.model';
 import { Request } from '../requests/request.model';
 import { Semester } from '../semesters/semester.model';
 import { ProfessorRestriction } from '../professors/professor-restriction.model';
-import { Class } from '../allocations/class.model';
+import { Class } from '../classes/class.model';
 import { NavbarService } from "./navbar.service";
 
 @Injectable()
@@ -37,7 +36,6 @@ export class FirebaseService {
   
   constructor(private db: AngularFireDatabase,
               private  navbarService: NavbarService)  {
-    this.allocations = db.list('/allocations') as FirebaseListObservable<Allocation[]>;
     this.professors = db.list('/professors') as FirebaseListObservable<Professor[]>;
     this.courses = db.list('/courses') as FirebaseListObservable<Course[]>;
     this.users = db.list('/users') as FirebaseListObservable<User[]>;
@@ -54,131 +52,64 @@ export class FirebaseService {
     })
   }
 
-///Allocation
-  getAllocations(){
-    return this.allocations;
-  }
-  addAllocation(allocation){
-    if(this.allocationExists(allocation.professorOneSIAPE+allocation.courseKey)){
-      return false;
-    }
-    else if (allocation.professorTwoSIAPE) {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAPE+allocation.courseKey).set({
-        caControl: false,
-        course: this.getCourseName(allocation.courseKey),
-        courseType: this.getCourseType(allocation.courseKey),
-        courseCredits: this.getCourseCredits(allocation.courseKey),
-        classNumber: this.getClassesNumber(allocation.courseKey),
-        professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
-        professorOneSIAPE: allocation.professorOneSIAPE,
-        professorTwoName: this.getProfessorNameWithSIAPE(allocation.professorTwoSIAPE),
-        professorTwoSIAPE: allocation.professorTwoSIAPE,
-        courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
-        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
-        note: allocation.note
-      })){
-        return true;
-      }else{
-        return false;
-      }
-    } else {
-      if(this.db.database.ref("allocations/"+allocation.professorOneSIAPE+allocation.courseKey).set({
-        caControl: false,
-        course: this.getCourseName(allocation.courseKey),
-        courseType: this.getCourseType(allocation.courseKey),
-        courseCredits: this.getCourseCredits(allocation.courseKey),
-        classNumber: this.getClassesNumber(allocation.courseKey),
-        professorOneName: this.getProfessorNameWithSIAPE(allocation.professorOneSIAPE),
-        professorOneSIAPE: allocation.professorOneSIAPE,
-        courseOffererDepartment: this.getOffererDepartment(allocation.courseKey),
-        courseRequesterDepartment: this.getRequesterDepartment(allocation.courseKey),
-        note: allocation.note
-        })){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  }
-  getAllocationDetails(id){
-    this.allocation = this.db.object('/allocations/'+id) as FirebaseObjectObservable<Allocation>;
-    return this.allocation;
-  }
-  updateAllocation(id,allocation){
-    if(id!=allocation.professorOneSIAPE+allocation.courseKey){
-      console.log('what??');
-      if(this.allocationExists(allocation.professorOneSIAPE+allocation.courseKey)){
-        console.log('what??2222');
-        return false;
-      }
-    }
-    if(this.deleteAllocation(id,allocation.oldCourseKey,allocation.classNumber)){
-      console.log('what??33333');
-      if(this.addAllocation(allocation)){
-        console.log('what??4444');
-        return true;
-      }else{
-        return false;
-      }
-    }else{
-      return false;
-    }
-  }
-  deleteAllocation(id,courseKey,allocationClassNumber){
-    if(courseKey){
-      if(this.updateAllocationsClassNumber(courseKey,allocationClassNumber)){
-        if(this.deleteClass(courseKey)){
-          console.log('inhereee4444');
-          if (this.allocations.remove(id)){
-            console.log('inhereee555');
-            return true;
-          }else{
-            return false;
-          }
-        }else{
-          return false;
-        }
-      }else{
-        return false;
-      }
-    }else{
-      if(this.allocations.remove(id)){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  }
-  updateAllocationsClassNumber(courseKey,allocationClassNumber){
-    var mayDelete: boolean;
-    var thisObject: any = this;
-    return this.db.database.ref("allocations/").on("value", function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        if(childSnapshot.child('course').val()+childSnapshot.child('courseCredits').val() === courseKey && childSnapshot.child('classNumber').val()>allocationClassNumber) {
-            console.log((childSnapshot.child('classNumber').val()) - 1);
-            console.log(childSnapshot.key);
-            if(thisObject.db.database.ref("allocations/"+childSnapshot.key).update({
-              "classNumber": (childSnapshot.child('classNumber').val() - 1)
-            })){
-              return true;
-            }
-        }
-      });
-    });
-  }
-
 //Classes
   updateClass(id, classToUpdate){
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    if (classToUpdate.professor1===classToUpdate.professor2){
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
     .set(classToUpdate.professor1);
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
-    .set(classToUpdate.professor2);
-    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
+    .set("");
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
     .set(classToUpdate.note);
+    }else{
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    .set(classToUpdate.professor1);
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
+    .set(classToUpdate.professor2);
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+    .set(classToUpdate.note);
+    }
   }
 
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
+    var detailedCourse: any;
+    this.getCourseDetails(classToSave.getCourse()).subscribe(course_ => {
+      detailedCourse = course_;
+    })
+    var recomendedSemester: string = "";
+    if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
+      recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
+    }else{
+      recomendedSemester = detailedCourse.minimumSemester;
+    }
+    classRef.update({
+      "isVerified":false,
+      "recomendedSemester":recomendedSemester,
+      "course":detailedCourse.shortName,
+      "number":classToSave.getNumber(),
+      "professor1":"",
+      "professor2":"",
+      "schedules":{
+        "monday":{
+          "hours":""
+        },
+        "tuesday":{
+          "hours":""
+        },
+        "wednesday":{
+          "hours":""
+        },
+        "thursday":{
+          "hours":""
+        },
+        "friday":{
+          "hours":""
+        }
+      },
+      "hoursToSchedule": detailedCourse.hoursToSchedule,
+      "note":""
+    })
     // Only saves the data if it does not exists already
    classRef.once('value').then(
       function(snapshot) {
@@ -196,12 +127,10 @@ export class FirebaseService {
     let classesList = this.db.list('/classes/'+this.currentSemester) as FirebaseListObservable<any[]>;
     return classesList;
   }
-
   getClassDetails(id){
-    this.class_ = this.db.object('/classes/'+this.currentSemester+'/'+id) as FirebaseObjectObservable<Allocation>;
+    this.class_ = this.db.object('/classes/'+this.currentSemester+'/'+id) as FirebaseObjectObservable<Class>;
     return this.class_;
   }
-
   private addClassToSemester(classId: string) {
     var semester = this.db.database.ref(this.SEMESTERS_PATH + '2017-2');
     semester.transaction(
@@ -217,7 +146,6 @@ export class FirebaseService {
       }
     );
   }
-
   getProfessorNameWithSIAPE(professorSIAPE) {
     var professorName: String = "-";
     this.db.database.ref("professors/"+professorSIAPE).once("value", function(snapshot){
@@ -270,14 +198,6 @@ export class FirebaseService {
     {
       return true;
     }
-  }
-  //CHECK WITH CLIENT
-  allocationExists(newAllocationKey){
-    var isSaved: boolean;
-    this.db.database.ref("allocations/"+newAllocationKey).once("value",function(snapshot){
-      isSaved = snapshot.exists();
-    });
-    return isSaved;
   }
   changeCAStatus(id,status){
     this.db.database.ref("allocations/"+id).update({
@@ -566,12 +486,6 @@ export class FirebaseService {
 
   getProfessorRestrictions(restriction_id: string) {
       return this.db.object(this.PROFESSORS_RESTRICTIONS_PATH + restriction_id) as FirebaseObjectObservable<ProfessorRestriction>;
-  }
-
-// Classes
-  addClass(Class) {
-    this.db.database.ref("classes/" + Class.classKey).set(Class);
-    return true;
   }
 
 //Schedules

@@ -1,11 +1,7 @@
-﻿/**
- * @api {component} projeto/src/app/allocations/edit-allocation/edit-allocation.component.ts Edit Allocation Component
- * @apiName Edit Allocation Component
- * @apiGroup Allocation
- */
-
 import { Component, OnInit } from '@angular/core';
+
 import { FirebaseService } from '../../services/firebase.service';
+//remove params???
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
@@ -13,11 +9,11 @@ import { Class } from '../class.model';
 import { Schedule } from '../schedule.model';
 
 @Component({
-  selector: 'app-edit-allocation',
-  templateUrl: './edit-allocation.component.html',
-  styleUrls: ['./edit-allocation.component.css']
+  selector: 'app-edit-class',
+  templateUrl: './edit-class.component.html',
+  styleUrls: ['./edit-class.component.css']
 })
-export class EditAllocationComponent implements OnInit {
+export class EditClassComponent implements OnInit {
   id: string;
   professorsList: any[];
   coursesList: any[];
@@ -75,7 +71,6 @@ export class EditAllocationComponent implements OnInit {
        note: this.currentNote
      };
     this.FBservice.updateClass(this.id, newClass);
-    this.router.navigate(['/add-class']);
+    this.router.navigate(['/classes']);
   }
-  
 }

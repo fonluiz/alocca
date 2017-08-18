@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 
 ///our modules
 import { NavbarModule } from './navbar/navbar.module';
-import { AllocationsModule } from './allocations/allocations.module';
+import { ClassesModule } from './classes/classes.module';
 import { CoursesModule } from './courses/courses.module';
 import { ProfessorsModule } from './professors/professors.module';
 import { SemesterModule } from './semesters/semester.module';
@@ -57,7 +57,7 @@ import { SnackbarService} from './services/snackbar.service';
     AngularFireAuthModule,
     MdDialogModule,
     MdButtonModule,
-    AllocationsModule,
+    ClassesModule,
     SemesterModule,
     CoursesModule,
     ProfessorsModule,
