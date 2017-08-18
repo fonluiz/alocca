@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Course } from '../course.model';
 import { FirebaseService } from '../../services/firebase.service';
-import { SnackbarsService } from '../../services/snackbars.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-edit-course',
@@ -10,30 +10,31 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./edit-course.component.css']
 })
 export class EditCourseComponent implements OnInit {
-  id;
+  id: string;
   code: string;
-  name;
-  shortName;
+  name: string;
+  shortName: string;
   credits: number;
   hoursToSchedule: number;
-  type;
-  minimumSemester;
-  maximumSemester;
-  offererDepartment;
-  requesterDepartment;
-  courseTypes = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
-  semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  departments = ["UASC", "Outro"];
+  type: string;
+  minimumSemester: number;
+  maximumSemester: number;
+  offererDepartment: string;
+  requesterDepartment: string;
+  courseTypes: string[] = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
+  semesters: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  departments: string[] = ["UASC", "Outro"];
+
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina editada com sucesso!";
   NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao editar a disciplina. Verifique se esta já está cadastrada.";
-  TIMEOUT_SAVED_MESSAGE = 2500;
-  TIMEOUT_NOT_SAVED_MESSAGE = 5000;
+  TIMEOUT_SAVED_MESSAGE: number = 2500;
+  TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarsService
+    private snackService: SnackbarService
   ) { }
 
   ngOnInit() {

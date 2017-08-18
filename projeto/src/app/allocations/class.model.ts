@@ -8,7 +8,7 @@ export class Class {
     private verified: boolean;
     private professor1: string;
     private professor2: string;
-    private schedules: Schedule[];
+    private schedules: any[];
     private note: string;
 
     constructor(

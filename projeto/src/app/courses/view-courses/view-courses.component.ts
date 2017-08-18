@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import { Course } from '../course.model';
 import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
-import { SnackbarsService } from '../../services/snackbars.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-view-courses',
@@ -12,19 +12,19 @@ import { SnackbarsService } from '../../services/snackbars.service';
   styleUrls: ['./view-courses.component.css']
 })
 export class ViewCoursesComponent implements OnInit {
-  courses: any
-  id: any;
+  courses: any;
+  id: string;
   public result: any;
   DELETED_MESSAGE: string = "Disicplina deletada com sucesso!";
   NOT_DELETED_MESSAGE: string = "Não foi possível remover a disciplina. Tente novamente!";
-  TIMEOUT_DELETED_MESSAGE = 2500;
-  TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+  TIMEOUT_DELETED_MESSAGE: number = 2500;
+  TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarsService,
+    private snackService: SnackbarService,
     private dialogsService: DialogsService
   ) { }
 
