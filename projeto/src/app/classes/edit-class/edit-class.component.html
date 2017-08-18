@@ -10,13 +10,13 @@
       <div class="edit-class-card-row">
 
         <md-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professor1" name="professor1">
-          <md-option *ngFor="let prof of professorsList" [value]="prof.name">
+          <md-option *ngFor="let prof of professorsList" [value]="prof.nickname">
             {{ prof.name }}
           </md-option>
         </md-select>
 
         <md-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professor2" name="professor2">
-          <md-option *ngFor="let prof of professorsList" [value]="prof.name">
+          <md-option *ngFor="let prof of professorsList" [value]="prof.nickname">
             {{ prof.name }}
           </md-option>
         </md-select>
