@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+﻿import { NgModule } from '@angular/core';
 import { CommonModule }       from '@angular/common';
 import { FormsModule }        from '@angular/forms';
 import { FlashMessagesModule} from 'angular2-flash-messages';
@@ -14,6 +14,8 @@ import { AddClassComponent } from './add-class/add-class.component';
 import { ClassTableComponent } from './class-table/class-table.component';
 import { EditClassComponent } from './edit-class/edit-class.component';
 
+import { AlertsModule } from '../alerts/alerts.module';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +23,9 @@ import { EditClassComponent } from './edit-class/edit-class.component';
         MaterialModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        FlashMessagesModule],
+        FlashMessagesModule,
+        AlertsModule
+    ],
     declarations: [
         ClassesContainerComponent,
         AddClassComponent,
