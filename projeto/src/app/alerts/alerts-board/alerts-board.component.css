@@ -1,0 +1,9 @@
+.board-container {
+    width: 500px;
+    height: 500px;
+    margin: 50px 50px 50px 50px;
+}
+
+.alert-container {
+    margin: 10px 1px 10px 1px;
+}

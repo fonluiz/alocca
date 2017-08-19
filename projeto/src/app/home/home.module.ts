@@ -18,7 +18,8 @@ import { HomeComponent } from './home.component';
         MaterialModule,
         BrowserAnimationsModule,
         FlashMessagesModule,
-        AppRoutingModule],
+        AppRoutingModule
+        ],
     declarations: [HomeComponent],
     exports: []
 })
