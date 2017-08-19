@@ -14,6 +14,7 @@ export class EditCourseComponent implements OnInit {
   code: string;
   name: string;
   shortName: string;
+  oldName: string;
   credits: number;
   hoursToSchedule: number;
   type: string;
@@ -43,6 +44,7 @@ export class EditCourseComponent implements OnInit {
         this.code = course.code;
         this.name = course.name;
         this.shortName = course.shortName;
+        this.oldName = course.shortName;
         this.credits = course.credits;
         this.hoursToSchedule = course.hoursToSchedule;
         this.type = course.type;
@@ -77,7 +79,7 @@ export class EditCourseComponent implements OnInit {
           requesterDepartment: this.requesterDepartment
     }
 
-    let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course);
+    let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course,this.oldName);
 
     if (savedSuccessfully) {
         this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);

@@ -309,19 +309,54 @@ export class FirebaseService {
     this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
     return this.course;
   }
-  updateCourse(id, course){
+  updateCourse(id, course, oldName){
     if(id!==(course.code)){
       if(this.courseExists(course.code)){
         return false;
       }
       this.deleteCourse(id);
       this.addNewCourse(course);
+      this.updateCourseInClassesTable(course,oldName);
       return true;
     }else if(this.courses.update(id,course)){
+      this.updateCourseInClassesTable(course,oldName);
       return true;
     }else{
       return false;
     }
+  }
+  updateCourseInClassesTable(course,oldName){
+    var thisObject = this;
+
+    var recomends: string = "";
+    if(course.minimumSemester!==course.maximumSemester){
+      recomends = course.minimumSemester+"-"+course.maximumSemester;
+    }else{
+      recomends = course.minimumSemester;
+    }
+
+    var semests: any[];
+    this.getSemesters().subscribe(sems => {
+      semests = sems;
+      semests.forEach(function(sem){
+        var rightclasses = []
+        thisObject.db.list('classes/'+sem.$key).subscribe(Rclasses=>{
+          rightclasses = Rclasses;
+          console.log(rightclasses);
+          rightclasses.forEach(function(thatClass){
+            console.log(thatClass.course);
+            if(thatClass.course === oldName){
+              console.log('entrou no 1')
+              thisObject.db.database.ref("classes/"+sem.$key+'/'+thatClass.$key).update({
+                "course":course.shortName,
+                "hoursToSchedule":course.hoursToSchedule,
+                "recomendedSemester": recomends
+              });
+            }
+          })
+        })
+      })
+    })
   }
   deleteCourse(id){
     if (this.courses.remove(id)){
