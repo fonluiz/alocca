@@ -13,6 +13,9 @@ export class EditProfessorComponent implements OnInit {
   name;
   nickname;
   SIAPE;
+  oldName;
+  oldNickname;
+  oldSIAPE;
   max_creditos;
   min_creditos;
   creditos_pos;
@@ -37,6 +40,9 @@ export class EditProfessorComponent implements OnInit {
         this.name = professor.name;
         this.SIAPE = professor.SIAPE;
         this.nickname = professor.nickname;
+        this.oldName = professor.name;
+        this.oldSIAPE = professor.SIAPE;
+        this.oldNickname = professor.nickname;
 
     });
     let initiateProfessors: any[];
@@ -46,13 +52,18 @@ export class EditProfessorComponent implements OnInit {
   }
 
   onEditProfessor(){
+    let oldProfessor = {
+      nickname: this.oldNickname,
+      name: this.oldName,
+      SIAPE: this.oldSIAPE
+    }
     let professor = {
       nickname: this.nickname,
       name: this.name,
       SIAPE: this.SIAPE
     }
         
-    if(this.FBservice.updateProfessor(this.id,professor)){
+    if(this.FBservice.updateProfessor(this.id,professor,oldProfessor)){
       this.snackService.openSnackBar(this.EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_EDITED_MESSAGE);
     }else{
       this.snackService.openSnackBar(this.NOT_EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_NOT_EDITED_MESSAGE);

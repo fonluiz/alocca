@@ -20,8 +20,8 @@ export class EditClassComponent implements OnInit {
 
   course: string;
 
-  professor1: string;
-  professor2: string;
+  professor1: any;
+  professor2: any;
   currentNote: string;
   
 
@@ -43,31 +43,42 @@ export class EditClassComponent implements OnInit {
 
     this.FBservice.getClassDetails(this.id).subscribe(class_ =>{
       this.course = class_.course;
-      if(class_.professor1){
-        this.professor1 = class_.professor1;
-      }
-      if(class_.professor2){
-        this.professor2 = class_.professor2;
-      }
-      if(class_.note){
-        this.currentNote = class_.note;
-      }
+      this.professor1 = class_.professor1;
+      this.professor2 = class_.professor2;
+      this.currentNote = class_.note;
     });
   }
 
   onUpdateClass(){
-    if(!this.professor1){
-      this.professor1 = "";
+    var professor1nickname: string;
+    var professor2nickname: string;
+    var professor1SIAPE: string;
+    var professor2SIAPE: string;
+    
+    if(this.professor1){
+      professor1nickname = this.professor1.nickname;
+      professor1SIAPE = this.professor1.SIAPE;
+    }else{
+      professor1nickname = "";
+      professor1SIAPE = "";
     }
-    if(!this.professor2){
-      this.professor2 = "";
+    if(this.professor2){
+      professor2nickname = this.professor2.nickname;
+      professor2SIAPE = this.professor2.SIAPE;
+    }else{
+      professor2nickname = "";
+      professor2SIAPE = "";
     }
+
     if(!this.currentNote){
       this.currentNote = "";
     }
+
      let newClass = {
-       professor1: this.professor1, 
-       professor2: this.professor2, 
+       professor1: professor1nickname,
+       professor1SIAPE: professor1SIAPE,
+       professor2: professor2nickname,
+       professor2SIAPE: professor2SIAPE,
        note: this.currentNote
      };
     this.FBservice.updateClass(this.id, newClass);

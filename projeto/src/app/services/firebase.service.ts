@@ -54,23 +54,24 @@ export class FirebaseService {
 
 //Classes
   updateClass(id, classToUpdate){
-    if (classToUpdate.professor1===classToUpdate.professor2){
-      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
-    .set(classToUpdate.professor1);
+    if (classToUpdate.professor1SIAPE===classToUpdate.professor2SIAPE){
       this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
-    .set("");
-      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
-    .set(classToUpdate.note);
+      .set("");
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2SIAPE')
+      .set("");
     }else{
-      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
-    .set(classToUpdate.professor1);
       this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2')
-    .set(classToUpdate.professor2);
-      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
-    .set(classToUpdate.note);
+      .set(classToUpdate.professor2);
+      this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor2SIAPE')
+      .set(classToUpdate.professor2SIAPE);
     }
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1')
+    .set(classToUpdate.professor1);
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/professor1SIAPE')
+    .set(classToUpdate.professor1SIAPE);
+    this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + id+'/note')
+    .set(classToUpdate.note);
   }
-
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
     var detailedCourse: any;
@@ -122,7 +123,6 @@ export class FirebaseService {
       }
     );
   }
-
   getClasses() {
     let classesList = this.db.list('/classes/'+this.currentSemester) as FirebaseListObservable<any[]>;
     return classesList;
@@ -218,7 +218,6 @@ export class FirebaseService {
     })
     return department;
   }
-
 ///Professors
   addNewProfessor(newprofessor){
     if(this.professorExists(newprofessor.SIAPE)){
@@ -235,17 +234,48 @@ export class FirebaseService {
     this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
     return this.professor;
   }
-  updateProfessor(id, professor){
+  updateProfessor(id, professor,oldProfessor){
     if (id!==professor.SIAPE){
       if(this.professorExists(professor.SIAPE)){
         return false;
       }
       this.deleteProfessor(id);
       this.addNewProfessor(professor);
+      this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
     }else if(this.professors.update(id,professor)){
+      this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
     }
+  }
+  updateProfessorInClassesTable(professor,oldProfessor){
+    var thisObject = this;
+    var semests: any[];
+    this.getSemesters().subscribe(sems => {
+      semests = sems;
+    })
+    semests.forEach(function(sem){
+      var rightclasses = []
+      thisObject.db.list('/classes/'+sem.$key).subscribe(Rclasses=>{
+        rightclasses = Rclasses;
+      })
+      rightclasses.forEach(function(thatClass){
+        if(thatClass.professor1SIAPE == oldProfessor.SIAPE){
+          console.log('entrou no 1')
+          thisObject.db.database.ref('/classes/'+sem.$key+'/'+thatClass.$key).update({
+            "professor1":professor.nickname,
+            "professor1SIAPE":professor.SIAPE
+          });
+        }
+        else if(thatClass.professor2SIAPE == oldProfessor.SIAPE){
+          console.log('entrou no 2')
+          thisObject.db.database.ref('/classes/'+sem.$key+'/'+thatClass.$key).update({
+            "professor2":professor.nickname,
+            "professor2SIAPE":professor.SIAPE
+          });
+        }
+      })
+    })
   }
   deleteProfessor(id){
     if(this.professors.remove(id)){
