@@ -229,7 +229,7 @@ export class FirebaseService {
    */
   addNewProfessor(newprofessor: Professor): boolean{
     if(this.professorExists(newprofessor.getSIAPE())){
-        return false;
+      return false;
     }else if(this.sameNickname(newprofessor.getNickname())){
       return false;
     }
@@ -272,14 +272,18 @@ export class FirebaseService {
     if (id!==professor.getSIAPE()){
       if(this.professorExists(professor.getSIAPE())){
         return false;
+      }else if(this.sameNickname(professor.getNickname())){
+        return false;
       }
       this.deleteProfessor(id);
       this.addNewProfessor(professor);
       this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
-    }else if(this.professors.update(id,professor.toFirebaseObject())){
-      this.updateProfessorInClassesTable(professor,oldProfessor);
-      return true;
+    }else if(this.sameNickname(professor.getNickname())===false){
+      if(this.professors.update(id,professor.toFirebaseObject())){
+        this.updateProfessorInClassesTable(professor,oldProfessor);
+        return true;
+      }
     }
   }
   /**
@@ -365,7 +369,7 @@ export class FirebaseService {
     })
 
     professors.forEach(function(prof){
-      if (prof.nickname){
+      if (prof.nickname===newProfessorNickname){
         sameNickname = true;
       }
     })
