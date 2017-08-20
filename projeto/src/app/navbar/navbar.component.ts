@@ -66,7 +66,7 @@ export class NavbarComponent implements OnInit {
   }
   
   /**
-   * Initiates the list of semesters.
+   * Sets necessary elements on the start of the page.
    */
   ngOnInit(){
     this.FBservice.getSemesters().subscribe(semesters => {

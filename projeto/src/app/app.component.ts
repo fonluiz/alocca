@@ -38,7 +38,7 @@ export class AppComponent {
     }
 
   /**
-   * Initiates list of users' emails.
+   * Sets necessary elements on the start of the page.
    */
   ngOnInit(){
     var initiateEmails: any[];

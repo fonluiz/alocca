@@ -1,10 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
+
 import { FirebaseService } from '../../services/firebase.service';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import { Professor } from '../professor.model';
-import { Router, ActivatedRoute,Params } from '@angular/router';
 import { DialogsService } from '../../services/dialogs.service';
-import { NavbarService } from '../../services/navbar.service';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
@@ -13,34 +11,63 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrls: ['./view-professors.component.css']
 })
 export class ViewProfessorsComponent implements OnInit {
-    //professores: Professor[] = PROFESSORES
-    professors: any;
-    id: any;
+    /**
+     * List of registered Professors.
+     */
+    professors: any[];
+    /**
+     * Message to display when a professor is deleted.
+     */
     DELETED_MESSAGE: string = "Professor deletado com sucesso!";
-    NOT_DELETED_MESSAGE: string = "Não foi possível remover o professor. Tente novamente!";
+    /**
+     * Timeout for the message displayed in the snackbar
+     * 
+     * when a professor is deleted.
+     */
     TIMEOUT_DELETED_MESSAGE = 2500;
+    /**
+     * Message to display when a professor is not deleted.
+     */
+    NOT_DELETED_MESSAGE: string = "Não foi possível remover o professor. Tente novamente!";
+    /**
+     * Timeout for the message displayed in the snackbar
+     * 
+     * when a professor is not deleted.
+     */
     TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+    /**
+     * Message to display when no semester is previously selected.
+     */
     NO_SEMESTER_SELECTED: string = "Selecione um semestre ou crie um novo";
+    /**
+     * Timeout for the message displayed in the snackbar
+     * 
+     * when no semester is previously selected.
+     */
     TIMEOUT_NO_SEMESTER_SELECTED = 5000;
-    selectedSemesterID: string;
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private route: ActivatedRoute,
     private dialogsService: DialogsService,
     private snackService: SnackbarService,
-    private navbarService: NavbarService
   ) {}
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
     this.FBservice.getProfessors().subscribe(professors =>{
       this.professors = professors;
       });
   }
 
+  /**
+   * Edit selected professor's restrictions.
+   * 
+   * @param siape SIAPE number of the Professor selected.
+   */
   onEditRestrictions(siape: string){
-    var currentSemester: string;
     if(this.FBservice.getCurrentSemester()){
       this.router.navigate(['/add-restriction/'+siape+'-'+this.FBservice.getCurrentSemester()]);
     }else{
@@ -48,10 +75,15 @@ export class ViewProfessorsComponent implements OnInit {
     }
   }
 
-
-  onDeleteProfessor(id, professorName){
+  /**
+   * Delete selected professor.
+   * 
+   * @param id Key (SIAPE) of the professor selected to be deleted.
+   * @param professorNickname  Nickname of the professor selected to be deleted.
+   */
+  onDeleteProfessor(id, professorNickname){
     var title = "Excluir Professor";
-    var message = "Deseja realmente excluir "+professorName+" ?";
+    var message = "Deseja realmente excluir "+professorNickname+" ?";
     this.dialogsService
       .confirm(title, message)
       .subscribe(res => {

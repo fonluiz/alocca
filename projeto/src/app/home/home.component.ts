@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
     this.user = dbAuth.authState
   }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
   }
 

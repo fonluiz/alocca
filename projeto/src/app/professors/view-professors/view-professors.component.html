@@ -1,12 +1,13 @@
-﻿<md-card class="visualize-professor-card">
-  <!--Toolbar-->
-  <md-toolbar color="primary" class="new-professor-card-toolbar">
+﻿<md-card id="visualize-professor-card">
+<!--Card Toolbar-->
+  <md-toolbar class="new-professor-card-toolbar mdl-color-text--white mdl-color--primary">
     Professores Cadastrados
     <span class="spacer"></span>
   </md-toolbar>
 
-  <md-card-content class="professor-card-content">
-
+<!--Card Content-->
+  <md-card-content id="professor-card-content">
+  <!--Professors Table-->
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
@@ -24,7 +25,7 @@
           <td>{{professor.SIAPE}}</td>
           <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-professor/' + professor.$key]">Editar</button></td>
           <!--mudar para atualizar melhor??-->
-          <td><button (click)="onDeleteProfessor(professor.$key,professor.name)" class="mdl-button mdl-js-button mdl-button--accent">Excluir</button></td>
+          <td><button (click)="onDeleteProfessor(professor.$key,professor.nickname)" class="mdl-button mdl-js-button delete-button">Excluir</button></td>
         </tr>
       </tbody>
     </table>
