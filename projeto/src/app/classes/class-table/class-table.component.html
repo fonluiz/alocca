@@ -1,5 +1,5 @@
 ﻿<div class="table-container">
-  <table align="left" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+  <table align="left" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp table full-width">
     <thead>
       <tr>
         <th>Verificado</th>
@@ -48,7 +48,9 @@
               <br></span>
           </span>
         </td>
-        <td>{{class.note}}</td>
+        <td>
+          {{class.note}}
+        </td>
         <td [routerLink]="['/edit-class/'+class.$key]">
          <button md-icon-button type="submit" color="accent">
           <md-icon>edit</md-icon>
