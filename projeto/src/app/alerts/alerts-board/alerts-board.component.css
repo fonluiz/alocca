@@ -1,6 +1,8 @@
 ﻿.board-container {
     width: 500px;
     height: 350px;
+    margin: 10px 10px 10px 10px;
+    overflow: auto;
 }
 
 .alert-container {
