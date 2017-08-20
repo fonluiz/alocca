@@ -4,12 +4,12 @@ Sistema desenvolvido na disciplina de LES(Laboratório de Engenharia de Software
 
 ## Desenvolvedores
 
-[Dandara Souza](https://github.com/dandaramcsousa)
-[Hugo Gabriel](https://github.com/hugogbs)
-[Laybson Cunha](https://github.com/laybson)
-[Lucas Aurelio](https://github.com/LucasAurelio)
-[Luiz Fonseca](https://github.com/fonluiz)
-[Paulo Vinicius](https://github.com/paul0vinicius)
+*[Dandara Souza](https://github.com/dandaramcsousa)
+*[Hugo Gabriel](https://github.com/hugogbs)
+*[Laybson Cunha](https://github.com/laybson)
+*[Lucas Aurelio](https://github.com/LucasAurelio)
+*[Luiz Fonseca](https://github.com/fonluiz)
+*[Paulo Vinicius](https://github.com/paul0vinicius)
 
 ## Professor
 
