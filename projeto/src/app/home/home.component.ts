@@ -8,6 +8,9 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  /**
+   * Current user.
+   */
   user: Observable<firebase.User>;
 
   constructor(

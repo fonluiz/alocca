@@ -1,2 +1,10 @@
-<h1><h1><h1 *ngIf="!(dbAuth.authState | async)">Faça login</h1></h1></h1>
-<h1><h1><h1 *ngIf="(dbAuth.authState | async)">Muito bem</h1></h1></h1>
+<!-- Shown if user not logged in. -->
+<h1 id="home-initial-section" *ngIf="!(dbAuth.authState | async)">
+    Faça login
+</h1>
+
+<!-- Shown if user logged in. -->
+<div id="home-about-section" *ngIf="(dbAuth.authState | async)">
+    <!--Make homepage-->
+    <h1>Bem vindo ao sistema ALOCCA!</h1>
+</div>
