@@ -8,9 +8,9 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {AddProfessorComponent} from './add-professor/add-professor.component';
-import {EditProfessorComponent} from './edit-professor/edit-professor.component';
-import {ViewProfessorsComponent} from './view-professors/view-professors.component';
+import { AddProfessorComponent } from './add-professor/add-professor.component';
+import { EditProfessorComponent } from './edit-professor/edit-professor.component';
+import { ViewProfessorsComponent } from './view-professors/view-professors.component';
 import { AddRestrictionComponent } from './add-restriction/add-restriction.component';
 
 @NgModule({
