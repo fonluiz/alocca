@@ -1,32 +1,39 @@
-﻿import { NgModule } from '@angular/core';
+﻿//Modules
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-//components
+
+//Components
+///Classes
 import { EditClassComponent } from './classes/edit-class/edit-class.component';
 import { ClassesContainerComponent } from './classes/classes-container/classes-container.component'
-//courses
+///Courses
 import { AddCourseComponent } from './courses/add-course/add-course.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
 import { ViewCoursesComponent } from './courses/view-courses/view-courses.component';
-//professors
+///Professors
 import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
-//restrictions
+///Restrictions
 import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
-//home
+///Home
 import { HomeComponent } from './home/home.component';
-//navbar
+///Navbar
 import { NavbarComponent } from './navbar/navbar.component';
-//users
+///Users
 import { ViewUsersComponent } from './users/view-users/view-users.component';
 import { AddUserComponent } from './users/add-user/add-user.component';
+///Requests
 import { ViewRequestsComponent } from './requests/view-requests/view-requests.component';
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
-//semesters
+///Semesters
 import { AddSemesterComponent } from './semesters/add-semester/add-semester.component';
-//scheudles
+///Schedules
 import { SchedulesTableComponent } from './schedules/schedules-table/schedules-table.component';
 
+/**
+ * Routes for the system navigation.
+ */
 const appRoutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'home', component: HomeComponent},

@@ -1,14 +1,13 @@
-﻿//modules
+﻿//Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-
-///extra modules
-import { AppRoutingModule } from './app-routing.module';
-import { FlashMessagesModule} from 'angular2-flash-messages';
 import { CommonModule } from '@angular/common';
 
-///our modules
+///Extra modules
+import { AppRoutingModule } from './app-routing.module';
+
+///Our modules
 import { NavbarModule } from './navbar/navbar.module';
 import { ClassesModule } from './classes/classes.module';
 import { CoursesModule } from './courses/courses.module';
@@ -19,28 +18,26 @@ import { UsersModule } from './users/users.module';
 import { RequestsModule } from './requests/requests.module';
 import { SchedulesModule } from './schedules/schedules.module';
 
-///angular material
+//Angular material
 import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import 'hammerjs';
 import { MdDialogModule, MdButtonModule  } from '@angular/material';
 import { DialogsService } from './services/dialogs.service';
 
-//firebase
+//Firebase
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { FirebaseService } from './services/firebase.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
-//components
+//Components
 import { AppComponent } from './app.component';
-
-///dialogs
 import { DialogsComponent } from './dialogs/dialogs.component';
-import { NavbarService } from './services/navbar.service';
 
-///snackbars
+//Services
+import { NavbarService } from './services/navbar.service';
 import { SnackbarService} from './services/snackbar.service';
 
 
@@ -51,7 +48,6 @@ import { SnackbarService} from './services/snackbar.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    FlashMessagesModule,
     MaterialModule,
     BrowserAnimationsModule,
     AngularFireAuthModule,
