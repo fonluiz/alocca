@@ -1,8 +1,8 @@
 # ALOCCA
 
-Sistema desenvolvido na disciplina de LES(Laboratório de Engenharia de Software) do curso de Ciência da Computação da UFCG(Universidade Federal de Campina Grande) no período 2017.1.
+Sistema desenvolvido na disciplina de `LES(Laboratório de Engenharia de Software)` do curso de Ciência da Computação da UFCG(Universidade Federal de Campina Grande) no `período 2017.1`.
 
-## Desenvolvedores
+## Desenvolvedores/Developers
 
 * [Dandara Souza](https://github.com/dandaramcsousa)
 * [Hugo Gabriel](https://github.com/hugogbs)
@@ -11,10 +11,10 @@ Sistema desenvolvido na disciplina de LES(Laboratório de Engenharia de Software
 * [Luiz Fonseca](https://github.com/fonluiz)
 * [Paulo Vinicius](https://github.com/paul0vinicius)
 
-## Professor
+## Professor/Professor
 
 Gustavo Soares
 
-## Cliente
+## Cliente/Client
 
 Cláudio Campelo

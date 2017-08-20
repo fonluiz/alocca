@@ -1,22 +1,18 @@
-﻿import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+﻿import { Component, OnInit} from '@angular/core';
+import { MdDialog} from '@angular/material';
 import { Router } from '@angular/router';
-
-import * as firebase from 'firebase/app';
-
-import { AngularFireAuth } from 'angularfire2/auth';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
 import { Observable } from 'rxjs/Observable';
 
+import * as firebase from 'firebase/app';
+import { AngularFireAuth } from 'angularfire2/auth';
+
 import { AddSemesterComponent } from '../semesters/add-semester/add-semester.component';
-import { AddCourseComponent } from '../courses/add-course/add-course.component';
+import { Semester } from '../semesters/semester.model';
+
 import { FirebaseService } from '../services/firebase.service';
 import { NavbarService } from '../services/navbar.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { DialogsService } from '../services/dialogs.service';
-import { Semester } from '../semesters/semester.model';
 
 @Component({
   selector: 'app-navbar',
@@ -33,8 +29,10 @@ export class NavbarComponent implements OnInit {
    * Current selected semester.
    */
   selectedSemesterID: string;
+  /**
+   * Current user.
+   */
   user: Observable<firebase.User>;
-  
   /**
    * Message to display when a semester is deleted.
    */
@@ -59,9 +57,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public dialog: MdDialog,
     private FBservice: FirebaseService,
-    public db: AngularFireDatabase,
     public dbAuth: AngularFireAuth,
-    private _flashMessagesService: FlashMessagesService,
     private navbarService: NavbarService,
     private dialogService: DialogsService,
     private snackService: SnackbarService,
@@ -69,6 +65,9 @@ export class NavbarComponent implements OnInit {
     this.user = dbAuth.authState
   }
   
+  /**
+   * Initiates the list of semesters.
+   */
   ngOnInit(){
     this.FBservice.getSemesters().subscribe(semesters => {
           this.semesters = semesters;
@@ -124,6 +123,9 @@ export class NavbarComponent implements OnInit {
       });
   }
 
+  /**
+   * Logs the user out of the system.
+   */
   logout(){
     this.dbAuth.auth.signOut();
   }

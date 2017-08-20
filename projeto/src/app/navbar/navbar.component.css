@@ -4,7 +4,6 @@
   flex: 1 1 auto;
 }
 
-
 /* Remove the blue outline from a selected option. */
 *:focus {
 outline: none;
@@ -21,7 +20,7 @@ outline: none;
   vertical-align: middle;
 }
 
-#select-semester-option{
+.select-semester-option{
   width: auto;
   vertical-align: middle;
   align-content: center;
@@ -31,6 +30,6 @@ outline: none;
   vertical-align: middle;
 }
 
-.page-content{
+#page-content{
   overflow-x: auto;
 }

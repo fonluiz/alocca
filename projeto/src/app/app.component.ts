@@ -19,11 +19,13 @@ export class AppComponent {
    */
   user: Observable<firebase.User>;
   /**
-   * Message displayed in the snackbar if user is not registered.
+   * Message to display when user is not registered.
    */
   NOT_REGISTERED_MESSAGE: string = "Opa! Parece que você não está cadastrado. Entre em contato com o administrador.";
   /**
-   * Duration of message diaplayed in the snackbar.
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when user is not registered.
    */
   TIMEOUT_NOT_REGISTERED: number = 5000;
   
