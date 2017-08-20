@@ -1,17 +1,23 @@
-<md-card class="board-container">
+﻿<md-card class="board-container">
     <md-tab-group>
         <md-tab label="Alertas">
-            <md-card class="alert-container">
-                <md-card-title>Conflito entre disciplinas</md-card-title>
+            <md-card class="alert-container" *ngFor="let alert of alertsList" >
+                <md-card-title>{{alert.title}}</md-card-title>
                 <md-card-content>
-                    <p> As disciplinas <b>EDA</b> e <b>GI</b> são do mesmo período e 
-                    estão alocadas para o mesmo horário.</p>
+                    <p>{{alert.message}}</p>
                 </md-card-content>
                 <md-card-actions>
-                    <button md-button color="primary">IGNORAR</button>
+                    <button (click)="ignoreAlert(alert.id)" md-button color="primary">IGNORAR</button>
                 </md-card-actions>
             </md-card>
         </md-tab>
-        <md-tab label="Ignorados">Content 2</md-tab>
+        <md-tab label="Ignorados">
+          <md-card class="alert-container" *ngFor="let alert of ignoredAlerts">
+            <md-card-title>{{alert.title}}</md-card-title>
+            <md-card-content>
+              <p>{{alert.message}}</p>
+            </md-card-content>
+          </md-card>
+        </md-tab>
     </md-tab-group>
 </md-card>
