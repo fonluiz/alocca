@@ -33,7 +33,7 @@ export class AddProfessorComponent implements OnInit {
    * 
    * when the professor is saved successfully.
    */
-  TIMEOUT_SAVED_MESSAGE = 2500;
+  TIMEOUT_SAVED_MESSAGE: number = 2500;
   /**
    * Message to display when the professor was not saved.
    */
@@ -43,7 +43,7 @@ export class AddProfessorComponent implements OnInit {
    * 
    * when the professor is not saved.
    */
-  TIMEOUT_NOT_SAVED_MESSAGE = 8000;
+  TIMEOUT_NOT_SAVED_MESSAGE: number = 8000;
 
   constructor(
     private FBservice: FirebaseService,

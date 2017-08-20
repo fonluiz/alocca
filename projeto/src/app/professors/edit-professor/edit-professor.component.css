@@ -3,6 +3,10 @@
   padding: 0px 0px 0px 0px;
 }
 
+#cancel-button{
+  margin-right: 1%;
+}
+
 .edit-professor-card-content {
   text-align: left;
   padding: 30px 30px 30px 30px;

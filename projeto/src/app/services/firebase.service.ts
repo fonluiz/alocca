@@ -46,6 +46,7 @@ export class FirebaseService {
     this.professorRestrictions = db.list(this.PROFESSORS_RESTRICTIONS_PATH) as FirebaseListObservable<ProfessorRestriction[]>;
     this.classes = db.list('/classes') as FirebaseListObservable<Class[]>;
 
+
     this.navbarService.getSemesterSelectedEmitter().subscribe(sem => {
       this.currentSemester = sem;
       this.classes = db.list(this.CLASSES_PATH + '/' + this.currentSemester) as FirebaseListObservable<Class[]>;
@@ -245,25 +246,49 @@ export class FirebaseService {
   getProfessors(): FirebaseListObservable<any[]>{
     return this.professors;
   }
-  getProfessorDetails( id){
-    this.professor = this.db.object('/professors/'+id) as FirebaseObjectObservable<Professor>
-    return this.professor;
+  /**
+   * Retrieves the data from the professor of the given key
+   * 
+   * passed as parameter.
+   * 
+   * @param id Key (SIAPE) of a professor
+   * 
+   * @returns The professor as a Firebase Object
+   */
+  getProfessorDetails(id: string): FirebaseObjectObservable<any>{
+    var selectedProfessor = this.db.object('/professors/'+id) as FirebaseObjectObservable<any>;
+    return selectedProfessor;
   }
-  updateProfessor(id, professor,oldProfessor){
-    if (id!==professor.SIAPE){
-      if(this.professorExists(professor.SIAPE)){
+  /**
+   * Updates a professor.
+   * 
+   * @param id Key (SIAPE) of the professor to be updated.
+   * @param professor New defined professor (object).
+   * @param oldProfessor Current professor (object).
+   * 
+   * @returns The status of the transaction: true if the professor was updated. False, otherwise.
+   */
+  updateProfessor(id:string, professor: Professor,oldProfessor: Professor): boolean{
+    if (id!==professor.getSIAPE()){
+      if(this.professorExists(professor.getSIAPE())){
         return false;
       }
       this.deleteProfessor(id);
       this.addNewProfessor(professor);
       this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
-    }else if(this.professors.update(id,professor)){
+    }else if(this.professors.update(id,professor.toFirebaseObject())){
       this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
     }
   }
-  updateProfessorInClassesTable(professor,oldProfessor){
+  /**
+   * Updates all the classes related to the professor just updated.
+   * 
+   * @param professor New defined professor (object).
+   * @param oldProfessor Professor updated (object).
+   */
+  private updateProfessorInClassesTable(professor: Professor,oldProfessor: Professor){
     var thisObject = this;
     var semests: any[];
     this.getSemesters().subscribe(sems => {
@@ -275,18 +300,16 @@ export class FirebaseService {
         rightclasses = Rclasses;
       })
       rightclasses.forEach(function(thatClass){
-        if(thatClass.professor1SIAPE == oldProfessor.SIAPE){
-          console.log('entrou no 1')
+        if(thatClass.professor1SIAPE == oldProfessor.getSIAPE()){
           thisObject.db.database.ref('/classes/'+sem.$key+'/'+thatClass.$key).update({
-            "professor1":professor.nickname,
-            "professor1SIAPE":professor.SIAPE
+            "professor1":professor.getNickname(),
+            "professor1SIAPE":professor.getSIAPE()
           });
         }
-        else if(thatClass.professor2SIAPE == oldProfessor.SIAPE){
-          console.log('entrou no 2')
+        else if(thatClass.professor2SIAPE == oldProfessor.getSIAPE()){
           thisObject.db.database.ref('/classes/'+sem.$key+'/'+thatClass.$key).update({
-            "professor2":professor.nickname,
-            "professor2SIAPE":professor.SIAPE
+            "professor2":professor.getNickname(),
+            "professor2SIAPE":professor.getSIAPE()
           });
         }
       })
@@ -299,7 +322,7 @@ export class FirebaseService {
    * 
    * @returns True if professor is removed successfully.
    */
-  deleteProfessor(id): boolean{
+  deleteProfessor(id: string): boolean{
     if(this.professors.remove(id)){
       return true;
     }else{
@@ -316,7 +339,7 @@ export class FirebaseService {
    * 
    * @returns True if there is a professor with the same SIAPE number.
    */
-  professorExists(newProfessorKey): boolean{
+  professorExists(newProfessorKey: string): boolean{
     var isSaved:boolean;
     this.db.database.ref("professors/"+newProfessorKey).once("value",function(snapshot){
       isSaved = snapshot.exists();
@@ -334,7 +357,7 @@ export class FirebaseService {
    * 
    * @returns True if there is a professor with the same nickname.
    */
-  sameNickname(newProfessorNickname): boolean{
+  sameNickname(newProfessorNickname: string): boolean{
     var sameNickname: boolean = false;
     var professors: any[];
     this.getProfessors().subscribe(profs =>{

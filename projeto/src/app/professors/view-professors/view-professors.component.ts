@@ -24,7 +24,7 @@ export class ViewProfessorsComponent implements OnInit {
      * 
      * when a professor is deleted.
      */
-    TIMEOUT_DELETED_MESSAGE = 2500;
+    TIMEOUT_DELETED_MESSAGE: number = 2500;
     /**
      * Message to display when a professor is not deleted.
      */
@@ -34,7 +34,7 @@ export class ViewProfessorsComponent implements OnInit {
      * 
      * when a professor is not deleted.
      */
-    TIMEOUT_NOT_DELETED_MESSAGE = 5000;
+    TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
     /**
      * Message to display when no semester is previously selected.
      */
@@ -44,7 +44,7 @@ export class ViewProfessorsComponent implements OnInit {
      * 
      * when no semester is previously selected.
      */
-    TIMEOUT_NO_SEMESTER_SELECTED = 5000;
+    TIMEOUT_NO_SEMESTER_SELECTED: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
