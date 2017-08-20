@@ -1,26 +1,33 @@
 ﻿  <span>
+    <!-- Navbar to be shown after login. -->
     <app-navbar></app-navbar>
   </span>
+  <!-- Only shown if user is logged in. -->
   <span *ngIf="!(dbAuth.authState | async)">
-    <!--Always shows a header, even in smaller screens.-->
+
+    <!-- Always shows a header, even in smaller screens. -->
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title" [routerLink]="['/home']">ALOCCA</span>
-          <!-- Navigation. We hide it in small screens. -->
-          <nav class="mdl-navigation mdl-layout--large-screen-only" >
-          </nav>
 
+          <!-- Navbar Title -->
+          <span class="mdl-layout-title" [routerLink]="['/home']">ALOCCA</span>
+
+          <!-- Spacer to align navbar options on its right-end. -->
           <div class="mdl-layout-spacer"></div>
+          
+          <!-- Login button. -->
           <button id="demo-menu-lower-left"
-            class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" (click)="login()" style="margin-left: 5px">
+            class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white login-button" (click)="login()">
           <b>Entrar</b>
           </button>
+
+          <!-- Request Access button. -->
           <button id="demo-menu-lower-left"
-            class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/request-access']" style="margin-left: 5px">
+            class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white  request-button" [routerLink]="['/request-access']">
           <b>Solicitar Acesso</b>
           </button>
+
         </div>
       </header>
     </div>

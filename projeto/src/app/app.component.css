@@ -2,3 +2,11 @@
 *:focus {
 outline: none;
 }
+
+.login-button{
+    margin-right: 1%;
+}
+
+.request-button{
+    margin-right: 1%;
+}
