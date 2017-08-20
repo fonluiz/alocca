@@ -219,15 +219,30 @@ export class FirebaseService {
     return department;
   }
 ///Professors
-  addNewProfessor(newprofessor){
-    if(this.professorExists(newprofessor.SIAPE)){
+  /**
+   * Saves new professor in the firebase.
+   * 
+   * @param newprofessor Professor (object) do be saved in the firebase database.
+   * 
+   * @returns Status of the transaction: true if successfully saved. False, otherwise.
+   */
+  addNewProfessor(newprofessor: Professor): boolean{
+    if(this.professorExists(newprofessor.getSIAPE())){
         return false;
-    }else{
-      this.db.database.ref("professors/"+newprofessor.SIAPE).set(newprofessor);
+    }else if(this.sameNickname(newprofessor.getNickname())){
+      return false;
+    }
+    else{
+      this.db.database.ref("professors/"+newprofessor.getSIAPE()).set(newprofessor.toFirebaseObject());
       return true;
     }  
   }
-  getProfessors(){
+  /**
+   * Retrieves the list of professors saved in the firebase.
+   * 
+   * @returns List of professors from the firebase.
+   */
+  getProfessors(): FirebaseListObservable<any[]>{
     return this.professors;
   }
   getProfessorDetails( id){
@@ -285,12 +300,47 @@ export class FirebaseService {
     }
     
   }
+  /**
+   * Checks if there is a professor with the same SIAPE number
+   * 
+   * already saved in the firebase.
+   * 
+   * @param newProfessorKey SIAPE number from the professor to be saved.
+   * 
+   * @returns True if there is a professor with the same SIAPE number.
+   */
   professorExists(newProfessorKey){
     var isSaved:boolean;
     this.db.database.ref("professors/"+newProfessorKey).once("value",function(snapshot){
       isSaved = snapshot.exists();
     });
     return isSaved;
+  }
+  /**
+   * Checks if there is a professor with the same nickname
+   * 
+   * already saved in the firebase.
+   * 
+   * @param newProfessorKey SIAPE number from the professor to be saved.
+   * 
+   * @param newProfessirNickname Nickname from the professor to be saved.
+   * 
+   * @returns True if there is a professor with the same nickname.
+   */
+  sameNickname(newProfessorNickname){
+    var sameNickname: boolean = false;
+    var professors: any[];
+    this.getProfessors().subscribe(profs =>{
+      professors = profs;
+    })
+
+    professors.forEach(function(prof){
+      if (prof.nickname){
+        sameNickname = true;
+      }
+    })
+    
+    return sameNickname;
   }
 
 ///Courses

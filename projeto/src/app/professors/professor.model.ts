@@ -1,15 +1,47 @@
 ﻿/**
- * @api {model} projeto/src/app/professors/professor.model.ts Professor Model
- * @apiName Professor Model
- * @apiGroup Professor
- * @apiParam {string} name Professor's name.
- * @apiParam {string} SIAPE Professor SIAPE's number ID.
+ * Class that represents a Professor.
  */
-
 export class Professor {
     constructor(
         public SIAPE: string,
-        public name: string
+        public name: string,
+        public nickname: string
     ) {}
+
+    /**
+     * @returns This professor's SIAPE number.
+     */
+    getSIAPE(): string {
+        return this.SIAPE;
+    }
+
+    /**
+     * @returns This professor's name.
+     */
+    getName(): string {
+        return this.name;
+    }
+
+    /**
+     * @returns This professor's nickname.
+     */
+    getNickname(): string {
+        return this.nickname;
+    }
+
+    /**
+     * This professor (object) in a JSON format.
+     * 
+     * @returns JSON element.
+     */
+    toFirebaseObject(){
+        var newProfessor: any = {
+            SIAPE: this.getSIAPE(),
+            name: this.getName(),
+            nickname: this.getNickname()
+        }
+
+        return <JSON>newProfessor;
+    }
 
 }

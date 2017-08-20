@@ -1,28 +1,32 @@
-﻿.new-professor-card {
+﻿#new-professor-card {
   margin: 50px 50px 50px 50px;
   padding: 0px 0px 0px 0px;
 }
 
-.new-professor-card-content {
+#cancel-button{
+  margin-right: 1%;
+}
+
+#new-professor-card-content {
   text-align: left;
   padding: 30px 30px 30px 30px;
 }
 
-.professor-name-input {
+#professor-name-input {
   width: 40%;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10%;
 }
 
-.professor-nickname-input {
+#professor-nickname-input {
   width: 20%;
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 5%;
 }
 
-.professor-SIAPE-input {
+#professor-SIAPE-input {
   width: 10%;
   margin-top: 10px;
   margin-bottom: 10px;

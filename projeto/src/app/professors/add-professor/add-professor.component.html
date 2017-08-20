@@ -1,28 +1,32 @@
-﻿<md-card class="new-professor-card">
+﻿<md-card id="new-professor-card">
   <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">
-    <!--Toolbar-->
-    <md-toolbar color="primary" class="new-professor-card-toolbar">
+  <!--Toolbar-->
+    <md-toolbar color="primary" id="new-professor-card-toolbar">
       Cadastrar Professor   
       <span class="spacer"></span>
-      <button md-button style="margin-right: 5px" [routerLink]="['/view-professors']">Cancelar</button> 
+      <button md-button id="cancel-button" [routerLink]="['/view-professors']">Cancelar</button> 
       <button md-button [disabled]="!professorForm.form.valid" >Salvar</button>
     </md-toolbar>
 
-    <!--Form-->
-    <md-card-content class="new-professor-card-content">
+  <!--Form-->
+    <md-card-content id="new-professor-card-content">
       <div class="professor-card-row">
-        <!-- Professor's SIAPE -->
-        <md-input-container class="professor-SIAPE-input" type="text">
+
+      <!-- Professor's SIAPE -->
+        <md-input-container id="professor-SIAPE-input" type="text">
           <input mdInput placeholder="SIAPE" [(ngModel)]="SIAPE" name="SIAPE" size="7" maxlength="7" pattern="[0-9]{7}" required>
         </md-input-container>
-        <!-- Professor name -->
-        <md-input-container class="professor-name-input" type="text">
+
+      <!-- Professor name -->
+        <md-input-container id="professor-name-input" type="text">
           <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>
         </md-input-container>
-        <!-- Professor nickname -->
-        <md-input-container class="professor-nickname-input" type="text">
+
+      <!-- Professor nickname -->
+        <md-input-container id="professor-nickname-input" type="text">
           <input mdInput placeholder="Apelido" [(ngModel)]="nickname" name="nickname" size="10" maxlength="10" required>
         </md-input-container>
+
       </div>
     </md-card-content>
   </form>

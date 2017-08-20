@@ -1,8 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
-import { Professor } from '../professor.model';
 import { Router } from '@angular/router';
+
+import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
+
+import { Professor } from '../professor.model';
 
 @Component({
   selector: 'app-add-professor',
@@ -10,14 +12,38 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrls: ['./add-professor.component.css']
 })
 export class AddProfessorComponent implements OnInit {
+  /**
+   * Name of the professor to be saved.
+   */
   name: any;
+  /**
+   * Nickname of the professor to be saved.
+   */
   nickname: any;
+  /**
+   * SIAPE number of the professor to be saved.
+   */
   SIAPE: any;
+  /**
+   * Message the professor is successfully saved.
+   */
   SAVED_SUCCESSFULLY_MESSAGE: string = "Professor salvo com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se este já está cadastrado.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the professor is saved successfully.
+   */
   TIMEOUT_SAVED_MESSAGE = 2500;
+  /**
+   * Message to display when the professor was not saved.
+   */
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se já existe um professor com esse SIAPE e/ou apelido.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the professor is not saved.
+   */
   TIMEOUT_NOT_SAVED_MESSAGE = 8000;
-  
 
   constructor(
     private FBservice: FirebaseService,
@@ -26,20 +52,22 @@ export class AddProfessorComponent implements OnInit {
   ) {
   }
 
+  /**
+   * Saves a new Professor (object) on the form submission.
+   */
   onAddNewProfessor(){
-    let professor = {
-    name: this.name,
-    nickname: this.nickname,
-    SIAPE: this.SIAPE
-  }
+    var newProfessor =  new Professor (
+      this.SIAPE,
+      this.name,
+      this.nickname
+    )
     
-    let savedSuccessfully: boolean = this.FBservice.addNewProfessor(professor);
+    var savedSuccessfully: boolean = this.FBservice.addNewProfessor(newProfessor);
 
     this.name = null;
     this.nickname = null;
     this.SIAPE = null;
 
-    // Queria colocar essa verificação em um método. Será que isso é possível?
     if (savedSuccessfully) {
         this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
     } else {
@@ -47,7 +75,6 @@ export class AddProfessorComponent implements OnInit {
     }
   }
 
-  
   ngOnInit() {
     let initiateProfessors: any[];
     this.FBservice.getProfessors().subscribe(professors =>{
