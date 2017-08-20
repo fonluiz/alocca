@@ -7,9 +7,21 @@
  */
 
 export class Alert {
-    constructor(
+    ignored: boolean;
+    id: number;
+    constructor(    
         public title: string,
         public message: string
-    ) { }
+    ) { 
+        this.unread();
+    }
+
+    ignore() {
+        this.ignored = true;
+    }
+
+    unread() {
+        this.ignored = false;
+    }
 
 }
