@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
+import { Alert } from "app/alerts/alert.model";
+import { AlertFactory } from "app/alerts/alert.factory";
 
 @Component({
   selector: 'app-classes-container',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ClassesContainerComponent implements OnInit {
 
+    alertTest: Alert;
+
   constructor() { }
 
   ngOnInit() {
+      this.alertTest = new AlertFactory().create("Teste", "ABC");
+      console.log(this.alertTest)
   }
 
 }
