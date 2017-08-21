@@ -12,7 +12,7 @@ import { SnackbarService } from '../../services/snackbar.service';
 })
 export class ViewProfessorsComponent implements OnInit {
     /**
-     * List of registered Professors.
+     * List of saved Professors.
      */
     professors: any[];
     /**
@@ -81,7 +81,7 @@ export class ViewProfessorsComponent implements OnInit {
    * @param id Key (SIAPE) of the professor selected to be deleted.
    * @param professorNickname  Nickname of the professor selected to be deleted.
    */
-  onDeleteProfessor(id, professorNickname){
+  onDeleteProfessor(id: string, professorNickname:string){
     var title = "Excluir Professor";
     var message = "Deseja realmente excluir "+professorNickname+" ?";
     this.dialogsService

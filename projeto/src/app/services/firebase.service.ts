@@ -324,7 +324,7 @@ export class FirebaseService {
    * 
    * @param id Key (SIAPE) of the professor do be deleted.
    * 
-   * @returns True if professor is removed successfully.
+   * @returns True if professor is removed successfully. False, otherwise.
    */
   deleteProfessor(id: string): boolean{
     if(this.professors.remove(id)){
@@ -398,7 +398,7 @@ export class FirebaseService {
    * 
    * @returns List of courses from the firebase.
    */
-  getCourses(){
+  getCourses(): FirebaseListObservable<any[]>{
     return this.courses;
   }
   getCourseDetails( id){
@@ -454,7 +454,14 @@ export class FirebaseService {
       })
     })
   }
-  deleteCourse(id){
+  /**
+   * Deletes a Course from the firebase.
+   * 
+   * @param id Key (code) of the course to be deleted.
+   * 
+   * @returns Status of the transaction: true if successfully deleted. False, otherwise.
+   */
+  deleteCourse(id:string): boolean{
     if (this.courses.remove(id)){
       return true;
     }else{
@@ -470,7 +477,7 @@ export class FirebaseService {
    * 
    * @returns True if there is a course with the same code. False, otherwise.
    */
-  courseExists(newCourseKey){
+  courseExists(newCourseKey: string):boolean{
     var isSaved: boolean;
     this.db.database.ref("courses/"+newCourseKey).on("value",function(snapshot){
       isSaved = snapshot.exists();

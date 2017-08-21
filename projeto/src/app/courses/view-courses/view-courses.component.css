@@ -1,13 +1,17 @@
-.view-courses-card {
-  margin: 50px 50px 50px 50px;
+#view-courses-card {
+  margin: 4% 1% 4% 1%;
   padding: 0px 0px 0px 0px;
 }
 
-.course-card-content {
+#course-card-content {
   text-align: center;
-  padding: 30px 30px 30px 30px;
+  padding: 0.5% 0.5% 0.5% 0.5%;
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.delete-button{
+  color: red;
 }
