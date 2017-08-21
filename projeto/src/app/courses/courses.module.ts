@@ -8,9 +8,9 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {AddCourseComponent} from './add-course/add-course.component';
-import {EditCourseComponent} from './edit-course/edit-course.component';
-import {ViewCoursesComponent} from './view-courses/view-courses.component';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { EditCourseComponent } from './edit-course/edit-course.component';
+import { ViewCoursesComponent } from './view-courses/view-courses.component';
 
 @NgModule({
     imports: [
