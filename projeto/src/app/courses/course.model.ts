@@ -12,46 +12,81 @@
         private requesterDepartment: string
     ) {}
 
+    /**
+     * @returns This course's code.
+     */
     getCode(): string{
         return this.code;
     }
 
+    /**
+     * @returns This course's name.
+     */
     getName(): string{
         return this.name;
     }
 
+    /**
+     * @returns This course's short name.
+     */
     getShortName(): string{
         return this.shortName;
     }
 
+    /**
+     * @returns This course's credits.
+     */
     getCredits(): number{
         return this.credits;
     }
 
+    /**
+     * @returns This course's hours to schedule.
+     */
     getHoursToSchedule(): number{
         return this.hoursToSchedule;
     }
 
+    /**
+     * @returns This course's type.
+     */
     getType(): string{
         return this.type;
     }
 
+    /**
+     * @returns This course's minimum recomended semester.
+     */
     getMinimumSemester(): number{
         return this.minimumSemester;
     }
 
+    /**
+     * @returns This course's maximum recomended semester.
+     */
     getMaximumSemester(): number{
         return this.maximumSemester;
     }
 
+    /**
+     * @returns This course's offerer department.
+     */
     getOffererDepartment(): string{
         return this.offererDepartment;
     }
 
+    /**
+     * @returns This course's requester department.
+     */
     getRequesterDepartment(): string{
         return this.requesterDepartment;
     }
 
+    /**
+     * This course (object) in a JSON format.
+     * 
+     * @returns JSON element.
+     */
     toFirebaseObject(): JSON{
         var course: any = {
             code: this.getCode(),
