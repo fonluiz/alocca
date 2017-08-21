@@ -8,8 +8,8 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {AddUserComponent} from './add-user/add-user.component';
-import {ViewUsersComponent} from './view-users/view-users.component';
+import { AddUserComponent } from './add-user/add-user.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 @NgModule({
     imports: [

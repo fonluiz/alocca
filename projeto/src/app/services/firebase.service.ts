@@ -568,18 +568,36 @@ export class FirebaseService {
   }
 
 ///Users
+  /**
+   * Retrieves the list of users saved in the firebase.
+   * 
+   * @returns List of users from the firebase.
+   */
   getUsers(){
     return this.users;
   }
-  getUsersEmails(){
+  /**
+   * Retrieves the list of emails from the users saved in the firebase.
+   * 
+   * @returns List of emails.
+   */
+  getUsersEmails(): FirebaseListObservable<any[]>{
     return this.usersEmails;
   }
-  deleteUser(user){
+  /**
+   * Deletes a user from the firebase.
+   * 
+   * @param userKey Key (SIAPE) of the user to be deleted.
+   * @param userEmail Email of the user to be deleted.
+   * 
+   * @returns Status of the transaction: true if deleted. False, otherwise.
+   */
+  deleteUser(userKey:string, userEmail:string): boolean{
     var thisObject = this;
-    if(this.users.remove(user.$key)){
+    if(this.users.remove(userKey)){
       if(this.db.database.ref("usersEmails/").on("value",function(snapshot){
         snapshot.forEach(function(childSnapshot){
-          if(childSnapshot.child('email').val()===user.email){
+          if(childSnapshot.child('email').val()===userEmail){
             thisObject.usersEmails.remove(childSnapshot.key);
             return true;
           }
@@ -627,7 +645,12 @@ export class FirebaseService {
     });
     return userSIAPE;
   }
-  
+  /**
+   * 
+   * @param userEmail Email of the user logging in.
+   * 
+   * @returns True is the user is registered. False, otherwise.
+   */
   isUserRegistered(userEmail){
     var sameEmail: boolean = false;
     var users: any[];
