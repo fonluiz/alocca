@@ -1,26 +1,29 @@
-<md-card class="new-user-card">
+<md-card id="new-user-card">
   <form (ngSubmit)="onAddNewUser()" #userForm="ngForm">
-     <!--Toolbar-->
-    <md-toolbar color="primary" class="new-user-card-toolbar">
+  <!-- Card Toolbar -->
+    <md-toolbar class="new-user-card-toolbar mdl-color-text--white mdl-color--primary">
       Cadastrar Usuário   
       <span class="spacer"></span>
-      <button md-button style="margin-right: 5px" [routerLink]="['/home-body']">Cancelar</button> 
+      <button md-button id="cancel-button" [routerLink]="['/view-users']">Cancelar</button> 
       <button md-button type="submit" [disabled]="!userForm.form.valid" >Cadastrar</button>
     </md-toolbar>
  
-     <!--Form-->
-    <md-card-content class="new-user-card-content">
+  <!-- Card Form -->
+    <md-card-content id="new-user-card-content">
       <div class="user-card-row">
-        <!-- user's SIAPE -->
-        <md-input-container class="user-SIAPE-input" type="text">
+
+      <!-- User SIAPE input -->
+        <md-input-container id="user-SIAPE-input" type="text">
           <input mdInput placeholder="SIAPE" [(ngModel)]="SIAPE" name="SIAPE" size="7" maxlength="7" pattern="[0-9]{7}" required>
         </md-input-container>
-        <!-- user's name -->
-        <md-input-container class="user-name-input" type="text">
+
+      <!-- User name input -->
+        <md-input-container id="user-name-input" type="text">
           <input mdInput placeholder="Nome" [(ngModel)]="name" name="name" required>
         </md-input-container>
-        <!-- user's e-mail -->
-        <md-input-container class="user-email-input">
+
+      <!-- User e-mail input -->
+        <md-input-container id="user-email-input">
           <input mdInput pattern="[A-Za-z0-9._%+-]+@+[a-z]+.ufcg.edu.br" placeholder="E-mail" [(ngModel)]="email" name="email" required>
         </md-input-container>
   

@@ -1,13 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
-import { User } from '../user.model';
 import { Router } from '@angular/router';
-import { SnackbarService } from '../../services/snackbar.service';
 
-const SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
-const NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
-const TIMEOUT_SAVED_MESSAGE: number = 2500;
-const TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
+import { User } from '../user.model';
+
+import { FirebaseService } from '../../services/firebase.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-add-user',
@@ -15,10 +12,38 @@ const TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
   styleUrls: ['./add-user.component.css']
 })
 export class AddUserComponent implements OnInit {
-  // should be private, but if so, maybe it won't work correctly.
+  /**
+   * Email of the user to be saved.
+   */
   email: string;
+  /**
+   * Name of the user to be saved.
+   */
   name: string;
+  /**
+   * SIAPE of the user to be saved.
+   */
   SIAPE: string;
+  /**
+   * Message to display when user is saved.
+   */
+  SAVED_SUCCESSFULLY_MESSAGE: string = "Usuário cadastrado com sucesso!";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the user is saved.
+   */
+  TIMEOUT_SAVED_MESSAGE: number = 2500;
+  /**
+   * Message to display when user is not saved.
+   */
+  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o usuário. Verifique se o usuário já foi cadastrado.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the user is not saved.
+   */
+  TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
@@ -27,29 +52,36 @@ export class AddUserComponent implements OnInit {
   ) {
   }
 
+  /**
+   * Saves a new user (object) on form submission.
+   */
   onAddNewUser(){
-    let user = {
-      SIAPE: this.SIAPE,
-      email: this.email,
-      name: this.name
-    }
+    let user = new User (
+      this.SIAPE,
+      this.name,
+      this.email
+    )
 
-    let savedSuccessfully: boolean = this.FBservice.addNewUser(user);
+    var savedSuccessfully: boolean = this.FBservice.addNewUser(user);
+
     this.SIAPE = null;
     this.email = null;
     this.name = null;
 
     if(savedSuccessfully){
-        this.snackService.openSnackBar(SAVED_SUCCESSFULLY_MESSAGE, TIMEOUT_SAVED_MESSAGE);
+        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE, this.TIMEOUT_SAVED_MESSAGE);
+        this.router.navigate(['/add-user']);
     }
     else{
-        this.snackService.openSnackBar(NOT_SAVED_MESSAGE, TIMEOUT_NOT_SAVED_MESSAGE);
+        this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE, this.TIMEOUT_NOT_SAVED_MESSAGE);
     }    
-    this.router.navigate(['/add-user']);
   }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
-    let initiateUsers: User[];
+    let initiateUsers: any[];
     this.FBservice.getUsers().subscribe(users =>{
       initiateUsers = users;
     });

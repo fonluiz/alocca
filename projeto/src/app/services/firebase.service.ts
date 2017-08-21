@@ -593,36 +593,55 @@ export class FirebaseService {
       return false;
     }
   }
-  addNewUser(newUser){
-      if (this.emailAlreadySaved(newUser.SIAPE)){
+  /**
+   * Saves new user in the firebase.
+   * 
+   * @param newUser User (object) to be saved.
+   * 
+   * @returns Status of the transaction: true if user is saved. False, otherwise.
+   */
+  addNewUser(newUser: User): boolean{
+      if (this.userAlreadySaved(newUser.getSIAPE())){
         return false;
       }else{
-        if(this.db.database.ref("users/"+newUser.SIAPE).set(newUser)){
-          if(this.usersEmails.push({email: newUser.email})){
+        if(this.db.database.ref("users/"+newUser.SIAPE).set(newUser.toFirebaseObject())){
+          if(this.usersEmails.push({email: newUser.getEmail()})){
             return true;
+          }else{
+            return false;
           }
+        }else{
+          return false;
         }
       }
-
   }
-  emailAlreadySaved(newUserKey){
-    var userEmail: boolean;
+  /**
+   * @param newUserKey Key (SIAPE) of the user to be saved.
+   * 
+   * @returns True if user is already saved. False, otherwise.
+   */
+  userAlreadySaved(newUserKey: string): boolean{
+    var userSIAPE: boolean = false;
     this.db.database.ref("users/"+newUserKey).once("value",function(snapshot){
-      userEmail = snapshot.exists();
+      userSIAPE = snapshot.exists();
     });
-    return userEmail;
+    return userSIAPE;
   }
+  
   isUserRegistered(userEmail){
-    var isRegistered: boolean = false;
-    this.db.database.ref("usersEmails/").on("value",function(snapshot){
-      snapshot.forEach(function(childSnapshot){
-        if(childSnapshot.child('email').val()===userEmail){
-          isRegistered = true;
-          return true;
-        }
-      });
-    });
-    return isRegistered;
+    var sameEmail: boolean = false;
+    var users: any[];
+    this.getUsersEmails().subscribe(usrs =>{
+      users = usrs;
+    })
+
+    users.forEach(function(user){
+      if (user.email===userEmail){
+        sameEmail = true;
+      }
+    })
+    
+    return sameEmail;
   }
 
 ///Requests

@@ -75,6 +75,9 @@ export class AddProfessorComponent implements OnInit {
     }
   }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
     let initiateProfessors: any[];
     this.FBservice.getProfessors().subscribe(professors =>{

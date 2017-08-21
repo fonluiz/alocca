@@ -1,27 +1,32 @@
-.new-user-card {
+#new-user-card {
   margin: 50px 250px 50px 250px;
   padding: 0px 0px 0px 0px;
 }
 
-.new-user-card-content {
+#cancel-button{
+  margin-right: 1%;
+}
+
+#new-user-card-content {
   text-align: left;
   padding: 30px 30px 30px 30px;
 }
 
-.user-SIAPE-input {
+#user-SIAPE-input {
   width: 10%;
   margin-top: 10px;
   margin-bottom: 1px;
   margin-left: 5%;
 }
 
-.user-name-input {
+#user-name-input {
   width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
   margin-left: 8%;
 }
-.user-email-input {
+
+#user-email-input {
   width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
