@@ -1,7 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
+
 import { Course } from '../course.model';
+
 import { FirebaseService } from '../../services/firebase.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
@@ -10,25 +12,85 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrls: ['./edit-course.component.css']
 })
 export class EditCourseComponent implements OnInit {
+  /**
+   * Key (code) of the course being updated.
+   */
   id: string;
+  /**
+   * New code for the course.
+   */
   code: string;
+  /**
+   * New name for the course.
+   */
   name: string;
+  /**
+   * New short name for the course.
+   */
   shortName: string;
+  /**
+   * Current name of the course being updated.
+   */
   oldName: string;
+  /**
+   * New credits for the course.
+   */
   credits: number;
+  /**
+   * New hours to schedule for the course.
+   */
   hoursToSchedule: number;
+  /**
+   * New type for the course.
+   */
   type: string;
+  /**
+   * New minimum recomended semester for the course.
+   */
   minimumSemester: number;
+  /**
+   * New maximum recomended semester for the course.
+   */
   maximumSemester: number;
+  /**
+   * New offerer department for the course.
+   */
   offererDepartment: string;
+  /**
+   * New requester department for the course.
+   */
   requesterDepartment: string;
+  /**
+   * Options of course type for the user selection.
+   */
   courseTypes: string[] = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
+  /**
+   * Options of semester for the user selection.
+   */
   semesters: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  /**
+   * Options of department for the user selection.
+   */
   departments: string[] = ["UASC", "Outro"];
-
+  /**
+   * Message to display when the course is updated.
+   */
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina editada com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao editar a disciplina. Verifique se esta já está cadastrada.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the course is updated.
+   */
   TIMEOUT_SAVED_MESSAGE: number = 2500;
+  /**
+   * Message to display when the course is not updated.
+   */
+  NOT_SAVED_MESSAGE: string = "Opa! Verifique se já existe uma disicplina com o código ou a sigla escolhidos.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the course is not updated.
+   */
   TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
@@ -38,6 +100,9 @@ export class EditCourseComponent implements OnInit {
     private snackService: SnackbarService
   ) { }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
     this.id = this.route.snapshot.params['id'],
     this.FBservice.getCourseDetails(this.id).subscribe(course =>{
@@ -59,6 +124,9 @@ export class EditCourseComponent implements OnInit {
     });
   }
 
+  /**
+   * Updates the course on form submission.
+   */
   onEditCourse(){
     if (this.credits===0){
       this.hoursToSchedule = 2;
@@ -66,18 +134,18 @@ export class EditCourseComponent implements OnInit {
       this.hoursToSchedule = this.credits;
     }
 
-    let course = {
-          code: this.code,
-          name: this.name,
-          shortName: this.shortName,
-          credits: this.credits,
-          hoursToSchedule: this.hoursToSchedule,
-          type: this.type,
-          minimumSemester: this.minimumSemester,
-          maximumSemester: this.maximumSemester,
-          offererDepartment: this.offererDepartment,
-          requesterDepartment: this.requesterDepartment
-    }
+    var course = new Course (
+          this.code,
+          this.name,
+          this.shortName,
+          this.credits,
+          this.hoursToSchedule,
+          this.type,
+          this.minimumSemester,
+          this.maximumSemester,
+          this.offererDepartment,
+          this.requesterDepartment
+    )
 
     let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course,this.oldName);
 

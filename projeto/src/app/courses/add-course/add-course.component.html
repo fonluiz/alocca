@@ -1,21 +1,22 @@
 <md-card id="new-course-card">
     <form (ngSubmit)="onAddNewCourse()" #courseForm="ngForm">
-    <!--Toolbar-->
+    <!-- Card Toolbar -->
         <md-toolbar class="new-course-card-toolbar mdl-color-text--white mdl-color--primary">
             Cadastrar Disciplina
             <span class="spacer"></span>
             <button md-button id="cancel-button" [routerLink]="['/view-courses']">Cancelar</button>
             <button md-button [disabled]="!courseForm.form.valid" type="submit">Salvar</button>
         </md-toolbar>
-    <!--Form-->
+    <!-- Card Form -->
         <md-card-content id="new-course-card-content">
             <div class="course-card-row">
+
             <!-- Course code input -->
                 <md-input-container id="professor-code-input" type="text">
                     <input mdInput placeholder="Código" [(ngModel)]="code" name="code" size="7" maxlength="7" pattern="[0-9]{7}" required>
                 </md-input-container>
 
-             <!-- Course name input -->
+            <!-- Course name input -->
                 <md-input-container id="course-name-input">
                     <input mdInput placeholder="Nome" type="text" [(ngModel)]="name" name="name" required>
                 </md-input-container>
@@ -25,21 +26,22 @@
                     <input mdInput placeholder="Sigla" type="text" [(ngModel)]="shortName" name="shortName" required>
                 </md-input-container>
 
-            <!-- Credits input -->
+            <!-- Course credits input -->
                 <md-input-container id="course-credits-input">
                     <input mdInput placeholder="Créditos" type="number" [(ngModel)]="credits" min="0" onkeypress="return event.charCode >= 48" name="credits" required>
                 </md-input-container>
             </div>
 
             <div class="course-card-row">
-            <!-- Type of course-->
+
+            <!-- Type of course input -->
                 <md-select id="course-type-input" placeholder="Tipo" [(ngModel)]="type" name="type" required>
                     <md-option *ngFor="let type of courseTypes" [value]="type">
                         {{ type }}
                     </md-option>
                 </md-select>
             
-            <!-- Recomended semester(s) -->
+            <!-- Recomended semester(s) input -->
                 <span [ngSwitch]="type">
                     <span *ngSwitchCase="'Optativa'">
                     <!--Recomended minimum Semester-->
@@ -70,14 +72,15 @@
             </div>
 
             <div class="course-card-row">
-            <!--Offerer department-->
+                
+            <!-- Offerer department input -->
                 <md-select id="offerer-department" class="course-department-input" placeholder="UA Ofertante" [(ngModel)]="offererDepartment" name="offererDepartment" required>
                     <md-option *ngFor="let dep of departments" [value]="dep">
                         {{ dep }}
                     </md-option>
                 </md-select>
 
-            <!--Requerer department-->
+            <!-- Requerer department input -->
                 <md-select id="requerer-department" class="course-department-input" placeholder="UA Solicitante" [(ngModel)]="requesterDepartment" name="requesterDepartment" required>
                     <md-option *ngFor="let dep of departments" [value]="dep">
                         {{ dep }}

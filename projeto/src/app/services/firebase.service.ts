@@ -247,20 +247,20 @@ export class FirebaseService {
     return this.professors;
   }
   /**
-   * Retrieves the data from the professor of the given key
+   * Retrieves the data from the professor of the key
    * 
    * passed as parameter.
    * 
-   * @param id Key (SIAPE) of a professor
+   * @param id Key (SIAPE) of a professor.
    * 
-   * @returns The professor as a Firebase Object
+   * @returns The professor as a Firebase Object.
    */
   getProfessorDetails(id: string): FirebaseObjectObservable<any>{
     var selectedProfessor = this.db.object('/professors/'+id) as FirebaseObjectObservable<any>;
     return selectedProfessor;
   }
   /**
-   * Updates a professor.
+   * Updates a professor in the firebase
    * 
    * @param id Key (SIAPE) of the professor to be updated.
    * @param professor New defined professor (object).
@@ -268,21 +268,38 @@ export class FirebaseService {
    * 
    * @returns The status of the transaction: true if the professor was updated. False, otherwise.
    */
-  updateProfessor(id:string, professor: Professor,oldProfessor: Professor): boolean{
+  updateProfessor(id, professor: Professor, oldProfessor: Professor): boolean{
     if (id!==professor.getSIAPE()){
       if(this.professorExists(professor.getSIAPE())){
         return false;
-      }else if(this.sameNickname(professor.getNickname())){
-        return false;
+      }else if(professor.getNickname()!==oldProfessor.getNickname()){
+        if(this.sameNickname(professor.getNickname())){
+          return false;
+        }
       }
       this.deleteProfessor(id);
       this.addNewProfessor(professor);
       this.updateProfessorInClassesTable(professor,oldProfessor);
       return true;
-    }else if(this.sameNickname(professor.getNickname())===false){
+    }else if(professor.getNickname()!==oldProfessor.getNickname()){
+      console.log("entrou sim vum");
+      if(this.sameNickname(professor.getNickname())===true){
+        return false;
+      }else{
+        if(this.professors.update(id,professor.toFirebaseObject())){
+          this.updateProfessorInClassesTable(professor,oldProfessor);
+          return true;
+        }else{
+          return false;
+        }
+      }
+    }else{
+      console.log("entrou no terceiro");
       if(this.professors.update(id,professor.toFirebaseObject())){
         this.updateProfessorInClassesTable(professor,oldProfessor);
         return true;
+      }else{
+        return false;
       }
     }
   }
@@ -401,34 +418,75 @@ export class FirebaseService {
   getCourses(): FirebaseListObservable<any[]>{
     return this.courses;
   }
-  getCourseDetails( id){
-    this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<Course>
+  /**
+   * Retrieves the data from the course of the key
+   * 
+   * passed as parameter.
+   * 
+   * @param id Key (code) of a course.
+   * 
+   * @returns The course as a Firebase Object.
+   */
+  getCourseDetails(id: string): FirebaseObjectObservable<any>{
+    this.course = this.db.object('/courses/'+id) as FirebaseObjectObservable<any>
     return this.course;
   }
-  updateCourse(id, course, oldName){
-    if(id!==(course.code)){
-      if(this.courseExists(course.code)){
+  /**
+   * Updates course in the firebase.
+   * 
+   * @param id Key (code) of the course to be updated.
+   * @param course New defined course (object).
+   * @param oldName Current course (object).
+   * 
+   * @returns Status of the transaction: True if the course was updated. False, otherwise.
+   */
+  updateCourse(id:string, course: Course, oldShortName: string): boolean{
+    if(id!==(course.getCode())){
+      if(this.courseExists(course.getCode())){
         return false;
+      }else if(course.getShortName()!==oldShortName){
+        if(this.sameShortname(course.getShortName())){
+          return false;
+        }
       }
       this.deleteCourse(id);
       this.addNewCourse(course);
-      this.updateCourseInClassesTable(course,oldName);
+      this.updateCourseInClassesTable(course,oldShortName);
       return true;
-    }else if(this.courses.update(id,course)){
-      this.updateCourseInClassesTable(course,oldName);
-      return true;
+    }else if(course.getShortName()!==oldShortName){
+      if(this.sameShortname(course.getShortName())===true){
+        return false;
+      }else{
+        if(this.courses.update(id,course.toFirebaseObject())){
+          this.updateCourseInClassesTable(course,oldShortName);
+          return true;
+        }else{
+          return false;  
+        }
+      }
     }else{
-      return false;
+      if(this.courses.update(id,course.toFirebaseObject())){
+        this.updateCourseInClassesTable(course,oldShortName);
+        return true;
+      }else{
+        return false;  
+      }
     }
   }
-  updateCourseInClassesTable(course,oldName){
+  /**
+   * Updates all the classes related to the course just updated.
+   * 
+   * @param course New defined course (object).
+   * @param oldName Short name of the of the course before update.
+   */
+  private updateCourseInClassesTable(course: Course,oldShortName: String){
     var thisObject = this;
 
     var recomends: string = "";
-    if(course.minimumSemester!==course.maximumSemester){
-      recomends = course.minimumSemester+"-"+course.maximumSemester;
+    if(course.getMinimumSemester()!==course.getMaximumSemester()){
+      recomends = course.getMinimumSemester()+"-"+course.getMaximumSemester();
     }else{
-      recomends = course.minimumSemester;
+      recomends = course.getMinimumSemester()+"";
     }
 
     var semests: any[];
@@ -441,11 +499,11 @@ export class FirebaseService {
           console.log(rightclasses);
           rightclasses.forEach(function(thatClass){
             console.log(thatClass.course);
-            if(thatClass.course === oldName){
+            if(thatClass.course === oldShortName){
               console.log('entrou no 1')
               thisObject.db.database.ref("classes/"+sem.$key+'/'+thatClass.$key).update({
-                "course":course.shortName,
-                "hoursToSchedule":course.hoursToSchedule,
+                "course":course.getShortName(),
+                "hoursToSchedule":course.getHoursToSchedule(),
                 "recomendedSemester": recomends
               });
             }

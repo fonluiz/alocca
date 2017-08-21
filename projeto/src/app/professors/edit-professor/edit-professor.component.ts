@@ -35,11 +35,11 @@ export class EditProfessorComponent implements OnInit {
   /**
    * Current SIAPE number of the professor.
    */
-  oldSIAPE;
+  oldSIAPE: string;
   /**
    * The key (SIAPE) of the professor being updated.
    */
-  id;
+  id: string;
   /**
    * Message to display when the professor is updated.
    */
@@ -53,7 +53,7 @@ export class EditProfessorComponent implements OnInit {
   /**
    * Message to display when the professor is not updated.
    */
-  NOT_EDITED_PROFESSOR_MESSAGE: string = "Já existe um professor com o SIAPE ou o apelido escolhido!";
+  NOT_EDITED_PROFESSOR_MESSAGE: string = "Opa! Verifique se já existe um professor com o SIAPE ou o apelido escolhido. ";
   /**
    * Timeout for the message displayed in the snackbar
    * 
