@@ -53,7 +53,7 @@ export class EditProfessorComponent implements OnInit {
   /**
    * Message to display when the professor is not updated.
    */
-  NOT_EDITED_PROFESSOR_MESSAGE: string = "Já existe um professor com o SIAPE escolhido!";
+  NOT_EDITED_PROFESSOR_MESSAGE: string = "Já existe um professor com o SIAPE ou o apelido escolhido!";
   /**
    * Timeout for the message displayed in the snackbar
    * 

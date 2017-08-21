@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
+
 import { Course } from '../course.model';
-import { Router } from '@angular/router';
+
+import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
@@ -10,31 +11,87 @@ import { SnackbarService } from '../../services/snackbar.service';
   styleUrls: ['./add-course.component.css']
 })
 export class AddCourseComponent implements OnInit {
+  /**
+   * Code of the course to be saved.
+   */
   code: string;
+  /**
+   * Name of the course to be saved.
+   */
   name: string;
+  /**
+   * Short name of the course to be saved.
+   */
   shortName: string;
+  /**
+   * Credits of the course to be saved.
+   */
   credits: number;
+  /**
+   * Hours to schedule of the course to be saved.
+   */
   hoursToSchedule: number;
+  /**
+   * Type of the course to be saved.
+   */
   type: string;
+  /**
+   * Minimum recomended semester of the course to be saved.
+   */
   minimumSemester: number;
+  /**
+   * Maximum recomended semester of the course to be saved.
+   */
   maximumSemester: number;
+  /**
+   * Offerer department of the course to be saved.
+   */
   offererDepartment: string;
-  requesterDepartment: String;
-  classesNumber: number = 0;
+  /**
+   * Requester department of the course to be saved.
+   */
+  requesterDepartment: string;
+  /**
+   * Options of course type for the user selection.
+   */
   courseTypes: string[] = [ "Complementar", "Eletiva", "Obrigatória", "Optativa" ];
+  /**
+   * Options of semester for the user selection.
+   */
   semesters: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  /**
+   * Options of department for the user selection.
+   */
   departments: string[] = ["UASC", "Outro"];
+  /**
+   * Message to display when the course is saved.
+   */
   SAVED_SUCCESSFULLY_MESSAGE: string = "Disciplina salva com sucesso!";
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar a disciplina. Verifique se esta já está cadastrada.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the course is saved.
+   */
   TIMEOUT_SAVED_MESSAGE: number = 2500;
+  /**
+   * Message to display when the course is not saved.
+   */
+  NOT_SAVED_MESSAGE: string = "Opa! Verifique se esta já existe uma disciplina com esse código e/ou sigla.";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the course is not saved.
+   */
   TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
-    private router: Router,
     private snackService: SnackbarService
   ) {  }
 
+  /**
+   * Saves new Course (object) on form submission
+   */
   onAddNewCourse(){
     if (this.credits===0){
       this.hoursToSchedule = 2;
@@ -42,19 +99,18 @@ export class AddCourseComponent implements OnInit {
       this.hoursToSchedule = this.credits;
     }
 
-    let course = {
-      code: this.code,
-      name: this.name,
-      shortName: this.shortName,
-      credits: this.credits,
-      hoursToSchedule: this.hoursToSchedule,
-      type: this.type,
-      minimumSemester: this.minimumSemester,
-      maximumSemester: this.maximumSemester,
-      offererDepartment: this.offererDepartment,
-      requesterDepartment: this.requesterDepartment,
-      classesNumber: this.classesNumber
-    }
+    var course = new Course(
+      this.code,
+      this.name,
+      this.shortName,
+      this.credits,
+      this.hoursToSchedule,
+      this.type,
+      this.minimumSemester,
+      this.maximumSemester,
+      this.offererDepartment,
+      this.requesterDepartment
+    )
 
     let savedSuccessfully: boolean = this.FBservice.addNewCourse(course);
 
@@ -62,6 +118,7 @@ export class AddCourseComponent implements OnInit {
     this.name = null;
     this.shortName = null;
     this.credits = null;
+    this.hoursToSchedule = null
     this.type = null;
     this.minimumSemester = null;
     this.maximumSemester = null;
@@ -75,6 +132,9 @@ export class AddCourseComponent implements OnInit {
     }
   }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
     let initiateCourses: any[];
     this.FBservice.getCourses().subscribe(courses =>{

@@ -34,14 +34,14 @@ export class Professor {
      * 
      * @returns JSON element.
      */
-    toFirebaseObject(){
-        var newProfessor: any = {
+    toFirebaseObject(): JSON {
+        var professor: any = {
             SIAPE: this.getSIAPE(),
             name: this.getName(),
             nickname: this.getNickname()
         }
 
-        return <JSON>newProfessor;
+        return <JSON>professor;
     }
 
 }

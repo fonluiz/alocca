@@ -1,7 +1,7 @@
 ﻿<md-card id="new-professor-card">
   <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">
   <!--Toolbar-->
-    <md-toolbar color="primary" id="new-professor-card-toolbar">
+    <md-toolbar class="new-professor-card-toolbar mdl-color-text--white mdl-color--primary">
       Cadastrar Professor   
       <span class="spacer"></span>
       <button md-button id="cancel-button" [routerLink]="['/view-professors']">Cancelar</button> 

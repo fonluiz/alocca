@@ -1,7 +1,8 @@
 ﻿export class Course {
     constructor(
-        private name: string,
         private code: string,
+        private name: string,
+        private shortName: string,
         private credits: number,
         private hoursToSchedule: number,
         private type: string,
@@ -11,12 +12,16 @@
         private requesterDepartment: string
     ) {}
 
+    getCode(): string{
+        return this.code;
+    }
+
     getName(): string{
         return this.name;
     }
 
-    getCode(): string{
-        return this.code;
+    getShortName(): string{
+        return this.shortName;
     }
 
     getCredits(): number{
@@ -45,6 +50,23 @@
 
     getRequesterDepartment(): string{
         return this.requesterDepartment;
+    }
+
+    toFirebaseObject(): JSON{
+        var course: any = {
+            code: this.getCode(),
+            name: this.getName(),
+            shortName: this.getShortName(),
+            credits: this.getCredits(),
+            hoursToSchedule: this.getHoursToSchedule(),
+            type: this.getType(),
+            minimumSemester: this.getMinimumSemester(),
+            maximumSemester: this.getMaximumSemester(),
+            offererDepartment: this.getOffererDepartment(),
+            requesterDepartment: this.getRequesterDepartment()
+        }
+
+        return <JSON>course;
     }
 
 }

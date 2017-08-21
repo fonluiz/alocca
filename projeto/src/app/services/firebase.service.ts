@@ -339,9 +339,9 @@ export class FirebaseService {
    * 
    * already saved in the firebase.
    * 
-   * @param newProfessorKey SIAPE number from the professor to be saved.
+   * @param newProfessorKey SIAPE number of the professor to be saved.
    * 
-   * @returns True if there is a professor with the same SIAPE number.
+   * @returns True if there is a professor with the same SIAPE number. False, otherwise.
    */
   professorExists(newProfessorKey: string): boolean{
     var isSaved:boolean;
@@ -355,11 +355,9 @@ export class FirebaseService {
    * 
    * already saved in the firebase.
    * 
-   * @param newProfessorKey SIAPE number from the professor to be saved.
+   * @param newProfessorNickname Nickname of the professor to be saved.
    * 
-   * @param newProfessirNickname Nickname from the professor to be saved.
-   * 
-   * @returns True if there is a professor with the same nickname.
+   * @returns True if there is a professor with the same nickname. False, otherwise.
    */
   sameNickname(newProfessorNickname: string): boolean{
     var sameNickname: boolean = false;
@@ -378,14 +376,28 @@ export class FirebaseService {
   }
 
 ///Courses
-  addNewCourse(newCourse){
-    if(this.courseExists(newCourse.code)){
+  /**
+   * Saves new course in the firebase.
+   * 
+   * @param newCourse Course (object) do be saved in the firebase database.
+   * 
+   * @returns Status of the transaction: true if successfully saved. False, otherwise.
+   */
+  addNewCourse(newCourse: Course): boolean{
+    if(this.courseExists(newCourse.getCode())){
+      return false;
+    }else if(this.sameShortname(newCourse.getShortName())){
       return false;
     }else{
-      this.db.database.ref("courses/"+newCourse.code).set(newCourse);
+      this.db.database.ref("courses/"+newCourse.getCode()).set(newCourse.toFirebaseObject());
       return true;
     }
   }
+  /**
+   * Retrieves the list of courses saved in the firebase.
+   * 
+   * @returns List of courses from the firebase.
+   */
   getCourses(){
     return this.courses;
   }
@@ -449,12 +461,45 @@ export class FirebaseService {
       return false;
     }
   }
+  /**
+   * Checks if there is a course with the same code
+   * 
+   * already saved in the firebase.
+   * 
+   * @param newCourseKey Code of the course to be saved.
+   * 
+   * @returns True if there is a course with the same code. False, otherwise.
+   */
   courseExists(newCourseKey){
     var isSaved: boolean;
     this.db.database.ref("courses/"+newCourseKey).on("value",function(snapshot){
       isSaved = snapshot.exists();
     });
     return isSaved;
+  }
+  /**
+   * Checks if there is a course with the same short name
+   * 
+   * already saved in the firebase.
+   * 
+   * @param newCourseShortname Short name of the course to be saved.
+   * 
+   * @returns True if there is a course with the same short name. False, otherwise.
+   */
+  sameShortname(newCourseShortname: string): boolean{
+    var sameShortname: boolean = false;
+    var courses: any[];
+    this.getCourses().subscribe(cours =>{
+      courses = cours;
+    })
+
+    courses.forEach(function(course){
+      if (course.shortName===newCourseShortname){
+        sameShortname = true;
+      }
+    })
+    
+    return sameShortname;
   }
 
 ///Users

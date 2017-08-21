@@ -37,7 +37,7 @@ export class AddProfessorComponent implements OnInit {
   /**
    * Message to display when the professor was not saved.
    */
-  NOT_SAVED_MESSAGE: string = "Opa! Parece que houve um erro ao cadastrar o professor. Verifique se já existe um professor com esse SIAPE e/ou apelido.";
+  NOT_SAVED_MESSAGE: string = "Opa! Verifique se já existe um professor com esse SIAPE e/ou apelido.";
   /**
    * Timeout for the message displayed in the snackbar
    * 
@@ -53,7 +53,7 @@ export class AddProfessorComponent implements OnInit {
   }
 
   /**
-   * Saves a new Professor (object) on the form submission.
+   * Saves a new Professor (object) on form submission.
    */
   onAddNewProfessor(){
     var newProfessor =  new Professor (
