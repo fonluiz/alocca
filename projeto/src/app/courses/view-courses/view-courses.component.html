@@ -35,8 +35,12 @@
           <td *ngIf='course.minimumSemester===course.maximumSemester'>{{course.minimumSemester}}º</td>
           <td>{{course.offererDepartment}}</td>
           <td>{{course.requesterDepartment}}</td>
-          <td><button class="mdl-button mdl-js-button mdl-button--primary" [routerLink] = "['/edit-course/' + course.$key]">Editar</button></td>
-          <td><button (click)="onDeleteCourse(course.$key, course.shortName)" class="mdl-button mdl-js-button delete-button">Excluir</button></td>
+          <td [routerLink] = "['/edit-course/' + course.$key]">
+            <i class="material-icons mdl-color-text--accent">edit</i>
+          </td>
+          <td (click)="onDeleteCourse(course.$key, course.shortName)">
+            <i class="material-icons delete-button">delete</i>
+          </td>
         </tr>
       </tbody>
     </table>

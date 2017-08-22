@@ -42,6 +42,10 @@
   height: 10%;
 }
 
+.delete-button{
+  color: red;
+}
+
 .week-day{
     text-align: center;
     vertical-align: center;
@@ -69,4 +73,9 @@
 
 .foo-red{
   color: red;
+}
+
+/* Remove the blue outline from a selected option. */
+*:focus {
+outline: none;
 }

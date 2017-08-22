@@ -24,9 +24,12 @@
           <td>{{request.SIAPE}}</td>
           <td>{{request.name}}</td>
           <td>{{request.email}}</td>
-          <td><button (click)="onAcceptRequest(request.SIAPE,request.name,request.email)" class="mdl-button mdl-js-button mdl-button--accent"><i class="material-icons">thumb_up</i></button></td>
-          <td><button (click)="onDeleteRequest(request.SIAPE,request.name,request.email)" id="delete-button" class="mdl-button mdl-js-button"><i class="material-icons">delete</i></button></td>
-        </tr>
+          <td (click)="onAcceptRequest(request.SIAPE,request.name,request.email)">
+            <i class="material-icons mdl-color-text--accent">thumb_up</i>
+          </td>
+          <td (click)="onDeleteRequest(request.SIAPE,request.name,request.email)">
+              <i class="material-icons delete-button">delete</i>
+        </td>
       </tbody>
     </table>
   </md-card-content>

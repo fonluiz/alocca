@@ -15,3 +15,8 @@
 .delete-button{
   color: red;
 }
+
+/* Remove the blue outline from a selected option. */
+*:focus {
+outline: none;
+}

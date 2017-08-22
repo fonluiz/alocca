@@ -8,10 +8,15 @@
   padding: 30px 30px 30px 30px;
 }
 
-#delete-button{
+.delete-button{
   color: red;
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+/* Remove the blue outline from a selected option. */
+*:focus {
+outline: none;
 }
