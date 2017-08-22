@@ -15,8 +15,6 @@
 
     /**
      * 
-     * @example 2017-1
-     * 
      * @returns The semester ID
      */
     getId(): string{
@@ -24,8 +22,6 @@
     }
 
     /**
-     * 
-     * @example 2017.1
      * 
      * @returns The semester name
      */
@@ -36,8 +32,6 @@
     /**
      * 
      * @param newId The new ID to be set to the semester
-     * 
-     * @example 2018-1
      */
     setId(newId: string) {
         this.id = newId;
@@ -46,18 +40,12 @@
     /**
      * 
      * @param newName The new name to be set to the semester
-     * 
-     * @example 2018.1
      */
     setName(newName: string) {
         this.name = newName;
     }
 
     /**
-     * @example
-     * {
-     *  "name": "2017.2"
-     * }
      * 
      * @returns The semester as a JSON object
      */
