@@ -1,19 +1,10 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
-import { Router, ActivatedRoute,Params } from '@angular/router';
-import { DialogsService } from '../../services/dialogs.service';
-import { SnackbarService } from '../../services/snackbar.service';
+
 import { Request } from '../request.model';
 
-const DELETED_MESSAGE: string = "Requisição ignorada!";
-const NOT_DELETED_MESSAGE: string = "Não foi possível remover a requisição. Tente novamente!";
-const ACCEPTED_MESSAGE: string = "Requisição aceita!";
-const NOT_ACCEPTED_MESSAGE: string = "Não foi possível aceitar a requisição. Tente novamente!";
-const CONFIRM_DELETE_DIALOG_TITLE: string = "Excluir Requisição";
-const TIMEOUT_DELETED_MESSAGE: number = 2500;
-const TIMEOUT_ACCEPTED_MESSAGE: number = 2500;
-const TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
-const TIMEOUT_NOT_ACCEPTED_MESSAGE: number = 5000;
+import { FirebaseService } from '../../services/firebase.service';
+import { DialogsService } from '../../services/dialogs.service';
+import { SnackbarService } from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-view-requests',
@@ -21,47 +12,110 @@ const TIMEOUT_NOT_ACCEPTED_MESSAGE: number = 5000;
   styleUrls: ['./view-requests.component.css']
 })
 export class ViewRequestsComponent implements OnInit {
-  requests: Request[];
+  /**
+   * List of requests saved.
+   */
+  requests: any[];
+  /**
+   * Message to display when request is ignored.
+   */
+  DELETED_MESSAGE: string = "Requisição ignorada!";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the request is ignored.
+   */
+  TIMEOUT_DELETED_MESSAGE: number = 2500;
+  /**
+   * Message to display when request is not ignored.
+   */
+  NOT_DELETED_MESSAGE: string = "Não foi possível remover a requisição. Tente novamente!";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the request is not ignored.
+   */
+  TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
+  /**
+   * Message to display when request is accepted.
+   */
+  ACCEPTED_MESSAGE: string = "Requisição aceita!";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the request is accepted.
+   */
+  TIMEOUT_ACCEPTED_MESSAGE: number = 2500;
+  /**
+   * Message to display when request is not accepted.
+   */
+  NOT_ACCEPTED_MESSAGE: string = "Não foi possível aceitar a requisição. Tente novamente!";
+  /**
+   * Timeout for the message displayed in the snackbar
+   * 
+   * when the request is not accepted.
+   */
+  TIMEOUT_NOT_ACCEPTED_MESSAGE: number = 5000;
 
   constructor(
     private FBservice: FirebaseService,
-    private router: Router,
-    private route: ActivatedRoute,
     private dialogsService: DialogsService,
     private snackService: SnackbarService
   ) { }
 
+  /**
+   * Sets necessary elements on the start of the page.
+   */
   ngOnInit() {
     this.FBservice.getRequests().subscribe(requests =>{
       this.requests = requests;
     });
   }
+  
+  /**
+   * Delete a selected request.
+   * 
+   * @param requestSIAPE Key (SIAPE) of the request to be deleted(ignored).
+   * @param requestName Name of the request to be deleted (ignored).
+   * @param requestEmail Email of the request to be deleted (ignored).
+   */
+  onDeleteRequest(requestSIAPE: string,requestName:string,requestEmail:string){
+    var requestToDelete = new Request(
+      requestSIAPE,requestName,requestEmail
+    );
 
-  onDeleteRequest(request){
+    var title = "Excluir Requisição";
+    var message = "Deseja realmente excluir a requisição feita por " + requestName + " ?";;
     this.dialogsService
-        .confirm(CONFIRM_DELETE_DIALOG_TITLE, this.deleteConfirmationMessage(request.name))
+      .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          if(this.FBservice.deleteRequest(request)){
-            this.snackService.openSnackBar(DELETED_MESSAGE, TIMEOUT_DELETED_MESSAGE);
+          if(this.FBservice.deleteRequest(requestToDelete)){
+            this.snackService.openSnackBar(this.DELETED_MESSAGE, this.TIMEOUT_DELETED_MESSAGE);
           }else{
-            this.snackService.openSnackBar(NOT_DELETED_MESSAGE, TIMEOUT_NOT_DELETED_MESSAGE);
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE, this.TIMEOUT_NOT_DELETED_MESSAGE);
           }
         }
       });
   }
 
-  onAcceptRequest(request){
-    if(this.FBservice.acceptRequest(request)){
-      this.snackService.openSnackBar(ACCEPTED_MESSAGE, TIMEOUT_ACCEPTED_MESSAGE);
-    }else{
-      this.snackService.openSnackBar(NOT_ACCEPTED_MESSAGE, TIMEOUT_NOT_ACCEPTED_MESSAGE);
-    }
-  }
+  /**
+   * Accept a selected request.
+   * 
+   * @param requestSIAPE Key (SIAPE) of the request to be accepted.
+   * @param requestName Name of the request to be accepted.
+   * @param requestEmail Email of the request to be accepted.
+   */
+  onAcceptRequest(requestSIAPE:string,requestName:string,requestEmail:string){
+    var requestToAccept = new Request(
+      requestSIAPE,requestName,requestEmail
+    );
 
-  deleteConfirmationMessage(name) {
-      var message = "Deseja realmente excluir " + name + " ?";
-      return message;
+    if(this.FBservice.acceptRequest(requestToAccept)){
+      this.snackService.openSnackBar(this.ACCEPTED_MESSAGE, this.TIMEOUT_ACCEPTED_MESSAGE);
+    }else{
+      this.snackService.openSnackBar(this.NOT_ACCEPTED_MESSAGE, this.TIMEOUT_NOT_ACCEPTED_MESSAGE);
+    }
   }
 
 }

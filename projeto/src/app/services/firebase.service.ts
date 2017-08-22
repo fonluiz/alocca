@@ -702,8 +702,19 @@ export class FirebaseService {
       return true;
     }
   }
-  acceptRequest(request){
-    if(this.addNewUser(request)){
+  /**
+   * 
+   * @param request Request (object) to be accepted.
+   * 
+   * @returns Status of the transaction: true if accepted. False, otherwise.
+   */
+  acceptRequest(request: Request): boolean{
+    var requestToUser = new User (
+      request.getSIAPE(),
+      request.getName(),
+      request.getEmail()
+    )
+    if(this.addNewUser(requestToUser)){
       if(this.deleteRequest(request)){
         return true;
       }else{
@@ -713,21 +724,31 @@ export class FirebaseService {
       return false;
     }
   }
-  deleteRequest(request){
+  /**
+   * 
+   * @param request Request (object) to be ignored.
+   * 
+   * @returns Status of the transaction: true if ignored. False, otherwise.
+   */
+  deleteRequest(request: Request): boolean{
     var thisObject = this;
-    if(this.requests.remove(request.$key)){
-      if(this.db.database.ref("requestsEmails/").on("value",function(snapshot){
-        snapshot.forEach(function(childSnapshot){
-          if(childSnapshot.child('email').val()===request.email){
-            thisObject.requestsEmails.remove(childSnapshot.key);
-            return true;
+    var requestsList: any[];
+    if(this.requests.remove(request.getSIAPE())){
+      console.log("entrou no remove");
+      this.getRequestsEmails().subscribe(rqsts =>{
+        console.log(rqsts);
+        requestsList = rqsts;
+        console.log(requestsList);
+        console.log(requestsList);
+        requestsList.forEach(function(reqst){
+          console.log(reqst.email);
+          console.log(request.getEmail());
+          if (reqst.email===request.getEmail()){
+            thisObject.requestsEmails.remove(reqst.$key);
           }
-        });
-      })){
-        return true;
-      }else{
-        return false;
-      }
+        })
+      })
+      return true;
     }else{
       return false;
     }
@@ -749,8 +770,6 @@ export class FirebaseService {
     })
 
     requests.forEach(function(request){
-      console.log(request.email);
-      console.log(requestEmail);
       if (request.email===requestEmail){
         sameEmail = true;
       }

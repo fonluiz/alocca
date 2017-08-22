@@ -1,12 +1,14 @@
-<md-card class="view-request-card">
-  <!--Toolbar-->
-  <md-toolbar color="primary" class="view-request-card-toolbar">
+<md-card id="view-request-card">
+<!-- Card Toolbar -->
+  <md-toolbar class="view-request-card-toolbar mdl-color-text--white mdl-color--primary">
     Requisições de Acesso
     <span class="spacer"></span>
   </md-toolbar>
 
-  <md-card-content class="request-card-content">
+<!-- Card Content -->
+  <md-card-content id="request-card-content">
 
+  <!-- Card Table -->
     <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
       <thead>
         <tr>
@@ -22,8 +24,8 @@
           <td>{{request.SIAPE}}</td>
           <td>{{request.name}}</td>
           <td>{{request.email}}</td>
-          <td><button (click)="onAcceptRequest(request)" class="mdl-button mdl-js-button mdl-button--primary">Aceitar</button></td>
-          <td><button (click)="onDeleteRequest(request)" class="mdl-button mdl-js-button mdl-button--accent">Recusar</button></td>
+          <td><button (click)="onAcceptRequest(request.SIAPE,request.name,request.email)" class="mdl-button mdl-js-button mdl-button--accent"><i class="material-icons">thumb_up</i></button></td>
+          <td><button (click)="onDeleteRequest(request.SIAPE,request.name,request.email)" id="delete-button" class="mdl-button mdl-js-button"><i class="material-icons">delete</i></button></td>
         </tr>
       </tbody>
     </table>

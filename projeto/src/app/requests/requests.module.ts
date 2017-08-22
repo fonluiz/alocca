@@ -8,7 +8,7 @@ import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
 
-import {RequestAccessComponent} from './request-access/request-access.component';
+import { RequestAccessComponent } from './request-access/request-access.component';
 import { ViewRequestsComponent } from './view-requests/view-requests.component';
 
 @NgModule({

@@ -1,11 +1,15 @@
-.view-request-card {
+#view-request-card {
   margin: 50px 50px 50px 50px;
   padding: 0px 0px 0px 0px;
 }
 
-.request-card-content {
+#request-card-content {
   text-align: center;
   padding: 30px 30px 30px 30px;
+}
+
+#delete-button{
+  color: red;
 }
 
 .spacer {
