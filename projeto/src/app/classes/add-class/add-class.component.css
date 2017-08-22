@@ -3,7 +3,6 @@
 }
 
 .classes-container {
-    padding: 1.6% 1.6% 1.6% 1.6%;
     background: #E1F5FE;
 }
 
@@ -11,7 +10,6 @@
     background: white;
     margin-bottom: 24px;
     padding: 10px 10px 10px 10px;
-    margin-right: 24px;
 }
 
 .new-classes-header {

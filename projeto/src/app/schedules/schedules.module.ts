@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import 'hammerjs';
 
 import { AppRoutingModule } from '../app-routing.module';
+import { AlertsModule } from '../alerts/alerts.module'
 
 import {SchedulesTableComponent} from './schedules-table/schedules-table.component';
 
@@ -19,7 +20,8 @@ import {SchedulesTableComponent} from './schedules-table/schedules-table.compone
         MaterialModule,
         BrowserAnimationsModule,
         AppRoutingModule,
-        FlashMessagesModule],
+        FlashMessagesModule,
+        AlertsModule],
     declarations: [
         SchedulesTableComponent],
     exports: []

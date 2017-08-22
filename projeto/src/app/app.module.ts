@@ -17,6 +17,7 @@ import { HomeModule } from './home/home.module';
 import { UsersModule } from './users/users.module';
 import { RequestsModule } from './requests/requests.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { AlertsModule } from './alerts/alerts.module'
 
 //Angular material
 import { MaterialModule } from '@angular/material';
@@ -61,7 +62,8 @@ import { SnackbarService} from './services/snackbar.service';
     HomeModule,
     UsersModule,
     RequestsModule,
-    SchedulesModule
+    SchedulesModule,
+    AlertsModule
   ],
   declarations: [
     AppComponent,
