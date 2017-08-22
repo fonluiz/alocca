@@ -188,15 +188,7 @@ export class FirebaseService {
     return credits;
   }
   deleteClass(courseKey){
-    this.classes.remove(courseKey);
-    var newClassesNumber:number;
-    this.db.database.ref("courses/"+courseKey).once("value",function(snapshot){
-      newClassesNumber = (snapshot.child('classesNumber').val() - 1);
-    });
-    if (this.db.database.ref("courses/"+courseKey).update({
-        "classesNumber": newClassesNumber
-    }))
-    {
+    if(this.getClasses().remove(courseKey)){
       return true;
     }
   }
