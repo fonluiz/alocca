@@ -15,8 +15,14 @@
     </thead>
     <tbody>
       <tr *ngFor = 'let class of classesList'>
-        <!--CHANGE-->
-        <td><md-checkbox></md-checkbox></td>
+
+        <td *ngIf="class.isVerified">
+            <md-checkbox (click)="onChangeCAStatus(class.$key,false)" [checked]="true"></md-checkbox>
+        </td>
+        <td *ngIf="!class.isVerified">
+          <md-checkbox (click)="onChangeCAStatus(class.$key,true)" [checked]="false"></md-checkbox>
+        </td>
+        
         <td>{{ class.course }}</td>
         <td>{{class.number}}</td>
         <td>{{class.professor1}}</td>

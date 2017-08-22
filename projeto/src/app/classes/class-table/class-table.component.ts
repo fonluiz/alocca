@@ -30,10 +30,7 @@ export class ClassTableComponent implements OnInit {
 
   }
   
-  //change to new checkbox way
   onChangeCAStatus(id,stats){
-    if(this.FBservice.changeCAStatus(id,stats)){
-      //this.router.navigate(['/allocations']);
-    }
+    this.FBservice.changeCAStatus(id,stats);
   }
 }

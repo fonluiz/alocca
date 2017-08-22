@@ -201,8 +201,8 @@ export class FirebaseService {
     }
   }
   changeCAStatus(id,status){
-    this.db.database.ref("allocations/"+id).update({
-        "caControl": status
+    this.db.database.ref("classes/"+this.getCurrentSemester()+"/"+id).update({
+        "isVerified": status
     })
   }
   getOffererDepartment(courseKey){
