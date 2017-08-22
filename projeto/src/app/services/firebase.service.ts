@@ -223,7 +223,7 @@ export class FirebaseService {
   /**
    * Saves new professor in the firebase.
    * 
-   * @param newprofessor Professor (object) do be saved in the firebase database.
+   * @param newprofessor Professor (object) do be saved.
    * 
    * @returns Status of the transaction: true if successfully saved. False, otherwise.
    */
@@ -668,19 +668,36 @@ export class FirebaseService {
   }
 
 ///Requests
-  getRequests(){
+  /**
+   * Retrieves the list of requests saved in the firebase.
+   * 
+   * @returns List of requests from the firebase.
+   */
+  getRequests(): FirebaseListObservable<any[]>{
     return this.requests;
   }
-  getRequestsEmails(){
+  /**
+   * Retrieves the list of requests' Emails saved in the firebase.
+   * 
+   * @returns List of emails from the firebase.
+   */
+  getRequestsEmails(): FirebaseListObservable<any[]>{
     return this.requestsEmails;
   }
-  addNewRequest(newRequest){
-    if(this.requestExists(newRequest.email)){
+  /**
+   * Saves new request in the firebase.
+   * 
+   * @param newRequest New request (object) to be saved.
+   * 
+   * @returns Status of the transaction: true if request is saved. False, otherwise.
+   */
+  addNewRequest(newRequest: Request): boolean{
+    if(this.requestExists(newRequest.getEmail())){
       return false;
     }else{
-      this.db.database.ref("requests/"+newRequest.SIAPE).set(newRequest);
+      this.db.database.ref("requests/"+newRequest.getSIAPE()).set(newRequest.toFirebaseObject());
       this.requestsEmails.push({
-        email: newRequest.email
+        email: newRequest.getEmail()
       });
       return true;
     }
@@ -715,17 +732,31 @@ export class FirebaseService {
       return false;
     }
   }
-  requestExists(requestEmail){
-    var isRegistered: boolean = false;
-    this.db.database.ref("requestsEmails/").on("value",function(snapshot){
-      snapshot.forEach(function(childSnapshot){
-        if(childSnapshot.child('email').val()===requestEmail){
-          isRegistered = true;
-          return true;
-        }
-      });
-    });
-    return isRegistered;
+  /**
+   * Checks if there is a request with the same email
+   * 
+   * already saved in the firebase.
+   * 
+   * @param requestEmail Email of the request to be saved.
+   * 
+   * @returns True if a request with the email already exists. False, otherwise.
+   */
+  requestExists(requestEmail: string): boolean{
+    var sameEmail: boolean = false;
+    var requests: any[];
+    this.getRequestsEmails().subscribe(rqsts =>{
+      requests = rqsts;
+    })
+
+    requests.forEach(function(request){
+      console.log(request.email);
+      console.log(requestEmail);
+      if (request.email===requestEmail){
+        sameEmail = true;
+      }
+    })
+    
+    return sameEmail;
   }
 
 // Semesters

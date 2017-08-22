@@ -1,27 +1,31 @@
-.new-request-card {
+#new-request-card {
   margin: 50px 250px 50px 250px;
   padding: 0px 0px 0px 0px;
 }
 
-.new-request-card-content {
+#back-button{
+  margin-right: 1%;
+}
+
+#new-request-card-content {
   text-align: left;
   padding: 30px 30px 30px 30px;
 }
 
-.request-SIAPE-input {
+#request-SIAPE-input {
   width: 10%;
   margin-top: 10px;
   margin-bottom: 1px;
   margin-left: 5%;
 }
 
-.request-name-input {
+#request-name-input {
   width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
   margin-left: 8%;
 }
-.request-email-input {
+#request-email-input {
   width: 30%;
   margin-top: 1%;
   margin-bottom: 1%;
