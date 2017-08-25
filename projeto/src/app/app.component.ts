@@ -51,7 +51,7 @@ export class AppComponent {
    * Logs in if user is registered.
    */
   login(){
-    this.dbAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).then(() => {
+    this.dbAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(() => {
       var userEmail: String = this.dbAuth.auth.currentUser.email;
       var isRegistered: boolean = this.FBservice.isUserRegistered(userEmail);
       if(!isRegistered){

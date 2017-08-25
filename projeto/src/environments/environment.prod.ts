@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyAKkR7PzI29DXgPxRVxitEil62wN5430Kc",
-    authDomain: "sistemaalocacao.firebaseapp.com",
-    databaseURL: "https://sistemaalocacao.firebaseio.com",
-    projectId: "sistemaalocacao",
-    storageBucket: "sistemaalocacao.appspot.com",
-    messagingSenderId: "58180113172"
+    apiKey: "AIzaSyCtumfo8TLv7s0uKdbr7btkYELE5vrcr8o",
+    authDomain: "alocca-f0ca1.firebaseapp.com",
+    databaseURL: "https://alocca-f0ca1.firebaseio.com",
+    projectId: "alocca-f0ca1",
+    storageBucket: "alocca-f0ca1.appspot.com",
+    messagingSenderId: "624774331215"
   }
 };
