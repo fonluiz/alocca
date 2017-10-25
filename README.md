@@ -1,8 +1,8 @@
 # ALOCCA
 
-Sistema desenvolvido na disciplina de `LES(Laboratório de Engenharia de Software)` do curso de Ciência da Computação da UFCG(Universidade Federal de Campina Grande) no `período 2017.1`.
+Alocca is a web system that helps department coordinators of universities allocate professors, classes and courses every  semester.
 
-## Desenvolvedores/Developers
+## Developers
 
 * [Dandara Souza](https://github.com/dandaramcsousa)
 * [Hugo Gabriel](https://github.com/hugogbs)
@@ -10,11 +10,3 @@ Sistema desenvolvido na disciplina de `LES(Laboratório de Engenharia de Softwar
 * [Lucas Aurelio](https://github.com/LucasAurelio)
 * [Luiz Fonseca](https://github.com/fonluiz)
 * [Paulo Vinicius](https://github.com/paul0vinicius)
-
-## Professor/Professor
-
-Gustavo Soares
-
-## Cliente/Client
-
-Cláudio Campelo
