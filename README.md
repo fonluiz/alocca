@@ -1,6 +1,6 @@
 # ALOCCA
 
-Alocca is a web system that helps department coordinators of universities allocate professors, classes and courses every  semester.
+Alocca is a web system that helps department coordinators of universities allocate professors, classes and classrooms every  semester.
 
 ## Developers
 
