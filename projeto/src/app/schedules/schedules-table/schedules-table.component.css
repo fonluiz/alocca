@@ -16,6 +16,10 @@
   height: 10%;
 }
 
+.lighter{
+  background-color: #3F51B5!important;
+}
+
 .hour-table{
   background-color: white;
   /*height: 10%;*/
@@ -28,8 +32,9 @@
 
 .hour-th{
   text-align: center;
-  vertical-align: bottom;
-  background-color: #1f8dd8;
+  /*vertical-align: bottom;*/
+  /*background-color: #1f8dd8;*/
+  background-color: #07304C;
   color: white;
   /*font-size: 105%;*/
   /*height: 10%;*/
@@ -68,11 +73,20 @@
 }
 
 .nohover:hover{
-  background-color: #1f8dd8;
+  background-color: #07304C;
 }
 
 .foo-red{
   color: red;
+}
+
+th, tr, td{
+  height:0!important;
+  padding-top:0!important;
+  padding-bottom:0!important;
+}
+app-alerts-board{
+  float:right;
 }
 
 /* Remove the blue outline from a selected option. */
