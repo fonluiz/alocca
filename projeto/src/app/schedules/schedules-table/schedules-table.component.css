@@ -18,7 +18,7 @@
 
 .hour-table{
   background-color: white;
-  height: 10%;
+  /*height: 10%;*/
 }
 
 .table-head{
@@ -31,15 +31,15 @@
   vertical-align: bottom;
   background-color: #1f8dd8;
   color: white;
-  font-size: 105%;
-  height: 10%;
+  /*font-size: 105%;*/
+  /*height: 10%;*/
 }
 
 .hour-td{
   background-color: white;
   vertical-align: center;
   color: black;
-  height: 10%;
+  /*height: 10%;*/
 }
 
 .delete-button{
@@ -50,16 +50,16 @@
     text-align: center;
     vertical-align: center;
     color: white;
-    font-weight: 900;
-    font-size: 150%;
+    /*font-weight: 900;*/
+    font-size: 120%;
 }
 
 .week-hours{
   text-align: center;
   vertical-align: center;
   color: white;
-  font-weight: 900;
-  font-size: 150%;
+  /*font-weight: 900;*/
+  font-size: 120%;
 }
 
 .new-class-selection{
@@ -68,7 +68,7 @@
 }
 
 .nohover:hover{
-  background-color: #07304C;
+  background-color: #1f8dd8;
 }
 
 .foo-red{
@@ -76,6 +76,6 @@
 }
 
 /* Remove the blue outline from a selected option. */
-*:focus {
+/**:focus {
 outline: none;
-}
+}*/
