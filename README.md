@@ -10,3 +10,10 @@ Alocca is a web system that helps department coordinators of universities alloca
 * [Lucas Aurelio](https://github.com/LucasAurelio)
 * [Luiz Fonseca](https://github.com/fonluiz)
 * [Paulo Vinicius](https://github.com/paul0vinicius)
+
+## Running the project
+
+* Clone the repository
+* Open a terminal into the _projeto_ folder
+* Run `npm install` and wait while all the dependencies are installed.
+* Run `npm start` or `ng serve`
