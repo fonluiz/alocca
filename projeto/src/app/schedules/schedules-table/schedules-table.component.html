@@ -10,6 +10,7 @@
           <col class="lighter" />
           <col/>
         </colgroup>
+
         <thead class="table-head">
           <tr class="geral-table">
             <th class="lighter"></th>
@@ -20,7 +21,23 @@
             <th class="week-day">Sexta</th>
           </tr>
         </thead>
+
+      
         <tbody>
+
+          <tr class="nohover">
+            <td></td>
+            <td *ngFor = 'let i of [1, 2,3,4,5]'>
+                  <tr>
+                    <th class="hour-th">Disciplina</th>
+                    <th class="hour-th">Docente(s)</th>
+                    <th class="hour-th">Período</th>
+                    <th class="hour-th"></th>
+                  </tr>
+            </td>
+            
+          </tr>
+
           <tr class="nohover" *ngFor = 'let hour of [7,8,10,12,14,16,18]'>
             <td class="week-hours">
               {{hour}}
@@ -29,14 +46,6 @@
             <!--Monday-->
             <td>
               <table class="hour-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead class="hour-th">
-                  <tr>
-                    <th class="hour-th">Disciplina</th>
-                    <th class="hour-th">Docente(s)</th>
-                    <th class="hour-th">Período</th>
-                    <th class="hour-th"></th>
-                  </tr>
-                </thead>
                 <tbody>
                   <!--Scheduled classes-->
                   <template let-class ngFor [ngForOf]="classes">
@@ -82,14 +91,7 @@
             <!--Tuesday-->
             <td>
               <table class="hour-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead class="hour-th lighter">
-                  <tr>
-                    <th class="hour-th lighter">Disciplina</th>
-                    <th class="hour-th lighter">Docente(s)</th>
-                    <th class="hour-th lighter">Período</th>
-                    <th class="hour-th lighter"></th>
-                  </tr>
-                </thead>
+                
                 <tbody>
                   <!--Scheduled classes-->
                   <template let-class ngFor [ngForOf]="classes">
@@ -135,14 +137,7 @@
             <!--Wednesday-->
             <td>
               <table class="hour-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead class="hour-th">
-                  <tr>
-                    <th class="hour-th">Disciplina</th>
-                    <th class="hour-th">Docente(s)</th>
-                    <th class="hour-th">Período</th>
-                    <th class="hour-th"></th>
-                  </tr>
-                </thead>
+                
                 <tbody>
                   <!--Scheduled classes-->
                   <template let-class ngFor [ngForOf]="classes">
@@ -188,14 +183,7 @@
             <!--Thursday-->
             <td>
               <table class="hour-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead class="hour-th lighter">
-                  <tr>
-                    <th class="hour-th lighter">Disciplina</th>
-                    <th class="hour-th lighter">Docente(s)</th>
-                    <th class="hour-th lighter">Período</th>
-                    <th class="hour-th lighter"></th>
-                  </tr>
-                </thead>
+                
                 <tbody>
                   <!--Scheduled classes-->
                   <template let-class ngFor [ngForOf]="classes">
@@ -241,14 +229,7 @@
             <!--Friday-->
             <td>
               <table class="hour-table" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead class="hour-th">
-                  <tr>
-                    <th class="hour-th">Disciplina</th>
-                    <th class="hour-th">Docente(s)</th>
-                    <th class="hour-th">Período</th>
-                    <th class="hour-th"></th>
-                  </tr>
-                </thead>
+                
                 <tbody>
                   <!--Scheduled classes-->
                   <template let-class ngFor [ngForOf]="classes">
