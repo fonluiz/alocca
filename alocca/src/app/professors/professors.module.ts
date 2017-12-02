@@ -12,6 +12,7 @@ import { AddProfessorComponent } from './add-professor/add-professor.component';
 import { EditProfessorComponent } from './edit-professor/edit-professor.component';
 import { ViewProfessorsComponent } from './view-professors/view-professors.component';
 import { AddRestrictionComponent } from './add-restriction/add-restriction.component';
+import { ProfessorsContainerComponent } from './professors-container/professors-container.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { AddRestrictionComponent } from './add-restriction/add-restriction.compo
         AddProfessorComponent,
         EditProfessorComponent,
         ViewProfessorsComponent,
-        AddRestrictionComponent
+        AddRestrictionComponent,
+        ProfessorsContainerComponent
         ],
     exports: []
 })

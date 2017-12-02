@@ -6,7 +6,7 @@
             <div class="course-card-row">
 
             <!-- Course code input -->
-                <mat-form-field id="professor-code-input" type="text">
+                <mat-form-field id="course-code-input" type="text">
                     <input matInput placeholder="Código" [(ngModel)]="code" name="code" size="7" maxlength="7" pattern="[0-9]{7}" required>
                 </mat-form-field>
 
@@ -96,6 +96,9 @@
 
             <span class="spacer"></span>
             <button mat-button [disabled]="!courseForm.form.valid" type="submit">Salvar</button>
+            <span *ngIf="code || name || shortName || credits || hoursToSchedule || type || minimumSemester || maximumSemester || offererDepartment || requesterDepartment">
+                <button mat-button id="cancel-button" (click)='cleanForm()'>Cancelar</button>
+            </span>
 
         </mat-card-content>
   </form>

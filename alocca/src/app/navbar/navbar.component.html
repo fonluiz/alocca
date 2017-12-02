@@ -11,15 +11,9 @@
 
       <!-- Professors options -->
         <button id="demo-menu-lower-left-profs"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-left: 100px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/professors']" style="margin-left: 100px">
         Professores
-        <mat-icon style="vertical-align: middle;"> arrow_drop_down </mat-icon>
         </button>
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-          for="demo-menu-lower-left-profs">
-          <li class="mdl-menu__item" [routerLink]="['/add-professor']">Cadastrar</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-professors']">Cadastrados</li>
-        </ul>
 
       <!-- Courses options -->
         <button id="demo-menu-lower-left-courses"

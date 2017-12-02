@@ -7,14 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditClassComponent } from './classes/edit-class/edit-class.component';
 import { ClassesContainerComponent } from './classes/classes-container/classes-container.component'
 ///Courses
-import { CoursesContainerComponent } from "./courses/courses-container/courses-container.component";
-import { AddCourseComponent } from './courses/add-course/add-course.component';
+import { CoursesContainerComponent } from './courses/courses-container/courses-container.component';
 import { EditCourseComponent } from './courses/edit-course/edit-course.component';
-import { ViewCoursesComponent } from './courses/view-courses/view-courses.component';
 ///Professors
-import { AddProfessorComponent } from './professors/add-professor/add-professor.component';
+import { ProfessorsContainerComponent } from './professors/professors-container/professors-container.component';
 import { EditProfessorComponent } from './professors/edit-professor/edit-professor.component';
-import { ViewProfessorsComponent } from './professors/view-professors/view-professors.component';
 ///Restrictions
 import { AddRestrictionComponent } from './professors/add-restriction/add-restriction.component';
 ///Home
@@ -44,14 +41,11 @@ const appRoutes: Routes = [
     {path: 'edit-class/:id', component: EditClassComponent},
 
     {path: 'courses', component: CoursesContainerComponent},
-    //{path: 'add-course', component: AddCourseComponent},
     {path: 'edit-course/:id', component: EditCourseComponent},
-    //{path: 'view-courses', component: ViewCoursesComponent},
     
-    {path: 'add-professor', component: AddProfessorComponent},
+    {path: 'professors', component: ProfessorsContainerComponent},
     {path: 'add-restriction/:id', component: AddRestrictionComponent },
     {path: 'edit-professor/:id', component: EditProfessorComponent},
-    {path: 'view-professors', component: ViewProfessorsComponent},
 
     {path: 'view-users', component: ViewUsersComponent},
     {path: 'add-user', component: AddUserComponent},
