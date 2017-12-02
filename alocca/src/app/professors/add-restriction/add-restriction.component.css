@@ -1,0 +1,52 @@
+﻿.add-restriction-card-toolbar {
+  align-items: center;
+  color: #808080;
+}
+
+.add-restriction-card {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.add-restriction-card-content {
+    padding: 30px 30px 30px 30px;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.center-table {
+  margin: 0 auto;
+}
+
+.credits-input {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.table-container {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.restrictions-slider {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.sliders-container {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}
+
+.schedules-container {
+    align-items: center;
+    align-self: center;
+    align-content: center;
+}

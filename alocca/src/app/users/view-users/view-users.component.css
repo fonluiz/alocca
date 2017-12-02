@@ -1,0 +1,29 @@
+#view-user-card {
+  margin: 25px;
+  padding: 0px 0px 0px 0px;
+}
+
+#user-card-content {
+  text-align: center;
+  padding: 0px;
+
+}
+
+.user-info-content{
+  padding: 0px 263px 0px 0px;
+  text-align: center;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.delete-button{
+  color: red;
+  padding: 0px 0px 0px 100px;
+}
+
+/* Remove the blue outline from a selected option. */
+*:focus {
+outline: none;
+}
