@@ -1,11 +1,11 @@
 ﻿<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
 <!-- Page navbar. -->
-  <header class="mdl-layout__header">
+  <header class="mdl-layout__header" *ngIf="(dbAuth.authState | async)">
     <div class="mdl-layout__header-row">
 
       <!-- Navbar Title -->
       <span class="mdl-layout-title" [routerLink]="['/home']">ALOCCA</span>
-
+      
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only" >
 
@@ -56,16 +56,9 @@
       
       <!-- Users option -->
         <button id="demo-menu-lower-left-users"
-          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" style="margin-right: 5px">
+          class="mdl-button mdl-js-button mdl-button--accent mdl-color-text--white" [routerLink]="['/users']" style="margin-right: 5px">
           Usuários
-          <mat-icon style="vertical-align: middle;"> arrow_drop_down </mat-icon>
         </button >
-        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-          for="demo-menu-lower-left-users">
-          <li class="mdl-menu__item" [routerLink]="['/add-user']">Cadastrar</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-users']">Cadastrados</li>
-          <li class="mdl-menu__item" [routerLink]="['/view-requests']">Requisições</li>
-        </ul>
 
       <!-- Logout option. -->
         <button id="demo-menu-lower-left"

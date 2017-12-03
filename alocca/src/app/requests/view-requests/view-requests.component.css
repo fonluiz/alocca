@@ -1,15 +1,26 @@
-#view-request-card {
-  margin: 50px 50px 50px 50px;
+#view-requests-card {
+  margin: 3.5% 4% 3.5% 4%;
   padding: 0px 0px 0px 0px;
+}
+
+.view-requests-card-toolbar {
+  text-align: center;
+  align-items: center;
+  color: #808080;
 }
 
 #request-card-content {
   text-align: center;
-  padding: 30px 30px 30px 30px;
+  padding: 0.5% 0.5% 0.5% 0.5%;
+  overflow-x: auto;
 }
 
 .delete-button{
   color: red;
+}
+
+.center-table{
+  margin: 0 auto;
 }
 
 .spacer {
@@ -18,5 +29,5 @@
 
 /* Remove the blue outline from a selected option. */
 *:focus {
-outline: none;
+  outline: none;
 }

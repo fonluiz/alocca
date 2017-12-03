@@ -69,6 +69,9 @@ export class ViewRequestsComponent implements OnInit {
   ngOnInit() {
     this.FBservice.getRequests().valueChanges().subscribe(requests =>{
       this.requests = requests;
+      if(requests.length==0){
+        this.requests = null;
+      }
     });
   }
   

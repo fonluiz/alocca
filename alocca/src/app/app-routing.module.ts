@@ -19,8 +19,7 @@ import { HomeComponent } from './home/home.component';
 ///Navbar
 import { NavbarComponent } from './navbar/navbar.component';
 ///Users
-import { ViewUsersComponent } from './users/view-users/view-users.component';
-import { AddUserComponent } from './users/add-user/add-user.component';
+import { UsersContainerComponent } from "./users/users-container/users-container.component";
 ///Requests
 import { ViewRequestsComponent } from './requests/view-requests/view-requests.component';
 import { RequestAccessComponent } from './requests/request-access/request-access.component';
@@ -47,8 +46,7 @@ const appRoutes: Routes = [
     {path: 'add-restriction/:id', component: AddRestrictionComponent },
     {path: 'edit-professor/:id', component: EditProfessorComponent},
 
-    {path: 'view-users', component: ViewUsersComponent},
-    {path: 'add-user', component: AddUserComponent},
+    {path: 'users', component: UsersContainerComponent},
     
     {path: 'request-access', component: RequestAccessComponent},
     {path: 'view-requests', component: ViewRequestsComponent},

@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { MaterialModule } from './../material.module';
 
+import { AppRoutingModule } from '../app-routing.module';
+
 @NgModule({
     imports: [
         CommonModule,
-        MaterialModule
+        MaterialModule,
+        AppRoutingModule
         ],
     declarations: [HomeComponent],
     exports: []

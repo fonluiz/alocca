@@ -10,6 +10,9 @@ import { AppRoutingModule } from '../app-routing.module';
 
 import { AddUserComponent } from './add-user/add-user.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { UsersContainerComponent } from './users-container/users-container.component';
+
+import { ViewRequestsComponent } from "./../requests/view-requests/view-requests.component";
 
 @NgModule({
     imports: [
@@ -20,7 +23,9 @@ import { ViewUsersComponent } from './view-users/view-users.component';
         AppRoutingModule],
     declarations: [
         AddUserComponent,
-        ViewUsersComponent],
+        ViewUsersComponent,
+        ViewRequestsComponent,
+        UsersContainerComponent],
     exports: []
 })
 
