@@ -18,7 +18,8 @@ export class DataManagerService {
   }
 
   push<JSON>(list: AngularFireList<JSON>, object: JSON) {
-    return list.push(object);
+      list.push(object);
+      return list;
   }
 
   set(list: AngularFireList<JSON>, object: JSON, objReference: string) {
@@ -27,16 +28,18 @@ export class DataManagerService {
   }
 
   update(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-      list.update(objReference, object);
+      list.update(objReference, object)
       return list;
   }
 
   delete(list: AngularFireList<JSON>, objReference: string) {
-    return list.remove(objReference);
+      list.remove(objReference);
+      return list;
   }
 
   deleteList(list: AngularFireList<JSON>) {
-    return list.remove();
+    list.remove();
+    return list;
   }
 
   readObject(listReference: string, id: string): AngularFireObject<any> {
