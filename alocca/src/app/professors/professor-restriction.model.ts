@@ -1,4 +1,4 @@
-﻿import { ScheduleRestriction } from "app/professors/schedule-restriction.model";
+﻿import { ScheduleRestriction } from "./schedule-restriction.model";
 
 export class ProfessorRestriction {
     constructor(
