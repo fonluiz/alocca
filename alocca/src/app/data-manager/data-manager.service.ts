@@ -45,14 +45,14 @@ export class DataManagerService {
     return list;
   }
 
+  readObject(listReference: string, id: string): AngularFireObject<any> {
+      var object = this.db.object(listReference + id) as AngularFireObject<any>;
+      return object;
+  }
+
   existReference(reference: string) {
     return this.db.database.ref(reference).once('value').then(function(snapshot) {
       return Promise.resolve(snapshot.exists())
     })
-  }
-
-  readObject(listReference: string, id: string): AngularFireObject<any> {
-      var selectedProfessor = this.db.object('/' + listReference + '/' + id) as AngularFireObject<any>;
-      return selectedProfessor;
   }
 }
