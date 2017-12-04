@@ -39,8 +39,8 @@ export class DataManagerService {
     return list.remove();
   }
 
-  getObject(listReference: string, id: string): AngularFireObject<any> {
-      var selectedProfessor = this.db.object('/' + listReference + '/' + id) as AngularFireObject<any>;
-      return selectedProfessor;
+  readObject(listReference: string, id: string): AngularFireObject<any> {
+      var object = this.db.object(listReference + id) as AngularFireObject<any>;
+      return object;
   }
 }
