@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+﻿import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -13,20 +13,22 @@ export class DataManagerService {
      }
 
      // Documentar 
-  createList<T>(object: T, listReference: string) { 
-    return this.db.list<object>(listReference).valueChanges();
+  createList<JSON>(listReference: string) { 
+    return this.db.list<JSON>(listReference);
   }
 
-  push(list: AngularFireList<JSON>, object: JSON) {
+  push<JSON>(list: AngularFireList<JSON>, object: JSON) {
     return list.push(object);
   }
 
   set(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-    return list.set(objReference, object);
+      list.set(objReference, object);
+      return list;
   }
 
   update(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-    return list.update(objReference, object);
+      list.update(objReference, object);
+      return list;
   }
 
   delete(list: AngularFireList<JSON>, objReference: string) {
@@ -35,5 +37,10 @@ export class DataManagerService {
 
   deleteList(list: AngularFireList<JSON>) {
     return list.remove();
+  }
+
+  getObject(listReference: string, id: string): AngularFireObject<any> {
+      var selectedProfessor = this.db.object('/' + listReference + '/' + id) as AngularFireObject<any>;
+      return selectedProfessor;
   }
 }
