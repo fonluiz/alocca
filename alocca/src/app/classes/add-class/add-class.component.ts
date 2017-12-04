@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar.service';
+import {ClassesDmService } from '../../data-manager/classes/classes-dm.service'
 
 //import 'rxjs/add/operator/startWith'; remove??
 //import 'rxjs/add/operator/map'; remove??
@@ -29,7 +30,8 @@ export class AddClassComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarService
+    private snackService: SnackbarService,
+    private classesDM: ClassesDmService
     ) {}
 
 
@@ -43,7 +45,7 @@ export class AddClassComponent implements OnInit {
     if(this.FBservice.getCurrentSemester()){
       for (var _i = 1; _i <= this.classesNumber; _i++) {
           let newClass = new Class(this.courseKey, _i);
-          this.FBservice.saveClass(newClass);
+          this.classesDM.addNewClass(this.FBservice.getCurrentSemester(), newClass);
       } 
     }else{
       this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DataManagerService} from '../data-manager.service'
-import { Observable } from 'rxjs/Observable';
 import { Course } from '../../courses/course.model'
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
