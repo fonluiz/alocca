@@ -3,6 +3,8 @@ import { FirebaseService } from '../../services/firebase.service';
 
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { CoursesDmService } from '../../data-manager/courses/courses-dm.service';
+
 
 @Component({
   selector: 'app-view-courses',
@@ -38,7 +40,8 @@ export class ViewCoursesComponent implements OnInit {
   constructor(
     private FBservice: FirebaseService,
     private snackService: SnackbarService,
-    private dialogsService: DialogsService
+    private dialogsService: DialogsService,
+    private courseDM: CoursesDmService    
   ) { }
 
   /**
@@ -63,11 +66,11 @@ export class ViewCoursesComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          if(this.FBservice.deleteCourse(id)){
-            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
-          }else{
-            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
-          }
+          this.courseDM.deleteCourse(id).then(() => {
+            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);            
+          }).catch(() => {
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);            
+          })
         }
       });
   }

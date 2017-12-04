@@ -36,8 +36,11 @@ export class DataManagerService {
   }
 
   delete(list: AngularFireList<JSON>, objReference: string) {
-    list.remove(objReference);
-    return list;
+    return list.remove(objReference).then(() => {
+      return Promise.resolve(list);
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
   }
 
   deleteList(list: AngularFireList<JSON>) {

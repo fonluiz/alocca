@@ -37,9 +37,20 @@ export class CoursesDmService {
   }
 
   updateCourse(course: Course) {
-    this.dm.update(this.courses, course.toFirebaseObject(), course.getCode());
+    return this.dm.update(this.courses, course.toFirebaseObject(), course.getCode()).then(
+      (list) => { this.courses = list; return true; }
+    ).catch((error) => {
+      return false;
+    });
   }
 
+  deleteCourse(reference: string) {
+    return this.dm.delete(this.courses, reference).then(
+      (list) => { this.courses = list; return true; }
+    ).catch((error) => {
+      return false;
+    });
+  }
 
   private existShortName(course: Course) {
    return this.courses.query.orderByChild('shortName').equalTo(course.getShortName()).once('value').then(
