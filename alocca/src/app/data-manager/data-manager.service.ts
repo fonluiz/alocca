@@ -17,7 +17,7 @@ export class DataManagerService {
     return this.db.list<object>(listReference).valueChanges();
   }
 
-  save(list: AngularFireList<JSON>, object: JSON) {
+  push(list: AngularFireList<JSON>, object: JSON) {
     return list.push(object);
   }
 
@@ -34,6 +34,6 @@ export class DataManagerService {
   }
 
   deleteList(list: AngularFireList<JSON>) {
-    list.remove();
+    return list.remove();
   }
 }
