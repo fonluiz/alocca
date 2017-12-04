@@ -13,27 +13,39 @@ export class DataManagerService {
      }
 
      // Documentar 
-  createList<T>(object: T, listReference: string) { 
-    return this.db.list<object>(listReference).valueChanges();
+  createList(listReference: string) { 
+    return this.db.list<JSON>(listReference);
   }
 
   push(list: AngularFireList<JSON>, object: JSON) {
-    return list.push(object);
+    list.push(object);
+    return list;
   }
 
   set(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-    return list.set(objReference, object);
+      list.set(objReference, object);
+      return list;
   }
 
   update(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-    return list.update(objReference, object);
+    list.update(objReference, object);
+    return list;
   }
 
   delete(list: AngularFireList<JSON>, objReference: string) {
-    return list.remove(objReference);
+    list.remove(objReference);
+    return list;
   }
 
   deleteList(list: AngularFireList<JSON>) {
-    return list.remove();
+    list.remove();
+    return list;
   }
+
+  existReference(reference: string) {
+    return this.db.database.ref(reference).once('value').then(function(snapshot) {
+      return Promise.resolve(snapshot.exists())
+    })
+  }
+
 }

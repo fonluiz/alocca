@@ -28,6 +28,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //firebase service -- TO CHANGE TO DATA MANAGER
 import { FirebaseService } from './services/firebase.service';
+import { DataManagerService } from './data-manager/data-manager.service'
+import { CoursesDmService } from './data-manager/courses/courses-dm.service'
 
 
 //angular material
@@ -70,7 +72,9 @@ import { SnackbarService} from './services/snackbar.service';
     FirebaseService, 
     DialogsService, 
     NavbarService, 
-    SnackbarService
+    SnackbarService,
+    DataManagerService,
+    CoursesDmService
   ],
   bootstrap: [AppComponent]
 })
