@@ -28,8 +28,11 @@ export class DataManagerService {
   }
 
   update(list: AngularFireList<JSON>, object: JSON, objReference: string) {
-    list.update(objReference, object);
-    return list;
+    return list.update(objReference, object).then(() => {
+      return Promise.resolve(list);
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
   }
 
   delete(list: AngularFireList<JSON>, objReference: string) {

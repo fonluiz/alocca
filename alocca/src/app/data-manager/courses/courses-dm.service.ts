@@ -36,7 +36,12 @@ export class CoursesDmService {
     })
   }
 
-  existShortName(course: Course) {
+  updateCourse(course: Course) {
+    this.dm.update(this.courses, course.toFirebaseObject(), course.getCode());
+  }
+
+
+  private existShortName(course: Course) {
    return this.courses.query.orderByChild('shortName').equalTo(course.getShortName()).once('value').then(
       function(snapshot) {
         return Promise.resolve(snapshot.exists())
