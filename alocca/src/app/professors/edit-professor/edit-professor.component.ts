@@ -3,8 +3,8 @@ import { Router, ActivatedRoute} from '@angular/router';
 
 import { Professor } from '../professor.model';
 
-import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { ProfessorsDmService } from '../../data-manager/professors/professors-dm.service';
 
 @Component({
   selector: 'app-edit-professor',
@@ -62,10 +62,10 @@ export class EditProfessorComponent implements OnInit {
   TIMEOUT_NOT_EDITED_MESSAGE: number = 5000;
 
   constructor(
-    private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarService
+    private snackService: SnackbarService,
+    private ProfDMService: ProfessorsDmService
   ){    }
 
   /**
@@ -73,7 +73,7 @@ export class EditProfessorComponent implements OnInit {
    */
   ngOnInit(){
     this.id = this.route.snapshot.params['id']
-    this.FBservice.getProfessorDetails(this.id).valueChanges().subscribe(professor =>{
+    this.ProfDMService.getProfessorDetails(this.id).valueChanges().subscribe(professor =>{
         this.name = professor.name;
         this.SIAPE = professor.SIAPE;
         this.nickname = professor.nickname;
@@ -83,7 +83,7 @@ export class EditProfessorComponent implements OnInit {
 
     });
     var initiateProfessors: any[];
-    this.FBservice.getProfessors().valueChanges().subscribe(professors =>{
+    this.ProfDMService.getProfessors().valueChanges().subscribe(professors =>{
       initiateProfessors = professors;
     });
   }
@@ -92,18 +92,13 @@ export class EditProfessorComponent implements OnInit {
    * Updates the professor on form submission.
    */
   onEditProfessor(){
-    var oldProfessor = new Professor(
-      this.oldSIAPE,
-      this.oldName,
-      this.oldNickname
-    )
     var professor = new Professor (
       this.SIAPE,
       this.name,
       this.nickname
     )
         
-    if(this.FBservice.updateProfessor(this.id,professor,oldProfessor)){
+    if (this.ProfDMService.updateProfessor(this.id, professor)){
       this.snackService.openSnackBar(this.EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_EDITED_MESSAGE);
     }else{
       this.snackService.openSnackBar(this.NOT_EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_NOT_EDITED_MESSAGE);

@@ -2,6 +2,7 @@
 import { Router, ActivatedRoute} from '@angular/router';
 
 import { FirebaseService } from '../../services/firebase.service';
+import { ProfessorsDmService } from '../../data-manager/professors/professors-dm.service';
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
 
@@ -48,17 +49,21 @@ export class ViewProfessorsComponent implements OnInit {
 
   constructor(
     private FBservice: FirebaseService,
+    private ProfDMService: ProfessorsDmService,
     private router: Router,
     private dialogsService: DialogsService,
-    private snackService: SnackbarService,
+    private snackService: SnackbarService
   ) {}
 
   /**
    * Sets necessary elements on the start of the page.
    */
   ngOnInit() {
-    this.FBservice.getProfessors().valueChanges().subscribe(professors =>{
-      this.professors = professors;
+    //this.FBservice.getProfessors().valueChanges().subscribe(professors =>{
+     // this.professors = professors;
+      //});
+      this.ProfDMService.getProfessors().valueChanges().subscribe(professors => {
+          this.professors = professors;
       });
   }
 
@@ -88,7 +93,7 @@ export class ViewProfessorsComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          if(this.FBservice.deleteProfessor(id)){
+        if (this.ProfDMService.deleteProfessor(id)){
           this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
           }else{
             this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);

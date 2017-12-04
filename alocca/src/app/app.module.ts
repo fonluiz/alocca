@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';//import??
@@ -30,6 +30,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { FirebaseService } from './services/firebase.service';
 import { DataManagerService } from './data-manager/data-manager.service'
 import { CoursesDmService } from './data-manager/courses/courses-dm.service'
+import { ProfessorsDmService } from './data-manager/professors/professors-dm.service';
 
 
 //angular material
@@ -69,7 +70,9 @@ import { SnackbarService} from './services/snackbar.service';
   entryComponents:[DialogsComponent],
   exports: [DialogsComponent],
   providers: [
-    FirebaseService, 
+    FirebaseService,
+    DataManagerService,
+    ProfessorsDmService,
     DialogsService, 
     NavbarService, 
     SnackbarService,

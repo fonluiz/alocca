@@ -41,7 +41,7 @@ export class Professor {
             nickname: this.getNickname()
         }
 
-        return <JSON>professor.stringify();
+        return <JSON>professor;
     }
 
 }

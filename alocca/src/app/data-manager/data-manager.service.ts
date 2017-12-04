@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+﻿import { Injectable } from '@angular/core';
+import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 
@@ -48,4 +48,8 @@ export class DataManagerService {
     })
   }
 
+  readObject(listReference: string, id: string): AngularFireObject<any> {
+      var selectedProfessor = this.db.object('/' + listReference + '/' + id) as AngularFireObject<any>;
+      return selectedProfessor;
+  }
 }
