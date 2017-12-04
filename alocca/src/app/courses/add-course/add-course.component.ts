@@ -2,7 +2,6 @@
 
 import { Course } from '../course.model';
 
-import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { CoursesDmService } from '../../data-manager/courses/courses-dm.service';
 
@@ -86,7 +85,6 @@ export class AddCourseComponent implements OnInit {
   TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
-    private FBservice: FirebaseService,
     private snackService: SnackbarService,
     private courseDM: CoursesDmService
   ) {  }
@@ -141,7 +139,7 @@ export class AddCourseComponent implements OnInit {
    */
   ngOnInit() {
     let initiateCourses: any[];
-    this.FBservice.getCourses().valueChanges().subscribe(courses =>{
+    this.courseDM.getCourses().subscribe(courses =>{
       initiateCourses = courses;
     });
   }

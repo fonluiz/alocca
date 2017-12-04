@@ -6,15 +6,15 @@ import { Professor } from '../../professors/professor.model';
 
 @Injectable()
 export class ProfessorsDmService {
-    readonly PROFESSORS_NAME = "professors";
-    readonly PROFESSORS_REF = "professors/";
+    readonly professorsListName = "professors";
+    readonly professorsListRef = "professors/";
 
     dm: DataManagerService;
     professors: AngularFireList<JSON>;
 
     constructor(dm: DataManagerService) {
         this.dm = dm;
-        this.professors = dm.createList(this.PROFESSORS_NAME);
+        this.professors = dm.createList(this.professorsListName);
     }
 
     addNewProfessor(professor: Professor) {
@@ -32,7 +32,7 @@ export class ProfessorsDmService {
     }
 
     getProfessorDetails(id: string) {
-        return this.dm.readObject(this.PROFESSORS_REF, id);
+        return this.dm.readObject(this.professorsListRef + id);
     }
 
     updateProfessor(professorId: string, professor: Professor) {

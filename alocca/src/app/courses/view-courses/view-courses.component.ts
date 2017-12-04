@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
 
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
@@ -38,7 +37,6 @@ export class ViewCoursesComponent implements OnInit {
   TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
 
   constructor(
-    private FBservice: FirebaseService,
     private snackService: SnackbarService,
     private dialogsService: DialogsService,
     private courseDM: CoursesDmService    
@@ -48,7 +46,7 @@ export class ViewCoursesComponent implements OnInit {
    * Sets necessary elements on the start of the page.
    */
   ngOnInit() {
-    this.FBservice.getCourses().valueChanges().subscribe(courses =>{
+    this.courseDM.getCourses().subscribe(courses =>{
       this.courses = courses;
     });
   }

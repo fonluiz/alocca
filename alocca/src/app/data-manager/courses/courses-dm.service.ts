@@ -46,22 +46,26 @@ export class CoursesDmService {
 
   deleteCourse(reference: string) {
     return this.dm.delete(this.courses, reference).then(
-      (list) => { this.courses = list; return true; }
+      (list) => { this.courses = list; return true }
     ).catch((error) => {
       return false;
     });
   }
 
-  private existShortName(course: Course) {
-   return this.courses.query.orderByChild('shortName').equalTo(course.getShortName()).once('value').then(
-      function(snapshot) {
-        return Promise.resolve(snapshot.exists())
-      }
-    )
+  getCourses() {
+    return this.courses.valueChanges();
   }
 
+  getCourse(courseRef: string) {
+    return this.dm.readObject(this.coursesListReference + courseRef).valueChanges();
+  }
 
-  
-  
+  private existShortName(course: Course) {
+    return this.courses.query.orderByChild('shortName').equalTo(course.getShortName()).once('value').then(
+       function(snapshot) {
+         return Promise.resolve(snapshot.exists())
+       }
+     )
+   }
 
 }

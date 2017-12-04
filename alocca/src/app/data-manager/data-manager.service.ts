@@ -48,9 +48,8 @@ export class DataManagerService {
     return list;
   }
 
-  readObject(listReference: string, id: string): AngularFireObject<any> {
-      var object = this.db.object(listReference + id) as AngularFireObject<any>;
-      return object;
+  readObject(reference: string): AngularFireObject<any> {
+      return this.db.object(reference);
   }
 
   existReference(reference: string) {
