@@ -36,11 +36,11 @@ export class ProfessorsDmService {
     }
 
     updateProfessor(professorId: string, professor: Professor) {
-        return this.dm.update(this.professors, professor.toFirebaseObject(), professorId);
+        this.professors = this.dm.update(this.professors, professor.toFirebaseObject(), professorId);
     }
 
     deleteProfessor(professorId: string) {
-        return this.dm.delete(this.professors, professorId);
+        this.professors = this.dm.delete(this.professors, professorId);
     }
 
     private verifyConstraints(professor: Professor) {
