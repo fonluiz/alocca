@@ -1,4 +1,6 @@
-# Alocca
+﻿# Alocca
+
+[![CI Status](http://img.shields.io/travis/fonluiz/alocca.svg?style=flat)](https://travis-ci.org/fonluiz/alocca)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.4.
 
