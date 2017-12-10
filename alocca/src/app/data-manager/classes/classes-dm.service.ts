@@ -31,11 +31,28 @@ export class ClassesDmService {
   }
 
   updateClass(semester: string, classObj: Class) {
-    return this.dm.update(this.classes, classObj.toFirebaseObject(), classObj.getId()).then(
+    var classReference = semester + '/' + classObj.getId();
+    return this.dm.update(this.classes, classObj.toFirebaseObject(), classReference).then(
       (list) => { this.classes = list; return true; }
     ).catch((error) => {
       return false;
     });
   }
 
+  deleteCourse(reference: string) {
+    return this.dm.delete(this.classes, reference).then(
+      (list) => { this.classes = list; return true }
+    ).catch((error) => {
+      return false;
+    });
+  }
+
+  getClasses() {
+    return this.classes.valueChanges();
+  }
+
+  getClass(semester: string, classReference: string) {
+    var classReference = semester + '/' + classReference;
+    return this.dm.readObject(this.classesListReference + classReference).valueChanges();
+  }
 }
