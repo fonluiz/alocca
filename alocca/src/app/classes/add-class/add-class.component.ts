@@ -4,6 +4,7 @@ import { FormControl } from '@angular/forms';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar.service';
+import { NavbarService } from '../../services/navbar.service';
 import { ClassesDmService } from '../../data-manager/classes/classes-dm.service'
 import { CoursesDmService } from '../../data-manager/courses/courses-dm.service'
 
@@ -31,9 +32,13 @@ export class AddClassComponent implements OnInit {
     private router: Router,
     private snackService: SnackbarService,
     private classesDM: ClassesDmService,
-    private coursesDM: CoursesDmService
-    ) {}
-
+    private coursesDM: CoursesDmService,
+    private navbarService: NavbarService
+    ) {
+      this.navbarService.getSemesterSelectedEmitter().subscribe(
+        semester => {this.classesDM.setSemester(semester)}
+      );
+    }
 
   ngOnInit() {
     this.coursesDM.getCourses().subscribe(coursesnames =>{
@@ -45,7 +50,7 @@ export class AddClassComponent implements OnInit {
     if(this.FBservice.getCurrentSemester()){
       for (var _i = 1; _i <= this.classesNumber; _i++) {
           let newClass = new Class(this.courseKey, _i);
-          this.classesDM.addNewClass(this.FBservice.getCurrentSemester(), newClass);
+          this.classesDM.addNewClass(newClass);
       } 
     }else{
       this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
