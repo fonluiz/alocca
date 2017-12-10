@@ -4,10 +4,9 @@ import { FormControl } from '@angular/forms';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { SnackbarService } from '../../services/snackbar.service';
-import {ClassesDmService } from '../../data-manager/classes/classes-dm.service'
+import { ClassesDmService } from '../../data-manager/classes/classes-dm.service'
+import { CoursesDmService } from '../../data-manager/courses/courses-dm.service'
 
-//import 'rxjs/add/operator/startWith'; remove??
-//import 'rxjs/add/operator/map'; remove??
 
 import { Class } from '../class.model'
 import { Schedule } from '../schedule.model'
@@ -31,12 +30,13 @@ export class AddClassComponent implements OnInit {
     private FBservice: FirebaseService,
     private router: Router,
     private snackService: SnackbarService,
-    private classesDM: ClassesDmService
+    private classesDM: ClassesDmService,
+    private coursesDM: CoursesDmService
     ) {}
 
 
   ngOnInit() {
-    this.FBservice.getCourses().valueChanges().subscribe(coursesnames =>{
+    this.coursesDM.getCourses().subscribe(coursesnames =>{
       this.coursesList = coursesnames;
     });
   }
