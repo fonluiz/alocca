@@ -26,6 +26,6 @@ export class ProfessorsRestrictionsDmService {
     }
 
     getProfessorRestrictions(restrictionId: string) {
-        return this.dm.readObject(this.professorsRestrictionListName + restrictionId);
+        return this.dm.readObject(this.professorsRestrictionListReference + restrictionId);
     }
 }
