@@ -6,14 +6,15 @@ import { ProfessorRestriction } from '../../professors/professor-restriction.mod
 
 @Injectable()
 export class ProfessorsRestrictionsDmService {
-    readonly PROFESSORS_RESTRICTION_PATH = "professorRestrictions";
 
     dm: DataManagerService;
     professorsRestrictions: AngularFireList<JSON>;
+    readonly professorsRestrictionListName = "professorRestrictions";
+    readonly professorsRestrictionListReference: string = 'professorRestrictions/'
 
     constructor(dm: DataManagerService) {
         this.dm = dm;
-        this.professorsRestrictions = dm.createList(this.PROFESSORS_RESTRICTION_PATH);
+        this.professorsRestrictions = dm.createList(this.professorsRestrictionListName);
     }
 
     saveProfessorRestriction(restriction: ProfessorRestriction) {
@@ -25,6 +26,6 @@ export class ProfessorsRestrictionsDmService {
     }
 
     getProfessorRestrictions(restrictionId: string) {
-        return this.dm.readObject(this.PROFESSORS_RESTRICTION_PATH + restrictionId);
+        return this.dm.readObject(this.professorsRestrictionListName + restrictionId);
     }
 }

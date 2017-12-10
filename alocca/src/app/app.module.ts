@@ -31,7 +31,8 @@ import { FirebaseService } from './services/firebase.service';
 import { DataManagerService } from './data-manager/data-manager.service'
 import { CoursesDmService } from './data-manager/courses/courses-dm.service'
 import { ProfessorsDmService } from './data-manager/professors/professors-dm.service';
-import { ClassesDmService } from './data-manager/classes/classes-dm.service'
+import { ClassesDmService } from './data-manager/classes/classes-dm.service';
+import { ProfessorsRestrictionsDmService } from './data-manager/professors-restrictions/professors-restrictions-dm.service';
 
 
 //angular material
@@ -74,6 +75,7 @@ import { SnackbarService} from './services/snackbar.service';
     FirebaseService,
     DataManagerService,
     ProfessorsDmService,
+    ProfessorsRestrictionsDmService,
     DialogsService, 
     NavbarService, 
     SnackbarService,
