@@ -47,8 +47,8 @@
               semestre
             </mat-option>
             <!--Added semesters -->
-            <mat-option class="select-semester-option" *ngFor="let sem of semesters" [value]="sem.name">
-              <i (click)="removeSemester(sem.name)" class="material-icons remove-semester" *ngIf="selectedSemesterID!==sem.name">remove_circle_outline</i> 
+            <mat-option class="select-semester-option" *ngFor="let sem of semesters" [value]="sem.id">
+              <i (click)="removeSemester(sem.id)" class="material-icons remove-semester" *ngIf="selectedSemesterID!==sem.id">remove_circle_outline</i> 
               {{ sem.name }}
             </mat-option>
           </mat-select>
