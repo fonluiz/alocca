@@ -76,53 +76,64 @@ export class FirebaseService {
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
     var detailedCourse: any;
-    this.getCourseDetails(classToSave.getCourse()).valueChanges().subscribe(course_ => {
-      detailedCourse = course_;
+    var self: FirebaseService = this;
+
+    var promise = new Promise (function(resolve, reject) {
+      self.getCourseDetails(classToSave.getCourse()).valueChanges().subscribe(course_ => {
+        detailedCourse = course_;
+      })
     })
-    var recomendedSemester: string = "";
-    if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
-      recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
-    }else{
-      recomendedSemester = detailedCourse.minimumSemester;
-    }
-    classRef.update({
-      "isVerified":false,
-      "recomendedSemester":recomendedSemester,
-      "course":detailedCourse.shortName,
-      "number":classToSave.getNumber(),
-      "professor1":"",
-      "professor2":"",
-      "schedules":{
-        "monday":{
-          "hours":""
-        },
-        "tuesday":{
-          "hours":""
-        },
-        "wednesday":{
-          "hours":""
-        },
-        "thursday":{
-          "hours":""
-        },
-        "friday":{
-          "hours":""
-        }
-      },
-      "hoursToSchedule": detailedCourse.hoursToSchedule,
-      "note":""
-    })
-    // Only saves the data if it does not exists already
-   classRef.once('value').then(
-      function(snapshot) {
-        if (snapshot.val() == null) {
-          classRef.set(classToSave.toFirebaseObject());
-          return true;
-        } else {
-          return false;
-        }
+
+    promise.then(function(){
+      console.log("LIXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"); 
+      var recomendedSemester: string = "";
+      if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
+        recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
+      }else{
+        recomendedSemester = detailedCourse.minimumSemester;
       }
-    );
+      console.log("VA CA H AAAAAAR"); 
+      classRef.update({
+        "isVerified":false,
+        "recomendedSemester":recomendedSemester,
+        "course":detailedCourse.shortName,
+        "number":classToSave.getNumber(),
+        "professor1":"",
+        "professor2":"",
+        "schedules":{
+          "monday":{
+            "hours":""
+          },
+          "tuesday":{
+            "hours":""
+          },
+          "wednesday":{
+            "hours":""
+          },
+          "thursday":{
+            "hours":""
+          },
+          "friday":{
+            "hours":""
+          }
+        },
+        "hoursToSchedule": detailedCourse.hoursToSchedule,
+        "note":""
+      })
+      console.log("PROJETO DE MERDAAAAAAAA"); 
+      // Only saves the data if it does not exists already
+    classRef.once('value').then(
+        function(snapshot) {
+          console.log("OQ TOU FAZENDO AQUI???????"); 
+          if (snapshot.val() == null) {
+            classRef.set(classToSave.toFirebaseObject());
+            return true;
+          } else {
+            return false;
+          }
+        }
+      );
+    })
   }
   getClasses() {
     let classesList = this.db.list('/classes/'+this.currentSemester) as AngularFireList<any[]>;
@@ -371,16 +382,23 @@ export class FirebaseService {
   sameNickname(newProfessorNickname: string): boolean{
     var sameNickname: boolean = false;
     var professors: any[];
-    this.getProfessors().valueChanges().subscribe(profs =>{
-      professors = profs;
+    var self: FirebaseService = this;
+
+    var promise = new Promise (function (result, reject) {
+      self.getProfessors().valueChanges().subscribe(profs =>{
+        professors = profs;
+      })
     })
 
-    professors.forEach(function(prof){
-      if (prof.nickname===newProfessorNickname){
-        sameNickname = true;
-      }
-    })
-    
+    promise.then(
+      function () {
+        professors.forEach(function(prof){
+          if (prof.nickname===newProfessorNickname){
+            sameNickname = true;
+          }
+        })
+      }     
+    )
     return sameNickname;
   }
 
@@ -546,17 +564,25 @@ export class FirebaseService {
   sameShortname(newCourseShortname: string): boolean{
     var sameShortname: boolean = false;
     var courses: any[];
-    this.getCourses().valueChanges().subscribe(cours =>{
-      courses = cours;
-    })
+    var self: FirebaseService = this;
 
-    courses.forEach(function(course){
-      if (course.shortName===newCourseShortname){
-        sameShortname = true;
-      }
-    })
-    
-    return sameShortname;
+    var promise = new Promise(function (resolve, reject) {
+      self.getCourses().valueChanges().subscribe(cours =>{
+        courses = cours;
+      })
+    });
+
+    promise.then(
+      function(){
+        courses.forEach(function(course){
+          if (course.shortName===newCourseShortname){
+            sameShortname = true;
+          }
+        })
+      }      
+    );    
+
+    return sameShortname;    
   }
 
 ///Users

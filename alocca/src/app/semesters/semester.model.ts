@@ -10,7 +10,7 @@
 
     constructor(year: number, semester: number) {
         this.id = year + '-' + semester;
-        this.name = year + '.' + semester;
+        this.name = year + '-' + semester;
     }
 
     /**
