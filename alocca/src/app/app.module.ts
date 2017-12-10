@@ -33,6 +33,7 @@ import { CoursesDmService } from './data-manager/courses/courses-dm.service'
 import { ProfessorsDmService } from './data-manager/professors/professors-dm.service';
 import { ClassesDmService } from './data-manager/classes/classes-dm.service';
 import { ProfessorsRestrictionsDmService } from './data-manager/professors-restrictions/professors-restrictions-dm.service';
+import { SemestersDmService } from './data-manager/semesters/semesters-dm.service';
 
 
 //angular material
@@ -76,6 +77,7 @@ import { SnackbarService} from './services/snackbar.service';
     DataManagerService,
     ProfessorsDmService,
     ProfessorsRestrictionsDmService,
+    SemestersDmService,
     DialogsService, 
     NavbarService, 
     SnackbarService,

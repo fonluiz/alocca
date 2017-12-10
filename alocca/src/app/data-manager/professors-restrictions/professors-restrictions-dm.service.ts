@@ -10,7 +10,7 @@ export class ProfessorsRestrictionsDmService {
     dm: DataManagerService;
     professorsRestrictions: AngularFireList<JSON>;
     readonly professorsRestrictionListName = "professorRestrictions";
-    readonly professorsRestrictionListReference: string = 'professorRestrictions/'
+    readonly professorsRestrictionListReference: string = '/professorRestrictions/'
 
     constructor(dm: DataManagerService) {
         this.dm = dm;
@@ -26,6 +26,6 @@ export class ProfessorsRestrictionsDmService {
     }
 
     getProfessorRestrictions(restrictionId: string) {
-        return this.dm.readObject(this.professorsRestrictionListName + restrictionId);
+        return this.dm.readObject(this.professorsRestrictionListReference + restrictionId);
     }
 }

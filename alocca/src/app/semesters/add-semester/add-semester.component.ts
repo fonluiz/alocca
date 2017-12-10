@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
+import { SemestersDmService } from '../../data-manager/semesters/semesters-dm.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { Semester } from '../semester.model';
 
@@ -40,6 +41,7 @@ export class AddSemesterComponent implements OnInit {
 
     constructor(
         private FBservice: FirebaseService,
+        private semesterDmService: SemestersDmService,
         private snackService: SnackbarService
     ) {
         this.years = [];
@@ -64,7 +66,7 @@ export class AddSemesterComponent implements OnInit {
      */
     onAddNewSemester() {
       let semester = new Semester(this.year, this.half);
-      if(this.FBservice.saveSemester(semester)){
+      if (this.semesterDmService.saveSemester(semester)){
           this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
       }
     }

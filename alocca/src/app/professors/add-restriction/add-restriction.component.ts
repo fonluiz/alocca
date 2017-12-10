@@ -2,7 +2,6 @@
 import { MatCheckbox } from '@angular/material';
 import { ScheduleRestriction } from '../schedule-restriction.model'
 import { ProfessorRestriction } from '../professor-restriction.model'
-import { FirebaseService } from '../../services/firebase.service';
 import { ProfessorsRestrictionsDmService } from '../../data-manager/professors-restrictions/professors-restrictions-dm.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
@@ -35,7 +34,6 @@ export class AddRestrictionComponent implements OnInit {
   FRIDAY_START_INDEX = 5;
 
   constructor(
-      private FBservice: FirebaseService,
       private profRestrictionsService: ProfessorsRestrictionsDmService,
       private router: Router,
       private route: ActivatedRoute
@@ -84,7 +82,7 @@ export class AddRestrictionComponent implements OnInit {
        this.getScheduleRestrictionsFromTable()
     );
 
-    this.FBservice.saveProfessorRestriction(restrictions);
+    this.profRestrictionsService.saveProfessorRestriction(restrictions);
     this.router.navigate(['view-professors']);
   }
 

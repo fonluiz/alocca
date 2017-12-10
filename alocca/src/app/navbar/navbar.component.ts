@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+﻿import { Component, OnInit} from '@angular/core';
 import { MatDialog} from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +10,7 @@ import { AddSemesterComponent } from '../semesters/add-semester/add-semester.com
 import { Semester } from '../semesters/semester.model';
 
 import { FirebaseService } from '../services/firebase.service';
+import { SemestersDmService } from '../data-manager/semesters/semesters-dm.service';
 import { NavbarService } from '../services/navbar.service';
 import { SnackbarService } from '../services/snackbar.service';
 import { DialogsService } from '../services/dialogs.service';
@@ -57,6 +58,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private FBservice: FirebaseService,
+    private semestersDmService: SemestersDmService,
     public dbAuth: AngularFireAuth,
     private navbarService: NavbarService,
     private dialogService: DialogsService,
@@ -69,7 +71,7 @@ export class NavbarComponent implements OnInit {
    * Sets necessary elements on the start of the page.
    */
   ngOnInit(){
-    this.FBservice.getSemesters().valueChanges().subscribe(semesters => {
+      this.FBservice.getSemesters().valueChanges().subscribe(semesters => {
           this.semesters = semesters;
     });
   }
@@ -112,7 +114,7 @@ export class NavbarComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          if(this.FBservice.removeSemester(id)){
+            if (this.semestersDmService.removeSemester(id)){
             this.snackService.openSnackBar(this.DELETED_SEMESTER,this.TIMEOUT_DELETED_SEMESTER);
             this.selectedSemesterID = null;
             this.emitSemesterSelected();

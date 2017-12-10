@@ -7,7 +7,7 @@ import { Professor } from '../../professors/professor.model';
 @Injectable()
 export class ProfessorsDmService {
     readonly professorsListName = "professors";
-    readonly professorsListRef = "professors/";
+    readonly professorsListRef = "/professors/";
 
     dm: DataManagerService;
     professors: AngularFireList<JSON>;
