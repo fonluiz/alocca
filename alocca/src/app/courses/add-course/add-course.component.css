@@ -1,5 +1,5 @@
 #new-course-card {
-  margin: 50px 50px 50px 50px;
+  margin: 0% 0% 0.5% 0%;
   padding: 0px 0px 0px 0px;
 }
 
@@ -10,7 +10,7 @@
 }
 
 #new-course-card-content {
-    padding: 30px 30px 30px 30px;
+    padding: 1% 0% 1% 0%;
     text-align: center;
 }
 
@@ -18,46 +18,45 @@
     display: inline;
 }
 
-#professor-code-input{
+#course-code-input{
     width: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
     margin-left: 5%;
 }
 
 #course-name-input {
     width: 38%;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
     margin-left: 3%;
 }
 
 #course-shortName-input {
     width: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;  
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;  
     margin-left: 3%;
 }
 
 #course-credits-input {
     width: 10%;
-    margin-top: 10px;
-    margin-bottom: 10px;  
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;  
     margin-left: 7%;
 }
 
 #course-type-input {
     width: 20%;
-    margin-top: 10px;
-    margin-bottom: 10px; 
+    margin-top: 0.5%;
+    margin-bottom: 0.5%; 
     margin-left: 10%; 
 }
 
 .course-semester-input {
     width: 21%;
-    margin-top: 10px;
-    margin-bottom: 10px;  
-    font-size: 5px!important;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
 }
 
 #unified-semester{
@@ -74,8 +73,8 @@
 
 .course-department-input {
     width: 20%;
-    margin-top: 20px;
-    margin-bottom: 10px;  
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;  
 }
 
 #offerer-department{

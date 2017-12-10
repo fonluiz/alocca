@@ -86,4 +86,10 @@ export class AddUserComponent implements OnInit {
       initiateUsers = users;
     });
   }
+
+  cleanForm(){
+    this.SIAPE = null;
+    this.name = null;
+    this.email = null;
+  }
 }

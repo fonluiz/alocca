@@ -9,7 +9,7 @@
   overflow-x: auto;
 }
 
-.view-courses-toolbar {
+.view-courses-card-toolbar {
   text-align: center;
   align-items: center;
   color: #808080;
@@ -29,5 +29,5 @@
 
 /* Remove the blue outline from a selected option. */
 *:focus {
-outline: none;
+  outline: none;
 }

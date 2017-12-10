@@ -1,12 +1,5 @@
 ﻿<mat-card id="new-professor-card">
   <form (ngSubmit)="onAddNewProfessor()" #professorForm="ngForm">
-  <!--Toolbar-->
-    <mat-toolbar class="new-professor-card-toolbar mdl-color-text--white mdl-color--primary">
-      Cadastrar Professor   
-      <span class="spacer"></span>
-      <button mat-button id="cancel-button" [routerLink]="['/view-professors']">Cancelar</button> 
-      <button mat-button [disabled]="!professorForm.form.valid" >Salvar</button>
-    </mat-toolbar>
 
   <!--Form-->
     <mat-card-content id="new-professor-card-content">
@@ -26,6 +19,10 @@
         <mat-form-field id="professor-nickname-input" type="text">
           <input matInput placeholder="Apelido" [(ngModel)]="nickname" name="nickname" size="10" maxlength="10" required>
         </mat-form-field>
+
+        <span class="spacer"></span>
+        <button mat-button id="save-button" [disabled]="!professorForm.form.valid" type="submit">Salvar</button>
+        <span *ngIf="SIAPE || name || nickname"><button mat-button id="cancel-button" (click)='cleanForm()'>Cancelar</button></span>
 
       </div>
     </mat-card-content>

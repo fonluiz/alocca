@@ -51,8 +51,7 @@
      */
     toFirebaseObject(): JSON {
         var firebaseObject: any = {
-            name: this.name,
-            id: this.id
+            name: this.name
         }
         return <JSON>firebaseObject;
     }
