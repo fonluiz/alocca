@@ -142,10 +142,16 @@ export class AddCourseComponent implements OnInit {
     });
   }
 
-  foods = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  cleanForm(){
+    this.code = null;
+    this.name = null;
+    this.shortName = null;
+    this.credits = null;
+    this.type = null;
+    this.maximumSemester = null;
+    this.minimumSemester = null;
+    this.offererDepartment = null;
+    this.requesterDepartment = null;
+  }
 
 }

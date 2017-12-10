@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Alert } from "app/alerts/alert.model";
-import { AlertFactory } from "app/alerts/alert.factory";
-import { SampleAlerts } from "app/alerts/alerts.mock";
+import { Alert } from "./../alert.model";
+import { AlertFactory } from "./../alert.factory";
+import { SampleAlerts } from "./../alerts.mock";
 
 // Single instance of factory
 const ALERT_FACTORY: AlertFactory = new AlertFactory();

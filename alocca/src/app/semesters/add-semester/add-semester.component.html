@@ -7,18 +7,22 @@
     <div id="new-semester-card-content">
 
     <!-- Year Input -->
-      <mat-select id="year-input" placeholder="Ano" [(ngModel)]="year" name="year" floatPlaceholder="never" required>
-        <mat-option *ngFor="let year of years" [value]="year">
-          {{ year }}
-        </mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select id="year-input" placeholder="Ano" [(ngModel)]="year" name="year" floatPlaceholder="never" required>
+          <mat-option *ngFor="let year of years" [value]="year">
+            {{ year }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
     <!-- Half Input -->
-      <mat-select id="half-input" placeholder="Semestre" [(ngModel)]="half" name="half" floatPlaceholder="never" required>
-        <mat-option *ngFor="let half of halves" [value]="half">
-          {{ half }}
-        </mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select id="half-input" placeholder="Semestre" [(ngModel)]="half" name="half" floatPlaceholder="never" required>
+          <mat-option *ngFor="let half of halves" [value]="half">
+            {{ half }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </mat-dialog-content>
 

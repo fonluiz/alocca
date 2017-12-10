@@ -84,4 +84,10 @@ export class AddProfessorComponent implements OnInit {
       initiateProfessors = professors;
     });
   }
+
+  cleanForm() {
+    this.name = null;
+    this.SIAPE = null;
+    this.nickname = null;
+  }
 }
