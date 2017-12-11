@@ -76,64 +76,53 @@ export class FirebaseService {
   saveClass(classToSave: Class) {
     var classRef = this.db.database.ref(this.CLASSES_PATH + '/' + this.currentSemester + '/' + classToSave.getId());
     var detailedCourse: any;
-    var self: FirebaseService = this;
-
-    var promise = new Promise (function(resolve, reject) {
-      self.getCourseDetails(classToSave.getCourse()).valueChanges().subscribe(course_ => {
-        detailedCourse = course_;
-      })
+    this.getCourseDetails(classToSave.getCourse()).valueChanges().subscribe(course_ => {
+      detailedCourse = course_;
     })
-
-    promise.then(function(){
-      console.log("LIXOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"); 
-      var recomendedSemester: string = "";
-      if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
-        recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
-      }else{
-        recomendedSemester = detailedCourse.minimumSemester;
-      }
-      console.log("VA CA H AAAAAAR"); 
-      classRef.update({
-        "isVerified":false,
-        "recomendedSemester":recomendedSemester,
-        "course":detailedCourse.shortName,
-        "number":classToSave.getNumber(),
-        "professor1":"",
-        "professor2":"",
-        "schedules":{
-          "monday":{
-            "hours":""
-          },
-          "tuesday":{
-            "hours":""
-          },
-          "wednesday":{
-            "hours":""
-          },
-          "thursday":{
-            "hours":""
-          },
-          "friday":{
-            "hours":""
-          }
+    var recomendedSemester: string = "";
+    if(detailedCourse.minimumSemester!==detailedCourse.maximumSemester){
+      recomendedSemester = detailedCourse.minimumSemester+"-"+detailedCourse.maximumSemester;
+    }else{
+      recomendedSemester = detailedCourse.minimumSemester;
+    }
+    classRef.update({
+      "isVerified":false,
+      "recomendedSemester":recomendedSemester,
+      "course":detailedCourse.shortName,
+      "number":classToSave.getNumber(),
+      "professor1":"",
+      "professor2":"",
+      "schedules":{
+        "monday":{
+          "hours":""
         },
-        "hoursToSchedule": detailedCourse.hoursToSchedule,
-        "note":""
-      })
-      console.log("PROJETO DE MERDAAAAAAAA"); 
-      // Only saves the data if it does not exists already
-    classRef.once('value').then(
-        function(snapshot) {
-          console.log("OQ TOU FAZENDO AQUI???????"); 
-          if (snapshot.val() == null) {
-            classRef.set(classToSave.toFirebaseObject());
-            return true;
-          } else {
-            return false;
-          }
+        "tuesday":{
+          "hours":""
+        },
+        "wednesday":{
+          "hours":""
+        },
+        "thursday":{
+          "hours":""
+        },
+        "friday":{
+          "hours":""
         }
-      );
+      },
+      "hoursToSchedule": detailedCourse.hoursToSchedule,
+      "note":""
     })
+    // Only saves the data if it does not exists already
+   classRef.once('value').then(
+      function(snapshot) {
+        if (snapshot.val() == null) {
+          classRef.set(classToSave.toFirebaseObject());
+          return true;
+        } else {
+          return false;
+        }
+      }
+    );
   }
   getClasses() {
     let classesList = this.db.list('/classes/'+this.currentSemester) as AngularFireList<any[]>;
