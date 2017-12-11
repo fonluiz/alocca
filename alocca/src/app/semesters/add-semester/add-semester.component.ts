@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
 import { SemestersDmService } from '../../data-manager/semesters/semesters-dm.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { Semester } from '../semester.model';
@@ -40,7 +39,6 @@ export class AddSemesterComponent implements OnInit {
     TIMEOUT_SAVED_MESSAGE: number = 2500;
 
     constructor(
-        private FBservice: FirebaseService,
         private semesterDmService: SemestersDmService,
         private snackService: SnackbarService
     ) {
