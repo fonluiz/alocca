@@ -7,7 +7,7 @@ import { Professor } from '../../professors/professor.model';
 @Injectable()
 export class ProfessorsDmService {
     readonly professorsListName = "professors";
-    readonly professorsListRef = "/professors/";
+    readonly professorsListReference = "/professors/";
 
     dm: DataManagerService;
     professors: AngularFireList<JSON>;
@@ -18,13 +18,23 @@ export class ProfessorsDmService {
     }
 
     addNewProfessor(professor: Professor) {
-        try {
-            this.verifyConstraints(professor);
-            this.professors = this.dm.set(this.professors, professor.toFirebaseObject(), professor.getSIAPE());
-            return true;
-        } catch (e) {
-            console.log("Constraint violation on Professors: " + e);
-        }
+
+        var self: ProfessorsDmService = this;
+
+        this.dm.existReference(this.professorsListReference + professor.getSIAPE())
+            .then((exists) => {
+                if (exists) {
+                    throw new Error("This professor key is already saved.");
+                } else {
+                    this.existsNickname(professor).then((exists) => {
+                        if (exists) {
+                            throw new Error("Can't save two professors with same nickname.");
+                        } else {
+                            self.professors = self.dm.set(self.professors, professor.toFirebaseObject(), professor.getSIAPE());
+                        }
+                    })
+                }
+            });
     }
 
     getProfessors() {
@@ -32,18 +42,30 @@ export class ProfessorsDmService {
     }
 
     getProfessorDetails(id: string) {
-        return this.dm.readObject(this.professorsListRef + id);
+        return this.dm.readObject(this.professorsListReference + id);
     }
 
-    updateProfessor(professorId: string, professor: Professor) {
-        this.dm.update(this.professors, professor.toFirebaseObject(), professorId);
+    updateProfessor(professor: Professor) {
+        return this.dm.update(this.professors, professor.toFirebaseObject(), professor.getSIAPE()).then(
+            (list) => { this.professors = list; return true; }
+        ).catch((error) => {
+            return false;
+        });
     }
 
     deleteProfessor(professorId: string) {
-        this.dm.delete(this.professors, professorId);
+        return this.dm.delete(this.professors, professorId).then(
+            (list) => { this.professors = list; return true }
+        ).catch((error) => {
+            return false;
+        });
     }
 
-    private verifyConstraints(professor: Professor) {
-            
+    private existsNickname(professor: Professor) {
+        return this.professors.query.orderByChild('nickname').equalTo(professor.getNickname()).once('value').then(
+            function (snapshot) {
+                return Promise.resolve(snapshot.exists())
+            }
+        )
     }
 }

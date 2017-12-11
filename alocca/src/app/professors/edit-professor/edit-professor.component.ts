@@ -98,7 +98,7 @@ export class EditProfessorComponent implements OnInit {
       this.nickname
     )
         
-    if (this.ProfDMService.updateProfessor(this.id, professor)){
+    if (this.ProfDMService.updateProfessor(professor)){
       this.snackService.openSnackBar(this.EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_EDITED_MESSAGE);
     }else{
       this.snackService.openSnackBar(this.NOT_EDITED_PROFESSOR_MESSAGE,this.TIMEOUT_NOT_EDITED_MESSAGE);
