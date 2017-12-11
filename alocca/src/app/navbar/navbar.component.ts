@@ -71,7 +71,7 @@ export class NavbarComponent implements OnInit {
    * Sets necessary elements on the start of the page.
    */
   ngOnInit(){
-      this.FBservice.getSemesters().valueChanges().subscribe(semesters => {
+      this.semestersDmService.getSemesters().valueChanges().subscribe(semesters => {
           this.semesters = semesters;
     });
   }
