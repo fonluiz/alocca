@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit} from '@angular/core';
-import { MatDialog} from '@angular/material';
+import { MatDialog, MatSelectChange} from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -22,43 +22,20 @@ import { DialogsService } from '../services/dialogs.service';
 })
 
 export class NavbarComponent implements OnInit {
-  /**
-   * Semester options for selection.
-   */
+  
   semesters: any[];
-  /**
-   * Current selected semester.
-   */
   selectedSemesterID: string;
-  /**
-   * Current user.
-   */
   user: Observable<firebase.User>;
-  /**
-   * Message to display when a semester is deleted.
-   */
   DELETED_SEMESTER: string = "Semestre removido com sucesso!"
-  /**
-   * Timeout for the message displayed in the snackbar
-   * 
-   * when a semester is deleted.
-   */
-  TIMEOUT_DELETED_SEMESTER: number = 2500;
-  /**
-   * Message to display when a semester is not deleted.
-   */
+  TIMEOUT_DELETED_SEMESTER: number = 2500; 
   NOT_DELETED_SEMESTER: string = "Não foi possível remover o semestre. Tente novamente!"
-  /**
-   * Timeout for the message displayed in the snackbar
-   * 
-   * when a semester is not deleted.
-   */
   TIMEOUT_NOT_DELETED_SEMESTER: number = 5000;
+
 
   constructor(
     public dialog: MatDialog,
     private FBservice: FirebaseService,
-    private semestersDmService: SemestersDmService,
+    private semestersDM: SemestersDmService,
     public dbAuth: AngularFireAuth,
     private navbarService: NavbarService,
     private dialogService: DialogsService,
@@ -71,8 +48,8 @@ export class NavbarComponent implements OnInit {
    * Sets necessary elements on the start of the page.
    */
   ngOnInit(){
-      this.FBservice.getSemesters().valueChanges().subscribe(semesters => {
-          this.semesters = semesters;
+    this.semestersDM.getSemesters().subscribe(semesters => {
+      this.semesters = semesters;
     });
   }
 
@@ -82,10 +59,7 @@ export class NavbarComponent implements OnInit {
   openDialog() {
     var dialogRef = this.dialog.open(AddSemesterComponent);
     dialogRef.afterClosed().subscribe(result => {
-      if (result===true){
-        this.selectedSemesterID = this.FBservice.getCurrentSemester();
-        this.emitSemesterSelected();
-      }
+      this.selectedSemesterID = result
     });
   }
 
@@ -114,7 +88,7 @@ export class NavbarComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-            if (this.semestersDmService.removeSemester(id)){
+            if (this.semestersDM.removeSemester(id)){
             this.snackService.openSnackBar(this.DELETED_SEMESTER,this.TIMEOUT_DELETED_SEMESTER);
             this.selectedSemesterID = null;
             this.emitSemesterSelected();

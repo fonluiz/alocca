@@ -10,7 +10,7 @@ export class SemestersDmService {
     dm: DataManagerService;
     semesters: AngularFireList<JSON>;
     readonly semestersListName = "semesters";
-    readonly semestersListReference: string = '/semesters/';
+    readonly semestersListReference: string = 'semesters/';
 
     constructor(dm: DataManagerService) {
         this.dm = dm;
@@ -22,7 +22,7 @@ export class SemestersDmService {
     }
 
     getSemesters() {
-        return this.semesters;
+        return this.semesters.valueChanges();
     }
 
     getSemester(semesterId: string) {

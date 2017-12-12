@@ -45,22 +45,16 @@ export class AddClassComponent implements OnInit {
       this.coursesList = coursesnames;
     });
   }
-
+ 
   saveNewClasses(){
-    if(this.FBservice.getCurrentSemester()){
+    try {
       for (var _i = 1; _i <= this.classesNumber; _i++) {
-          let newClass = new Class(this.courseKey, _i);
-          this.classesDM.addNewClass(newClass);
-      } 
-    }else{
+        let newClass = new Class(this.courseKey, _i);
+        this.classesDM.addNewClass(newClass);
+      }
+    } catch (error) {
       this.snackService.openSnackBar(this.NO_SEMESTER_SELECTED,this.TIMEOUT_NO_SEMESTER_SELECTED);
+      console.log(error)
     }
-
-    // if (savedSuccessfully) {
-    //   this.snackbarsService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE, this.MESSAGES_TIME);
-    // } else {
-    //   this.snackbarsService.openSnackBar(this.NOT_SAVED_MESSAGE, this.MESSAGES_TIME);
-    // }
-
   }
 }

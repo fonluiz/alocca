@@ -16,7 +16,7 @@ export class ClassesDmService {
     this.dm = dm;
     this.classes = this.dm.createList(this.classesListName);
   }
-
+ 
   addNewClass(classObj: Class) {
     if (this.semester != null) {
       var self: ClassesDmService = this;
