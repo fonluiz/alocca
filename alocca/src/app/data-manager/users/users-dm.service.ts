@@ -42,7 +42,7 @@ export class UsersDmService {
     }
 
     getUsersEmails() {
-        return this.usersEmails;
+        // return this.usersEmails;
     }
 
     getUserDetails(id: string) {
