@@ -17,7 +17,7 @@ export class SampleAlerts {
         var i: number;
         for (i = 0; i < 10; i++){
             var alert: Alert = ALERT_FACTORY.create("Restrição " + i, "Default message");
-            alert.id = i;
+            alert.id = ""+i;
             this.alerts.push(alert);
         }
     }
