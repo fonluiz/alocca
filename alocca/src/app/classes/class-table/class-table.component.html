@@ -27,7 +27,7 @@
         <td>{{ class.number }}</td>
         <td>{{ class.professor1 }}</td>
         <td>{{ class.professor2 }}</td>
-        <!-- <td>
+        <td>
           <span *ngFor='let hour of class.schedules.monday.hours'>
               <span *ngIf = 'hour'>
                 SEG - {{ hour }}h
@@ -53,14 +53,14 @@
                 SEX - {{ hour }}h
               <br></span>
           </span>
-        </td> -->
+        </td>
         <td>
           {{ class.note }}
         </td>
-        <td [routerLink]="['/edit-class/'+class.$key]">
+        <td [routerLink]="['/edit-class/'+class.course+'-'+class.number]">
           <i class="material-icons mdl-color-text--accent">edit</i>
         </td>
-        <td (click)="onDeleteClass(class.$key)">
+        <td (click)="onDeleteClass(class.course+'-'+class.number)">
            <i class="material-icons delete-button">delete</i>
         </td>
       </tr>

@@ -72,7 +72,23 @@ export class Class {
         if(this.schedules){
             schedules = this.schedules;
         }else{
-            schedules = ''
+            schedules = {
+                monday:{
+                    hours:['']
+                },
+                tuesday:{
+                    hours:['']
+                },
+                wednesday:{
+                    hours:['']
+                },
+                thursday:{
+                    hours:['']
+                },
+                friday:{
+                    hours:['']
+                }
+            }
         }
         if(this.note){
             note = this.note;
@@ -83,7 +99,6 @@ export class Class {
             verified: this.verified,
             course: this.course,
             number: this.number,
-
             professor1: professor1,
             professor2: professor2,
             schedules: schedules,

@@ -22,6 +22,7 @@ export class AddClassComponent implements OnInit {
   NOT_SAVED_MESSAGE: string = "Erro ao salvar. Verifique se a turma já foi cadastrada.";
   MESSAGES_TIME = 4000;
   coursesList: any[];
+  courseName: string;
   courseKey: string;
   classesNumber: number;
   NO_SEMESTER_SELECTED: string = "Selecione um semestre ou crie um novo";
@@ -49,7 +50,7 @@ export class AddClassComponent implements OnInit {
   saveNewClasses(){
     try {
       for (var _i = 1; _i <= this.classesNumber; _i++) {
-        let newClass = new Class(this.courseKey, _i);
+        let newClass = new Class(this.courseName, _i);
         this.classesDM.addNewClass(newClass);
       }
     } catch (error) {

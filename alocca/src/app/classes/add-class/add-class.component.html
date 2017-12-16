@@ -8,8 +8,8 @@
       <div class="new-classes-content">
 
         <mat-form-field class="course-name-input">
-          <mat-select placeholder="Disciplina" [(ngModel)]="courseKey" name="courseKey" required>
-            <mat-option *ngFor="let course of coursesList" [(value)]="course.code">
+          <mat-select placeholder="Disciplina" [(ngModel)]="courseName" name="courseName" required>
+            <mat-option *ngFor="let course of coursesList" [(value)]="course.name">
               {{ course.name }}
             </mat-option>
           </mat-select>

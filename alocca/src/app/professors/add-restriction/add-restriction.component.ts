@@ -83,7 +83,7 @@ export class AddRestrictionComponent implements OnInit {
     );
 
     this.profRestrictionsService.saveProfessorRestriction(restrictions);
-    this.router.navigate(['view-professors']);
+    this.router.navigate(['professors']);
   }
 
   // TODO: Set this method to private
