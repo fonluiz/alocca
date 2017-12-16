@@ -3,13 +3,13 @@ import { Router, ActivatedRoute} from '@angular/router';
 
 import { Course } from '../course.model';
 
-import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { CoursesDmService } from '../../data-manager/courses/courses-dm.service';
 
 @Component({
   selector: 'app-edit-course',
   templateUrl: './edit-course.component.html',
-  styleUrls: ['./edit-course.component.css']
+  styleUrls: ['./edit-course.component.css'] 
 })
 export class EditCourseComponent implements OnInit {
   /**
@@ -94,10 +94,10 @@ export class EditCourseComponent implements OnInit {
   TIMEOUT_NOT_SAVED_MESSAGE: number = 5000;
 
   constructor(
-    private FBservice: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private snackService: SnackbarService
+    private snackService: SnackbarService,
+    private courseDM: CoursesDmService
   ) { }
 
   /**
@@ -105,7 +105,7 @@ export class EditCourseComponent implements OnInit {
    */
   ngOnInit() {
     this.id = this.route.snapshot.params['id'],
-    this.FBservice.getCourseDetails(this.id).valueChanges().subscribe(course =>{
+    this.courseDM.getCourse(this.id).subscribe(course =>{
         this.code = course.code;
         this.name = course.name;
         this.shortName = course.shortName;
@@ -119,7 +119,7 @@ export class EditCourseComponent implements OnInit {
         this.requesterDepartment = course.requesterDepartment;
     });
     let initiateCourses: any[];
-    this.FBservice.getCourses().valueChanges().subscribe(courses =>{
+    this.courseDM.getCourses().subscribe(courses =>{
       initiateCourses = courses;
     });
   }
@@ -147,13 +147,12 @@ export class EditCourseComponent implements OnInit {
           this.requesterDepartment
     )
 
-    let savedSuccessfully: boolean = this.FBservice.updateCourse(this.id, course,this.oldName);
-
-    if (savedSuccessfully) {
-        this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
-    } else {
+    this.courseDM.updateCourse(course).then((resolve) => {
+      this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
+    })
+    .catch((reject) => {
       this.snackService.openSnackBar(this.NOT_SAVED_MESSAGE,this.TIMEOUT_NOT_SAVED_MESSAGE);
-    }
+    });
 
     this.router.navigate(['/view-courses']);
 

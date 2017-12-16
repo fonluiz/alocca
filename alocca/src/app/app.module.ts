@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';//import??
@@ -28,6 +28,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 //firebase service -- TO CHANGE TO DATA MANAGER
 import { FirebaseService } from './services/firebase.service';
+import { DataManagerService } from './data-manager/data-manager.service'
+import { CoursesDmService } from './data-manager/courses/courses-dm.service'
+import { ProfessorsDmService } from './data-manager/professors/professors-dm.service';
+import { ClassesDmService } from './data-manager/classes/classes-dm.service';
+import { ProfessorsRestrictionsDmService } from './data-manager/professors-restrictions/professors-restrictions-dm.service';
+import { SemestersDmService } from './data-manager/semesters/semesters-dm.service';
 
 
 //angular material
@@ -67,10 +73,17 @@ import { SnackbarService} from './services/snackbar.service';
   entryComponents:[DialogsComponent],
   exports: [DialogsComponent],
   providers: [
-    FirebaseService, 
+    FirebaseService,
+    DataManagerService,
+    ProfessorsDmService,
+    ProfessorsRestrictionsDmService,
+    SemestersDmService,
     DialogsService, 
     NavbarService, 
-    SnackbarService
+    SnackbarService,
+    DataManagerService,
+    CoursesDmService,
+    ClassesDmService
   ],
   bootstrap: [AppComponent]
 })

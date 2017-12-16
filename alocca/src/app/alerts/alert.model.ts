@@ -8,12 +8,16 @@
 
 export class Alert {
     ignored: boolean;
-    id: number;
+    id: string;
     constructor(    
         public title: string,
         public message: string
     ) { 
         this.unread();
+    }
+
+    getId() {
+        return this.id;
     }
 
     ignore() {
@@ -22,6 +26,14 @@ export class Alert {
 
     unread() {
         this.ignored = false;
+    }
+
+    toFirebaseObject() {
+        var firebaseObject: any = {
+            isIgnored: this.ignored,
+            message: this.message
+        }
+        return <JSON>firebaseObject;
     }
 
 }

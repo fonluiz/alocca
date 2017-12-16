@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import  { MatCheckbox } from '@angular/material';
+﻿import { Component, OnInit } from '@angular/core';
+import { MatCheckbox } from '@angular/material';
 import { ScheduleRestriction } from '../schedule-restriction.model'
 import { ProfessorRestriction } from '../professor-restriction.model'
-import { FirebaseService } from '../../services/firebase.service';
+import { ProfessorsRestrictionsDmService } from '../../data-manager/professors-restrictions/professors-restrictions-dm.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -34,14 +34,14 @@ export class AddRestrictionComponent implements OnInit {
   FRIDAY_START_INDEX = 5;
 
   constructor(
-      private FBservice: FirebaseService,
+      private profRestrictionsService: ProfessorsRestrictionsDmService,
       private router: Router,
       private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
       this.professor_id = this.route.snapshot.params['id'];
-      this.FBservice.getProfessorRestrictions(this.professor_id).valueChanges().subscribe(professorRestriction => {
+      this.profRestrictionsService.getProfessorRestrictions(this.professor_id).valueChanges().subscribe(professorRestriction => {
           this.restrictionFromFB = professorRestriction;
           this.maxCredits = professorRestriction.maxCredits;
           this.minCredits = professorRestriction.minCredits;
@@ -82,7 +82,7 @@ export class AddRestrictionComponent implements OnInit {
        this.getScheduleRestrictionsFromTable()
     );
 
-    this.FBservice.saveProfessorRestriction(restrictions);
+    this.profRestrictionsService.saveProfessorRestriction(restrictions);
     this.router.navigate(['view-professors']);
   }
 
@@ -91,8 +91,8 @@ export class AddRestrictionComponent implements OnInit {
       var iteration = 0;
       for (var i = startIndex; i <= 40; i += 5) {
           console.log(document.getElementsByName("graduateCredits"));
-          console.log(document.getElementById("input-md-checkbox-" + i));
-          var checkbox = <MatCheckbox><any>document.getElementById("input-md-checkbox-" + i);
+          console.log(document.getElementById("mat-checkbox-" + i + "-input"));
+          var checkbox = <MatCheckbox><any>document.getElementById("mat-checkbox-" + i + "-input");
           if (checkbox.checked) {
               restrictionsArray.push(this.integerHours[iteration]);
           } else restrictionsArray.push(0);

@@ -1,8 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { FirebaseService } from '../../services/firebase.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { ProfessorsDmService } from '../../data-manager/professors/professors-dm.service';
 
 import { Professor } from '../professor.model';
 
@@ -46,9 +46,9 @@ export class AddProfessorComponent implements OnInit {
   TIMEOUT_NOT_SAVED_MESSAGE: number = 8000;
 
   constructor(
-    private FBservice: FirebaseService,
     private router: Router,
-    private snackService: SnackbarService
+    private snackService: SnackbarService,
+    private ProfDMService: ProfessorsDmService
   ) {
   }
 
@@ -62,7 +62,9 @@ export class AddProfessorComponent implements OnInit {
       this.nickname
     )
     
-    var savedSuccessfully: boolean = this.FBservice.addNewProfessor(newProfessor);
+    //var savedSuccessfully: boolean = this.FBservice.addNewProfessor(newProfessor);
+
+    var savedSuccessfully = this.ProfDMService.addNewProfessor(newProfessor);
 
     this.name = null;
     this.nickname = null;
@@ -80,7 +82,7 @@ export class AddProfessorComponent implements OnInit {
    */
   ngOnInit() {
     let initiateProfessors: any[];
-    this.FBservice.getProfessors().valueChanges().subscribe(professors =>{
+    this.ProfDMService.getProfessors().valueChanges().subscribe(professors =>{
       initiateProfessors = professors;
     });
   }

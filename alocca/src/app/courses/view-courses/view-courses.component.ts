@@ -1,8 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
 
 import { DialogsService } from '../../services/dialogs.service';
 import { SnackbarService } from '../../services/snackbar.service';
+import { CoursesDmService } from '../../data-manager/courses/courses-dm.service';
+
 
 @Component({
   selector: 'app-view-courses',
@@ -36,16 +37,16 @@ export class ViewCoursesComponent implements OnInit {
   TIMEOUT_NOT_DELETED_MESSAGE: number = 5000;
 
   constructor(
-    private FBservice: FirebaseService,
     private snackService: SnackbarService,
-    private dialogsService: DialogsService
+    private dialogsService: DialogsService,
+    private courseDM: CoursesDmService    
   ) { }
 
   /**
    * Sets necessary elements on the start of the page.
    */
   ngOnInit() {
-    this.FBservice.getCourses().valueChanges().subscribe(courses =>{
+    this.courseDM.getCourses().subscribe(courses =>{
       this.courses = courses;
     });
   }
@@ -63,11 +64,11 @@ export class ViewCoursesComponent implements OnInit {
       .confirm(title, message)
       .subscribe(res => {
         if (res) {
-          if(this.FBservice.deleteCourse(id)){
-            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);
-          }else{
-            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);
-          }
+          this.courseDM.deleteCourse(id).then(() => {
+            this.snackService.openSnackBar(this.DELETED_MESSAGE,this.TIMEOUT_DELETED_MESSAGE);            
+          }).catch(() => {
+            this.snackService.openSnackBar(this.NOT_DELETED_MESSAGE,this.TIMEOUT_NOT_DELETED_MESSAGE);            
+          })
         }
       });
   }

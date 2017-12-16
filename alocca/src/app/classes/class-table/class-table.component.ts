@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../services/firebase.service';
 import { Router } from '@angular/router';
 import { NavbarService } from '../../services/navbar.service';
+import { ClassesDmService } from '../../data-manager/classes/classes-dm.service'
+
 
 @Component({
   selector: 'app-class-table',
@@ -11,22 +13,27 @@ import { NavbarService } from '../../services/navbar.service';
 })
 export class ClassTableComponent implements OnInit {
   classesList: any[];
-  selectedSemesterID: string;
+  selectedSemesterID: string; 
 
   constructor(
     private FBservice: FirebaseService,
     private router: Router,
-    private navbarService: NavbarService
-  ) {}
+    private navbarService: NavbarService,
+    private classesDM: ClassesDmService
+  ) {
+    this.navbarService.getSemesterSelectedEmitter().subscribe(
+      semester => {this.classesDM.setSemester(semester)}
+    );
+  }
 
   ngOnInit() {
-    this.FBservice.getClasses().valueChanges().subscribe( classes =>{
+    this.classesDM.getClasses().subscribe( classes =>{
       this.classesList = classes;
     })
   }
 
   onDeleteClass(id){
-    this.FBservice.deleteClass(id);
+    this.classesDM.deleteClass(id);
 
   }
   

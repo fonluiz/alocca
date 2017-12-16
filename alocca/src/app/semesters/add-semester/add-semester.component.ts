@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../../services/firebase.service';
+import { SemestersDmService } from '../../data-manager/semesters/semesters-dm.service';
 import { SnackbarService } from '../../services/snackbar.service';
 import { Semester } from '../semester.model';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
     selector: 'app-add-semester',
@@ -9,38 +10,19 @@ import { Semester } from '../semester.model';
     styleUrls: ['./add-semester.component.css']
 })
 export class AddSemesterComponent implements OnInit {
-    /**
-     * Maximum year for the creation of a semester.
-     */
+
     MAX_YEAR: number;
-    /**
-     * Year options for a new semester.
-     */
     years: number[];
-    /**
-     * Academic year-half options for a new semester.
-     */
     halves: number[];
-    /**
-     * Selected year for the new semester.
-     */
     year: number;
-    /**
-     * Selected academic year-half for the new semester.
-     */
     half: number;
-    /**
-     * Message to display when a semester is created.
-     */
     SAVED_SUCCESSFULLY_MESSAGE: string = "Semestre criado com sucesso!";
-    /**
-     * Timeout for the message displayed in the snackbar.
-     */
     TIMEOUT_SAVED_MESSAGE: number = 2500;
 
     constructor(
-        private FBservice: FirebaseService,
-        private snackService: SnackbarService
+        private semesterDmService: SemestersDmService,
+        private snackService: SnackbarService,
+        private dialogRef: MatDialogRef<AddSemesterComponent>
     ) {
         this.years = [];
         this.MAX_YEAR = 2030;
@@ -64,11 +46,13 @@ export class AddSemesterComponent implements OnInit {
      */
     onAddNewSemester() {
       let semester = new Semester(this.year, this.half);
-      if(this.FBservice.saveSemester(semester)){
-          this.snackService.openSnackBar(this.SAVED_SUCCESSFULLY_MESSAGE,this.TIMEOUT_SAVED_MESSAGE);
-      }
+      this.semesterDmService.saveSemester(semester)
+      this.closeDialog(semester.getId())
     }
 
+    closeDialog(result) {
+        this.dialogRef.close(result);
+    }
     /**
      * Executes its commands once the class constructor is called.
      */

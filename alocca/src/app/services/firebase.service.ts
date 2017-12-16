@@ -85,7 +85,7 @@ export class FirebaseService {
     }else{
       recomendedSemester = detailedCourse.minimumSemester;
     }
-    classRef.update({
+    classRef.update({ 
       "isVerified":false,
       "recomendedSemester":recomendedSemester,
       "course":detailedCourse.shortName,
