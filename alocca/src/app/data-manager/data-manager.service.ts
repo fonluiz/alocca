@@ -12,7 +12,7 @@ export class DataManagerService {
       this.db = db;
      }
 
-     // Documentar 
+  // Documentar 
   createList(listReference: string) { 
     return this.db.list<JSON>(listReference);
   }

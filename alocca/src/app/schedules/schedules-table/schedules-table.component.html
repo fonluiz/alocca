@@ -65,13 +65,15 @@
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <mat-select class="new-class-selection" (change)="onAddClassToSchedule('monday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
-                        <span *ngFor="let class of classes">
-                          <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
-                            {{class.course}} - t{{class.number}}
-                          </mat-option>
-                        </span>
-                      </mat-select>
+                      <mat-form-field class="new-class-selection">
+                        <mat-select (change)="onAddClassToSchedule('monday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                          <span *ngFor="let class of classes">
+                            <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.course+-+class.number">
+                              {{class.course}} - t{{class.number}}
+                            </mat-option>
+                          </span>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                   </tr>
                 </tbody>
@@ -124,13 +126,15 @@
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <mat-select class="new-class-selection" (change)="onAddClassToSchedule('tuesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
-                        <span *ngFor="let class of classes">
-                          <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
-                            {{class.course}} - t{{class.number}}
-                          </mat-option>
-                        </span>
-                      </mat-select>
+                      <mat-form-field class="new-class-selection">
+                        <mat-select (change)="onAddClassToSchedule('tuesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                          <span *ngFor="let class of classes">
+                            <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
+                              {{class.course}} - t{{class.number}}
+                            </mat-option>
+                          </span>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                   </tr>
                 </tbody>
@@ -183,13 +187,15 @@
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <mat-select class="new-class-selection" (change)="onAddClassToSchedule('wednesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
-                        <span *ngFor="let class of classes">
-                          <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
-                            {{class.course}} - t{{class.number}}
-                          </mat-option>
-                        </span>
-                      </mat-select>
+                      <mat-form-field class="new-class-selection">
+                        <mat-select (change)="onAddClassToSchedule('wednesday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                          <span *ngFor="let class of classes">
+                            <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
+                              {{class.course}} - t{{class.number}}
+                            </mat-option>
+                          </span>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                   </tr>
                 </tbody>
@@ -242,13 +248,15 @@
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <mat-select class="new-class-selection" (change)="onAddClassToSchedule('thursday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
-                        <span *ngFor="let class of classes">
-                          <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
-                            {{class.course}} - t{{class.number}}
-                          </mat-option>
-                        </span>
-                      </mat-select>
+                      <mat-form-field class="new-class-selection">
+                        <mat-select (change)="onAddClassToSchedule('thursday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                          <span *ngFor="let class of classes">
+                            <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
+                              {{class.course}} - t{{class.number}}
+                            </mat-option>
+                          </span>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                   </tr>
                 </tbody>
@@ -301,13 +309,15 @@
                   <!--Classes to schedule-->
                   <tr>
                     <td colspan="4">
-                      <mat-select class="new-class-selection" (change)="onAddClassToSchedule('friday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
-                        <span *ngFor="let class of classes">
-                          <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
-                            {{class.course}} - t{{class.number}}
-                          </mat-option>
-                        </span>
-                      </mat-select>
+                      <mat-form-field class="new-class-selection">
+                        <mat-select (change)="onAddClassToSchedule('friday',hour)" placeholder="Turma" [(ngModel)]="currentClassKey" name="currentClassKey">
+                          <span *ngFor="let class of classes">
+                            <mat-option *ngIf = "class.hoursToSchedule>0" [value]="class.$key">
+                              {{class.course}} - t{{class.number}}
+                            </mat-option>
+                          </span>
+                        </mat-select>
+                      </mat-form-field>
                     </td>
                   </tr>
                 </tbody>

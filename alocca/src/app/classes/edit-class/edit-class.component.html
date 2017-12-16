@@ -9,17 +9,21 @@
     <mat-card-content class="edit-class-card-content">
       <div class="edit-class-card-row">
 
-        <mat-select class="professor1-name-input" placeholder="Docente 1" [(ngModel)]="professor1" name="professor1">
-          <mat-option *ngFor="let prof of professorsList" [value]="prof">
-            {{ prof.nickname }}
-          </mat-option>
-        </mat-select>
+        <mat-form-field class="professor1-name-input">
+          <mat-select placeholder="Docente 1" [(ngModel)]="professor1" name="professor1">
+            <mat-option *ngFor="let prof of professorsList" [value]="prof.nickname">
+              {{ prof.nickname }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <mat-select class="professor2-name-input" placeholder="Docente 2" [(ngModel)]="professor2" name="professor2">
-          <mat-option *ngFor="let prof of professorsList" [value]="prof">
-            {{ prof.nickname }}
-          </mat-option>
-        </mat-select>
+        <mat-form-field class="professor2-name-input">
+          <mat-select placeholder="Docente 2" [(ngModel)]="professor2" name="professor2">
+            <mat-option *ngFor="let prof of professorsList" [value]="prof.nickname">
+              {{ prof.nickname }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
 
         <mat-form-field class="class-note-input">
